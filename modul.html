@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="lms-page-title">ARUTALA Cerdas: 7 Modul &amp; Kuis Pembelajaran Pemuda</title>
+  
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="ARUTALA Cerdas: Pustaka 7 Modul Pengembangan Kapasitas Pemuda berbasis moderasi beragama, kearifan lokal, dan kesetaraan gender.">
+  <meta property="og:title" content="ARUTALA Cerdas - 7 Modul Pembelajaran Pemuda">
+  <meta property="og:description" content="Model Inovasi Ekosistem Pemuda Berbasis Nilai Keagamaan - UIN Sunan Gunung Djati Bandung.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Plus Jakarta Sans (Body/UI) & Fraunces + Playfair Display (Editorial Headlines) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700;1,9..144,800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=3.0">
+  
+  <!-- Favicon Resmi ARUTALA -->
+  <link rel="icon" type="image/png" href="img/logo.png">
+
+  <style>
+    :root {
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+    }
+
+    /* Styling Khusus Halaman Terpisah: ARUTALA Cerdas */
+    body.lms-page-body {
+      background-color: #FAF8F5;
+      font-family: var(--font-body);
+      color: #111111;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lms-top-nav {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .lms-top-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .lms-hero-banner {
+      background: #FFFFFF;
+      border-bottom: 1px solid #E2E8F0;
+      color: #0F172A;
+      padding: 44px 0 38px;
+    }
+
+    .lms-hero-banner h1 {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .lms-hero-banner p {
+      font-size: 1rem;
+      color: #64748B;
+      max-width: 720px;
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    .lms-progress-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .lms-progress-bar-wrap {
+      flex: 1;
+      min-width: 220px;
+      height: 10px;
+      background: #E2E8F0;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .lms-progress-bar-fill {
+      height: 100%;
+      background: #48B863;
+      width: 0%;
+      transition: width 0.4s ease;
+      border-radius: var(--radius-full);
+    }
+
+    .lms-workspace-section {
+      padding: 40px 0 70px;
+      flex: 1;
+    }
+
+    .lms-workspace-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    /* Kartu Bersih dengan border tipis border-slate-200 */
+    .lms-sidebar-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 22px 18px;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+      position: sticky;
+      top: 96px;
+    }
+
+    .lms-sidebar-header {
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .lms-sidebar-header h4 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 2px;
+    }
+
+    .lms-sidebar-header span {
+      font-size: 0.78rem;
+      color: #64748B;
+    }
+
+    .lms-module-item-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+      margin-bottom: 8px;
+    }
+
+    .lms-module-item-btn:hover {
+      background: #F8FAFC;
+      border-color: #CBD5E1;
+    }
+
+    .lms-module-item-btn.active {
+      background: #F8FAFC;
+      border-color: #1D428A;
+      box-shadow: 0 0 0 1px #1D428A;
+    }
+
+    .lms-module-item-btn .mod-badge-num {
+      width: 30px;
+      height: 30px;
+      border-radius: var(--radius-full);
+      background: #F1F5F9;
+      color: #475569;
+      font-size: 0.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .lms-module-item-btn.active .mod-badge-num {
+      background: #1D428A;
+      color: #FFFFFF;
+    }
+
+    .lms-module-item-btn.completed .mod-badge-num {
+      background: #48B863;
+      color: #FFFFFF;
+    }
+
+    .lms-module-item-btn .mod-text-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .lms-module-item-btn .mod-code {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748B;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .lms-module-item-btn.active .mod-code {
+      color: #1D428A;
+    }
+
+    .lms-module-item-btn .mod-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .lms-content-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      padding: 38px 44px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+
+    .lms-content-header {
+      padding-bottom: 22px;
+      margin-bottom: 26px;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .lms-content-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lms-code-chip {
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      background: #EEF3FA;
+      color: #1D428A;
+      border: 1px solid #CBD5E1;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .lms-duration-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #64748B;
+    }
+
+    .lms-content-title {
+      font-family: var(--font-heading);
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .lms-content-subtitle {
+      font-size: 1rem;
+      color: #475569;
+      line-height: 1.55;
+      margin-bottom: 0;
+    }
+
+    .lms-reading-body {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: #334155;
+      margin-bottom: 40px;
+    }
+
+    .lms-reading-body h4 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    .lms-reading-body p {
+      margin-bottom: 18px;
+    }
+
+    .lms-reading-body blockquote {
+      background: #F8FAFC;
+      border-left: 4px solid #1D428A;
+      padding: 16px 22px;
+      border-radius: 0 10px 10px 0;
+      font-style: italic;
+      color: #0F172A;
+      font-weight: 600;
+      margin: 24px 0;
+    }
+
+    /* Kuis Box Bersih dengan border-slate-200 */
+    .lms-quiz-panel {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 28px 30px;
+      margin-top: 32px;
+    }
+
+    .lms-quiz-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .lms-quiz-header h4 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin-bottom: 0;
+    }
+
+    .lms-quiz-question {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #1E293B;
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+
+    .lms-quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .lms-quiz-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 0.94rem;
+      color: #334155;
+      line-height: 1.5;
+    }
+
+    .lms-quiz-opt:hover {
+      border-color: #CBD5E1;
+      background: #F8FAFC;
+    }
+
+    .lms-quiz-opt.selected {
+      border-color: #1D428A;
+      background: #EEF3FA;
+      font-weight: 600;
+      color: #1D428A;
+    }
+
+    .lms-quiz-opt input[type="radio"] {
+      margin-top: 4px;
+      cursor: pointer;
+    }
+
+    .lms-quiz-feedback {
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+      display: none;
+      line-height: 1.55;
+    }
+
+    .lms-quiz-feedback.correct {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      color: #065F46;
+      display: block;
+    }
+
+    .lms-quiz-feedback.incorrect {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+      display: block;
+    }
+
+    .back-text-short {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      html, body.lms-page-body {
+        overflow-x: hidden;
+        max-width: 100vw;
+        width: 100%;
+        padding-bottom: 76px !important;
+      }
+
+      /* 1. Nav Top Bar Mobile */
+      .lms-top-nav {
+        height: 56px;
+      }
+
+      .lms-top-nav-inner {
+        height: 56px;
+        gap: 10px;
+        justify-content: flex-start;
+      }
+
+      .lms-top-nav-actions {
+        display: none !important; /* Disembunyikan karena sudah ada di Dock Navigasi Bawah */
+      }
+
+      .lms-top-nav-brand-wrap {
+        gap: 10px !important;
+        width: 100%;
+        justify-content: flex-start;
+        display: flex;
+        align-items: center;
+      }
+
+      .portal-back-btn {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+        gap: 5px;
+        flex-shrink: 0;
+      }
+
+      .back-text-full {
+        display: none;
+      }
+
+      .back-text-short {
+        display: inline;
+      }
+
+      .brand-uin-logo-sm {
+        width: 28px !important;
+        height: 28px !important;
+      }
+
+      /* 2. Hero Banner Mobile */
+      .lms-hero-banner {
+        padding: 24px 0 20px;
+      }
+
+      .lms-hero-banner h1 {
+        font-size: 1.4rem;
+        line-height: 1.25;
+      }
+
+      .lms-hero-banner p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+
+      .lms-progress-card {
+        padding: 12px 14px;
+        margin-top: 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+
+      .lms-progress-bar-wrap {
+        min-width: 0;
+        width: 100%;
+      }
+
+      /* 3. Workspace Grid & Layout */
+      .lms-workspace-section {
+        padding: 16px 0 40px;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+
+      .lms-workspace-grid {
+        grid-template-columns: 100%;
+        gap: 16px;
+        width: 100%;
+      }
+
+      /* 4. Horizontal Scrollable 7 Modules Strip */
+      .lms-sidebar-card {
+        position: static;
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: var(--radius-md);
+      }
+
+      .lms-sidebar-header {
+        margin-bottom: 8px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .lms-sidebar-header h4 {
+        font-size: 0.88rem;
+      }
+
+      #lms-modules-list {
+        display: flex;
+        overflow-x: auto;
+        gap: 8px;
+        padding: 4px 2px 8px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      #lms-modules-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .lms-module-item-btn {
+        flex: 0 0 auto;
+        width: auto;
+        min-width: 120px;
+        padding: 8px 12px;
+        margin-bottom: 0;
+        gap: 8px;
+      }
+
+      .lms-module-item-btn .mod-title {
+        display: none;
+      }
+
+      .lms-module-item-btn .mod-code {
+        font-size: 0.78rem;
+        font-weight: 800;
+        margin-bottom: 0;
+      }
+
+      /* 5. Reading Content Card */
+      .lms-content-card {
+        padding: 20px 16px;
+        width: 100%;
+        border-radius: var(--radius-md);
+      }
+
+      .lms-content-header h2 {
+        font-size: 1.35rem;
+        line-height: 1.25;
+      }
+
+      .lms-content-header .subtitle {
+        font-size: 0.88rem;
+      }
+
+      .lms-module-reading-body {
+        font-size: 0.94rem;
+        line-height: 1.7;
+      }
+
+      /* 6. Quiz Box */
+      .lms-quiz-box {
+        padding: 18px 14px;
+        border-radius: var(--radius-md);
+      }
+
+      .lms-quiz-opt {
+        padding: 11px 12px;
+        font-size: 0.88rem;
+        line-height: 1.45;
+        word-break: break-word;
+      }
+
+      .lms-quiz-action-bar {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .lms-quiz-action-bar .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body data-theme="genu" class="lms-page-body">
+
+  <!-- ==========================================================================
+       TOP NAVIGATION BAR
+       ========================================================================== -->
+  <header class="lms-top-nav">
+    <div class="container">
+      <div class="lms-top-nav-inner">
+        <div class="lms-top-nav-brand-wrap">
+          <a href="index.html" class="portal-back-btn" title="Kembali ke Beranda" id="btn-back-home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span class="back-text-full">&larr; Kembali ke Beranda</span>
+            <span class="back-text-short">&larr; Beranda</span>
+          </a>
+
+          <a href="index.html" class="brand-logo" style="display: flex; align-items: center; gap: 8px;">
+            <img src="img/logo.png" alt="Logo ARUTALA" class="brand-arutala-logo-sm" style="width: 32px; height: 32px; object-fit: contain; border-radius: 6px;">
+            <div class="brand-text" style="display: flex; flex-direction: column;">
+              <span style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #0F172A; line-height: 1;">ARUTALA</span>
+              <span class="lms-brand-sub" style="font-size: 0.68rem; color: #1D428A; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;">ARUTALA Cerdas</span>
+            </div>
+          </a>
+        </div>
+
+        <div class="lms-top-nav-actions" style="display: flex; align-items: center; gap: 12px;">
+          <a href="#lms-registrasi-circle" class="btn btn-primary btn-sm btn-pill" style="background: #1D428A; border-color: #1D428A; color: #FFFFFF; font-weight: 700;">
+            Daftar Pendampingan Modul &darr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO LEARNING BANNER (Clean Editorial Style)
+       ========================================================================== -->
+  <section class="lms-hero-banner">
+    <div class="container">
+      <span class="section-kicker" style="color: #1D428A !important; font-weight: 800; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;">Ruang Belajar Mandiri &bull; ARUTALA Cerdas</span>
+      <h1>ARUTALA Cerdas: <span style="font-family: 'Playfair Display', serif; font-style: italic; font-weight: 600; color: #1D428A;">7 Modul Pembelajaran</span> &amp; Kuis Interaktif</h1>
+      <p>
+        Kurikulum modular komprehensif berbasis nilai keagamaan rahmah, kearifan budaya Sunda, dan kesetaraan gender untuk membentuk pemimpin pemuda yang inklusif dan berdaya.
+      </p>
+
+      <!-- Progress Tracking Card -->
+      <div class="lms-progress-card">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="font-weight: 800; font-size: 1.1rem; color: #0F172A;" id="lms-progress-percent">0%</div>
+          <span style="font-size: 0.88rem; color: #64748B;" id="lms-progress-label">0 dari 7 modul diselesaikan</span>
+        </div>
+        <div class="lms-progress-bar-wrap">
+          <div class="lms-progress-bar-fill" id="lms-progress-bar"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MAIN WORKSPACE: PLAYLIST & VIEWER
+       ========================================================================== -->
+  <main class="lms-workspace-section">
+    <div class="container">
+      <div class="lms-workspace-grid">
+        
+        <!-- Left Column: Syllabus Playlist -->
+        <aside class="lms-sidebar-card">
+          <div class="lms-sidebar-header">
+            <h4>Silabus 7 Modul</h4>
+            <span>Pilih modul untuk mulai membaca</span>
+          </div>
+          <div id="lms-modules-list">
+            <!-- Populated by js/modul.js -->
+          </div>
+        </aside>
+
+        <!-- Right Column: Rich Lesson Viewer & Quiz -->
+        <article class="lms-content-card">
+          <div class="lms-content-header">
+            <div class="lms-content-meta">
+              <span class="lms-code-chip" id="mod-code">MOD-01</span>
+              <span class="lms-duration-chip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="mod-duration">45 Menit</span>
+              </span>
+            </div>
+            <h2 class="lms-content-title" id="mod-title">Mengenali Diri dan Potensi</h2>
+            <p class="lms-content-subtitle" id="mod-subtitle">Fondasi Self-Love, Identifikasi Bakat, dan Perencanaan Masa Depan</p>
+          </div>
+
+          <!-- Reading Content Body -->
+          <div class="lms-reading-body" id="mod-body">
+            <!-- Injected by js/modul.js -->
+          </div>
+
+          <!-- Interactive Quiz Box -->
+          <div class="lms-quiz-panel" id="mod-quiz-panel">
+            <div class="lms-quiz-header">
+              <h4>Kuis Pemahaman Materi</h4>
+              <span class="badge badge-blue" style="font-size: 0.72rem;">Uji Pemahaman</span>
+            </div>
+
+            <p class="lms-quiz-question" id="quiz-question-text">Pertanyaan kuis sedang dimuat...</p>
+
+            <div class="lms-quiz-options" id="quiz-options-container">
+              <!-- Radio choices injected by js/modul.js -->
+            </div>
+
+            <div class="lms-quiz-feedback" id="quiz-feedback-box"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px; flex-wrap: wrap; gap: 12px;">
+              <button class="btn btn-primary btn-pill btn-sm" id="btn-submit-quiz" style="background: #1D428A; border-color: #1D428A; color: #FFFFFF; font-weight: 700; padding: 10px 20px;">
+                Periksa Jawaban Kuis
+              </button>
+              <button class="btn btn-secondary btn-pill btn-sm" id="btn-next-module" style="display: none; background: #0F172A; color: #FFFFFF; font-weight: 700; padding: 10px 20px;">
+                Lanjut ke Modul Berikutnya &rarr;
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       FORM PENDAFTARAN KEDUA: KHUSUS PESERTA MODUL & FASILITATOR (EMBEDDED)
+       Tepat di bagian bawah halaman modul ARUTALA Cerdas
+       ========================================================================== -->
+  <section class="section-pad circle-lms-section" id="lms-registrasi-circle" style="background: #FAF8F5; border-top: 1px solid #E2E8F0; padding: 70px 0 80px;">
+    <div class="container" style="max-width: 860px;">
+      <div class="section-header" style="text-align: center; margin-bottom: 32px;">
+        <span class="section-kicker" style="color: #1D428A; font-weight: 800; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;">Form Pendaftaran Kedua (Khusus Peserta Modul / Fasilitator)</span>
+        <h2 style="font-family: var(--font-heading); font-size: 2.1rem; font-weight: 800; color: #0F172A; letter-spacing: -0.02em; margin-bottom: 12px;">
+          Pendaftaran Program Pendampingan &amp; Kelulusan Modul
+        </h2>
+        <p style="color: #64748B; font-size: 1rem; max-width: 720px; margin: 0 auto; line-height: 1.6;">
+          Setelah membaca modul mandiri, lanjutkan proses belajarmu dalam lingkaran kelompok sebaya 5–8 orang yang didampingi tutor terlatih, atau ajukan diri sebagai Fasilitator/Konselor Sebaya. Formulir ini terhubung langsung ke sistem pendampingan.
+        </p>
+      </div>
+
+      <div class="circle-reg-card" style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 36px; box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);">
+        <!-- Role Switcher -->
+        <div class="role-switcher" style="margin-bottom: 24px;">
+          <div class="role-btn active" id="lms-role-mentee" role="button" tabindex="0">
+            <h4>
+              <span>Peserta Belajar (Mentee)</span>
+              <span class="badge badge-green" style="font-size: 0.72rem;">Siswa / Mhs</span>
+            </h4>
+            <p style="margin-bottom: 0; font-size: 0.8rem; color: #64748B;">Mendalami modul dalam kelompok 5–8 orang dengan bimbingan intensif fasilitator sebaya.</p>
+          </div>
+
+          <div class="role-btn" id="lms-role-tutor" role="button" tabindex="0">
+            <h4>
+              <span>Fasilitator Sebaya / Konselor</span>
+              <span class="badge badge-blue" style="font-size: 0.72rem; background: #EEF3FA; color: #1D428A;">Pendamping</span>
+            </h4>
+            <p style="margin-bottom: 0; font-size: 0.8rem; color: #64748B;">Memandu lingkaran belajar, menjaga ruang aman, dan mendampingi kelulusan materi modul.</p>
+          </div>
+        </div>
+
+        <form id="lms-circle-reg-form">
+          <input type="hidden" id="lms-reg-role-input" value="mentee">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="lms-reg-fullname">Nama Lengkap / Panggilan *</label>
+              <input type="text" id="lms-reg-fullname" class="form-control" placeholder="Contoh: Rian / Salma" required>
+              <small style="color: var(--text-muted); font-size: 0.75rem;">Boleh nama alias (prinsip minimisasi data &amp; privasi).</small>
+            </div>
+            <div class="form-group">
+              <label for="lms-reg-age">Rentang Usia *</label>
+              <select id="lms-reg-age" class="form-control" required>
+                <option value="">Pilih Rentang Usia...</option>
+                <option value="16-18">16 - 18 Tahun (SMA/SMK)</option>
+                <option value="19-22">19 - 22 Tahun (Mahasiswa Baru/Tengah)</option>
+                <option value="23-25">23 - 25 Tahun (Tingkat Akhir/Fresh Graduate)</option>
+                <option value="26-30">26 - 30 Tahun (Pemuda Komunitas/Umum)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="lms-reg-institution">Asal Kampus / Sekolah / Komunitas *</label>
+              <input type="text" id="lms-reg-institution" class="form-control" placeholder="Contoh: UIN SGD Bandung / Karang Taruna" required>
+            </div>
+            <div class="form-group">
+              <label for="lms-reg-contact">Kontak WhatsApp / Email (Opsional)</label>
+              <input type="text" id="lms-reg-contact" class="form-control" placeholder="Untuk konfirmasi jadwal Circle">
+            </div>
+          </div>
+
+          <!-- Dynamic Fields for Mentee -->
+          <div id="lms-mentee-fields">
+            <div class="form-group">
+              <label for="lms-reg-interest">Modul / Topik yang Ingin Kamu Dalami Bersama Circle *</label>
+              <select id="lms-reg-interest" class="form-control" required>
+                <option value="">Pilih fokus modul...</option>
+                <option value="modul-1">Modul 1: Mengenali Diri &amp; Keberanian Bertumbuh</option>
+                <option value="modul-2">Modul 2: Moderasi Beragama dalam Ruang Pergaulan</option>
+                <option value="modul-3">Modul 3: Kearifan Budaya Sunda (Silih Asah, Asih, Asuh)</option>
+                <option value="modul-4">Modul 4: Keadilan Gender &amp; Relasi Sehat Tanpa Stereotip</option>
+                <option value="modul-5">Modul 5: Ruang Aman &amp; Pencegahan Pelecehan Digital</option>
+                <option value="modul-6">Modul 6: Kepemimpinan Pemuda &amp; Fasilitasi Inklusif</option>
+                <option value="modul-7">Modul 7: Inisiasi Proyek Aksi Sosial Nyata di Lingkungan</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Dynamic Fields for Tutor Sebaya / Konselor -->
+          <div id="lms-tutor-fields" style="display: none;">
+            <div class="form-group">
+              <label for="lms-reg-experience">Pengalaman Organisasi / Minat Fasilitasi Sebaya *</label>
+              <textarea id="lms-reg-experience" class="form-control" rows="2" placeholder="Ceritakan singkat motivasimu menjadi fasilitator sebaya..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="lms-reg-commitment">Komitmen Waktu Pendampingan *</label>
+              <select id="lms-reg-commitment" class="form-control">
+                <option value="4-weeks">Siap mendampingi 1 Circle selama 4 minggu (1 sesi/minggu @60-90 menit)</option>
+                <option value="flexible">Fleksibel sesuai kesepakatan kelompok</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="checkbox-wrap" style="margin-bottom: 20px;">
+            <input type="checkbox" id="lms-reg-consent" required>
+            <label for="lms-reg-consent" style="font-size: 0.82rem; line-height: 1.5;">
+              Saya menyetujui <strong>Pakta Integritas Ruang Aman</strong>: Berkomitmen menjaga kerahasiaan teman sekelompok, tidak melakukan ujaran kebencian/pelecehan, serta menghargai perbedaan latar belakang secara empatik.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-pill" id="btn-submit-lms-circle"
+            style="width: 100%; padding: 14px; font-weight: 700; font-size: 1rem; background: #1D428A; border-color: #1D428A; color: #FFFFFF;">
+            Daftar Program Pendampingan Modul &rarr;
+          </button>
+        </form>
+
+        <!-- Konfirmasi Sukses Langsung di Halaman -->
+        <div id="lms-circle-reg-success" style="display: none; text-align: center; padding: 24px 12px 12px;">
+          <div style="width: 64px; height: 64px; background: #DCFCE7; color: #16A34A; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 14px; box-shadow: 0 4px 14px rgba(22, 163, 74, 0.2);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="30" height="30"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <h3 style="font-size: 1.4rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">Pendaftaran Berhasil!</h3>
+          <p style="color: #64748B; font-size: 0.9rem; margin-bottom: 20px;">Selamat, kamu resmi terdaftar dalam ekosistem ARUTALA Circle.</p>
+          
+          <div style="background: #FFFFFF; border: 1.5px dashed #CBD5E1; border-radius: 12px; padding: 20px; margin-bottom: 22px; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="color: #64748B; font-size: 0.85rem;">ID Circle Kamu:</span>
+              <strong id="lms-reg-success-id" style="color: #2F4F87; font-family: monospace; font-size: 1.05rem; background: #EEF3FA; padding: 3px 10px; border-radius: 6px;">ARUTALA-CR-0000</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="color: #64748B; font-size: 0.85rem;">Nama Peserta:</span>
+              <strong id="lms-reg-success-name" style="color: #0F172A; font-size: 0.9rem;">-</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <span style="color: #64748B; font-size: 0.85rem;">Peran:</span>
+              <span id="lms-reg-success-role" class="badge badge-green" style="font-size: 0.75rem;">-</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: #64748B; font-size: 0.85rem;">Asal Institusi:</span>
+              <strong id="lms-reg-success-inst" style="color: #0F172A; font-size: 0.9rem;">-</strong>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-secondary btn-pill" id="lms-btn-reset-reg" style="padding: 10px 24px; font-weight: 700;">
+            Daftarkan Peserta Lain
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toast Notification -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <img src="img/logo.png" alt="Logo ARUTALA" style="width: 38px; height: 38px; object-fit: contain; border-radius: 8px;">
+            <img src="img/uin_logo.png" alt="UIN Bandung" style="width: 32px; height: 32px; object-fit: contain; opacity: 0.9;">
+            <h3 style="margin-bottom: 0;">ARUTALA</h3>
+          </div>
+          <p>
+            Akses Ruang Tumbuh Aman, Layak, dan Adil. Model inovasi ekosistem pengembangan kapasitas pemuda yang inklusif berbasis nilai keagamaan dan kesetaraan gender.
+          </p>
+          <span class="badge badge-blue" style="font-size: 0.75rem;">OASE III PTKIN 2026</span>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#beranda">Beranda</a></li>
+            <li><a href="index.html#nilai-dasar">Nilai &amp; Fondasi</a></li>
+            <li><a href="index.html#artikel-opini">Artikel &amp; Opini</a></li>
+            <li><a href="index.html#pustaka-modul">7 Modul Kapasitas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Program &amp; Aksi</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#registrasi-circle">ARUTALA Circle</a></li>
+            <li><a href="index.html#registrasi-circle">Tutor Sebaya</a></li>
+            <li><a href="index.html#aksi-sosial">ARUTALA Action</a></li>
+            <li><a href="index.html#forum-diskusi">Forum Q&amp;A</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Tim Inovasi</h4>
+          <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 8px;">
+            <strong>UIN Sunan Gunung Djati Bandung</strong><br>
+            Alfath Fadillah Ridwannur<br>
+            M. Rifqi Nurhidayat<br>
+            Nuzhatul Hilawah
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 ARUTALA - UIN Sunan Gunung Djati Bandung. Dikembangkan untuk OASE III PTKIN.
+        </div>
+        <div>
+          Prinsip: <em>Silih Asah, Silih Asih, Silih Asuh</em> • Bebas Diskriminasi
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MOBILE BOTTOM NAVIGATION DOCK
+       ========================================================================== -->
+  <nav class="mobile-bottom-dock" id="mobile-bottom-dock" aria-label="Navigasi Bawah Mobile">
+    <a href="index.html#beranda" class="bottom-dock-item">
+      <div class="dock-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </div>
+      <span>Beranda</span>
+    </a>
+
+    <a href="index.html#nilai-dasar" class="bottom-dock-item">
+      <div class="dock-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      </div>
+      <span>Tentang</span>
+    </a>
+
+    <a href="index.html#artikel-opini" class="bottom-dock-item">
+      <div class="dock-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+      </div>
+      <span>Aktivitas</span>
+    </a>
+
+    <a href="modul.html" class="bottom-dock-item active">
+      <div class="dock-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+        </svg>
+      </div>
+      <span>7 Modul</span>
+    </a>
+
+    <a href="index.html#registrasi-circle" class="bottom-dock-item">
+      <div class="dock-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <span>Circle</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/modul.js"></script>
+</body>
+</html>

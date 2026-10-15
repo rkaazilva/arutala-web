@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARUTALA - Akses Ruang Tumbuh Aman, Layak, dan Adil | Inovasi Sosial Pemuda</title>
+
+  <!-- SEO & Social Meta -->
+  <meta name="description"
+    content="ARUTALA adalah ekosistem pengembangan kapasitas pemuda yang inklusif berbasis nilai keagamaan, moderasi beragama, dan kesetaraan gender. Menghubungkan platform digital, tutor sebaya, dan aksi sosial nyata.">
+  <meta name="keywords"
+    content="ARUTALA, kesetaraan gender, moderasi beragama, tutor sebaya, kepemudaan, UIN Sunan Gunung Djati, OASE III, inovasi sosial">
+  <meta property="og:title" content="ARUTALA - Akses Ruang Tumbuh Aman, Layak, dan Adil">
+  <meta property="og:description"
+    content="Model Inovasi Ekosistem Pengembangan Kapasitas Pemuda yang Inklusif Berbasis Nilai Keagamaan dan Kesetaraan Gender.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Plus Jakarta Sans (Clean Modern Editorial) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css?v=3.0">
+
+  <!-- Favicon Resmi ARUTALA -->
+  <link rel="icon" type="image/png" href="img/logo.png">
+</head>
+
+<body data-theme="genu">
+
+  <!-- ==========================================================================
+       TWO-TIER EDITORIAL HEADER (Gaya Media Modern USS Feed)
+       Sticky Top-0, Z-50, Full-Width, Dominan Putih & Slate Dark #0F172A
+       ========================================================================== -->
+  <!-- ==========================================================================
+       USS FEED STYLE EDITORIAL HEADER (Clean, Minimalist, White)
+       Benchmark: USS FEED Media (Center Logo, Dropdown Artikel, Hamburger & Search)
+       ========================================================================== -->
+  <header class="uss-header" id="site-header">
+    <!-- Baris 1: Top Bar (Hamburger Kiri, Logo ARUTALA Tengah, Search Kanan) -->
+    <div class="uss-header-top">
+      <div class="uss-header-top-container">
+        <!-- Kiri: Hamburger Menu Icon -->
+        <button type="button" class="uss-icon-btn" id="btn-uss-menu-toggle" aria-label="Buka Menu Navigasi" title="Menu Navigasi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Tengah: Logo ARUTALA Center (Gaya USS FEED) -->
+        <a href="#beranda" class="uss-brand-center" id="nav-brand-logo">
+          <img src="img/logo.png" alt="Logo Resmi ARUTALA" class="uss-brand-img">
+          <div class="uss-brand-text">
+            <div class="uss-brand-row">
+              <span class="uss-brand-name">ARUTALA</span>
+              <span class="uss-brand-dot">•</span>
+            </div>
+            <span class="uss-brand-sub">CIRCLE</span>
+          </div>
+        </a>
+
+        <!-- Kanan: Search Icon -->
+        <button type="button" class="uss-icon-btn" id="btn-uss-search-toggle" aria-label="Cari Artikel" title="Pencarian">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Quick Search Bar (Toggled by Search Icon) -->
+      <div class="uss-search-bar-wrap" id="uss-header-search-bar" style="display: none;">
+        <div class="uss-search-bar-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18" class="search-input-icon">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="uss-top-search-input" placeholder="Cari artikel, topik moderasi, gender, atau isu pemuda..." autocomplete="off">
+          <button type="button" class="uss-search-close-btn" id="btn-uss-search-close" aria-label="Tutup Pencarian">&times;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Baris 2: Navigasi Tengah dengan Dropdown Artikel (Sesuai USS Feed) -->
+    <nav class="uss-nav-bottom" aria-label="Navigasi Utama">
+      <div class="uss-nav-container">
+        <ul class="uss-nav-list" id="main-nav-links">
+          <li><a href="#beranda" class="uss-nav-item">BERANDA</a></li>
+          <li><a href="#nilai-dasar" class="uss-nav-item">TENTANG KAMI</a></li>
+
+          <!-- DROPDOWN ARTIKEL (Sesuai Request User: Pilihan Artikel Jadi Dropdown) -->
+          <li class="uss-nav-dropdown" id="dropdown-artikel-wrapper">
+            <button type="button" class="uss-nav-item uss-dropdown-btn" id="btn-nav-dropdown-artikel" aria-haspopup="true" aria-expanded="false">
+              <span>ARTIKEL &amp; JURNAL</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12" class="dropdown-arrow-icon">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="uss-dropdown-card" id="nav-dropdown-card" role="menu">
+              <a href="#artikel-opini" onclick="filterArticlesAndScroll('all', event)" class="uss-dropdown-link" role="menuitem">
+                <span class="dropdown-item-title">Semua Tulisan</span>
+                <span class="dropdown-item-desc">Pustaka lengkap opini &amp; edukasi pemuda</span>
+              </a>
+              <a href="#artikel-opini" onclick="filterArticlesAndScroll('pandai', event)" class="uss-dropdown-link" role="menuitem">
+                <span class="dropdown-item-title">PANDAI</span>
+                <span class="dropdown-item-desc">Moderasi Beragama &amp; Nilai Rahmah</span>
+              </a>
+              <a href="#artikel-opini" onclick="filterArticlesAndScroll('cerdas', event)" class="uss-dropdown-link" role="menuitem">
+                <span class="dropdown-item-title">CERDAS</span>
+                <span class="dropdown-item-desc">Kearifan Budaya Lokal Sunda</span>
+              </a>
+              <a href="#artikel-opini" onclick="filterArticlesAndScroll('bersuara', event)" class="uss-dropdown-link" role="menuitem">
+                <span class="dropdown-item-title">BERSUARA</span>
+                <span class="dropdown-item-desc">Keadilan Gender &amp; Relasi Sehat</span>
+              </a>
+              <a href="#artikel-opini" onclick="filterArticlesAndScroll('berdaya', event)" class="uss-dropdown-link" role="menuitem">
+                <span class="dropdown-item-title">BERDAYA</span>
+                <span class="dropdown-item-desc">Ruang Aman &amp; Pencegahan Pelecehan</span>
+              </a>
+            </div>
+          </li>
+
+          <li><a href="#aksi-sosial" class="uss-nav-item">ARUTALA ACTION</a></li>
+          <li><a href="modul.html" class="uss-nav-item">ARUTALA CERDAS</a></li>
+          <li><a href="#donasi-gerakan" class="uss-nav-item">DUKUNG KAMI</a></li>
+          <li><a href="#registrasi-circle" onclick="openCircleRegistrationModal('mentee', event)" class="uss-nav-item">GABUNG CIRCLE</a></li>
+          <li>
+            <a href="#modal-submit-article" onclick="openSubmitArticleModal(event)" class="uss-nav-item uss-nav-write">
+              WRITE / UPLOAD
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Side-Drawer Overlay & Drawer Menu (Triggered by Hamburger Icon) -->
+  <div class="uss-drawer-overlay" id="uss-drawer-overlay" style="display: none;"></div>
+  <aside class="uss-side-drawer" id="uss-side-drawer" aria-label="Menu Samping">
+    <div class="uss-drawer-header">
+      <div class="uss-drawer-brand">
+        <img src="img/logo.png" alt="Logo ARUTALA" style="width: 28px; height: 28px; object-fit: contain;">
+        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 1.15rem; color: #0F172A;">ARUTALA</span>
+      </div>
+      <button type="button" class="uss-drawer-close" id="btn-uss-drawer-close" aria-label="Tutup Menu">&times;</button>
+    </div>
+    <div class="uss-drawer-body">
+      <ul class="uss-drawer-links">
+        <li><a href="#beranda" class="drawer-link" onclick="closeUssDrawer()">Beranda</a></li>
+        <li><a href="#nilai-dasar" class="drawer-link" onclick="closeUssDrawer()">Tentang Kami &amp; Nilai Dasar</a></li>
+        <li class="drawer-group">
+          <span class="drawer-group-label">Kategori Artikel</span>
+          <div class="drawer-sublinks">
+            <a href="#artikel-opini" onclick="filterArticlesAndScroll('all', event); closeUssDrawer();" class="drawer-sublink">Semua Tulisan</a>
+            <a href="#artikel-opini" onclick="filterArticlesAndScroll('pandai', event); closeUssDrawer();" class="drawer-sublink">PANDAI (Moderasi)</a>
+            <a href="#artikel-opini" onclick="filterArticlesAndScroll('cerdas', event); closeUssDrawer();" class="drawer-sublink">CERDAS (Budaya)</a>
+            <a href="#artikel-opini" onclick="filterArticlesAndScroll('bersuara', event); closeUssDrawer();" class="drawer-sublink">BERSUARA (Gender)</a>
+            <a href="#artikel-opini" onclick="filterArticlesAndScroll('berdaya', event); closeUssDrawer();" class="drawer-sublink">BERDAYA (Ruang Aman)</a>
+          </div>
+        </li>
+        <li><a href="#aksi-sosial" class="drawer-link" onclick="closeUssDrawer()">ARUTALA Action</a></li>
+        <li><a href="modul.html" class="drawer-link" onclick="closeUssDrawer()">ARUTALA Cerdas (7 Modul &amp; Kuis)</a></li>
+        <li><a href="#donasi-gerakan" class="drawer-link" onclick="closeUssDrawer()">Dukung Kami (Donasi)</a></li>
+      </ul>
+      <div class="uss-drawer-ctas">
+        <button type="button" class="btn btn-primary" style="width: 100%; margin-bottom: 10px; background: #2F4F87; color: #FFFFFF;" onclick="openCircleRegistrationModal('mentee', event); closeUssDrawer();">
+          Gabung Circle
+        </button>
+        <button type="button" class="btn btn-outline" style="width: 100%; border: 1.5px solid #0F172A; background: #FFFFFF; color: #0F172A;" onclick="openSubmitArticleModal(event); closeUssDrawer();">
+          + Upload Tulisan
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <!-- ==========================================================================
+         COMPACT EDITORIAL MASTHEAD (PORTAL BERITA MODEREN / USS FEED STYLE)
+         Pengenalan Ringkas 1 Baris Bersih + Aksi Cepat
+         ========================================================================== -->
+    <section class="uss-masthead-section" id="beranda">
+      <div class="uss-masthead-container">
+        <div class="uss-masthead-inner">
+          <!-- Sisi Kiri: Judul Ringkas Tegas -->
+          <div class="uss-masthead-left">
+            <span class="uss-masthead-tag">PORTAL INOVASI &amp; GERAKAN PEMUDA</span>
+            <h1 class="uss-masthead-title">
+              ARUTALA — Ekosistem Literasi, Ruang Aman Sebaya &amp; Aksi Kesetaraan Pemuda
+            </h1>
+          </div>
+
+          <!-- Sisi Kanan: Tombol Aksi Cepat -->
+          <div class="uss-masthead-actions">
+            <button type="button" class="btn-masthead-primary" onclick="openCircleRegistrationModal('mentee', event)"
+              id="btn-hero-join-circle">
+              Gabung Gerakan Circle &rarr;
+            </button>
+            <a href="modul.html" class="btn-masthead-outline" id="btn-hero-view-modul">
+              Pelajari 7 Modul Cerdas
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================================
+           BAR STATISTIK 4 KOLOM DENGAN 4 GARIS WARNA TEMA (CIRI KHAS ARUTALA)
+           34+ (Navy #2F4F87) | 768+ (Sky Blue #89BBEE) | 18 (Green #66BB6A) | 100% (Pink #FF64C5)
+           Pemisah vertikal tipis (1px solid #E2E8F0) & Border-top 3px warna aksen
+           ====================================================================== -->
+      <div class="uss-impact-bar">
+        <div class="uss-impact-container">
+          <div class="uss-impact-grid">
+            <div class="uss-impact-col impact-col-navy">
+              <div class="uss-stat-number">34+</div>
+              <div class="uss-stat-label">Fasilitator Sebaya Terlatih</div>
+            </div>
+            <div class="uss-impact-col impact-col-sky">
+              <div class="uss-stat-number">768+</div>
+              <div class="uss-stat-label">Penerima Manfaat Langsung</div>
+            </div>
+            <div class="uss-impact-col impact-col-green">
+              <div class="uss-stat-number">18</div>
+              <div class="uss-stat-label">Lingkaran Circle Aktif</div>
+            </div>
+            <div class="uss-impact-col impact-col-pink">
+              <div class="uss-stat-number">100%</div>
+              <div class="uss-stat-label">Inisiatif Aman &amp; Inklusif</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION ARTIKEL & JURNAL UTAMA (GAYA CLEAN USS FEED)
+         Tepat di Bawah Hero/Statistik, Borderless, Background Putih #FFFFFF
+         1 Featured Besar di Atas (2 Kolom) + Clean Grid 3 Kolom di Bawahnya
+         ========================================================================== -->
+    <section class="uss-feed-section" id="artikel-opini">
+      <div class="uss-feed-container">
+        <!-- Header Section: Clean USS Feed Header -->
+        <div class="uss-feed-header">
+          <div class="uss-feed-header-left">
+            <div class="uss-feed-kicker">EDITORIAL FEED &amp; JURNAL PEMUDA</div>
+            <h2 class="uss-feed-title">Artikel &amp; Jurnal Utama</h2>
+            <p class="uss-feed-subtitle">
+              Kurasi esai pemikiran kritis, riset aksi, dan gagasan generasi muda untuk merawat moderasi beragama,
+              keadilan gender, dan ruang aman bersama.
+            </p>
+          </div>
+          <div class="uss-feed-header-actions">
+            <button type="button" class="btn-uss-upload-article" id="btn-open-submit-article"
+              onclick="openSubmitArticleModal(event)">
+              <span class="plus-icon">+</span> Upload Artikel / Jurnal Kamu
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Bar Minimalis & Search Input -->
+        <div class="uss-feed-controls">
+          <div class="uss-filter-pills" id="article-filter-pills">
+            <button type="button" class="uss-filter-pill active" data-category="all"
+              onclick="filterArticles('all', this)">
+              Semua Tulisan
+            </button>
+            <button type="button" class="uss-filter-pill" data-category="pandai"
+              onclick="filterArticles('pandai', this)">
+              <span class="cat-dot dot-green"></span> PANDAI (Moderasi)
+            </button>
+            <button type="button" class="uss-filter-pill" data-category="cerdas"
+              onclick="filterArticles('cerdas', this)">
+              <span class="cat-dot dot-sky"></span> CERDAS (Budaya)
+            </button>
+            <button type="button" class="uss-filter-pill" data-category="bersuara"
+              onclick="filterArticles('bersuara', this)">
+              <span class="cat-dot dot-pink"></span> BERSUARA (Gender)
+            </button>
+            <button type="button" class="uss-filter-pill" data-category="berdaya"
+              onclick="filterArticles('berdaya', this)">
+              <span class="cat-dot dot-navy"></span> BERDAYA (Ruang Aman)
+            </button>
+          </div>
+
+          <div class="uss-search-wrapper">
+            <svg class="uss-search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              width="16" height="16">
+              <circle cx="11" cy="11" r="7" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" id="article-search-input" placeholder="Cari topik naskah atau nama penulis...">
+          </div>
+        </div>
+
+        <!-- Dynamic Container for 1 Featured + 3-Column Clean Grid -->
+        <div id="articles-container" class="uss-feed-articles-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SIKLUS TRANSFORMASI PEMUDA (Sharp Editorial Grid - 4 Warna Tema Elegan)
+         ========================================================================== -->
+    <section class="section-pad" id="siklus-pemuda">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Model Inovasi Hibrida</span>
+          <h2>Siklus Transformasi Pemuda ARUTALA</h2>
+          <p>Empat pilar pemberdayaan terstruktur berbasis prinsip <em>Silih Asah, Silih Asih, Silih Asuh</em>.</p>
+        </div>
+
+        <div class="cycle-grid-row">
+          <div class="cycle-box-card cycle-navy">
+            <div class="cycle-box-num">01</div>
+            <div>
+              <h5>Belajar (Learn)</h5>
+              <p>Mengenali potensi diri, nilai rahmah keagamaan, dan kesadaran hak asasi yang memuliakan manusia.</p>
+            </div>
+          </div>
+          <div class="cycle-box-card cycle-sky">
+            <div class="cycle-box-num">02</div>
+            <div>
+              <h5>Bertumbuh (Grow)</h5>
+              <p>Mendobrak stereotip gender yang membatasi, batasan diri sehat, dan komunikasi tanpa kekerasan.</p>
+            </div>
+          </div>
+          <div class="cycle-box-card cycle-green">
+            <div class="cycle-box-num">03</div>
+            <div>
+              <h5>Bergerak (Act)</h5>
+              <p>Fasilitasi dialog kelompok kecil bersama tutor sebaya dalam lingkaran aman yang setara.</p>
+            </div>
+          </div>
+          <div class="cycle-box-card cycle-pink">
+            <div class="cycle-box-num">04</div>
+            <div>
+              <h5>Berdampak (Impact)</h5>
+              <p>Melahirkan ARUTALA Action nyata untuk lingkungan kampus, ormawa, dan masyarakat luas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         VALUES & FOUNDATIONS (Moderasi & Gender)
+         ========================================================================== -->
+    <section class="section-pad" id="nilai-dasar">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Fondasi Etis &amp; Nilai</span>
+          <h2>Integrasi Moderasi Beragama &amp; Kesetaraan Gender</h2>
+          <p>
+            Membangun keadilan sosial yang berakar pada nilai keluhuran agama serta penghormatan sejati terhadap
+            martabat kemanusiaan (karamah insaniyyah).
+          </p>
+        </div>
+
+        <div class="values-grid">
+          <div class="value-card val-1">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
+                <path d="M3 21l9-18 9 18" />
+                <path d="M9 15h6" />
+              </svg>
+            </div>
+            <span class="pilar-kicker">PILAR 01</span>
+            <h3>Komitmen Kebangsaan</h3>
+            <p>Menempatkan persatuan, kebinekaan, dan Pancasila sebagai ruang perjumpaan bersama anak bangsa di atas
+              segala sekat identitas primodial.</p>
+          </div>
+
+          <div class="value-card val-2">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <span class="pilar-kicker">PILAR 02</span>
+            <h3>Kesetaraan &amp; Keadilan Gender</h3>
+            <p>Membongkar stereotip peran yang mengekang potensi pemuda serta menjamin akses kesempatan yang setara bagi
+              perempuan dan laki-laki.</p>
+          </div>
+
+          <div class="value-card val-3">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <span class="pilar-kicker">PILAR 03</span>
+            <h3>Toleransi &amp; Anti-Kekerasan</h3>
+            <p>Menolak segala intimidasi verbal, pelecehan, dan kekerasan fisik, serta mengedepankan dialog damai yang
+              hangat dan saling menghargai.</p>
+          </div>
+
+          <div class="value-card val-4">
+            <div class="value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 8v4l3 3" />
+              </svg>
+            </div>
+            <span class="pilar-kicker">PILAR 04</span>
+            <h3>Akomodatif Budaya Lokal</h3>
+            <p>Menghidupkan kearifan tradisi nusantara seperti gotong royong dan kesundaan yang selaras dengan
+              kemaslahatan dan pemuliaan martabat manusia.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         ARUTALA ACTION: LENSA GERAKAN PEMUDA (GAYA WEPRESENT)
+         Showcase Dokumentasi Komunitas, Background Slate-900 (#0F172A), Asymmetric Bento Grid
+         ========================================================================== -->
+    <section class="wepresent-action-section" id="aksi-sosial">
+      <div class="wepresent-container">
+        <!-- WePresent Editorial Header with Prominent Button -->
+        <div class="wepresent-header">
+          <div class="wepresent-header-left">
+            <span class="wepresent-kicker">LENSA GERAKAN PEMUDA • WEPRESENT SHOWCASE</span>
+            <h2 class="wepresent-title">ARUTALA Action: Lensa Gerakan Pemuda</h2>
+            <p class="wepresent-desc">
+              Pameran visual dan arsip hidup dokumentasi inisiatif pemuda, lingkaran sebaya, dan komunitas akar rumput
+              dalam mewujudkan ruang aman, advokasi kesetaraan gender, serta toleransi aktif di tengah masyarakat.
+            </p>
+          </div>
+          <div class="wepresent-header-right">
+            <button type="button" class="btn-wepresent-share" id="btn-open-submit-action"
+              onclick="openSubmitActionModal(event)">
+              <span class="plus-icon">+</span> Bagikan Dokumentasi Kegiatanmu
+            </button>
+          </div>
+        </div>
+
+        <!-- Asymmetric Bento Grid Gallery -->
+        <div class="bento-gallery-grid" id="actions-container">
+          <!-- Populated by JS: Asymmetric Bento Grid (foto lebar 2 kolom & foto 1 kolom) -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         RUANG EKSPLORASI VIDEO EDUKASI (Inspirasi VIRAL Pancawala)
+         ========================================================================== -->
+    <section class="section-pad videos-section" id="video-edukasi">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Eksplorasi Multimedia</span>
+          <h2>Pojok Video Edukasi &amp; Inspirasi</h2>
+          <p>
+            Kurasi konten video karya anak bangsa yang mengedukasi tentang sikap toleransi, kepemimpinan pemuda, dan
+            pemahaman kesetaraan gender.
+          </p>
+        </div>
+
+        <div class="video-grid" id="videos-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FORUM TANYA JAWAB (Q&A CORNER)
+         ========================================================================== -->
+    <section class="section-pad qa-section" id="forum-diskusi">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Ruang Dialog Interaktif</span>
+          <h2>Forum Tanya Jawab &amp; Konsultasi Sebaya</h2>
+          <p>
+            Punya pertanyaan seputar relasi, dinamika organisasi, atau tantangan moderasi di lingkunganmu? Tanyakan
+            secara terbuka dan aman di sini.
+          </p>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 30px;">
+          <button type="button" class="btn btn-primary btn-pill btn-sm" id="btn-open-ask-modal"
+            onclick="openAskQAModal(event)">
+            Ajukan Pertanyaan Baru
+          </button>
+        </div>
+
+        <div class="qa-list" id="qa-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         GERBANG REGISTRASI ARUTALA CIRCLE (Sharp Architectural Banner)
+         ========================================================================== -->
+    <section class="circle-cta-section" id="registrasi-circle">
+      <div class="container">
+        <div class="circle-cta-card">
+          <div class="circle-cta-top-bar">
+            <span class="circle-cta-badge">EKOSISTEM BELAJAR SEBAYA INKLUSIF</span>
+            <div class="theme-color-strip">
+              <span style="background:#2F4F87"></span>
+              <span style="background:#89BBEE"></span>
+              <span style="background:#66BB6A"></span>
+              <span style="background:#FF64C5"></span>
+            </div>
+          </div>
+          <h2>Gabung ARUTALA Circle: Bertumbuh Bersama Teman Sebaya</h2>
+          <p>
+            Pilih peranmu dalam gerakan kepemudaan: menjadi Peserta Belajar (Mentee) untuk berproses intensif dalam
+            lingkaran kecil 5–8 orang, atau menjadi Tutor Sebaya / Konselor Pemuda untuk memandu dan menjaga ruang aman
+            bersama.
+          </p>
+
+          <div class="circle-cta-actions">
+            <button type="button" class="btn btn-primary" onclick="openCircleRegistrationModal('mentee', event)">
+              DAFTAR SEBAGAI MENTEE &rarr;
+            </button>
+            <button type="button" class="btn btn-outline-white" onclick="openCircleRegistrationModal('tutor', event)">
+              DAFTAR SEBAGAI TUTOR SEBAYA
+            </button>
+          </div>
+
+          <div class="circle-cta-perks">
+            <div class="perk-item"><span>01 /</span> Pakta Integritas Ruang Aman</div>
+            <div class="perk-item"><span>02 /</span> 4 Minggu Siklus Pembelajaran</div>
+            <div class="perk-item"><span>03 /</span> E-Sertifikat Resmi OASE III PTKIN</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FITUR DONASI: DUKUNG GERAKAN ARUTALA (Solidaritas Pemuda Nusantara)
+         ========================================================================== -->
+    <!-- ==========================================================================
+         FITUR DONASI: DUKUNG GERAKAN ARUTALA (Gaya Charity: Water)
+         Kolom Kiri: Foto Kegiatan Besar, Transparansi Dana, 3 Doa Donatur
+         Kolom Kanan: Kartu Form Donasi Bersih (border-slate-200, #2F4F87, #66BB6A)
+         ========================================================================== -->
+    <section class="donation-section" id="donasi-gerakan">
+      <div class="container">
+        <div class="section-header" style="text-align: center; max-width: 720px; margin: 0 auto 48px;">
+          <span class="section-kicker"
+            style="color: #2F4F87; font-weight: 800; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;">Solidaritas
+            &amp; Gotong Royong</span>
+          <h2
+            style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: #0F172A; letter-spacing: -0.02em; margin-bottom: 12px;">
+            Dukung Gerakan Ruang Aman &amp; Inklusif Pemuda
+          </h2>
+          <p style="color: #64748B; font-size: 1rem; line-height: 1.6; margin-bottom: 0;">
+            Setiap rupiah donasimu didedikasikan langsung 100% untuk pencetakan modul belajar pemuda rentan,
+            pendampingan konselor sebaya di kampus, dan inkubasi aksi sosial di pedesaan.
+          </p>
+        </div>
+
+        <div class="donation-grid">
+          <!-- ====================================================================
+               KOLOM KIRI: Foto Kegiatan Nyata, Transparansi Dana, Feed Doa Donatur
+               ==================================================================== -->
+          <div class="donation-left-col">
+            <!-- 1. Foto Kegiatan Nyata Berukuran Besar -->
+            <div class="donation-photo-card">
+              <div class="donation-photo-container">
+                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80"
+                  alt="Dokumentasi Pelatihan Fasilitator Sebaya ARUTALA Circle" class="donation-hero-photo">
+                <div class="donation-photo-overlay-tag">
+                  <span class="tag-live-dot"></span>
+                  <span>Dokumentasi Nyata: Sesi Pelatihan Fasilitator Sebaya &amp; Ruang Aman Pemuda</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Transparansi Penggunaan Dana (Charity: Water Style) -->
+            <div class="donation-transparency-card">
+              <div class="transparency-header">
+                <div class="transparency-icon-box">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    <polyline points="9 12 11 14 15 10"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="transparency-title">100% Transparansi Penyaluran Dana</h4>
+                  <p class="transparency-desc">Diaudit &amp; dilaporkan secara berkala dalam publikasi akuntabilitas
+                    OASE III PTKIN</p>
+                </div>
+              </div>
+
+              <div class="transparency-bars">
+                <div class="transparency-row">
+                  <div class="transparency-metric-info">
+                    <span class="metric-name">Fasilitasi Circle &amp; Cetak 7 Modul Cerdas</span>
+                    <span class="metric-val" style="color: #2F4F87;">70%</span>
+                  </div>
+                  <div class="transparency-metric-bar-bg">
+                    <div class="transparency-metric-bar-fill" style="width: 70%; background: #2F4F87;"></div>
+                  </div>
+                </div>
+
+                <div class="transparency-row">
+                  <div class="transparency-metric-info">
+                    <span class="metric-name">Logistik &amp; Inkubasi Aksi Sosial Komunitas</span>
+                    <span class="metric-val" style="color: #66BB6A;">20%</span>
+                  </div>
+                  <div class="transparency-metric-bar-bg">
+                    <div class="transparency-metric-bar-fill" style="width: 20%; background: #66BB6A;"></div>
+                  </div>
+                </div>
+
+                <div class="transparency-row">
+                  <div class="transparency-metric-info">
+                    <span class="metric-name">Pemeliharaan Ruang Aman &amp; Audit Publik</span>
+                    <span class="metric-val" style="color: #89BBEE;">10%</span>
+                  </div>
+                  <div class="transparency-metric-bar-bg">
+                    <div class="transparency-metric-bar-fill" style="width: 10%; background: #89BBEE;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Daftar Singkat Doa & Dukungan Terkini Donatur (3 Data Dummy Terisi) -->
+            <div class="donor-feed-card">
+              <div class="donor-feed-header">
+                <h4 style="font-size: 0.95rem; font-weight: 800; color: #0F172A; margin: 0;">Doa &amp; Dukungan Terkini
+                  Donatur</h4>
+                <span class="badge badge-green" style="font-size: 0.72rem;">Live Feed</span>
+              </div>
+
+              <div id="donor-feed-list">
+                <!-- Data Dummy 1 -->
+                <div class="donor-feed-item">
+                  <div class="donor-avatar" style="background: #64748B;">H</div>
+                  <div class="donor-info">
+                    <div class="donor-name-row">
+                      <strong class="donor-name">Hamba Allah (Alumni UIN)</strong>
+                      <span class="donor-amount-badge">Rp 100.000</span>
+                    </div>
+                    <div class="donor-package-tag">Paket Pendampingan 2 Mentee Sebaya</div>
+                    <p class="donor-message">“Semoga gerakan ruang aman ini terus meluas dan memberkahi adik-adik
+                      mahasiswa.”</p>
+                    <span class="donor-time">10 menit lalu</span>
+                  </div>
+                </div>
+
+                <!-- Data Dummy 2 -->
+                <div class="donor-feed-item">
+                  <div class="donor-avatar" style="background: #2F4F87;">S</div>
+                  <div class="donor-info">
+                    <div class="donor-name-row">
+                      <strong class="donor-name">Siti Rahmawati</strong>
+                      <span class="donor-amount-badge">Rp 50.000</span>
+                    </div>
+                    <div class="donor-package-tag">Paket Ruang Belajar Modul</div>
+                    <p class="donor-message">“Keren banget gagasannya! Semangat untuk tim OASE III PTKIN.”</p>
+                    <span class="donor-time">1 jam lalu</span>
+                  </div>
+                </div>
+
+                <!-- Data Dummy 3 -->
+                <div class="donor-feed-item">
+                  <div class="donor-avatar" style="background: #2F4F87;">F</div>
+                  <div class="donor-info">
+                    <div class="donor-name-row">
+                      <strong class="donor-name">Fajar Nugraha</strong>
+                      <span class="donor-amount-badge">Rp 25.000</span>
+                    </div>
+                    <div class="donor-package-tag">Dukungan Aksi Sosial Desa</div>
+                    <p class="donor-message">“Sedekah pemuda untuk masa depan yang lebih adil dan toleran.”</p>
+                    <span class="donor-time">3 jam lalu</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #E2E8F0; text-align: center;">
+                <small style="color: #64748B; font-size: 0.78rem; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #2F4F87; flex-shrink: 0;">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                  Transparansi dana diaudit dan dilaporkan secara berkala dalam publikasi OASE III PTKIN.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- ====================================================================
+               KOLOM KANAN: Kartu Form Donasi Bersih (charity: water style)
+               bg-white border border-slate-200 rounded-xl p-8
+               Progress Bar Hijau (#66BB6A) & Tombol Nominal Biru Tua (#2F4F87)
+               ==================================================================== -->
+          <div class="donation-card">
+            <!-- Progress Target Bar -->
+            <div class="donation-progress-wrap">
+              <div
+                style="display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; margin-bottom: 6px;">
+                <span style="color: #64748B; font-weight: 600;">Target Program 500 Paket Edukasi</span>
+                <strong style="color: #66BB6A; font-weight: 800;" id="donation-progress-percent">75% Terkumpul</strong>
+              </div>
+              <div class="donation-progress-bar-bg">
+                <div class="donation-progress-bar-fill" id="donation-progress-bar"
+                  style="width: 75%; background: #66BB6A;"></div>
+              </div>
+              <div
+                style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; margin-top: 6px;">
+                <span style="color: #0F172A; font-weight: 700;" id="donation-current-amount">Rp 18.750.000</span>
+                <span style="color: #94A3B8;">Target Rp 25.000.000</span>
+              </div>
+            </div>
+
+            <h4 style="font-size: 1rem; font-weight: 800; color: #0F172A; margin-bottom: 12px;">
+              Pilih Nominal Donasi Kebaikan:
+            </h4>
+
+            <div class="donation-pill-group">
+              <div class="donation-pill active" data-amount="10000" onclick="selectDonationAmount(10000, this)">
+                <span class="nominal">Rp 10.000</span>
+                <span class="purpose">1 Paket Modul Belajar</span>
+              </div>
+              <div class="donation-pill" data-amount="25000" onclick="selectDonationAmount(25000, this)">
+                <span class="nominal">Rp 25.000</span>
+                <span class="purpose">1 Sesi Konseling Sebaya</span>
+              </div>
+              <div class="donation-pill" data-amount="50000" onclick="selectDonationAmount(50000, this)">
+                <span class="nominal">Rp 50.000</span>
+                <span class="purpose">Paket Ruang Aman Kampus</span>
+              </div>
+              <div class="donation-pill" data-amount="100000" onclick="selectDonationAmount(100000, this)">
+                <span class="nominal">Rp 100.000</span>
+                <span class="purpose">Inkubasi Aksi Sosial Desa</span>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 16px;">
+              <label for="custom-donation-amount" style="font-size: 0.82rem; font-weight: 700; color: #334155;">
+                Atau Masukkan Nominal Lainnya (Rp):
+              </label>
+              <input type="number" id="custom-donation-amount" class="form-control" placeholder="Contoh: 150000"
+                min="5000" step="5000" oninput="handleCustomDonationInput(this)">
+            </div>
+
+            <form id="donation-form" onsubmit="handleDonationSubmit(event)">
+              <div class="form-group" style="margin-bottom: 14px;">
+                <label for="donor-name-input">Nama Lengkap / Panggilan *</label>
+                <input type="text" id="donor-name-input" class="form-control" placeholder="Nama donatur" required>
+              </div>
+
+              <div class="checkbox-wrap" style="margin-bottom: 14px;">
+                <input type="checkbox" id="donor-anonymous-checkbox" onchange="toggleAnonymousDonor(this)">
+                <label for="donor-anonymous-checkbox">Sembunyikan nama saya (Tampilkan sebagai Hamba Allah)</label>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 18px;">
+                <label for="donor-message-input">Doa / Pesan Semangat untuk Pemuda ARUTALA (Opsional)</label>
+                <textarea id="donor-message-input" class="form-control" rows="2"
+                  placeholder="Tuliskan harapan dan doa baikmu..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-pill" id="btn-submit-donation"
+                style="width: 100%; padding: 14px; font-weight: 700; font-size: 1rem; background: #2F4F87; border-color: #2F4F87; color: #FFFFFF;">
+                Lanjutkan ke Pembayaran Donasi &rarr;
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL: BACA ARTIKEL LENGKAP (Malala Fund & Gen-U Reader Experience)
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-article-reader">
+    <div class="modal-window" style="max-width: 800px;">
+      <div class="modal-header">
+        <h3 id="modal-article-title">Judul Artikel</h3>
+        <button type="button" class="modal-close" id="btn-close-article-modal" onclick="closeArticleReaderModal(event)"
+          aria-label="Tutup">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="modal-article-cover-wrap"
+          style="position: relative; width: 100%; height: 280px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 22px; display: none;">
+          <img id="modal-article-img" src="" alt="Cover Artikel" style="width: 100%; height: 100%; object-fit: cover;">
+          <div
+            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,58,89,0.75), transparent 55%);">
+          </div>
+          <span class="badge badge-coral" id="modal-article-cat"
+            style="position: absolute; bottom: 16px; left: 18px; font-weight: 700; font-size: 0.85rem;">Kategori</span>
+        </div>
+        <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 18px; flex-wrap: wrap;">
+          <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;"
+            id="modal-article-date">Tanggal</span>
+          <span style="color: var(--border);">·</span>
+          <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;" id="modal-article-readtime">5
+            menit baca</span>
+        </div>
+        <div id="modal-article-quote-wrap"
+          style="display: none; background: #F8FAFC; border-left: 4px solid var(--prisma-coral); padding: 16px 20px; margin-bottom: 24px; border-radius: 0 12px 12px 0;">
+          <p id="modal-article-quote"
+            style="font-style: italic; font-size: 1.08rem; color: var(--text-primary); margin-bottom: 0; font-weight: 600; line-height: 1.55;">
+          </p>
+        </div>
+        <div id="modal-article-body" style="font-size: 1rem; line-height: 1.8; color: var(--text-secondary);">
+          <!-- Article HTML injected here -->
+        </div>
+        <div
+          style="margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 14px;">
+          <div class="author-avatar" id="modal-article-avatar" style="width: 44px; height: 44px; font-size: 1.1rem;">A
+          </div>
+          <div>
+            <h5 id="modal-article-author" style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Nama Penulis
+            </h5>
+            <span id="modal-article-role" style="font-size: 0.82rem; color: var(--text-muted);">Peran / Instansi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: UPLOAD ARTIKEL / JURNAL (GAYA CLEAN USS FEED)
+       Input: Judul, Kategori, Nama Penulis, Asal Instansi, Upload File/Isi Tulisan, Foto Sampul
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-submit-article">
+    <div class="modal-window" style="max-width: 660px;">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #0F172A; margin-bottom: 2px;">Upload Artikel / Jurnal
+            Kamu</h3>
+          <p style="font-size: 0.8rem; color: #64748B; margin-bottom: 0;">Publikasikan naskah riset aksi, esai kritis,
+            atau gagasan pemuda ke Portal ARUTALA.</p>
+        </div>
+        <button type="button" class="modal-close" id="btn-close-submit-article" onclick="closeSubmitArticleModal(event)"
+          aria-label="Tutup">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-submit-article">
+          <div class="form-group">
+            <label for="article-title-input">Judul Artikel / Jurnal *</label>
+            <input type="text" id="article-title-input" class="form-control"
+              placeholder="Contoh: Menolak Bias Gender dalam Praktik Organisasi Kemahasiswaan" required>
+          </div>
+
+          <div class="form-group">
+            <label for="article-category-input">Kategori Tulisan *</label>
+            <select id="article-category-input" class="form-control" required>
+              <option value="pandai">PANDAI (Pendidikan Nilai &amp; Moderasi Beragama)</option>
+              <option value="cerdas">CERDAS (Kearifan Budaya &amp; Tradisi Nusantara)</option>
+              <option value="bersuara">BERSUARA (Kesetaraan &amp; Keadilan Gender)</option>
+              <option value="berdaya">BERDAYA (Ruang Aman &amp; Relasi Sehat)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="article-author-input">Nama Penulis *</label>
+              <input type="text" id="article-author-input" class="form-control" placeholder="Contoh: Alfath Fadillah"
+                required>
+            </div>
+            <div class="form-group">
+              <label for="article-institution-input">Asal Instansi / Afiliasi *</label>
+              <input type="text" id="article-institution-input" class="form-control"
+                placeholder="Contoh: UIN Sunan Gunung Djati Bandung" required>
+            </div>
+          </div>
+
+          <!-- Cover Image Upload Box -->
+          <div class="form-group">
+            <label>Foto Sampul (Cover Image)</label>
+            <div class="upload-dropzone" id="cover-dropzone">
+              <input type="file" id="article-cover-file" accept="image/png, image/jpeg, image/webp"
+                style="display: none;">
+              <div id="cover-upload-prompt"
+                style="display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28"
+                  style="color: #2F4F87;">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <span style="font-size: 0.85rem; font-weight: 700; color: #0F172A;">Pilih Foto Sampul
+                  (JPG/PNG/WEBP)</span>
+                <span style="font-size: 0.74rem; color: #64748B;">Klik di sini untuk unggah gambar dari perangkat</span>
+              </div>
+              <img id="article-cover-preview" class="upload-preview-thumb" alt="Preview Sampul">
+            </div>
+          </div>
+
+          <!-- Manuscript File Upload (Opsional draf file Word / PDF) -->
+          <div class="form-group">
+            <label for="article-doc-file">Upload File Dokumen Naskah <span
+                style="font-size: 0.74rem; color: #64748B; font-weight: normal;">(Opsional: .docx, .pdf,
+                .txt)</span></label>
+            <input type="file" id="article-doc-file" accept=".docx,.pdf,.txt,.doc" class="form-control"
+              style="font-size: 0.82rem; padding: 7px 10px;">
+            <div id="doc-attached-info" class="doc-attached-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+              <span id="doc-file-name">Dokumen terlampir</span>
+            </div>
+          </div>
+
+          <!-- Manuscript Text Body -->
+          <div class="form-group">
+            <label for="article-content-input">Isi Tulisan / Ringkasan Gagasan *</label>
+            <textarea id="article-content-input" class="form-control" rows="5"
+              placeholder="Tuliskan isi gagasan, argumen kritis, latar belakang masalah, atau poin rekomendasi naskahmu..."
+              required></textarea>
+            <small style="color: var(--text-muted); font-size: 0.76rem;">Gagasan harus menghormati martabat kemanusiaan
+              dan bebas diskriminasi.</small>
+          </div>
+
+          <button type="submit" class="btn-uss-modal-submit"
+            style="width: 100%; padding: 13px; font-weight: 700; font-size: 0.94rem; background: #2F4F87; color: #FFFFFF; border: none; border-radius: 6px; cursor: pointer;">
+            Kirim &amp; Terbitkan Tulisan &rarr;
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: PUTAR VIDEO EDUKASI
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-video-player">
+    <div class="modal-window" style="max-width: 800px;">
+      <div class="modal-header">
+        <h3 id="modal-video-title">Judul Video</h3>
+        <button type="button" class="modal-close" id="btn-close-video-modal" onclick="closeVideoModal(event)"
+          aria-label="Tutup">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 0;">
+        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+          <iframe id="modal-video-iframe" style="position: absolute; top:0; left: 0; width: 100%; height: 100%;"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <div style="padding: 20px;">
+          <p id="modal-video-desc" style="font-size: 0.92rem; color: var(--text-secondary);"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: TANYA DI FORUM Q&A
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-ask-qa">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>Ajukan Pertanyaan di Ruang Aman</h3>
+        <button type="button" class="modal-close" id="btn-close-ask-qa" onclick="closeAskQAModal(event)"
+          aria-label="Tutup">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-ask-qa">
+          <div class="form-group">
+            <label for="qa-author-input">Nama / Nama Samaran (Pseudonim) *</label>
+            <input type="text" id="qa-author-input" class="form-control" placeholder="Contoh: Kawan_Cibiru" required>
+          </div>
+          <div class="form-group">
+            <label for="qa-question-input">Pertanyaanmu *</label>
+            <textarea id="qa-question-input" class="form-control" rows="4"
+              placeholder="Ceritakan situasi atau hal yang ingin kamu diskusikan..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="qa-tag-input">Topik Bahasan *</label>
+            <select id="qa-tag-input" class="form-control" required>
+              <option value="Ruang Aman">Ruang Aman & Batasan Diri</option>
+              <option value="Kesetaraan Gender">Kesetaraan Gender & Stereotip</option>
+              <option value="Moderasi Beragama">Toleransi & Moderasi Beragama</option>
+              <option value="Etika Organisasi">Etika Organisasi & Kampus</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-pill" style="width: 100%;">
+            Tayangkan Pertanyaan
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: BAGIKAN DOKUMENTASI KEGIATAN (ARUTALA ACTION - GAYA WEPRESENT)
+       Input: Judul Kegiatan, Lokasi, Nama Pengirim/Komunitas, Upload Foto/Link Video, Cerita Singkat Dampak
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-submit-action">
+    <div class="modal-window" style="max-width: 640px;">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #0F172A; margin-bottom: 2px;">Bagikan Dokumentasi
+            Kegiatanmu</h3>
+          <p style="font-size: 0.8rem; color: #64748B; margin-bottom: 0;">Pamerkan foto &amp; video jejak kegiatan
+            komunitasmu di showcase visual Lensa Gerakan Pemuda.</p>
+        </div>
+        <button type="button" class="modal-close" id="btn-close-submit-action" onclick="closeSubmitActionModal(event)"
+          aria-label="Tutup">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-submit-action">
+          <div class="form-group">
+            <label for="action-title-input">Judul Kegiatan *</label>
+            <input type="text" id="action-title-input" class="form-control"
+              placeholder="Contoh: Workshop Komunikasi Inklusif bagi Pengurus Organisasi" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="action-location-input">Lokasi Kegiatan *</label>
+              <input type="text" id="action-location-input" class="form-control"
+                placeholder="Contoh: Kampus UIN SGD Bandung / Balai Desa Cipadung" required>
+            </div>
+            <div class="form-group">
+              <label for="action-circle-input">Nama Pengirim / Komunitas *</label>
+              <input type="text" id="action-circle-input" class="form-control"
+                placeholder="Contoh: Circle Arutala Pasundan / Karang Taruna" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="action-photo-url-input">Upload Foto / Link Foto atau Video *</label>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <input type="file" id="action-photo-file-input" accept="image/*" class="form-control"
+                style="font-size: 0.82rem; padding: 7px 10px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 0.75rem; color: #94A3B8; text-transform: uppercase; font-weight: 700;">Atau Link
+                  URL:</span>
+                <input type="url" id="action-photo-url-input" class="form-control"
+                  placeholder="https://images.unsplash.com/... atau tautan YouTube/Drive">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="action-desc-input">Cerita Singkat Dampak Kegiatan *</label>
+            <textarea id="action-desc-input" class="form-control" rows="3"
+              placeholder="Ceritakan momen penting kegiatan dan bagaimana dampak nyatanya bagi partisipan yang hadir..."
+              required></textarea>
+          </div>
+
+          <button type="submit" class="btn-action-modal-submit"
+            style="width: 100%; padding: 13px; font-weight: 700; font-size: 0.94rem; background: #0F172A; color: #FFFFFF; border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;">
+            Tayangkan ke Lensa Gerakan Pemuda &rarr;
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: PENDAFTARAN RESMI ARUTALA CIRCLE (Mentee & Tutor Sebaya)
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-circle-registration">
+    <div class="modal-window" style="max-width: 680px;">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #0F172A; margin-bottom: 2px;">Pendaftaran ARUTALA
+            Circle</h3>
+          <p style="font-size: 0.8rem; color: #64748B; margin-bottom: 0;">Bergabung dalam siklus 4 minggu kelompok
+            belajar sebaya yang aman dan inklusif.</p>
+        </div>
+        <button type="button" class="modal-close" id="btn-close-circle-modal"
+          onclick="closeCircleRegistrationModal(event)" aria-label="Tutup">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Role Switcher Tabs -->
+        <div class="role-switcher" style="margin-bottom: 20px;">
+          <div class="role-btn active" id="modal-role-mentee" data-role="mentee"
+            onclick="setCircleRegistrationRole('mentee')" role="button" tabindex="0">
+            <h4>
+              <span>Peserta Belajar (Mentee)</span>
+              <span class="badge badge-green" style="font-size: 0.72rem;">Siswa / Mhs</span>
+            </h4>
+            <p style="margin-bottom: 0; font-size: 0.78rem;">Masuk kelompok 5–8 orang, didampingi tutor sebaya intensif.
+            </p>
+          </div>
+
+          <div class="role-btn" id="modal-role-tutor" data-role="tutor" onclick="setCircleRegistrationRole('tutor')"
+            role="button" tabindex="0">
+            <h4>
+              <span>Tutor Sebaya / Konselor</span>
+              <span class="badge badge-coral" style="font-size: 0.72rem;">Pendamping</span>
+            </h4>
+            <p style="margin-bottom: 0; font-size: 0.78rem;">Memandu lingkaran belajar dan menjaga kenyamanan ruang
+              aman.</p>
+          </div>
+        </div>
+
+        <form id="modal-circle-reg-form">
+          <input type="hidden" id="reg-role-input" value="mentee">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-fullname">Nama Lengkap / Panggilan *</label>
+              <input type="text" id="reg-fullname" class="form-control" placeholder="Contoh: Rian / Salma" required>
+              <small style="color: var(--text-muted); font-size: 0.75rem;">Boleh nama alias (prinsip minimisasi data
+                &amp; privasi).</small>
+            </div>
+            <div class="form-group">
+              <label for="reg-age">Rentang Usia *</label>
+              <select id="reg-age" class="form-control" required>
+                <option value="">Pilih Rentang Usia...</option>
+                <option value="16-18">16 - 18 Tahun (SMA/SMK)</option>
+                <option value="19-22">19 - 22 Tahun (Mahasiswa Baru/Tengah)</option>
+                <option value="23-25">23 - 25 Tahun (Tingkat Akhir/Fresh Graduate)</option>
+                <option value="26-30">26 - 30 Tahun (Pemuda Komunitas/Umum)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reg-institution">Asal Kampus / Sekolah / Komunitas *</label>
+              <input type="text" id="reg-institution" class="form-control"
+                placeholder="Contoh: UIN SGD Bandung / Karang Taruna" required>
+            </div>
+            <div class="form-group">
+              <label for="reg-contact">Kontak WhatsApp / Email (Opsional)</label>
+              <input type="text" id="reg-contact" class="form-control" placeholder="Untuk konfirmasi jadwal Circle">
+            </div>
+          </div>
+
+          <!-- Dynamic Fields for Mentee -->
+          <div id="mentee-specific-fields">
+            <div class="form-group">
+              <label for="reg-interest">Kebutuhan Pengembangan Terbesarmu *</label>
+              <select id="reg-interest" class="form-control" required>
+                <option value="">Pilih fokus kebutuhan...</option>
+                <option value="self-growth">Mengenali Potensi Diri &amp; Mengatasi Insecurity (Modul 1)</option>
+                <option value="moderation">Memahami Nilai Keagamaan &amp; Toleransi Aktif (Modul 2 &amp; 3)</option>
+                <option value="gender">Memahami Keadilan Gender &amp; Menghapus Stereotip (Modul 4)</option>
+                <option value="safe-space">Membangun Batasan Diri, Konsen &amp; Anti-Bullying (Modul 5)</option>
+                <option value="leadership">Belajar Memimpin Rapat &amp; Kerja Tim Inklusif (Modul 6)</option>
+                <option value="action">Ingin Membuat Proyek Aksi Nyata di Lingkungan (Modul 7)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Dynamic Fields for Tutor Sebaya / Konselor -->
+          <div id="tutor-specific-fields" style="display: none;">
+            <div class="form-group">
+              <label for="reg-experience">Pengalaman Organisasi / Minat Fasilitasi Sebaya *</label>
+              <textarea id="reg-experience" class="form-control" rows="2"
+                placeholder="Ceritakan singkat ketertarikanmu menjadi pendamping sebaya..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="reg-skill">Komitmen Waktu Pendampingan *</label>
+              <select id="reg-skill" class="form-control">
+                <option value="4-weeks">Siap mendampingi 1 Circle selama 4 minggu (1 sesi/minggu @60-90 menit)</option>
+                <option value="flexible">Fleksibel sesuai kesepakatan kelompok</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="checkbox-wrap" style="margin-bottom: 18px;">
+            <input type="checkbox" id="reg-consent" required>
+            <label for="reg-consent" style="font-size: 0.8rem; line-height: 1.5;">
+              Saya menyetujui <strong>Pakta Integritas Ruang Aman</strong>: Berkomitmen menjaga kerahasiaan teman
+              sekelompok, tidak melakukan ujaran kebencian/pelecehan, serta menghargai perbedaan latar belakang secara
+              empatik.
+            </label>
+          </div>
+
+          <button type="submit" class="btn-modal-reg-submit"
+            style="width: 100%; padding: 14px; font-weight: 700; font-size: 0.96rem; background: #2F4F87; color: #FFFFFF; border: none; border-radius: 6px; cursor: pointer; transition: all 0.2s ease;"
+            id="btn-modal-submit-reg">
+            Kirim Pendaftaran &amp; Dapatkan ID Circle &rarr;
+          </button>
+        </form>
+
+        <!-- Konfirmasi Sukses Langsung di Modal -->
+        <div id="modal-circle-reg-success" style="display: none; text-align: center; padding: 16px 8px 8px;">
+          <div
+            style="width: 58px; height: 58px; background: #DCFCE7; color: #16A34A; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(22, 163, 74, 0.2);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="28" height="28">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <h3 style="font-size: 1.3rem; font-weight: 800; color: #0F172A; margin-bottom: 4px;">Pendaftaran Berhasil!
+          </h3>
+          <p style="color: #64748B; font-size: 0.85rem; margin-bottom: 16px;">Selamat, kamu resmi terdaftar dalam
+            ekosistem ARUTALA Circle.</p>
+
+          <div
+            style="background: #F8FAFC; border: 1.5px dashed #CBD5E1; border-radius: 8px; padding: 16px; margin-bottom: 18px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="color: #64748B; font-size: 0.82rem;">ID Circle Kamu:</span>
+              <strong id="modal-reg-success-id"
+                style="color: #2F4F87; font-family: monospace; font-size: 0.95rem; background: #F1F5F9; padding: 3px 8px; border-radius: 4px; border: 1px solid #E2E8F0;">ARUTALA-CR-0000</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="color: #64748B; font-size: 0.82rem;">Nama Peserta:</span>
+              <strong id="modal-reg-success-name" style="color: #0F172A; font-size: 0.85rem;">-</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="color: #64748B; font-size: 0.82rem;">Peran:</span>
+              <span id="modal-reg-success-role" class="badge badge-green" style="font-size: 0.72rem;">-</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="color: #64748B; font-size: 0.82rem;">Asal Institusi:</span>
+              <strong id="modal-reg-success-inst" style="color: #0F172A; font-size: 0.85rem;">-</strong>
+            </div>
+          </div>
+
+          <button type="button" class="btn-modal-reg-done" onclick="closeCircleRegistrationModal(event)"
+            style="width: 100%; padding: 12px; font-weight: 700; font-size: 0.9rem; background: #0F172A; color: #FFFFFF; border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;">
+            Selesai &amp; Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: PEMBAYARAN DONASI (QRIS & Transfer Bank)
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-donasi-payment">
+    <div class="modal-window" style="max-width: 540px;">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #0F172A; margin-bottom: 2px;">Pembayaran Donasi
+            Kebaikan</h3>
+          <p style="font-size: 0.8rem; color: #64748B; margin-bottom: 0;">Pindai QRIS atau salin nomor rekening resmi
+            program ARUTALA.</p>
+        </div>
+        <button type="button" class="modal-close" id="btn-close-donasi-modal" onclick="closeDonationPaymentModal(event)"
+          aria-label="Tutup">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div
+          style="background: #EEF3FA; border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; text-align: center;">
+          <span style="font-size: 0.82rem; color: #64748B;">Total Donasi:</span>
+          <div style="font-size: 1.6rem; font-weight: 800; color: #2F4F87; margin-top: 2px;"
+            id="donasi-modal-amount-display">Rp 10.000</div>
+          <span style="font-size: 0.75rem; color: #059669; font-weight: 700;" id="donasi-modal-package-display">1 Paket
+            Modul Belajar</span>
+        </div>
+
+        <!-- QRIS Simulation Visual -->
+        <div class="qris-display-box">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
+            <span style="font-weight: 800; font-size: 1.1rem; color: #0F172A; letter-spacing: 0.05em;">QRIS</span>
+            <span
+              style="font-size: 0.72rem; background: #DC2626; color: #FFFFFF; font-weight: 700; padding: 2px 6px; border-radius: 4px;">PEMBAYARAN
+              RESMI</span>
+          </div>
+          <!-- Barcode SVG Simulation -->
+          <div
+            style="width: 180px; height: 180px; margin: 0 auto; background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 12px; padding: 10px; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 100 100" width="100%" height="100%">
+              <!-- QR Patterns -->
+              <rect x="0" y="0" width="30" height="30" fill="#0F172A" />
+              <rect x="5" y="5" width="20" height="20" fill="#FFFFFF" />
+              <rect x="10" y="10" width="10" height="10" fill="#0F172A" />
+
+              <rect x="70" y="0" width="30" height="30" fill="#0F172A" />
+              <rect x="75" y="5" width="20" height="20" fill="#FFFFFF" />
+              <rect x="80" y="10" width="10" height="10" fill="#0F172A" />
+
+              <rect x="0" y="70" width="30" height="30" fill="#0F172A" />
+              <rect x="5" y="75" width="20" height="20" fill="#FFFFFF" />
+              <rect x="10" y="80" width="10" height="10" fill="#0F172A" />
+
+              <rect x="40" y="10" width="8" height="8" fill="#0F172A" />
+              <rect x="52" y="10" width="8" height="8" fill="#0F172A" />
+              <rect x="40" y="24" width="8" height="8" fill="#0F172A" />
+              <rect x="40" y="40" width="20" height="20" fill="#2F4F87" rx="3" />
+              <circle cx="50" cy="50" r="5" fill="#FFFFFF" />
+
+              <rect x="70" y="45" width="8" height="8" fill="#0F172A" />
+              <rect x="84" y="45" width="8" height="8" fill="#0F172A" />
+              <rect x="70" y="60" width="15" height="6" fill="#0F172A" />
+              <rect x="40" y="75" width="12" height="12" fill="#0F172A" />
+              <rect x="60" y="75" width="8" height="8" fill="#0F172A" />
+              <rect x="80" y="80" width="14" height="14" fill="#0F172A" />
+            </svg>
+          </div>
+          <small style="color: #64748B; font-size: 0.78rem; display: block; margin-top: 10px;">
+            Mendukung: GoPay, OVO, Dana, ShopeePay, BCA, Mandiri, BSI, &amp; Seluruh Mobile Banking.
+          </small>
+        </div>
+
+        <!-- Transfer Bank Option -->
+        <h5 style="font-size: 0.88rem; font-weight: 700; color: #0F172A; margin-bottom: 8px;">Atau Transfer ke Rekening
+          Khusus ARUTALA:</h5>
+
+        <div class="bank-copy-card">
+          <div>
+            <strong style="color: #0F172A; font-size: 0.9rem; display: block;">Bank Syariah Indonesia (BSI)</strong>
+            <span style="font-family: monospace; font-size: 1rem; color: #2F4F87; font-weight: 800;">7182 9901
+              2344</span>
+            <small style="color: #64748B; display: block;">a.n. ARUTALA Inovasi Pemuda UIN</small>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm btn-pill"
+            onclick="copyAccountNumber('718299012344', this)">
+            Salin
+          </button>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-pill"
+          style="width: 100%; padding: 13px; font-weight: 700; margin-top: 10px;" onclick="confirmDonationCompleted()">
+          Saya Sudah Menyelesaikan Donasi
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- ==========================================================================
+       MODAL: DIREKTORI RUJUKAN BANTUAN RESMI
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-referral">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>Direktori Bantuan &amp; Rujukan Profesional</h3>
+        <button type="button" class="modal-close" id="btn-close-referral-modal" onclick="closeReferralModal(event)"
+          aria-label="Tutup">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div
+          style="background: #FFF1F2; border-left: 4px solid var(--prisma-coral); padding: 14px; border-radius: 6px; margin-bottom: 20px; font-size: 0.88rem; color: #881337;">
+          <strong>Pernyataan Penting:</strong> ARUTALA adalah platform edukasi kepemudaan dan pendampingan sebaya.
+          Platform ini <strong>BUKAN</strong> layanan gawat darurat medis, hukum, atau intervensi psikiatri klinis. Jika
+          kamu atau temanmu mengalami kekerasan, bahaya fisik, atau krisis mental darurat, segera hubungi lembaga resmi
+          berikut:
+        </div>
+
+        <div id="referral-list-container" style="display: flex; flex-direction: column; gap: 16px;">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <img src="img/logo.png" alt="Logo ARUTALA"
+              style="width: 38px; height: 38px; object-fit: contain; border-radius: 8px;">
+            <img src="img/uin_logo.png" alt="UIN Bandung"
+              style="width: 32px; height: 32px; object-fit: contain; opacity: 0.9;">
+            <h3 style="margin-bottom: 0;">ARUTALA</h3>
+          </div>
+          <p>
+            Akses Ruang Tumbuh Aman, Layak, dan Adil. Model inovasi ekosistem pengembangan kapasitas pemuda yang
+            inklusif berbasis nilai keagamaan dan kesetaraan gender.
+          </p>
+          <span class="badge badge-blue" style="font-size: 0.75rem;">OASE III PTKIN 2026</span>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigasi</h4>
+          <ul class="footer-links">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#nilai-dasar">Nilai & Fondasi</a></li>
+            <li><a href="#artikel-opini">Artikel & Opini</a></li>
+            <li><a href="#video-edukasi">Video Multikultural</a></li>
+            <li><a href="#pustaka-modul">7 Modul Kapasitas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Program & Aksi</h4>
+          <ul class="footer-links">
+            <li><a href="#registrasi-circle">ARUTALA Circle</a></li>
+            <li><a href="#registrasi-circle">Tutor Sebaya</a></li>
+            <li><a href="#aksi-sosial">ARUTALA Action</a></li>
+            <li><a href="#forum-diskusi">Forum Q&A</a></li>
+            <li><a href="#direktori-bantuan" id="btn-open-referral" onclick="openReferralModal(event)">Direktori
+                Bantuan</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Tim Inovasi</h4>
+          <p style="font-size: 0.85rem; color: #94A3B8; margin-bottom: 8px;">
+            <strong>UIN Sunan Gunung Djati Bandung</strong><br>
+            Alfath Fadillah Ridwannur<br>
+            M. Rifqi Nurhidayat<br>
+            Nuzhatul Hilawah
+          </p>
+          <p style="font-size: 0.8rem; color: #64748B;">
+            Bidang Agama: Sosial Kemasyarakatan
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 ARUTALA - UIN Sunan Gunung Djati Bandung. Dikembangkan untuk OASE III PTKIN.
+        </div>
+        <div>
+          Prinsip: <em>Silih Asah, Silih Asih, Silih Asuh</em> • Bebas Diskriminasi
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MOBILE BOTTOM NAVIGATION DOCK (Gaya Aplikasi Modern SejutaCita / Gojek)
+       Muncul di layar HP (<= 768px) dengan 5 tombol navigasi utama
+       ========================================================================== -->
+  <nav class="mobile-bottom-dock" id="mobile-bottom-dock" aria-label="Navigasi Bawah Mobile">
+    <a href="#beranda" class="bottom-dock-item active" data-target="beranda" id="dock-btn-beranda"
+      onclick="scrollToSection('beranda', event)">
+      <div class="dock-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      </div>
+      <span>Beranda</span>
+    </a>
+
+    <a href="#nilai-dasar" class="bottom-dock-item" data-target="nilai-dasar" id="dock-btn-tentang"
+      onclick="scrollToSection('nilai-dasar', event)">
+      <div class="dock-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+      </div>
+      <span>Tentang</span>
+    </a>
+
+    <a href="#artikel-opini" class="bottom-dock-item" data-target="artikel-opini" id="dock-btn-aktivitas"
+      onclick="scrollToSection('artikel-opini', event)">
+      <div class="dock-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+      </div>
+      <span>Artikel</span>
+    </a>
+
+    <a href="modul.html" class="bottom-dock-item" data-target="pustaka-modul" id="dock-btn-modul">
+      <div class="dock-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+          <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+          <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+        </svg>
+      </div>
+      <span>Cerdas</span>
+    </a>
+
+    <a href="#registrasi-circle" class="bottom-dock-item" data-target="registrasi-circle" id="dock-btn-circle"
+      onclick="openCircleRegistrationModal('mentee', event)">
+      <div class="dock-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <span>Circle</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js?v=2.6"></script>
+</body>
+
+</html>
