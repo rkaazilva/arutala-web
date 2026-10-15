@@ -6198,7 +6198,7 @@ img {
   .uss-masthead-section,
   .uss-hero-section {
     background: #FFFFFF !important;
-    border-bottom: 1px solid #E2E8F0 !important;
+    border-bottom: none !important;
     padding: 0 !important;
   }
 
