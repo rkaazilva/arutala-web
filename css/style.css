@@ -1971,19 +1971,62 @@ img {
   background: var(--bg-main);
 }
 
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
+/* ==========================================================================
+   HORIZONTAL SCROLL CAROUSEL FOR VIDEOS (POJOK VIDEO EDUKASI)
+   ========================================================================== */
+.video-grid,
+.video-carousel-track,
+#videos-container,
+#nuansa-videos-container .video-carousel-track,
+#nuansa-videos-container > div {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  gap: 24px !important;
+  padding-bottom: 22px !important;
+  padding-top: 6px !important;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+  scroll-behavior: smooth !important;
+  scroll-snap-type: x mandatory !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
 
-.video-card {
+.video-grid::-webkit-scrollbar,
+.video-carousel-track::-webkit-scrollbar,
+#videos-container::-webkit-scrollbar,
+#nuansa-videos-container::-webkit-scrollbar,
+#nuansa-videos-container > div::-webkit-scrollbar {
+  display: none !important;
+}
+
+.video-card,
+.video-carousel-track .video-card,
+#videos-container .video-card,
+#nuansa-videos-container .video-card {
+  flex: 0 0 320px !important;
+  width: 320px !important;
+  max-width: 320px !important;
+  scroll-snap-align: start !important;
   background: #FFFFFF;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 640px) {
+  .video-card,
+  .video-carousel-track .video-card,
+  #videos-container .video-card,
+  #nuansa-videos-container .video-card {
+    flex: 0 0 280px !important;
+    width: 280px !important;
+    max-width: 280px !important;
+  }
 }
 
 .video-card:hover {
@@ -3606,10 +3649,40 @@ img {
     height: 190px;
   }
 
-  /* 6. Video Section */
-  .video-grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
+  /* 6. Video Section (Mobile Carousel) */
+  .video-grid,
+  .video-carousel-track,
+  #videos-container,
+  #nuansa-videos-container .video-carousel-track,
+  #nuansa-videos-container > div {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    gap: 16px !important;
+    padding-bottom: 20px !important;
+    padding-top: 4px !important;
+    scroll-behavior: smooth !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+
+  .video-grid::-webkit-scrollbar,
+  .video-carousel-track::-webkit-scrollbar,
+  #videos-container::-webkit-scrollbar,
+  #nuansa-videos-container::-webkit-scrollbar,
+  #nuansa-videos-container > div::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .video-card,
+  .video-carousel-track .video-card,
+  #videos-container .video-card,
+  #nuansa-videos-container .video-card {
+    flex: 0 0 280px !important;
+    width: 280px !important;
+    max-width: 280px !important;
+    scroll-snap-align: start !important;
   }
 
   /* 7. Curriculum 7 Modul Grid */
@@ -6177,6 +6250,15 @@ img {
     .uss-header-top {
       padding: 8px 16px !important;
     }
+    .uss-header-top-container {
+      min-height: 40px !important;
+    }
+    /* Sembunyikan tombol teks di top-bar pada layar HP agar tidak tabrakan dengan logo ARUTALA di tengah */
+    .uss-header-top-container > .btn,
+    .uss-header-top-container > a.btn,
+    .uss-header-top-container > button.btn {
+      display: none !important;
+    }
     .uss-brand-name {
       font-size: 1.15rem !important;
     }
@@ -6184,8 +6266,23 @@ img {
       width: 28px;
       height: 28px;
     }
+    .uss-brand-sub {
+      display: none !important;
+    }
     .uss-nav-bottom {
-      display: none;
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 641px) and (max-width: 820px) {
+    .uss-header-top-container > .btn,
+    .uss-header-top-container > a.btn,
+    .uss-header-top-container > button.btn {
+      font-size: 0.72rem !important;
+      padding: 6px 12px !important;
+    }
+    .uss-brand-sub {
+      display: none !important;
     }
   }
 
@@ -7209,3 +7306,149 @@ img {
     display: none !important;
     content: none !important;
   }
+
+/* ==========================================================================
+   SCROLL REVEAL ANIMATION (Fade In Up)
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ==========================================================================
+   VIDEO CAROUSEL CONTROLS & ARROWS
+   ========================================================================== */
+.carousel-nav-arrows {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-carousel-arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid #CBD5E1;
+  background: #FFFFFF;
+  color: #1E293B;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.btn-carousel-arrow:hover {
+  background: #2F4F87;
+  color: #FFFFFF;
+  border-color: #2F4F87;
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(47, 79, 135, 0.25);
+}
+
+.btn-carousel-arrow:active {
+  transform: scale(0.92);
+}
+
+/* ==========================================================================
+   PLAYFUL MOBILE & TACTILE MICRO-INTERACTIONS
+   ========================================================================== */
+/* Bouncy tap on buttons and chips (native app feeling) */
+button:active,
+.btn:active,
+.filter-pill:active,
+.uss-filter-pill:active,
+.module-pill-btn:active,
+.curriculum-card-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Playful breathing pulse for video play button */
+@keyframes subtlePlayPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 14px rgba(47, 79, 135, 0.35);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(47, 79, 135, 0.6);
+  }
+}
+
+.play-overlay,
+.video-card .play-btn-circle {
+  animation: subtlePlayPulse 2.6s ease-in-out infinite;
+}
+
+.video-thumbnail-wrap:hover .play-overlay {
+  transform: scale(1.15) !important;
+  background: #243E6B !important;
+}
+
+/* Cute Floating Back to Top Button */
+.btn-floating-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #2F4F87;
+  color: #FFFFFF;
+  border: none;
+  box-shadow: 0 6px 18px rgba(47, 79, 135, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.85);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-floating-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.btn-floating-top:hover {
+  background: #243E6B;
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 8px 24px rgba(47, 79, 135, 0.45);
+}
+
+.btn-floating-top:active {
+  transform: scale(0.9);
+}
+
+@media (max-width: 640px) {
+  .btn-floating-top {
+    bottom: 20px;
+    right: 18px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+}

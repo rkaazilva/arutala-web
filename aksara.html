@@ -33,20 +33,29 @@
       flex-direction: column;
     }
 
+    /* --------------------------------------------------------------------------
+       1. HERO BANNER BERWARNA (COLORED BANNER DENGAN SOFT GRADIENT & GLOW)
+       -------------------------------------------------------------------------- */
     .aksara-hero-banner {
-      background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
-      border-bottom: 1px solid #E2E8F0;
-      padding: 56px 0 44px;
+      background: linear-gradient(135deg, #F0F4FF 0%, #E8EEFA 100%);
+      border-bottom: 1px solid rgba(47, 79, 135, 0.18);
+      box-shadow: 0 10px 30px -10px rgba(47, 79, 135, 0.12);
+      padding: 68px 0 54px;
+      position: relative;
     }
 
     .aksara-hero-kicker {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 800;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #2F4F87;
-      margin-bottom: 12px;
-      display: block;
+      margin-bottom: 14px;
+      display: inline-block;
+      background: rgba(47, 79, 135, 0.12);
+      padding: 5px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(47, 79, 135, 0.25);
     }
 
     .aksara-hero-title {
@@ -79,6 +88,48 @@
       align-items: center;
       gap: 14px;
       flex-wrap: wrap;
+    }
+
+    /* --------------------------------------------------------------------------
+       2. POP-OUT INTERACTIVE BUTTONS
+       -------------------------------------------------------------------------- */
+    .btn-primary {
+      background: #2F4F87 !important;
+      border-color: #2F4F87 !important;
+      color: #FFFFFF !important;
+      font-weight: 700 !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .btn-primary:hover {
+      background: #3A5C9A !important;
+      border-color: #3A5C9A !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 16px rgba(47, 79, 135, 0.25) !important;
+    }
+
+    .btn-secondary {
+      background: #FFFFFF !important;
+      border: 1px solid #CBD5E1 !important;
+      color: #0F172A !important;
+      font-weight: 700 !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .btn-secondary:hover {
+      background: #F8FAFC !important;
+      border-color: #94A3B8 !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .btn-ghost {
+      transition: all 0.2s ease !important;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(47, 79, 135, 0.08) !important;
+      transform: translateX(3px) !important;
     }
 
     /* Section 1: Pengajuan Proyek Sosial & Galeri Aksi */
@@ -208,12 +259,72 @@
       border-color: #2F4F87;
     }
 
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* --------------------------------------------------------------------------
+       3. RESPONSIVE MOBILE OPTIMIZATION (HP / TABLET SCREEN)
+       -------------------------------------------------------------------------- */
     @media (max-width: 768px) {
+      .aksara-hero-banner {
+        padding: 44px 0 38px;
+      }
+      .aksara-hero-kicker {
+        font-size: 0.72rem;
+        padding: 4px 12px;
+        line-height: 1.4;
+      }
       .aksara-hero-title {
-        font-size: 1.85rem;
+        font-size: 1.65rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 14px !important;
+      }
+      .aksara-hero-desc {
+        font-size: 0.94rem !important;
+        line-height: 1.65 !important;
+        margin-bottom: 22px !important;
+      }
+      .aksara-cta-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+      }
+      .aksara-cta-row .btn {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        padding: 13px 18px !important;
+        font-size: 0.92rem !important;
+        white-space: normal !important;
       }
       .dialog-banner-card {
         padding: 20px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+      }
+      .dialog-banner-card .btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+      .form-grid-2 {
+        grid-template-columns: 1fr !important;
+      }
+      .modal-window {
+        padding: 24px 18px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .donation-pill-group {
+        grid-template-columns: 1fr !important;
+      }
+      .aksara-hero-title {
+        font-size: 1.5rem !important;
       }
     }
   </style>
@@ -315,14 +426,14 @@
 
       <!-- Action Buttons -->
       <div class="aksara-cta-row">
-        <button type="button" class="btn btn-primary btn-pill" onclick="openProposalModal()" style="background: #2F4F87; border-color: #2F4F87; color: #FFFFFF; font-weight: 700; padding: 12px 24px;">
-          + Ajukan Proposal Proyek Sosial &darr;
+        <button type="button" class="btn btn-primary btn-pill" onclick="openProposalModal()" style="padding: 12px 24px;">
+          + Ajukan Proposal <span style="white-space: nowrap;">Proyek Sosial &darr;</span>
         </button>
-        <a href="#donasi-sosial" class="btn btn-secondary btn-pill" style="background: #FFFFFF; border: 1px solid #CBD5E1; color: #0F172A; font-weight: 700; padding: 12px 24px;">
-          Dukungan Donasi &amp; QRIS &darr;
+        <a href="#donasi-sosial" class="btn btn-secondary btn-pill" style="padding: 12px 24px;">
+          Dukungan Donasi &amp; <span style="white-space: nowrap;">QRIS &darr;</span>
         </a>
         <a href="#ruang-dialog" class="btn btn-ghost btn-pill" style="color: #2F4F87; font-weight: 700;">
-          Ruang Dialog Lintas Pemuda &rarr;
+          Ruang Dialog Lintas <span style="white-space: nowrap;">Pemuda &rarr;</span>
         </a>
       </div>
     </div>
@@ -593,7 +704,7 @@
             <input type="text" id="prop-title" class="form-control" placeholder="Contoh: Pendampingan Literasi Inklusif Remaja Difabel" required>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-grid-2">
             <div class="form-group">
               <label for="prop-category">Fokus Isu Utama <span style="color: #EF4444;">*</span></label>
               <select id="prop-category" class="form-control" required>
@@ -610,7 +721,7 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-grid-2">
             <div class="form-group">
               <label for="prop-initiator">Inisiator / Komunitas Pengusung <span style="color: #EF4444;">*</span></label>
               <input type="text" id="prop-initiator" class="form-control" placeholder="Contoh: Circle Pemuda UIN Bandung" required>
@@ -827,6 +938,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase.js"></script>
   <script src="js/data.js"></script>
+  <script src="js/interactions.js"></script>
   <script src="js/aksara.js"></script>
 </body>
 </html>

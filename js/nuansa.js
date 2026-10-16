@@ -11,7 +11,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   initNuansaVideos();
   initNuansaLiteracyQuiz();
+  setupNuansaUploadVideoModal();
   setupNuansaNavDrawer();
+  initScrollReveal();
+  setupFloatingBackToTop();
 });
 
 // DATASET LITERASI KONTEKSTUAL & KUIS REFLEKSI (4 NILAI ETIS)
@@ -226,12 +229,28 @@ function loadNuansaTopic(idx) {
   }
 }
 
+// HELPER EKSTRAKSI ID YOUTUBE
+function extractYouTubeId(url) {
+  if (!url) return null;
+  url = url.trim();
+  const regExp = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const match = url.match(regExp);
+  if (match && match[1]) {
+    return match[1];
+  }
+  if (/^[a-zA-Z0-9_-]{11}$/.test(url)) {
+    return url;
+  }
+  return null;
+}
+
 // VIDEO EDUKASI SOSIAL-KEAGAMAAN (FITUR 2)
 function initNuansaVideos() {
   const container = document.getElementById("nuansa-videos-container");
   if (!container) return;
 
-  const videoList = (window.ARUTALA_DATA && Array.isArray(window.ARUTALA_DATA.videos))
+  const customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+  const defaultVideos = (window.ARUTALA_DATA && Array.isArray(window.ARUTALA_DATA.videos))
     ? window.ARUTALA_DATA.videos
     : [
         {
@@ -280,19 +299,25 @@ function initNuansaVideos() {
         }
       ];
 
+  // Gabungkan custom videos di paling atas (tanpa duplikasi)
+  const videoList = [
+    ...customVideos,
+    ...defaultVideos.filter(dv => !customVideos.some(cv => cv.youtubeId === dv.youtubeId || cv.id === dv.id))
+  ];
+
   container.innerHTML = `
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+    <div class="video-carousel-track">
       ${videoList.map(vid => `
-        <div class="video-card" style="border: 1px solid #E2E8F0; border-radius: 12px; overflow: hidden; background: #FFFFFF; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04); transition: transform 0.2s, box-shadow 0.2s;">
-          <div style="position: relative; width: 100%; height: 200px; background: #0F172A; cursor: pointer; overflow: hidden;" onclick="openNuansaVideoModal('${vid.videoUrl}', '${encodeURIComponent(vid.title)}', '${encodeURIComponent(vid.takeaways)}')">
+        <div class="video-card reveal">
+          <div class="video-thumbnail-wrap" style="position: relative; width: 100%; height: 200px; background: #0F172A; cursor: pointer; overflow: hidden;" onclick="openNuansaVideoModal('${vid.videoUrl}', '${encodeURIComponent(vid.title)}', '${encodeURIComponent(vid.takeaways)}')">
             <img src="${vid.thumbnail}" alt="${vid.title}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.88;" loading="lazy">
             <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
-              <div style="width: 48px; height: 48px; border-radius: 50%; background: #2F4F87; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: transform 0.2s;">
+              <div class="play-overlay">
                 ▶
               </div>
             </div>
             <span style="position: absolute; bottom: 10px; right: 12px; background: rgba(15, 23, 42, 0.85); color: #FFFFFF; font-size: 0.74rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">
-              ${vid.duration}
+              ${vid.duration || 'Video Edukasi'}
             </span>
           </div>
           <div style="padding: 20px;">
@@ -311,6 +336,13 @@ function initNuansaVideos() {
       `).join('')}
     </div>
   `;
+
+  if (typeof initScrollReveal === "function") {
+    initScrollReveal();
+  }
+  if (typeof initAutoScrollVideoCarousel === "function") {
+    initAutoScrollVideoCarousel();
+  }
 }
 
 function openNuansaVideoModal(url, encodedTitle, encodedDesc) {
@@ -336,6 +368,125 @@ function closeNuansaVideoModal() {
   if (modal) modal.classList.remove("active");
   if (iframe) iframe.src = "";
   document.body.style.overflow = "";
+}
+
+// MODAL UPLOAD VIDEO YOUTUBE
+function openUploadVideoModal() {
+  const modal = document.getElementById("modal-upload-video");
+  if (modal) {
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closeUploadVideoModal() {
+  const modal = document.getElementById("modal-upload-video");
+  if (modal) {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+  const form = document.getElementById("form-upload-video");
+  if (form) form.reset();
+  const previewBox = document.getElementById("yt-preview-box");
+  if (previewBox) previewBox.style.display = "none";
+  const statusBox = document.getElementById("yt-video-status");
+  if (statusBox) statusBox.style.display = "none";
+}
+
+function setupNuansaUploadVideoModal() {
+  const urlInput = document.getElementById("yt-video-url");
+  const previewBox = document.getElementById("yt-preview-box");
+  const previewThumb = document.getElementById("yt-preview-thumb");
+  const form = document.getElementById("form-upload-video");
+  const statusBox = document.getElementById("yt-video-status");
+
+  // Live Thumbnail Preview on URL Input
+  if (urlInput && previewBox && previewThumb) {
+    urlInput.addEventListener("input", () => {
+      const ytId = extractYouTubeId(urlInput.value);
+      if (ytId) {
+        previewThumb.src = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+        previewBox.style.display = "flex";
+      } else {
+        previewBox.style.display = "none";
+      }
+    });
+  }
+
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const urlVal = urlInput ? urlInput.value.trim() : "";
+      const titleVal = document.getElementById("yt-video-title")?.value.trim() || "";
+      const channelVal = document.getElementById("yt-video-channel")?.value.trim() || "Kontributor Pemuda";
+      const catVal = document.getElementById("yt-video-category")?.value || "Moderasi & Gender";
+      const takeawaysVal = document.getElementById("yt-video-takeaways")?.value.trim() || "";
+      const submitBtn = document.getElementById("btn-submit-upload-video");
+
+      const ytId = extractYouTubeId(urlVal);
+      if (!ytId) {
+        if (statusBox) {
+          statusBox.style.display = "block";
+          statusBox.style.backgroundColor = "#FEE2E2";
+          statusBox.style.color = "#991B1B";
+          statusBox.style.border = "1px solid #FCA5A5";
+          statusBox.textContent = "Format tautan YouTube tidak dikenali. Mohon masukkan link YouTube yang valid (contoh: https://www.youtube.com/watch?v=... atau https://youtu.be/...)";
+        }
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Menyimpan Video...";
+      }
+
+      const newVideo = {
+        id: "vid-" + Date.now(),
+        youtubeId: ytId,
+        title: titleVal,
+        channel: channelVal,
+        duration: "Video Edukasi",
+        thumbnail: `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`,
+        takeaways: takeawaysVal,
+        category: catVal,
+        videoUrl: `https://www.youtube.com/embed/${ytId}`
+      };
+
+      // 1. Simpan ke localStorage agar tampil di pilar NUANSA dan Landing Page (index.html)
+      try {
+        const customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+        customVideos.unshift(newVideo);
+        localStorage.setItem("arutala_custom_videos", JSON.stringify(customVideos));
+      } catch (err) {
+        console.warn("Gagal menyimpan video ke localStorage:", err);
+      }
+
+      // 2. Perbarui memori ARUTALA_DATA jika aktif
+      if (window.ARUTALA_DATA && Array.isArray(window.ARUTALA_DATA.videos)) {
+        window.ARUTALA_DATA.videos.unshift(newVideo);
+      }
+
+      // 3. Render ulang grid video di halaman Nuansa
+      initNuansaVideos();
+
+      // 4. Tutup modal dan beri konfirmasi
+      closeUploadVideoModal();
+      alert("Selamat! Video edukasi YouTube berhasil ditambahkan.\nVideo ini langsung muncul di Pojok Video NUANSA dan di Beranda Utama (Landing Page)!");
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Tayangkan Video";
+      }
+    });
+  }
+
+  const modalUpload = document.getElementById("modal-upload-video");
+  if (modalUpload) {
+    modalUpload.addEventListener("click", (e) => {
+      if (e.target === modalUpload) closeUploadVideoModal();
+    });
+  }
 }
 
 function setupNuansaNavDrawer() {
@@ -364,3 +515,101 @@ function setupNuansaNavDrawer() {
   const closeVidBtn = document.getElementById("btn-close-video-modal");
   if (closeVidBtn) closeVidBtn.addEventListener("click", closeNuansaVideoModal);
 }
+
+/**
+ * ==========================================================================
+ * GLOBAL HELPER: Scroll Video Carousel (Smooth Horizontal Scroll)
+ * ==========================================================================
+ */
+window.scrollVideoCarousel = function(containerId, offset) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const track = container.querySelector(".video-carousel-track") || container;
+  track.scrollBy({ left: offset, behavior: "smooth" });
+};
+
+/**
+ * ==========================================================================
+ * GLOBAL HELPER: Scroll Reveal (Fade In Up on Scroll)
+ * ==========================================================================
+ */
+function initScrollReveal() {
+  const selectors = [
+    ".reveal",
+    ".section-header",
+    ".article-card",
+    ".video-card",
+    ".bento-item",
+    ".cycle-box-card",
+    ".cycle-card",
+    ".value-card",
+    ".toolkit-content-card",
+    ".donation-card",
+    ".hero-content",
+    ".pillar-card"
+  ];
+
+  const elements = document.querySelectorAll(selectors.join(", "));
+  if (!elements || elements.length === 0) return;
+
+  if (!("IntersectionObserver" in window)) {
+    elements.forEach(el => el.classList.add("active"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: "0px 0px -30px 0px"
+  });
+
+  elements.forEach(el => {
+    if (!el.classList.contains("reveal")) {
+      el.classList.add("reveal");
+    }
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 40) {
+      el.classList.add("active");
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+window.initScrollReveal = initScrollReveal;
+
+/**
+ * ==========================================================================
+ * GLOBAL HELPER: Setup Floating Back to Top Button
+ * ==========================================================================
+ */
+function setupFloatingBackToTop() {
+  let btn = document.getElementById("btn-floating-top");
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.id = "btn-floating-top";
+    btn.className = "btn-floating-top";
+    btn.setAttribute("aria-label", "Kembali ke atas");
+    btn.setAttribute("type", "button");
+    btn.innerHTML = "&#8593;";
+    document.body.appendChild(btn);
+  }
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 380) {
+      btn.classList.add("show");
+    } else {
+      btn.classList.remove("show");
+    }
+  }, { passive: true });
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+window.setupFloatingBackToTop = setupFloatingBackToTop;

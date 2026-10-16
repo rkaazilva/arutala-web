@@ -723,10 +723,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const customVidsInitial = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+  const baseVidsInitial = (typeof ARUTALA_DATA !== "undefined" && Array.isArray(ARUTALA_DATA.videos)) ? ARUTALA_DATA.videos : [];
+  const mergedVidsInitial = [
+    ...customVidsInitial,
+    ...baseVidsInitial.filter(bv => !customVidsInitial.some(cv => cv.youtubeId === bv.youtubeId || cv.id === bv.id))
+  ];
+
   // State Manager
   const AppState = {
     articles: [...ARUTALA_DATA.articles],
-    videos: [...ARUTALA_DATA.videos],
+    videos: mergedVidsInitial,
     modules: [...ARUTALA_DATA.modules],
     qaList: [...ARUTALA_DATA.qaList],
     actions: [...ARUTALA_DATA.actions],
@@ -816,7 +823,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 1. Featured Article (2 Kolom: Kiri foto besar, Kanan kategori, judul besar, ringkasan, nama penulis)
     const featuredHtml = `
-      <article class="uss-featured-card" onclick="window.location.href='artikel.html?id=${encodeURIComponent(featured.id)}'">
+      <article class="uss-featured-card reveal" onclick="window.location.href='artikel.html?id=${encodeURIComponent(featured.id)}'">
         <div class="featured-media-col">
           <div class="featured-img-wrap">
             <img src="${featured.coverImage || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=85'}" 
@@ -850,7 +857,7 @@ document.addEventListener("DOMContentLoaded", () => {
       gridHtml = `
         <div class="uss-clean-grid">
           ${rest.map(art => `
-            <article class="uss-clean-card cat-${art.category}" data-category="${art.category}" style="border-top: 3px solid ${getCategoryColor(art.category)} !important;" onclick="window.location.href='artikel.html?id=${encodeURIComponent(art.id)}'">
+            <article class="uss-clean-card cat-${art.category} reveal" data-category="${art.category}" style="border-top: 3px solid ${getCategoryColor(art.category)} !important;" onclick="window.location.href='artikel.html?id=${encodeURIComponent(art.id)}'">
               <div class="clean-card-media">
                 <img src="${art.coverImage || 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80'}" 
                      alt="${art.title}" class="clean-card-img" loading="lazy">
@@ -874,6 +881,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     articlesContainer.innerHTML = featuredHtml + gridHtml;
+    if (typeof initScrollReveal === "function") {
+      initScrollReveal();
+    }
   }
   window.renderArticlesGlobal = renderArticles;
 
@@ -1235,14 +1245,23 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderVideos() {
     if (!videosContainer) return;
     videosContainer.innerHTML = "";
-    AppState.videos.forEach(vid => {
+
+    const customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+    const currentVideos = AppState.videos || (window.ARUTALA_DATA && window.ARUTALA_DATA.videos) || [];
+
+    const allVideos = [
+      ...customVideos,
+      ...currentVideos.filter(cv => !customVideos.some(uv => uv.youtubeId === cv.youtubeId || uv.id === cv.id))
+    ];
+
+    allVideos.forEach(vid => {
       const card = document.createElement("div");
-      card.className = "video-card";
+      card.className = "video-card reveal";
       card.innerHTML = `
         <div class="video-thumbnail-wrap">
           <img src="${vid.thumbnail}" alt="${vid.title}" loading="lazy">
           <div class="play-overlay">▶</div>
-          <span class="video-duration">${vid.duration}</span>
+          <span class="video-duration">${vid.duration || 'Video Edukasi'}</span>
         </div>
         <div class="video-info">
           <span class="badge badge-teal" style="font-size: 0.72rem; margin-bottom: 8px;">${vid.category}</span>
@@ -1269,6 +1288,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       videosContainer.appendChild(card);
     });
+
+    if (typeof initScrollReveal === "function") {
+      initScrollReveal();
+    }
+    if (typeof initAutoScrollVideoCarousel === "function") {
+      initAutoScrollVideoCarousel();
+    }
   }
 
   // Immediate initial render for videos
@@ -2246,5 +2272,109 @@ document.addEventListener("DOMContentLoaded", () => {
   // Background Cloud Sync (Real-time Cloud Data)
   syncWithSupabaseCloud();
 
+  // Interactive Animations & Controls
+  initScrollReveal();
+  setupFloatingBackToTop();
+
   console.log("ARUTALA Application Initialized Successfully.");
 });
+
+/**
+ * ==========================================================================
+ * GLOBAL HELPER: Scroll Video Carousel (Smooth Horizontal Scroll)
+ * ==========================================================================
+ */
+window.scrollVideoCarousel = function(containerId, offset) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const track = container.querySelector(".video-carousel-track") || container;
+  track.scrollBy({ left: offset, behavior: "smooth" });
+};
+
+/**
+ * ==========================================================================
+ * GLOBAL HELPER: Scroll Reveal (Fade In Up on Scroll)
+ * ==========================================================================
+ */
+function initScrollReveal() {
+  const selectors = [
+    ".reveal",
+    ".section-header",
+    ".article-card",
+    ".uss-clean-card",
+    ".uss-featured-card",
+    ".video-card",
+    ".bento-item",
+    ".cycle-box-card",
+    ".cycle-card",
+    ".value-card",
+    ".toolkit-content-card",
+    ".donation-card",
+    ".hero-content",
+    ".pillar-card"
+  ];
+
+  const elements = document.querySelectorAll(selectors.join(", "));
+  if (!elements || elements.length === 0) return;
+
+  if (!("IntersectionObserver" in window)) {
+    elements.forEach(el => el.classList.add("active"));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: "0px 0px -30px 0px"
+  });
+
+  elements.forEach(el => {
+    if (!el.classList.contains("reveal")) {
+      el.classList.add("reveal");
+    }
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 40) {
+      el.classList.add("active");
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+window.initScrollReveal = initScrollReveal;
+
+/**
+ * ==========================================================================
+ * GLOBAL HELPER: Setup Floating Back to Top Button
+ * ==========================================================================
+ */
+function setupFloatingBackToTop() {
+  let btn = document.getElementById("btn-floating-top");
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.id = "btn-floating-top";
+    btn.className = "btn-floating-top";
+    btn.setAttribute("aria-label", "Kembali ke atas");
+    btn.setAttribute("type", "button");
+    btn.innerHTML = "&#8593;";
+    document.body.appendChild(btn);
+  }
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 380) {
+      btn.classList.add("show");
+    } else {
+      btn.classList.remove("show");
+    }
+  }, { passive: true });
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+window.setupFloatingBackToTop = setupFloatingBackToTop;
