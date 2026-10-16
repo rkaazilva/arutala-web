@@ -87,7 +87,7 @@ function renderLmsSidebar() {
         ${isCompleted ? '✓' : mod.id}
       </div>
       <div class="mod-text-info">
-        <span class="mod-code">${mod.code} • ${mod.duration}</span>
+        <span class="mod-code">${mod.code} / ${mod.duration}</span>
         <span class="mod-title">${mod.title}</span>
       </div>
     `;

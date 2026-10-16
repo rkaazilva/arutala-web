@@ -69,11 +69,15 @@
 
   function getCategoryLabel(category) {
     switch ((category || "").toLowerCase()) {
-      case "bersuara": return "BERSUARA (Gender)";
-      case "pandai": return "PANDAI (Moderasi)";
-      case "cerdas": return "CERDAS (Budaya)";
-      case "berdaya": return "BERDAYA (Ruang Aman)";
-      default: return "ARUTALA (Inovasi)";
+      case "pandai":
+      case "moderasi": return "MODERASI BERAGAMA";
+      case "bersuara":
+      case "kesetaraan": return "KESETARAAN";
+      case "cerdas":
+      case "budaya": return "BUDAYA";
+      case "berdaya":
+      case "sosial": return "SOSIAL MASYARAKAT";
+      default: return "MODERASI BERAGAMA";
     }
   }
 

@@ -108,7 +108,7 @@ window.openArticleReaderModal = function(art) {
 
   if (modalTitle) modalTitle.textContent = art.title || "Artikel";
   if (modalCat) {
-    modalCat.textContent = art.categoryLabel || "Opini";
+    modalCat.textContent = typeof getCategoryLabelClean === 'function' ? getCategoryLabelClean(art.category) : (art.categoryLabel || "MODERASI BERAGAMA");
     modalCat.className = `badge ${typeof getCategoryBadgeClass === 'function' ? getCategoryBadgeClass(art.category) : 'badge-blue'}`;
   }
   if (modalDate) modalDate.textContent = art.date || "";
@@ -776,12 +776,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getCategoryLabelClean(category) {
-    switch (category) {
-      case "bersuara": return "BERSUARA (GENDER)";
-      case "pandai": return "PANDAI (MODERASI)";
-      case "cerdas": return "CERDAS (BUDAYA)";
-      case "berdaya": return "BERDAYA (RUANG AMAN)";
-      default: return (category || "ARTIKEL").toUpperCase();
+    switch ((category || "").toLowerCase()) {
+      case "pandai":
+      case "moderasi": return "MODERASI BERAGAMA";
+      case "bersuara":
+      case "kesetaraan": return "KESETARAAN";
+      case "cerdas":
+      case "budaya": return "BUDAYA";
+      case "berdaya":
+      case "sosial": return "SOSIAL MASYARAKAT";
+      default: return (category || "MODERASI BERAGAMA").toUpperCase();
     }
   }
 
@@ -827,9 +831,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <p class="featured-summary">${featured.summary}</p>
           <div class="featured-meta-row">
             <span class="meta-author-name">${featured.author}</span>
-            <span class="meta-bullet">&bull;</span>
+            <span class="meta-sep" style="opacity: 0.35; margin: 0 4px;">/</span>
             <span class="meta-author-role">${featured.authorRole || 'Kontributor Pemuda'}</span>
-            <span class="meta-bullet">&bull;</span>
+            <span class="meta-sep" style="opacity: 0.35; margin: 0 4px;">/</span>
             <span class="meta-date">${featured.date || 'Oktober 2026'}</span>
           </div>
           <div class="featured-action-link">
@@ -859,7 +863,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="clean-card-summary">${art.summary}</p>
                 <div class="clean-card-meta">
                   <span class="author-name">${art.author}</span>
-                  <span class="meta-bullet">&bull;</span>
+                  <span class="meta-sep" style="opacity: 0.35; margin: 0 4px;">/</span>
                   <span class="date">${art.date || 'Oktober 2026'}</span>
                 </div>
               </div>
@@ -872,6 +876,13 @@ document.addEventListener("DOMContentLoaded", () => {
     articlesContainer.innerHTML = featuredHtml + gridHtml;
   }
   window.renderArticlesGlobal = renderArticles;
+
+  // Immediate initial render for articles
+  try {
+    renderArticles();
+  } catch (err) {
+    console.warn("Initial renderArticles notice:", err);
+  }
 
   function getCategoryBadgeClass(category) {
     switch (category) {
@@ -929,10 +940,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Search Input Event
-  searchInput.addEventListener("input", (e) => {
-    AppState.searchQuery = e.target.value.trim();
-    renderArticles();
-  });
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      AppState.searchQuery = e.target.value.trim();
+      renderArticles();
+    });
+  }
 
   // Modal Article Reader
   const modalReader = document.getElementById("modal-article-reader");
@@ -940,7 +953,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function openArticleReader(art) {
     document.getElementById("modal-article-title").textContent = art.title;
-    document.getElementById("modal-article-cat").textContent = art.categoryLabel;
+    document.getElementById("modal-article-cat").textContent = getCategoryLabelClean(art.category);
     document.getElementById("modal-article-cat").className = `badge ${getCategoryBadgeClass(art.category)}`;
     document.getElementById("modal-article-date").textContent = art.date;
     document.getElementById("modal-article-readtime").textContent = art.readTime;
@@ -981,16 +994,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("has-active-modal");
   }
 
-  btnCloseReader.addEventListener("click", () => {
-    modalReader.classList.remove("active");
-    document.body.classList.remove("has-active-modal");
-  });
-  modalReader.addEventListener("click", (e) => {
-    if (e.target === modalReader) {
+  if (btnCloseReader && modalReader) {
+    btnCloseReader.addEventListener("click", () => {
       modalReader.classList.remove("active");
       document.body.classList.remove("has-active-modal");
-    }
-  });
+    });
+  }
+  if (modalReader) {
+    modalReader.addEventListener("click", (e) => {
+      if (e.target === modalReader) {
+        modalReader.classList.remove("active");
+        document.body.classList.remove("has-active-modal");
+      }
+    });
+  }
 
 
   // Modal Submit Article ("Kirim Tulisan")
@@ -1038,7 +1055,7 @@ document.addEventListener("DOMContentLoaded", () => {
     docFileInput.addEventListener("change", (e) => {
       const file = e.target.files[0];
       if (file && docAttachedInfo && docFileName) {
-        docFileName.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB) • File Terlampir`;
+        docFileName.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB) / File Terlampir`;
         docAttachedInfo.style.display = "inline-flex";
 
         const contentInput = document.getElementById("article-content-input");
@@ -1084,24 +1101,24 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Brand Category Label & Accent Color
-      let catLabel = "PANDAI (Moderasi)";
+      let catLabel = "MODERASI BERAGAMA";
       let accentColor = "#66BB6A";
       let fallbackImage = "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80";
 
       if (cat === "pandai") {
-        catLabel = "PANDAI (Moderasi)";
+        catLabel = "MODERASI BERAGAMA";
         accentColor = "#66BB6A";
         fallbackImage = "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80";
       } else if (cat === "cerdas") {
-        catLabel = "CERDAS (Budaya)";
+        catLabel = "BUDAYA";
         accentColor = "#89BBEE";
         fallbackImage = "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800&q=80";
       } else if (cat === "bersuara") {
-        catLabel = "BERSUARA (Gender)";
+        catLabel = "KESETARAAN";
         accentColor = "#FF64C5";
         fallbackImage = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80";
       } else if (cat === "berdaya") {
-        catLabel = "BERDAYA (Ruang Aman)";
+        catLabel = "SOSIAL MASYARAKAT";
         accentColor = "#2F4F87";
         fallbackImage = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80";
       }
@@ -1216,6 +1233,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalVideoDesc = document.getElementById("modal-video-desc");
 
   function renderVideos() {
+    if (!videosContainer) return;
     videosContainer.innerHTML = "";
     AppState.videos.forEach(vid => {
       const card = document.createElement("div");
@@ -1236,30 +1254,46 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       `;
 
-      card.querySelector(".video-thumbnail-wrap").addEventListener("click", () => {
-        modalVideoTitle.textContent = vid.title;
-        modalVideoDesc.textContent = vid.takeaways;
-        modalVideoIframe.src = vid.videoUrl;
-        modalVideo.classList.add("active");
-        document.body.classList.add("has-active-modal");
-      });
+      const thumb = card.querySelector(".video-thumbnail-wrap");
+      if (thumb) {
+        thumb.addEventListener("click", () => {
+          if (modalVideoTitle) modalVideoTitle.textContent = vid.title;
+          if (modalVideoDesc) modalVideoDesc.textContent = vid.takeaways;
+          if (modalVideoIframe) modalVideoIframe.src = vid.videoUrl;
+          if (modalVideo) {
+            modalVideo.classList.add("active");
+            document.body.classList.add("has-active-modal");
+          }
+        });
+      }
 
       videosContainer.appendChild(card);
     });
   }
 
-  btnCloseVideo.addEventListener("click", () => {
-    modalVideo.classList.remove("active");
-    document.body.classList.remove("has-active-modal");
-    modalVideoIframe.src = "";
-  });
-  modalVideo.addEventListener("click", (e) => {
-    if (e.target === modalVideo) {
+  // Immediate initial render for videos
+  try {
+    renderVideos();
+  } catch (err) {
+    console.warn("Initial renderVideos notice:", err);
+  }
+
+  if (btnCloseVideo && modalVideo) {
+    btnCloseVideo.addEventListener("click", () => {
       modalVideo.classList.remove("active");
       document.body.classList.remove("has-active-modal");
-      modalVideoIframe.src = "";
-    }
-  });
+      if (modalVideoIframe) modalVideoIframe.src = "";
+    });
+  }
+  if (modalVideo) {
+    modalVideo.addEventListener("click", (e) => {
+      if (e.target === modalVideo) {
+        modalVideo.classList.remove("active");
+        document.body.classList.remove("has-active-modal");
+        if (modalVideoIframe) modalVideoIframe.src = "";
+      }
+    });
+  }
 
   // ==========================================================================
   // 4. LMS: 7 MODUL PEMBELAJARAN ARUTALA
@@ -1275,16 +1309,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnNextModule = document.getElementById("btn-next-module");
 
   function updateModuleProgress() {
+    if (!moduleProgressStat) return;
     const total = AppState.modules.length;
     const completed = AppState.completedModules.length;
     moduleProgressStat.textContent = `${completed} dari ${total} modul diselesaikan (${Math.round((completed/total)*100)}%)`;
   }
 
   function renderModulesNav() {
+    if (!modulesNavList) return;
     // Preserve header
     const header = modulesNavList.querySelector(".module-nav-header");
     modulesNavList.innerHTML = "";
-    modulesNavList.appendChild(header);
+    if (header) modulesNavList.appendChild(header);
 
     AppState.modules.forEach(mod => {
       const isCompleted = AppState.completedModules.includes(mod.id);
@@ -1311,10 +1347,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderActiveModule() {
+    if (!moduleHeaderContent || !moduleBodyContent) return;
     const mod = AppState.modules.find(m => m.id === AppState.activeModuleId) || AppState.modules[0];
+    if (!mod) return;
     
     moduleHeaderContent.innerHTML = `
-      <span class="module-code-badge">${mod.code} • ${mod.duration}</span>
+      <span class="module-code-badge">${mod.code} / ${mod.duration}</span>
       <h2>${mod.title}</h2>
       <div class="subtitle">${mod.subtitle}</div>
     `;
@@ -1327,26 +1365,28 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     // Render Quiz
-    quizQuestionText.textContent = mod.quiz.question;
-    quizOptionsContainer.innerHTML = "";
-    quizFeedbackBox.className = "quiz-feedback";
-    quizFeedbackBox.style.display = "none";
-    btnNextModule.style.display = "none";
-    AppState.selectedQuizOption = null;
+    if (quizQuestionText && quizOptionsContainer && quizFeedbackBox && btnNextModule) {
+      quizQuestionText.textContent = mod.quiz.question;
+      quizOptionsContainer.innerHTML = "";
+      quizFeedbackBox.className = "quiz-feedback";
+      quizFeedbackBox.style.display = "none";
+      btnNextModule.style.display = "none";
+      AppState.selectedQuizOption = null;
 
-    mod.quiz.options.forEach((optText, index) => {
-      const optDiv = document.createElement("div");
-      optDiv.className = "quiz-option";
-      optDiv.textContent = `${String.fromCharCode(65 + index)}. ${optText}`;
+      mod.quiz.options.forEach((optText, index) => {
+        const optDiv = document.createElement("div");
+        optDiv.className = "quiz-option";
+        optDiv.textContent = `${String.fromCharCode(65 + index)}. ${optText}`;
 
-      optDiv.addEventListener("click", () => {
-        quizOptionsContainer.querySelectorAll(".quiz-option").forEach(o => o.classList.remove("selected"));
-        optDiv.classList.add("selected");
-        AppState.selectedQuizOption = index;
+        optDiv.addEventListener("click", () => {
+          quizOptionsContainer.querySelectorAll(".quiz-option").forEach(o => o.classList.remove("selected"));
+          optDiv.classList.add("selected");
+          AppState.selectedQuizOption = index;
+        });
+
+        quizOptionsContainer.appendChild(optDiv);
       });
-
-      quizOptionsContainer.appendChild(optDiv);
-    });
+    }
   }
 
   if (btnSubmitQuiz) {
@@ -1613,6 +1653,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   window.renderActionsGlobal = renderActions;
 
+  // Immediate initial render for actions
+  try {
+    renderActions();
+  } catch (err) {
+    console.warn("Initial renderActions notice:", err);
+  }
+
   if (btnOpenSubmitAction) {
     btnOpenSubmitAction.addEventListener("click", (e) => {
       window.openSubmitActionModal(e);
@@ -1728,6 +1775,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const formAskQA = document.getElementById("form-ask-qa");
 
   function renderQA() {
+    if (!qaContainer) return;
     qaContainer.innerHTML = "";
     AppState.qaList.forEach(q => {
       const card = document.createElement("div");
@@ -1788,7 +1836,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  formAskQA.addEventListener("submit", async (e) => {
+  if (formAskQA) {
+    formAskQA.addEventListener("submit", async (e) => {
     e.preventDefault();
     const author = document.getElementById("qa-author-input").value;
     const question = document.getElementById("qa-question-input").value;
@@ -1837,9 +1886,10 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.disabled = false;
       submitBtn.innerHTML = origBtnHtml;
     }
-    modalAskQA.classList.remove("active");
+    if (modalAskQA) modalAskQA.classList.remove("active");
     showToast("Pertanyaanmu telah ditayangkan dan tersimpan di database cloud!", "success");
   });
+}
 
   // ==========================================================================
   // 8. DIREKTORI RUJUKAN BANTUAN RESMI
@@ -1850,6 +1900,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const referralListContainer = document.getElementById("referral-list-container");
 
   function renderReferrals() {
+    if (!referralListContainer) return;
     referralListContainer.innerHTML = "";
     ARUTALA_DATA.referrals.forEach(ref => {
       const item = document.createElement("div");
@@ -1861,7 +1912,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px;">${ref.desc}</p>
         <div style="font-size: 0.82rem; font-weight: 600; color: var(--primary);">
-          Kontak: ${ref.contact} &bull; ${ref.hours}
+          Kontak: ${ref.contact} | ${ref.hours}
         </div>
       `;
       referralListContainer.appendChild(item);
@@ -1882,12 +1933,14 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.classList.remove("has-active-modal");
     });
   }
-  modalReferral.addEventListener("click", (e) => {
-    if (e.target === modalReferral) {
-      modalReferral.classList.remove("active");
-      document.body.classList.remove("has-active-modal");
-    }
-  });
+  if (modalReferral) {
+    modalReferral.addEventListener("click", (e) => {
+      if (e.target === modalReferral) {
+        modalReferral.classList.remove("active");
+        document.body.classList.remove("has-active-modal");
+      }
+    });
+  }
 
   // Mobile Nav Toggle (if present)
   const mobileToggle = document.getElementById("btn-mobile-toggle");

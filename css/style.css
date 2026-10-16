@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ARUTALA - Akses Ruang Tumbuh Aman, Layak, dan Adil
+   ARUTALA - Akses Ruang Tumbuh yang Agamis, Setara, dan Adil
    Design System & 4 Theme References (Warna Logo Prisma Muda)
    ========================================================================== */
 
@@ -1553,12 +1553,8 @@ img {
 }
 
 .uss-feed-kicker::before {
-  content: "";
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #FF64C5;
+  display: none !important;
+  content: none !important;
 }
 
 .uss-feed-title {
@@ -2723,12 +2719,8 @@ img {
 }
 
 .wepresent-kicker::before {
-  content: "";
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #66BB6A;
+  display: none !important;
+  content: none !important;
 }
 
 .wepresent-title {
@@ -5632,14 +5624,10 @@ img {
     border-radius: 4px !important;
   }
 
-  /* Hanya titik indikator status yang bulat 50% */
-  .category-dot,
-  .cat-dot,
+  /* Hanya indikator status yang bulat 50% */
   .caption-dot,
   .tag-live-dot,
   .article-accent-dot,
-  .uss-feed-kicker::before,
-  .wepresent-kicker::before,
   .play-overlay {
     border-radius: 50% !important;
   }
@@ -5659,14 +5647,21 @@ img {
   h6,
   .uss-hero-headline,
   .uss-feed-title,
-  .wepresent-title,
-  .section-header h2,
-  .circle-cta-card h2 {
+  .section-header h2 {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
     font-weight: 700 !important;
     letter-spacing: -0.025em !important;
     text-transform: none;
     color: #0F172A !important;
+  }
+
+  .wepresent-title,
+  .circle-cta-card h2 {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.025em !important;
+    text-transform: none;
+    color: #FFFFFF !important;
   }
 
   /* HAPUS TOTAL font serif miring & efek stabilo di tengah judul */
@@ -6722,19 +6717,39 @@ img {
   }
 
   .cycle-box-card.cycle-navy {
+    background: linear-gradient(135deg, #F0F5FF 0%, #E5EDFF 100%) !important;
     border-top: 3px solid #2F4F87 !important;
+  }
+  .cycle-box-card.cycle-navy .cycle-box-num {
+    background: #2F4F87 !important;
+    color: #FFFFFF !important;
   }
 
   .cycle-box-card.cycle-sky {
+    background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%) !important;
     border-top: 3px solid #89BBEE !important;
+  }
+  .cycle-box-card.cycle-sky .cycle-box-num {
+    background: #89BBEE !important;
+    color: #0F172A !important;
   }
 
   .cycle-box-card.cycle-green {
+    background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%) !important;
     border-top: 3px solid #66BB6A !important;
+  }
+  .cycle-box-card.cycle-green .cycle-box-num {
+    background: #66BB6A !important;
+    color: #FFFFFF !important;
   }
 
   .cycle-box-card.cycle-pink {
+    background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%) !important;
     border-top: 3px solid #FF64C5 !important;
+  }
+  .cycle-box-card.cycle-pink .cycle-box-num {
+    background: #FF64C5 !important;
+    color: #FFFFFF !important;
   }
 
   .cycle-box-num {
@@ -6757,10 +6772,6 @@ img {
   }
 
   .value-card {
-    background: radial-gradient(circle at 15% 15%, rgba(47, 79, 135, 0.06), transparent 50%),
-                radial-gradient(circle at 85% 25%, rgba(137, 187, 238, 0.16), transparent 55%),
-                radial-gradient(circle at 25% 85%, rgba(255, 100, 197, 0.08), transparent 55%),
-                #FFFFFF !important;
     border: 1px solid #E2E8F0 !important;
     border-radius: 6px !important;
     box-shadow: 0 4px 20px rgba(47, 79, 135, 0.05) !important;
@@ -6774,19 +6785,35 @@ img {
   }
 
   .value-card.val-1 {
-    border-left: 3px solid #2F4F87 !important;
+    background: linear-gradient(135deg, #F0F5FF 0%, #E5EDFF 100%) !important;
+    border-top: 3px solid #2F4F87 !important;
+  }
+  .value-card.val-1 .pilar-kicker {
+    color: #2F4F87 !important;
   }
 
   .value-card.val-2 {
-    border-left: 3px solid #66BB6A !important;
+    background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%) !important;
+    border-top: 3px solid #89BBEE !important;
+  }
+  .value-card.val-2 .pilar-kicker {
+    color: #0284C7 !important;
   }
 
   .value-card.val-3 {
-    border-left: 3px solid #FF64C5 !important;
+    background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%) !important;
+    border-top: 3px solid #66BB6A !important;
+  }
+  .value-card.val-3 .pilar-kicker {
+    color: #16A34A !important;
   }
 
   .value-card.val-4 {
-    border-left: 3px solid #89BBEE !important;
+    background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%) !important;
+    border-top: 3px solid #FF64C5 !important;
+  }
+  .value-card.val-4 .pilar-kicker {
+    color: #DB2777 !important;
   }
 
   .value-icon {
@@ -7172,4 +7199,13 @@ img {
     letter-spacing: 0.04em !important;
     font-weight: 700 !important;
     border-radius: 6px !important;
+  }
+
+  /* Clean: Hapus Bulatan Titik Dekoratif (Dots) */
+  .uss-brand-dot,
+  .cat-dot,
+  .uss-feed-kicker::before,
+  .wepresent-kicker::before {
+    display: none !important;
+    content: none !important;
   }

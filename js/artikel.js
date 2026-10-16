@@ -104,8 +104,8 @@ async function initPortalArticle() {
   // 5. Eyebrow, Title, & Author Byline
   const metaDateCat = document.getElementById("portal-meta-date-cat");
   if (metaDateCat) {
-    const catName = currentArticle.categoryLabel ? currentArticle.categoryLabel.replace(/\(.*\)/, "").trim() : currentArticle.category;
-    metaDateCat.textContent = `${currentArticle.date.toUpperCase()} | ${catName.toUpperCase()}`;
+    const catName = getPortalCategoryLabel(currentArticle.category, currentArticle.categoryLabel);
+    metaDateCat.textContent = `${currentArticle.date.toUpperCase()} | ${catName}`;
   }
 
   const metaReadTime = document.getElementById("portal-meta-readtime");
@@ -125,7 +125,7 @@ async function initPortalArticle() {
 
   const metaRole = document.getElementById("portal-meta-role");
   if (metaRole) {
-    metaRole.textContent = `${currentArticle.authorRole} • UIN Sunan Gunung Djati Bandung`;
+    metaRole.textContent = `${currentArticle.authorRole} / UIN Sunan Gunung Djati Bandung`;
   }
 
   const bylineAvatar = document.getElementById("portal-byline-avatar");
@@ -196,7 +196,7 @@ async function initPortalArticle() {
 
   const bioRole = document.getElementById("portal-bio-role");
   if (bioRole) {
-    bioRole.textContent = `${currentArticle.authorRole} • UIN Sunan Gunung Djati Bandung`;
+    bioRole.textContent = `${currentArticle.authorRole} / UIN Sunan Gunung Djati Bandung`;
   }
 
   // 7. Share Action Buttons
@@ -249,6 +249,20 @@ function getCategoryThemeColor(category) {
   }
 }
 
+function getPortalCategoryLabel(category, fallback) {
+  switch ((category || "").toLowerCase()) {
+    case "pandai":
+    case "moderasi": return "MODERASI BERAGAMA";
+    case "bersuara":
+    case "kesetaraan": return "KESETARAAN";
+    case "cerdas":
+    case "budaya": return "BUDAYA";
+    case "berdaya":
+    case "sosial": return "SOSIAL MASYARAKAT";
+    default: return (fallback || category || "MODERASI BERAGAMA").toUpperCase();
+  }
+}
+
 function renderRelatedArticles(allArticles, currentId) {
   const container = document.getElementById("portal-related-container");
   if (!container) return;
@@ -269,7 +283,7 @@ function renderRelatedArticles(allArticles, currentId) {
         <img src="${item.coverImage}" alt="${item.title}" class="article-cover-img" loading="lazy">
         <div class="article-cover-overlay"></div>
         <span class="article-floating-badge" style="background: ${catColor}; color: #FFFFFF;">
-          ${item.categoryLabel || item.category}
+          ${getPortalCategoryLabel(item.category, item.categoryLabel)}
         </span>
         <span class="article-read-pill">${item.readTime || '5 menit baca'}</span>
       </div>
@@ -277,7 +291,6 @@ function renderRelatedArticles(allArticles, currentId) {
       <div class="article-body">
         <div class="article-meta">
           <span class="article-date">${item.date}</span>
-          <span class="article-accent-dot" style="background: ${catColor};"></span>
           <span class="article-category-name" style="color: ${catColor};">
             ${item.tags ? item.tags[0] : 'Literasi'}
           </span>
