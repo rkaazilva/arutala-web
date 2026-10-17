@@ -187,12 +187,198 @@
   };
 
   /**
+   * 5. HERO SHOWCASE PHOTO SLIDER (Crossfade + Ken Burns + Controls)
+   */
+  window.initHeroShowcaseSlider = function () {
+    var showcase = document.querySelector('.arutala-hero-showcase');
+    if (!showcase) return;
+
+    var slides = showcase.querySelectorAll('.hero-slides-track .hero-slide');
+    var dots = showcase.querySelectorAll('#heroIndicators .indicator-dot');
+    var btnPrev = document.getElementById('btnHeroPrev');
+    var btnNext = document.getElementById('btnHeroNext');
+
+    if (!slides || slides.length === 0) return;
+
+    var currentIdx = 0;
+    var timer = null;
+    var autoPlayDelay = 5500; // 5.5 detik per slide
+
+    function showSlide(index) {
+      slides.forEach(function (slide, idx) {
+        if (idx === index) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      dots.forEach(function (dot, idx) {
+        if (idx === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
+      currentIdx = index;
+    }
+
+    function nextSlide() {
+      var next = (currentIdx + 1) % slides.length;
+      showSlide(next);
+    }
+
+    function prevSlide() {
+      var prev = (currentIdx - 1 + slides.length) % slides.length;
+      showSlide(prev);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      timer = setInterval(nextSlide, autoPlayDelay);
+    }
+
+    function stopAutoPlay() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    // Tombol Next & Prev
+    if (btnNext) {
+      btnNext.addEventListener('click', function (e) {
+        e.preventDefault();
+        nextSlide();
+        startAutoPlay();
+      });
+    }
+
+    if (btnPrev) {
+      btnPrev.addEventListener('click', function (e) {
+        e.preventDefault();
+        prevSlide();
+        startAutoPlay();
+      });
+    }
+
+    // Indikator Dots
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function (e) {
+        e.preventDefault();
+        var targetIndex = parseInt(dot.getAttribute('data-index'), 10);
+        if (!isNaN(targetIndex)) {
+          showSlide(targetIndex);
+          startAutoPlay();
+        }
+      });
+    });
+
+    // Pause on Mouse Hover
+    showcase.addEventListener('mouseenter', stopAutoPlay);
+    showcase.addEventListener('mouseleave', startAutoPlay);
+
+    // Touch Swipe Support di Perangkat Mobile
+    var touchStartX = 0;
+    var touchEndX = 0;
+
+    showcase.addEventListener('touchstart', function (e) {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchStartX = e.changedTouches[0].screenX;
+      }
+      stopAutoPlay();
+    }, { passive: true });
+
+    showcase.addEventListener('touchend', function (e) {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 45) {
+          if (diff > 0) {
+            nextSlide(); // swipe kiri -> slide selanjutnya
+          } else {
+            prevSlide(); // swipe kanan -> slide sebelumnya
+          }
+        }
+      }
+      startAutoPlay();
+    }, { passive: true });
+
+    // Mulai autoplay
+    startAutoPlay();
+  };
+
+  /**
+   * 6. HERO STATS ANIMATED COUNTERS (Smooth Count-Up with easeOutExpo)
+   */
+  window.initHeroCounterStats = function () {
+    var statsBanner = document.querySelector('.hero-docked-stats-banner');
+    if (!statsBanner) return;
+
+    var counters = statsBanner.querySelectorAll('.stat-counter');
+    if (!counters || counters.length === 0) return;
+
+    var hasAnimated = false;
+
+    function runCounterAnimation() {
+      if (hasAnimated) return;
+      hasAnimated = true;
+
+      var duration = 2000; // 2 detik
+
+      counters.forEach(function (counter) {
+        var target = parseInt(counter.getAttribute('data-target'), 10) || 0;
+        var startTime = null;
+
+        function updateNumber(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var elapsed = timestamp - startTime;
+          var progress = Math.min(elapsed / duration, 1);
+
+          // Easing: easeOutExpo
+          var ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          var current = Math.floor(ease * target);
+
+          counter.textContent = current.toLocaleString('id-ID');
+
+          if (progress < 1) {
+            requestAnimationFrame(updateNumber);
+          } else {
+            counter.textContent = target.toLocaleString('id-ID');
+          }
+        }
+
+        requestAnimationFrame(updateNumber);
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            runCounterAnimation();
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      observer.observe(statsBanner);
+    } else {
+      // Fallback langsung jalankan
+      setTimeout(runCounterAnimation, 400);
+    }
+  };
+
+  /**
    * Inisialisasi saat DOM siap
    */
   function startInteractions() {
     window.initScrollReveal();
     window.setupFloatingBackToTop();
     window.initAutoScrollVideoCarousel();
+    window.initHeroShowcaseSlider();
+    window.initHeroCounterStats();
   }
 
   if (document.readyState === 'loading') {

@@ -91,6 +91,185 @@ window.closeVideoModal = function(e) {
   closeModalById("modal-video-player");
 };
 
+window.getArticleKeyPoints = function(art) {
+  if (art && Array.isArray(art.keyPoints) && art.keyPoints.length > 0) {
+    return art.keyPoints;
+  }
+  
+  // Ekstraksi otomatis dari HTML content atau teks jika belum ada keyPoints terdefinisi
+  const points = [];
+  if (art && art.content) {
+    try {
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = art.content;
+      
+      // 1. Coba cari tag heading h3, h4
+      const headings = tempDiv.querySelectorAll("h3, h4");
+      if (headings.length > 0) {
+        headings.forEach((h, i) => {
+          if (i < 4) {
+            let nextP = h.nextElementSibling;
+            while (nextP && nextP.tagName !== "P" && nextP.tagName !== "UL" && nextP.tagName !== "H3" && nextP.tagName !== "H4") {
+              nextP = nextP.nextElementSibling;
+            }
+            const desc = (nextP ? nextP.textContent.trim() : (art.summary || ""));
+            points.push({
+              title: h.textContent.trim(),
+              desc: desc.length > 175 ? desc.substring(0, 172) + "..." : desc
+            });
+          }
+        });
+      }
+      
+      // 2. Coba cari list li jika tidak ada heading
+      if (points.length === 0) {
+        const listItems = tempDiv.querySelectorAll("li");
+        if (listItems.length > 0) {
+          listItems.forEach((li, i) => {
+            if (i < 4) {
+              const strong = li.querySelector("strong, b");
+              const title = strong ? strong.textContent.replace(/:$/, "").trim() : `Poin Pokok #${i + 1}`;
+              const desc = li.textContent.replace(title, "").replace(/^[:\s-]+/, "").trim();
+              points.push({
+                title: title,
+                desc: desc.length > 175 ? desc.substring(0, 172) + "..." : desc
+              });
+            }
+          });
+        }
+      }
+
+      // 3. Fallback ke pemotongan paragraf jika tidak ada h3/li
+      if (points.length === 0) {
+        const paras = tempDiv.querySelectorAll("p");
+        paras.forEach((p, i) => {
+          const text = p.textContent.trim();
+          if (text && i < 3) {
+            const sentences = text.split(/(?<=[.?!])\s+/);
+            const firstSentence = sentences[0] || `Pokok Pikiran #${i + 1}`;
+            const rest = sentences.slice(1).join(" ") || text;
+            points.push({
+              title: firstSentence.length > 60 ? firstSentence.substring(0, 57) + "..." : firstSentence,
+              desc: rest.length > 175 ? rest.substring(0, 172) + "..." : rest
+            });
+          }
+        });
+      }
+    } catch (e) {
+      console.warn("Gagal ekstraksi poin artikel:", e);
+    }
+  }
+
+  // 4. Fallback default jika teks kosong
+  if (points.length === 0) {
+    points.push(
+      { title: "Intisari Gagasan Pokok", desc: (art && art.summary) || "Gagasan penting literasi pemuda untuk menciptakan ruang tumbuh yang setara dan adil." },
+      { title: "Konteks & Relevansi Sosial", desc: "Pentingnya memperkuat kesadaran kritis, empati sebaya, dan perlindungan ruang aman bersama." },
+      { title: "Langkah Transformasi Pemuda", desc: "Menerapkan nilai-nilai kepemimpinan inklusif dalam kehidupan kampus, organisasi, dan ranah digital." }
+    );
+  }
+
+  return points;
+};
+
+window.buildArticleKeyPointsHtml = function(art) {
+  if (!art) return "";
+  const points = window.getArticleKeyPoints(art);
+  const actionNote = art.actionNote || (art.quoteHighlight ? art.quoteHighlight : "Terapkan intisari pemikiran ini dalam langkah aksi nyata pemuda di lingkungan sekitarmu.");
+  
+  const docDownloadHtml = art.docUrl ? `
+    <div class="keypoints-doc-box">
+      <div class="keypoints-doc-info">
+        <div class="keypoints-doc-icon" style="font-weight: 800; font-size: 0.82rem; color: #2F4F87;">PDF</div>
+        <div>
+          <strong style="color: #0F172A; font-size: 0.88rem; display: block;">Dokumen Naskah / Jurnal Terlampir</strong>
+          <span style="color: #64748B; font-size: 0.74rem;">Tersimpan resmi di Cloud Storage ARUTALA</span>
+        </div>
+      </div>
+      <a href="${art.docUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="background: #2F4F87; color: #FFFFFF; font-weight: 700; border-radius: 6px; padding: 7px 14px; text-decoration: none; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;">
+        <span>Unduh Naskah</span> &rarr;
+      </a>
+    </div>
+  ` : "";
+
+  return `
+    <div class="article-keypoints-box">
+      <div class="keypoints-top-banner">
+        <div class="keypoints-badge">
+          <span class="keypoints-badge-text">POIN-POIN BESAR GAGASAN UTAMA</span>
+        </div>
+        <span class="keypoints-meta-tag">Format Baca Cepat Pemuda</span>
+      </div>
+
+      <div class="keypoints-lead-text">
+        ${art.summary || 'Berikut adalah intisari gagasan pokok tulisan ini yang disajikan secara terarah dan aplikatif:'}
+      </div>
+
+      <div class="keypoints-list">
+        ${points.map((pt, idx) => `
+          <div class="keypoint-card">
+            <div class="keypoint-num-badge">${String(idx + 1).padStart(2, '0')}</div>
+            <div class="keypoint-card-content">
+              <h5 class="keypoint-card-title">${pt.title}</h5>
+              <p class="keypoint-card-desc">${pt.desc}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="keypoints-action-callout">
+        <div class="action-callout-header">
+          <strong>REFLEKSI &amp; AKSI NYATA PEMUDA:</strong>
+        </div>
+        <p class="action-callout-text">${actionNote}</p>
+      </div>
+
+      ${docDownloadHtml}
+
+      <div class="keypoints-accordion-wrapper">
+        <button type="button" class="btn-toggle-fulltext" onclick="window.toggleArticleFullText(this)">
+          <span class="toggle-text">Buka Naskah Narasi Lengkap</span>
+          <span class="toggle-icon">▼</span>
+        </button>
+        <div class="fulltext-collapse-container" style="display: none;">
+          <div class="fulltext-inner-content">
+            ${art.content || `<p style="color: #64748B; font-style: italic;">Tidak ada naskah narasi tambahan.</p>`}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+};
+
+window.toggleArticleFullText = function(btn) {
+  if (!btn) return;
+  const container = btn.nextElementSibling;
+  const icon = btn.querySelector(".toggle-icon");
+  const text = btn.querySelector(".toggle-text");
+  if (!container) return;
+  
+  const isHidden = container.style.display === "none" || !container.style.display;
+  if (isHidden) {
+    container.style.display = "block";
+    if (icon) icon.textContent = "▲";
+    if (text) text.textContent = "Tutup Naskah Narasi Lengkap";
+  } else {
+    container.style.display = "none";
+    if (icon) icon.textContent = "▼";
+    if (text) text.textContent = "Buka Naskah Narasi Lengkap";
+  }
+};
+
+window.openArticleReaderModalById = function(id) {
+  const art = (window.AppState && window.AppState.articles && window.AppState.articles.find(a => String(a.id) === String(id))) || 
+              (window.ARUTALA_DATA && window.ARUTALA_DATA.articles && window.ARUTALA_DATA.articles.find(a => String(a.id) === String(id)));
+  if (art) {
+    window.openArticleReaderModal(art);
+  } else {
+    window.location.href = `artikel.html?id=${encodeURIComponent(id)}`;
+  }
+};
+
 window.openArticleReaderModal = function(art) {
   if (!art) return;
   const modalTitle = document.getElementById("modal-article-title");
@@ -111,34 +290,13 @@ window.openArticleReaderModal = function(art) {
     modalCat.textContent = typeof getCategoryLabelClean === 'function' ? getCategoryLabelClean(art.category) : (art.categoryLabel || "MODERASI BERAGAMA");
     modalCat.className = `badge ${typeof getCategoryBadgeClass === 'function' ? getCategoryBadgeClass(art.category) : 'badge-blue'}`;
   }
-  if (modalDate) modalDate.textContent = art.date || "";
+  if (modalDate) modalDate.textContent = art.date || "Oktober 2026";
   if (modalReadtime) modalReadtime.textContent = art.readTime || "5 menit baca";
   
-  let modalContentHtml = art.content || art.summary || "";
-  if (art.docUrl) {
-    modalContentHtml += `
-      <div style="margin-top: 24px; padding: 16px 20px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 6px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <div style="width: 38px; height: 38px; background: #EEF3FA; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #2F4F87;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-            </svg>
-          </div>
-          <div>
-            <strong style="color: #0F172A; font-size: 0.9rem; display: block;">Dokumen Naskah Terlampir</strong>
-            <span style="color: #64748B; font-size: 0.76rem;">Tersimpan resmi di Cloud Storage ARUTALA</span>
-          </div>
-        </div>
-        <a href="${art.docUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="background: #2F4F87; color: #FFFFFF; font-weight: 700; border-radius: 4px; padding: 7px 14px; text-decoration: none; font-size: 0.82rem;">
-          Unduh Naskah &rarr;
-        </a>
-      </div>
-    `;
+  // Render format Poin-Poin Besar (Key Takeaways)
+  if (modalBody) {
+    modalBody.innerHTML = window.buildArticleKeyPointsHtml(art);
   }
-  if (modalBody) modalBody.innerHTML = modalContentHtml;
 
   if (coverWrap && coverImg) {
     if (art.coverImage) {
@@ -165,6 +323,11 @@ window.openArticleReaderModal = function(art) {
   }
   if (modalAuthor) modalAuthor.textContent = art.author || "Penulis";
   if (modalRole) modalRole.textContent = art.authorRole || "";
+
+  const modalFullLink = document.getElementById("modal-article-full-link");
+  if (modalFullLink) {
+    modalFullLink.href = `artikel.html?id=${encodeURIComponent(art.id)}`;
+  }
 
   openModalById("modal-article-reader");
 };
@@ -240,45 +403,8 @@ window.closeCircleRegistrationModal = function(e) {
 
 window.filterArticlesAndScroll = function(cat, e) {
   if (e && e.preventDefault) e.preventDefault();
-  
-  // Set filter di pills artikel section
-  const filterPills = document.querySelectorAll("#article-filter-pills .uss-filter-pill, #article-filter-pills .filter-btn");
-  filterPills.forEach(b => {
-    if (b.dataset.category === cat) {
-      b.classList.add("active");
-    } else {
-      b.classList.remove("active");
-    }
-  });
-
-  // Set filter di subbar kategori artikel (header baris 2)
-  const subbarLinks = document.querySelectorAll(".subbar-filter-link");
-  subbarLinks.forEach(lnk => {
-    if (lnk.dataset.category === cat) {
-      lnk.classList.add("active");
-    } else {
-      lnk.classList.remove("active");
-    }
-  });
-
-  if (window.AppState) {
-    window.AppState.currentCategory = cat;
-  }
-  if (typeof window.renderArticlesGlobal === "function") {
-    window.renderArticlesGlobal();
-  }
-
-  // Tutup dropdown artikel jika terbuka
-  const dropdownWrapper = document.getElementById("dropdown-artikel-wrapper");
-  const btnNavDropdownArtikel = document.getElementById("btn-nav-dropdown-artikel");
-  if (dropdownWrapper) dropdownWrapper.classList.remove("active");
-  if (btnNavDropdownArtikel) btnNavDropdownArtikel.setAttribute("aria-expanded", "false");
-
-  // Gulir halus ke section artikel tepat di bawah hero
-  const section = document.getElementById("artikel-opini");
-  if (section) {
-    section.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  const targetUrl = 'artikel.html' + (cat && cat !== 'all' ? '?category=' + encodeURIComponent(cat) : '');
+  window.location.href = targetUrl;
 };
 
 // ==========================================================================
@@ -398,7 +524,7 @@ window.copyAccountNumber = function(text, btn) {
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(() => {
       const orig = btn.textContent;
-      btn.textContent = "Tersalin! ✓";
+      btn.textContent = "Tersalin!";
       setTimeout(() => {
         btn.textContent = orig;
       }, 2000);
@@ -699,9 +825,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Dropdown artikel toggle for touch / click
   if (btnNavDropdownArtikel && dropdownArtikelWrapper) {
     btnNavDropdownArtikel.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isOpen = dropdownArtikelWrapper.classList.toggle("active");
-      btnNavDropdownArtikel.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      // Jika yang diklik adalah ikon panah kecil dropdown, toggle menu dropdown di HP
+      if (e.target.closest(".dropdown-arrow-icon")) {
+        e.preventDefault();
+        e.stopPropagation();
+        const isOpen = dropdownArtikelWrapper.classList.toggle("active");
+        btnNavDropdownArtikel.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        return;
+      }
+      // Jika teks ARTIKEL & JURNAL diklik, langsung pindah halaman ke artikel.html
+      window.location.href = "artikel.html";
     });
 
     document.addEventListener("click", (e) => {
@@ -753,7 +886,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const toast = document.createElement("div");
     toast.className = `toast ${type}`;
     toast.innerHTML = `
-      <span>${type === "success" ? "✓" : "!"}</span>
       <span>${message}</span>
     `;
     container.appendChild(toast);
@@ -823,10 +955,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 1. Featured Article (2 Kolom: Kiri foto besar, Kanan kategori, judul besar, ringkasan, nama penulis)
     const featuredHtml = `
-      <article class="uss-featured-card reveal" onclick="window.location.href='artikel.html?id=${encodeURIComponent(featured.id)}'">
+      <a href="artikel.html?id=${encodeURIComponent(featured.id)}" class="uss-featured-card reveal" style="display: grid; text-decoration: none; color: inherit; cursor: pointer;">
         <div class="featured-media-col">
           <div class="featured-img-wrap">
-            <img src="${featured.coverImage || 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=85'}" 
+            <img src="${featured.coverImage || 'img/harmoni_pemuda_aljabbar.png'}" 
                  alt="${featured.title}" class="featured-cover-img" loading="eager">
           </div>
         </div>
@@ -844,11 +976,11 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="meta-date">${featured.date || 'Oktober 2026'}</span>
           </div>
           <div class="featured-action-link">
-            <span>Baca Selengkapnya</span>
+            <span>Baca Poin-Poin Pokok</span>
             <span class="arrow">&rarr;</span>
           </div>
         </div>
-      </article>
+      </a>
     `;
 
     // 2. Clean 3-Column Grid di bawahnya (tanpa border, menyatu dengan background putih)
@@ -857,9 +989,9 @@ document.addEventListener("DOMContentLoaded", () => {
       gridHtml = `
         <div class="uss-clean-grid">
           ${rest.map(art => `
-            <article class="uss-clean-card cat-${art.category} reveal" data-category="${art.category}" style="border-top: 3px solid ${getCategoryColor(art.category)} !important;" onclick="window.location.href='artikel.html?id=${encodeURIComponent(art.id)}'">
+            <a href="artikel.html?id=${encodeURIComponent(art.id)}" class="uss-clean-card cat-${art.category} reveal" data-category="${art.category}" style="display: block; text-decoration: none; color: inherit; cursor: pointer; border-top: 3px solid ${getCategoryColor(art.category)} !important;">
               <div class="clean-card-media">
-                <img src="${art.coverImage || 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80'}" 
+                <img src="${art.coverImage || 'img/pelatihan_fasilitator_auditorium.jpg'}" 
                      alt="${art.title}" class="clean-card-img" loading="lazy">
               </div>
               <div class="clean-card-body">
@@ -874,7 +1006,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   <span class="date">${art.date || 'Oktober 2026'}</span>
                 </div>
               </div>
-            </article>
+            </a>
           `).join('')}
         </div>
       `;
@@ -933,12 +1065,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   window.filterArticlesAndScroll = function(category, event) {
-    if (event) event.preventDefault();
-    window.filterArticles(category);
-    const targetSection = document.getElementById("artikel-opini");
-    if (targetSection) {
-      targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    if (event && event.preventDefault) event.preventDefault();
+    const targetUrl = 'artikel.html' + (category && category !== 'all' ? '?category=' + encodeURIComponent(category) : '');
+    window.location.href = targetUrl;
   };
 
   const articleFilterButtons = document.querySelectorAll("#article-filter-pills button");
@@ -962,46 +1091,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnCloseReader = document.getElementById("btn-close-article-modal");
 
   function openArticleReader(art) {
-    document.getElementById("modal-article-title").textContent = art.title;
-    document.getElementById("modal-article-cat").textContent = getCategoryLabelClean(art.category);
-    document.getElementById("modal-article-cat").className = `badge ${getCategoryBadgeClass(art.category)}`;
-    document.getElementById("modal-article-date").textContent = art.date;
-    document.getElementById("modal-article-readtime").textContent = art.readTime;
-    document.getElementById("modal-article-body").innerHTML = art.content;
-    
-    // Cover Image Handling
-    const coverWrap = document.getElementById("modal-article-cover-wrap");
-    const coverImg = document.getElementById("modal-article-img");
-    if (coverWrap && coverImg) {
-      if (art.coverImage) {
-        coverImg.src = art.coverImage;
-        coverWrap.style.display = "block";
-      } else {
-        coverWrap.style.display = "none";
-      }
+    if (typeof window.openArticleReaderModal === "function") {
+      window.openArticleReaderModal(art);
     }
-
-    // Quote Highlight
-    const quoteWrap = document.getElementById("modal-article-quote-wrap");
-    const quoteText = document.getElementById("modal-article-quote");
-    if (quoteWrap && quoteText) {
-      if (art.quoteHighlight) {
-        quoteText.textContent = `“${art.quoteHighlight}”`;
-        quoteWrap.style.borderLeftColor = art.accentColor || "var(--prisma-coral)";
-        quoteWrap.style.display = "block";
-      } else {
-        quoteWrap.style.display = "none";
-      }
-    }
-
-    const modalAvatar = document.getElementById("modal-article-avatar");
-    modalAvatar.textContent = art.author.charAt(0);
-    modalAvatar.style.background = art.accentColor || "var(--prisma-navy)";
-    document.getElementById("modal-article-author").textContent = art.author;
-    document.getElementById("modal-article-role").textContent = art.authorRole;
-
-    modalReader.classList.add("active");
-    document.body.classList.add("has-active-modal");
   }
 
   if (btnCloseReader && modalReader) {
@@ -1113,24 +1205,24 @@ document.addEventListener("DOMContentLoaded", () => {
       // Brand Category Label & Accent Color
       let catLabel = "MODERASI BERAGAMA";
       let accentColor = "#66BB6A";
-      let fallbackImage = "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80";
+      let fallbackImage = "img/harmoni_pemuda_aljabbar.png";
 
       if (cat === "pandai") {
         catLabel = "MODERASI BERAGAMA";
         accentColor = "#66BB6A";
-        fallbackImage = "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80";
+        fallbackImage = "img/harmoni_pemuda_aljabbar.png";
       } else if (cat === "cerdas") {
         catLabel = "BUDAYA";
         accentColor = "#89BBEE";
-        fallbackImage = "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800&q=80";
+        fallbackImage = "img/seminar_cakrawala_muda.png";
       } else if (cat === "bersuara") {
         catLabel = "KESETARAAN";
         accentColor = "#FF64C5";
-        fallbackImage = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80";
+        fallbackImage = "img/pelatihan_fasilitator_auditorium.jpg";
       } else if (cat === "berdaya") {
         catLabel = "SOSIAL MASYARAKAT";
         accentColor = "#2F4F87";
-        fallbackImage = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80";
+        fallbackImage = "img/circle_mentoring_sebaya.jpg";
       }
 
       // 1. Upload Cover Image ke Supabase Storage Bucket 'arutala-media'
@@ -1650,7 +1742,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       item.innerHTML = `
         <div class="bento-media">
-          <img src="${act.image || 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80'}" 
+          <img src="${act.image || 'img/pelatihan_fasilitator_auditorium.jpg'}" 
                alt="${act.title}" class="bento-img" loading="lazy">
           <span class="bento-badge">${act.badge || 'Dokumentasi Aksi'}</span>
         </div>
@@ -1732,7 +1824,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (!photoUrl) {
-        photoUrl = actionUploadedUrl || document.getElementById("action-photo-url-input")?.value || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80";
+        photoUrl = actionUploadedUrl || document.getElementById("action-photo-url-input")?.value || "img/pelatihan_fasilitator_auditorium.jpg";
       }
 
       // 2. Simpan Data Aksi ke Supabase Tabel 'actions'

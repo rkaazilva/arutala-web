@@ -185,18 +185,26 @@ const TEMARA_TOOLKIT_DATA = [
   }
 ];
 
+let TEMARA_LMS_ITEMS = [];
 let CURRENT_TOOLKIT_INDEX = 0;
 
-function initTemaraToolkit() {
+async function initTemaraToolkit() {
   const tabsContainer = document.getElementById("toolkit-nav-tabs");
   if (!tabsContainer) return;
 
+  // 1. Ambil data dinamis dari Supabase / Local Storage
+  if (window.ArutalaDB && typeof window.ArutalaDB.fetchLmsItems === "function") {
+    TEMARA_LMS_ITEMS = await window.ArutalaDB.fetchLmsItems("temara");
+  } else {
+    TEMARA_LMS_ITEMS = window.ArutalaDB.getDefaultLmsItems("temara");
+  }
+
   tabsContainer.innerHTML = "";
-  TEMARA_TOOLKIT_DATA.forEach((item, idx) => {
+  TEMARA_LMS_ITEMS.forEach((item, idx) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = `toolkit-tab-btn ${idx === CURRENT_TOOLKIT_INDEX ? "active" : ""}`;
-    btn.textContent = item.tabLabel;
+    btn.textContent = `0${idx + 1}. ${(item.title || "").split(" ")[0]} ${(item.code ? `[${item.code}]` : "")}`;
     btn.addEventListener("click", () => {
       CURRENT_TOOLKIT_INDEX = idx;
       document.querySelectorAll(".toolkit-tab-btn").forEach((b, i) => {
@@ -211,7 +219,7 @@ function initTemaraToolkit() {
 }
 
 function loadToolkitContent(idx) {
-  const item = TEMARA_TOOLKIT_DATA[idx];
+  const item = TEMARA_LMS_ITEMS[idx];
   if (!item) return;
 
   const titleEl = document.getElementById("toolkit-title");
@@ -220,10 +228,64 @@ function loadToolkitContent(idx) {
   const bodyEl = document.getElementById("toolkit-content-body");
 
   if (titleEl) titleEl.textContent = item.title;
-  if (subEl) subEl.textContent = item.subtitle;
-  if (catEl) catEl.textContent = item.badge;
-  if (bodyEl) bodyEl.innerHTML = item.body;
+  if (subEl) subEl.textContent = item.subtitle || "Perangkat Standar Pelaksanaan Lingkaran Teman Sebaya";
+  if (catEl) catEl.textContent = item.duration || "SOP Fasilitator";
+
+  // Ringkasan Materi (Summary)
+  const paragraphs = (item.summary || item.content || "Panduan fasilitator sedang disiapkan.")
+    .split("\n\n")
+    .filter(p => p.trim() !== "");
+
+  const summaryHtml = paragraphs.map(p => {
+    if (p.startsWith("<") && p.endsWith(">")) return p;
+    return `<p style="font-size: 1.05rem; line-height: 1.75; color: #334155; margin-bottom: 18px;">${p.replace(/\n/g, "<br>")}</p>`;
+  }).join("");
+
+  // Download Card
+  const downloadCardHtml = `
+    <div class="lms-download-card">
+      <div class="download-card-info">
+        <div class="download-icon-box" style="background:#FEF3C7; color:#B45309; font-weight: 800; font-size: 0.85rem;">PDF</div>
+        <div class="download-card-text">
+          <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #B45309; display: block; margin-bottom: 2px;">
+            DOKUMEN RESMI PANDUAN FASILITATOR TEMARA
+          </span>
+          <h4>${item.docName || item.title + '.pdf'}</h4>
+          <p>${item.docSize || 'File PDF Lengkap'} • Perangkat SOP &amp; panduan pelaksanaan lingkaran sebaya.</p>
+        </div>
+      </div>
+      <div>
+        ${item.docUrl ? `
+          <a href="${item.docUrl}" target="_blank" rel="noopener" class="btn-download-pdf" style="background:#B45309;">
+            <span>Unduh Panduan Lengkap (PDF)</span>
+          </a>
+        ` : `
+          <button type="button" class="btn-download-pdf" style="opacity: 0.6; cursor: not-allowed; background:#B45309;" title="File PDF sedang disiapkan">
+            <span>PDF Segera Diunggah</span>
+          </button>
+        `}
+      </div>
+    </div>
+  `;
+
+  if (bodyEl) {
+    bodyEl.innerHTML = `
+      <div class="summary-body-wrap">
+        <div style="background: #FFFBEB; border-left: 4px solid #B45309; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 24px;">
+          <span style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #B45309; display: block; margin-bottom: 3px;">
+            RINGKASAN PERANGKAT &amp; PANDUAN FASILITATOR SEBAYA
+          </span>
+          <p style="font-size: 0.94rem; color: #334155; margin: 0; line-height: 1.5;">
+            Pelajari ringkasan prosedur di bawah ini dan unduh dokumen PDF lengkap untuk panduan operasional di lapangan.
+          </p>
+        </div>
+        ${summaryHtml}
+        ${downloadCardHtml}
+      </div>
+    `;
+  }
 }
+
 
 // --------------------------------------------------------------------------
 // 2. FITUR REKRUTMEN FASILITATOR SEBAYA (INTEGRASI SUPABASE & LOCAL STORAGE)
@@ -299,7 +361,7 @@ function initTemaraRecruitmentForm() {
       localStorage.setItem("arutala_facilitator_registrations", JSON.stringify(existing));
 
       showStatus(
-        `✓ Pendaftaran Fasilitator Berhasil! Terima kasih, <strong>${fullname}</strong>. Data kamu telah tercatat di sistem kaderisasi ARUTALA. Tim Seleksi akan menghubungi melalui WhatsApp di nomor <strong>${contact}</strong> untuk tahap pembekalan.`,
+        `Pendaftaran Fasilitator Berhasil! Terima kasih, <strong>${fullname}</strong>. Data kamu telah tercatat di sistem kaderisasi ARUTALA. Tim Seleksi akan menghubungi melalui WhatsApp di nomor <strong>${contact}</strong> untuk tahap pembekalan.`,
         "success"
       );
 

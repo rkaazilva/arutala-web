@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="page-title">Artikel & Kisah Inspiratif - ARUTALA</title>
+  <title id="page-title">Pustaka Gagasan & Jurnal Utama â€” ARUTALA</title>
   
   <!-- SEO & Social Meta -->
-  <meta name="description" id="meta-description" content="Baca kisah inspiratif dan opini kritis pemuda seputar moderasi beragama, kearifan budaya nusantara, dan kesetaraan gender di ARUTALA.">
-  <meta property="og:title" id="og-title" content="Artikel & Kisah Inspiratif - ARUTALA">
+  <meta name="description" id="meta-description" content="Pustaka gagasan dan kurasi jurnal pemikiran kritis pemuda ARUTALA seputar 4 pilar: Moderasi Beragama, Kesetaraan Gender, Budaya Nusantara, dan Aksi Sosial Masyarakat.">
+  <meta property="og:title" id="og-title" content="Pustaka Gagasan & Jurnal Utama â€” ARUTALA">
   <meta property="og:description" id="og-desc" content="Akses Ruang Tumbuh yang Agamis, Setara, dan Adil - Model Inovasi Ekosistem Pemuda Berbasis Nilai Keagamaan.">
   <meta property="og:type" content="article">
 
@@ -18,6 +18,7 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/vibrant.css?v=1.0">
   
   <!-- Favicon Resmi ARUTALA -->
   <link rel="icon" type="image/png" href="img/logo.png">
@@ -31,24 +32,27 @@
     <div class="container">
       <div class="portal-nav-inner">
         <div class="portal-nav-brand-group">
-          <a href="index.html#artikel-opini" class="portal-back-btn" id="btn-back-to-home" title="Kembali ke Ruang Artikel ARUTALA">
+          <a href="index.html" class="portal-back-btn" id="btn-back-to-home" title="Kembali ke Beranda Utama ARUTALA">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16">
               <line x1="19" y1="12" x2="5" y2="12"></line>
               <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
-            <span>Semua Artikel</span>
+            <span>Kembali ke Beranda</span>
           </a>
 
-          <a href="index.html" class="brand-logo portal-brand-logo">
-            <img src="img/logo.png" alt="Logo ARUTALA" class="portal-brand-img" style="border-radius: 6px;">
+          <a href="index.html" class="brand-logo portal-brand-logo" style="text-decoration: none;">
             <div class="brand-text">
-              <span class="portal-brand-title">ARUTALA</span>
+              <span class="portal-brand-title" style="font-family: var(--font-heading); font-size: 1.45rem; font-weight: 900; letter-spacing: -0.02em; color: #0F172A;">ARUTALA</span>
             </div>
           </a>
         </div>
 
-        <div class="portal-nav-actions">
-          <a href="index.html#registrasi-circle" class="btn btn-primary btn-sm btn-pill portal-desktop-only">
+        <div class="portal-nav-actions" style="display: flex; align-items: center; gap: 10px;">
+          <button type="button" class="btn btn-outline-primary btn-sm btn-pill" onclick="openUploadArticleModal(event)" style="font-weight: 700; border: 1.5px solid #2F4F87; color: #2F4F87; display: inline-flex; align-items: center; gap: 6px;">
+            <span style="font-size: 1.1rem; line-height: 1;">+</span>
+            <span>Upload Tulisan</span>
+          </button>
+          <a href="index.html#registrasi-circle" class="btn btn-primary btn-sm btn-pill portal-desktop-only" style="background: #2F4F87; color: #FFFFFF;">
             Gabung Circle
           </a>
         </div>
@@ -58,148 +62,442 @@
 
   <!-- ==========================================================================
        MAIN DYNAMIC ARTICLE PORTAL CONTAINER
-       Populated automatically by js/artikel.js based on ?id=...
+       Berisi 2 Tampilan Utama:
+       1. #portal-hub-view: 4 Kartu Besar Kategori + Feed Daftar Artikel (Default)
+       2. #portal-reader-view: Baca Poin-Poin Pokok Artikel Terpilih (Jika kartu diklik / URL ?id=...)
        ========================================================================== -->
   <main id="portal-root">
-    <!-- 1. Editorial Article Header Section (Clean, Modern Newsroom Layout) -->
-    <section class="portal-article-header-section">
-      <div class="container portal-narrow-container">
-        <!-- Category & Date Eyebrow -->
-        <div class="portal-header-meta-row">
-          <span class="portal-meta-eyebrow" id="portal-meta-date-cat">
-            12 OKTOBER 2026 | BERSUARA
-          </span>
-          <span class="portal-readtime-badge" id="portal-meta-readtime">
-            5 Menit Baca
-          </span>
-        </div>
 
-        <!-- Big, Beautiful Headline -->
-        <h1 class="portal-main-title" id="portal-meta-title">
-          Menguji Keadilan vs Kesetaraan Gender di Ruang Publik: Refleksi Transportasi Kota
-        </h1>
-
-        <!-- Author Byline Bar -->
-        <div class="portal-header-byline">
-          <div class="portal-byline-avatar" id="portal-byline-avatar">N</div>
-          <div class="portal-byline-meta">
-            <span class="portal-byline-name" id="portal-meta-author">Nuzhatul Hilawah</span>
-            <span class="portal-byline-role" id="portal-meta-role">Fasilitator Pemuda / UIN Sunan Gunung Djati Bandung</span>
+    <!-- ========================================================================
+         VIEW 1: PORTAL HUB (4 KARTU BESAR KATEGORI + CURATED FEED LIST)
+         ======================================================================== -->
+    <div id="portal-hub-view">
+      <div class="portal-hub-container">
+        <!-- Hero Header Editorial Hub -->
+        <div class="portal-hub-hero">
+          <span class="portal-hub-kicker">
+            <span class="badge-dot"></span> PUSTAKA GAGASAN &amp; JURNAL UTAMA ARUTALA
+          </span>
+          <h1 class="portal-hub-title">
+            Eksplorasi 4 Pilar Literasi &amp; Gagasan Kritis Pemuda
+          </h1>
+          <p class="portal-hub-subtitle">
+            Kurasi esai pemikiran kritis, riset aksi, dan gagasan generasi muda untuk merawat moderasi beragama, keadilan gender, kearifan nusantara, dan ruang aman bersama. Pilih pilar di bawah untuk membaca intisari poin pokoknya.
+          </p>
+          <div class="portal-hub-actions">
+            <button type="button" class="btn btn-primary btn-pill" onclick="openUploadArticleModal(event)" style="background: #2F4F87; color: #FFFFFF; font-weight: 700; padding: 12px 24px; box-shadow: 0 4px 14px rgba(47, 79, 135, 0.25); display: inline-flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.15rem; line-height: 1;">+</span>
+              <span>Unggah Tulisan Pemuda</span>
+            </button>
+            <a href="#portal-feed-section" class="btn btn-secondary btn-pill" style="padding: 12px 24px; font-weight: 700; background: #F1F5F9; color: #0F172A; text-decoration: none;">
+              Jelajahi Semua Tulisan &darr;
+            </a>
           </div>
         </div>
 
-        <!-- Clean, High-Resolution Featured Cover Photo (Natural 16:9 aspect ratio, no awkward boxes or arch cuts) -->
-        <div class="portal-featured-image-wrapper">
-          <img src="" alt="" id="portal-hero-img" class="portal-featured-image" loading="eager">
-        </div>
-
-        <!-- Inspirational Quote Highlight (Clean Modern Editorial Callout) -->
-        <div class="portal-quote-callout" id="portal-quote-container">
-          <div class="portal-quote-symbol">“</div>
-          <blockquote class="portal-quote-text" id="portal-hero-quote">
-            “Keadilan bukan memberi setiap orang ukuran sepatu sama, melainkan yang pas dengan kakinya.”
-          </blockquote>
-          <cite class="portal-quote-source" id="portal-hero-source">
-            Kutipan Refleksi: Nuzhatul Hilawah (Fasilitator Pemuda UIN Bandung)
-          </cite>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. Main Article Content Section -->
-    <section class="portal-article-section">
-      <div class="container portal-narrow-container">
-        <div class="portal-article-grid">
-          <!-- Left/Side: Topic Pills & Share Tools -->
-          <aside class="portal-sidebar-col">
-            <div class="portal-sidebar-block">
-              <span class="portal-sidebar-label">Topik Bahasan</span>
-              <div class="portal-meta-tags-wrap" id="portal-meta-tags">
-                <!-- Rendered by JS -->
-              </div>
+        <!-- 4 KARTU BESAR KATEGORI TEMA ARTIKEL -->
+        <div class="portal-4-pillars-grid" id="portal-4-pillars">
+          <!-- KARTU 1: MODERASI BERAGAMA -->
+          <div class="pillar-big-card card-theme-moderasi" onclick="filterHubCategory('pandai')" role="button" tabindex="0">
+            <div class="pillar-card-badge-row">
+              <span class="pillar-theme-badge badge-moderasi">MODERASI BERAGAMA</span>
+              <span class="pillar-card-count" id="count-pandai">Kurasi Tulisan</span>
             </div>
-
-            <div class="portal-meta-divider"></div>
-
-            <!-- Share Tools -->
-            <div class="portal-meta-share-box">
-              <span class="portal-sidebar-label">Bagikan Naskah</span>
-              <div class="portal-share-buttons">
-                <button class="portal-share-btn" id="btn-share-wa">
-                  <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.074-2.121-.497-1.748-.703-2.883-2.484-2.971-2.6-.088-.116-.711-.947-.711-1.808 0-.861.452-1.284.613-1.459.16-.174.349-.218.466-.218.116 0 .233.001.334.006.107.005.25-.041.391.297.145.349.497 1.21.541 1.299.044.088.073.19.015.305-.058.117-.088.19-.175.292-.088.102-.185.228-.264.307-.088.087-.179.182-.077.357.102.175.454.75 1.002 1.238.705.628 1.299.823 1.474.911.175.087.277.073.38-.044.103-.117.438-.51.555-.685.117-.175.234-.146.394-.087.16.058 1.02.481 1.196.568.175.088.291.131.335.205.044.072.044.423-.1 1.037z"/></svg>
-                  <span>WhatsApp</span>
-                </button>
-                <button class="portal-share-btn" id="btn-copy-link">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                  <span>Salin Tautan</span>
-                </button>
-              </div>
+            <h2 class="pillar-big-title">Moderasi Beragama</h2>
+            <div class="pillar-big-subtitle">Nilai Rahmah &amp; Komitmen Kebangsaan</div>
+            <p class="pillar-big-desc">
+              Menanamkan pemahaman keagamaan yang ramah, merawat toleransi aktif, penguatan cinta tanah air, dan mencegah ekstremisme melalui narasi dialog damai pemuda nusantara.
+            </p>
+            <div class="pillar-big-features">
+              <span class="pillar-big-feat-chip">Nilai Rahmah</span>
+              <span class="pillar-big-feat-chip">Komitmen Kebangsaan</span>
+              <span class="pillar-big-feat-chip">Dialog Antar-Iman</span>
             </div>
-          </aside>
-
-          <!-- Right Column: Rich Editorial Content Body -->
-          <article class="portal-body-col">
-            <div class="portal-lead-text" id="portal-lead-summary">
-              Ringkasan pemikiran pengantar artikel...
+            <div class="pillar-big-btn btn-card-moderasi">
+              <span>Buka Pustaka Moderasi</span>
+              <span>&rarr;</span>
             </div>
-
-            <div class="portal-rich-content" id="portal-content-body">
-              <!-- Full HTML article content injected here -->
-            </div>
-
-            <!-- Author Bio Card -->
-            <div class="portal-author-card">
-              <div class="portal-author-card-avatar" id="portal-bio-avatar">N</div>
-              <div class="portal-author-card-info">
-                <span class="portal-author-card-badge">Tentang Penulis</span>
-                <h5 id="portal-bio-author">Nama Penulis</h5>
-                <p id="portal-bio-role">Fasilitator Pemuda / UIN Sunan Gunung Djati Bandung</p>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. Related Articles Section -->
-    <section class="portal-related-section">
-      <div class="container">
-        <div class="portal-related-header">
-          <div>
-            <span class="section-kicker">Eksplorasi Lanjutan</span>
-            <h3>Kisah &amp; Tulisan Inspiratif Lainnya</h3>
           </div>
-          <a href="index.html#artikel-opini" class="btn btn-secondary btn-sm btn-pill">
-            Lihat Semua Tulisan &rarr;
-          </a>
+
+          <!-- KARTU 2: KESETARAAN -->
+          <div class="pillar-big-card card-theme-kesetaraan" onclick="filterHubCategory('bersuara')" role="button" tabindex="0">
+            <div class="pillar-card-badge-row">
+              <span class="pillar-theme-badge badge-kesetaraan">KESETARAAN GENDER</span>
+              <span class="pillar-card-count" id="count-bersuara">Kurasi Tulisan</span>
+            </div>
+            <h2 class="pillar-big-title">Kesetaraan Gender</h2>
+            <div class="pillar-big-subtitle">Keadilan Gender &amp; Relasi Sehat</div>
+            <p class="pillar-big-desc">
+              Membedah pemikiran kritis seputar keadilan hakiki vs kesamaan rata, dekonstruksi stereotip bias gender, perlindungan ruang publik aman, dan pembentukan relasi setara yang sehat.
+            </p>
+            <div class="pillar-big-features">
+              <span class="pillar-big-feat-chip">Keadilan vs Kesetaraan</span>
+              <span class="pillar-big-feat-chip">Ruang Publik Aman</span>
+              <span class="pillar-big-feat-chip">Relasi Setara</span>
+            </div>
+            <div class="pillar-big-btn btn-card-kesetaraan">
+              <span>Buka Pustaka Kesetaraan</span>
+              <span>&rarr;</span>
+            </div>
+          </div>
+
+          <!-- KARTU 3: BUDAYA -->
+          <div class="pillar-big-card card-theme-budaya" onclick="filterHubCategory('cerdas')" role="button" tabindex="0">
+            <div class="pillar-card-badge-row">
+              <span class="pillar-theme-badge badge-budaya">BUDAYA NUSANTARA</span>
+              <span class="pillar-card-count" id="count-cerdas">Kurasi Tulisan</span>
+            </div>
+            <h2 class="pillar-big-title">Budaya &amp; Tradisi</h2>
+            <div class="pillar-big-subtitle">Kearifan Budaya Lokal &amp; Tradisi Nusantara</div>
+            <p class="pillar-big-desc">
+              Menggali kembali kearifan lokal etno-pedagogi, tradisi musyawarah mufakat, nilai gotong royong, dan pelestarian identitas nusantara sebagai benteng moral etika generasi muda.
+            </p>
+            <div class="pillar-big-features">
+              <span class="pillar-big-feat-chip">Kearifan Budaya Lokal</span>
+              <span class="pillar-big-feat-chip">Tradisi Gotong Royong</span>
+              <span class="pillar-big-feat-chip">Dialog Antar-Tradisi</span>
+            </div>
+            <div class="pillar-big-btn btn-card-budaya">
+              <span>Buka Pustaka Budaya</span>
+              <span>&rarr;</span>
+            </div>
+          </div>
+
+          <!-- KARTU 4: SOSIAL MASYARAKAT -->
+          <div class="pillar-big-card card-theme-sosial" onclick="filterHubCategory('berdaya')" role="button" tabindex="0">
+            <div class="pillar-card-badge-row">
+              <span class="pillar-theme-badge badge-sosial">SOSIAL MASYARAKAT</span>
+              <span class="pillar-card-count" id="count-berdaya">Kurasi Tulisan</span>
+            </div>
+            <h2 class="pillar-big-title">Sosial Masyarakat</h2>
+            <div class="pillar-big-subtitle">Ruang Aman, Inklusivitas &amp; Pemberdayaan</div>
+            <p class="pillar-big-desc">
+              Riset aksi advokasi pemuda terhadap ruang aman bersama, perlindungan kelompok marginal, kepemimpinan transformatif, dan filantropi aksi sosial kemasyarakatan yang berkeadilan.
+            </p>
+            <div class="pillar-big-features">
+              <span class="pillar-big-feat-chip">Ruang Aman &amp; Inklusif</span>
+              <span class="pillar-big-feat-chip">Pemberdayaan Pemuda</span>
+              <span class="pillar-big-feat-chip">Riset Aksi Advokasi</span>
+            </div>
+            <div class="pillar-big-btn btn-card-sosial">
+              <span>Buka Pustaka Sosial</span>
+              <span>&rarr;</span>
+            </div>
+          </div>
         </div>
 
-        <div class="portal-related-grid" id="portal-related-container">
-          <!-- Populated by JS -->
-        </div>
+        <!-- SECTION DAFTAR ARTIKEL TERKURASI (GAYA CLEAN GRID) -->
+        <section class="portal-feed-section" id="portal-feed-section">
+          <div class="portal-feed-header-bar">
+            <div class="portal-feed-heading">
+              <h3 id="portal-feed-title-label">Semua Naskah &amp; Gagasan Pemuda</h3>
+              <p id="portal-feed-subtitle-label">Klik kartu tulisan mana pun untuk langsung menelaah intisari poin-poin besarnya.</p>
+            </div>
+
+            <!-- Search Input Box -->
+            <div class="uss-search-wrapper" style="max-width: 340px;">
+              <svg class="uss-search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <circle cx="11" cy="11" r="7" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input type="text" id="portal-search-input" placeholder="Cari topik naskah atau penulis...">
+            </div>
+          </div>
+
+          <!-- Filter Pills Minimalis -->
+          <div class="uss-feed-controls" style="margin-bottom: 26px;">
+            <div class="uss-filter-pills" id="portal-filter-pills">
+              <button type="button" class="uss-filter-pill active" data-category="all" onclick="filterHubCategory('all')">
+                Semua Tulisan
+              </button>
+              <button type="button" class="uss-filter-pill" data-category="pandai" onclick="filterHubCategory('pandai')">
+                MODERASI BERAGAMA
+              </button>
+              <button type="button" class="uss-filter-pill" data-category="bersuara" onclick="filterHubCategory('bersuara')">
+                KESETARAAN
+              </button>
+              <button type="button" class="uss-filter-pill" data-category="cerdas" onclick="filterHubCategory('cerdas')">
+                BUDAYA
+              </button>
+              <button type="button" class="uss-filter-pill" data-category="berdaya" onclick="filterHubCategory('berdaya')">
+                SOSIAL MASYARAKAT
+              </button>
+            </div>
+          </div>
+
+          <!-- Dynamic Container Kartu Artikel (Grid 3-Kolom Modern) -->
+          <div id="portal-hub-articles-container" class="portal-articles-grid">
+            <!-- Populated by js/artikel.js -->
+          </div>
+        </section>
       </div>
-    </section>
+    </div>
+
+    <!-- ========================================================================
+         VIEW 2: ARTICLE READER DETAIL (TAMPIL SAAT KARTU ARTIKEL DIKLIK)
+         ======================================================================== -->
+    <div id="portal-reader-view" style="display: none;">
+      <!-- Top Navigation Kembali ke 4 Pilar -->
+      <div class="container portal-narrow-container" style="padding-top: 24px;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="showArticleHub()" style="background: #F1F5F9; color: #2F4F87; border: 1px solid #CBD5E1; font-weight: 700; border-radius: 8px; padding: 8px 18px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>&larr; Kembali ke Daftar Kategori &amp; Tulisan</span>
+        </button>
+      </div>
+
+      <!-- 1. Editorial Article Header Section -->
+      <section class="portal-article-header-section" style="padding-top: 16px;">
+        <div class="container portal-narrow-container">
+          <!-- Category & Date Eyebrow -->
+          <div class="portal-header-meta-row">
+            <span class="portal-meta-eyebrow" id="portal-meta-date-cat">
+              12 OKTOBER 2026 | BERSUARA
+            </span>
+            <span class="portal-readtime-badge" id="portal-meta-readtime">
+              5 Menit Baca
+            </span>
+          </div>
+
+          <!-- Big, Beautiful Headline -->
+          <h1 class="portal-main-title" id="portal-meta-title">
+            Menguji Keadilan vs Kesetaraan Gender di Ruang Publik: Refleksi Transportasi Kota
+          </h1>
+
+          <!-- Author Byline Bar -->
+          <div class="portal-header-byline">
+            <div class="portal-byline-avatar" id="portal-byline-avatar">N</div>
+            <div class="portal-byline-meta">
+              <span class="portal-byline-name" id="portal-meta-author">Nuzhatul Hilawah</span>
+              <span class="portal-byline-role" id="portal-meta-role">Fasilitator Pemuda / UIN Sunan Gunung Djati Bandung</span>
+            </div>
+          </div>
+
+          <!-- Clean, High-Resolution Featured Cover Photo (Natural 16:9 aspect ratio) -->
+          <div class="portal-featured-image-wrapper">
+            <img src="" alt="" id="portal-hero-img" class="portal-featured-image" loading="eager">
+          </div>
+
+          <!-- Inspirational Quote Highlight -->
+          <div class="portal-quote-callout" id="portal-quote-container">
+            <div class="portal-quote-symbol">â€œ</div>
+            <blockquote class="portal-quote-text" id="portal-hero-quote">
+              â€œKeadilan bukan memberi setiap orang ukuran sepatu sama, melainkan yang pas dengan kakinya.â€
+            </blockquote>
+            <cite class="portal-quote-source" id="portal-hero-source">
+              Kutipan Refleksi: Nuzhatul Hilawah (Fasilitator Pemuda UIN Bandung)
+            </cite>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Main Article Content Section: POIN-POIN BESAR GAGASAN UTAMA -->
+      <section class="portal-article-section">
+        <div class="container portal-narrow-container">
+          <div class="portal-article-grid">
+            <!-- Left/Side: Topic Pills & Share Tools -->
+            <aside class="portal-sidebar-col">
+              <div class="portal-sidebar-block">
+                <span class="portal-sidebar-label">Topik Bahasan</span>
+                <div class="portal-meta-tags-wrap" id="portal-meta-tags">
+                  <!-- Rendered by JS -->
+                </div>
+              </div>
+
+              <div class="portal-meta-divider"></div>
+
+              <!-- Share Tools -->
+              <div class="portal-meta-share-box">
+                <span class="portal-sidebar-label">Bagikan Naskah</span>
+                <div class="portal-share-buttons">
+                  <button class="portal-share-btn" id="btn-share-wa">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.698.074-2.121-.497-1.748-.703-2.883-2.484-2.971-2.6-.088-.116-.711-.947-.711-1.808 0-.861.452-1.284.613-1.459.16-.174.349-.218.466-.218.116 0 .233.001.334.006.107.005.25-.041.391.297.145.349.497 1.21.541 1.299.044.088.073.19.015.305-.058.117-.088.19-.175.292-.088.102-.185.228-.264.307-.088.087-.179.182-.077.357.102.175.454.75 1.002 1.238.705.628 1.299.823 1.474.911.175.087.277.073.38-.044.103-.117.438-.51.555-.685.117-.175.234-.146.394-.087.16.058 1.02.481 1.196.568.175.088.291.131.335.205.044.072.044.423-.1 1.037z"/></svg>
+                    <span>WhatsApp</span>
+                  </button>
+                  <button class="portal-share-btn" id="btn-copy-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span>Salin Tautan</span>
+                  </button>
+                </div>
+              </div>
+            </aside>
+
+            <!-- Right Column: Rich Editorial Content Body (Point by Point) -->
+            <article class="portal-body-col">
+              <div class="portal-lead-text" id="portal-lead-summary">
+                Ringkasan pemikiran pengantar artikel...
+              </div>
+
+              <div class="portal-rich-content" id="portal-content-body">
+                <!-- Full Key Points injected here -->
+              </div>
+
+              <!-- Author Bio Card -->
+              <div class="portal-author-card">
+                <div class="portal-author-card-avatar" id="portal-bio-avatar">N</div>
+                <div class="portal-author-card-info">
+                  <span class="portal-author-card-badge">Tentang Penulis</span>
+                  <h5 id="portal-bio-author">Nama Penulis</h5>
+                  <p id="portal-bio-role">Fasilitator Pemuda / UIN Sunan Gunung Djati Bandung</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Related Articles Section -->
+      <section class="portal-related-section">
+        <div class="container">
+          <div class="portal-related-header">
+            <div>
+              <span class="section-kicker">Eksplorasi Lanjutan</span>
+              <h3>Tulisan Inspiratif Lainnya</h3>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm btn-pill" onclick="showArticleHub()">
+              Lihat Semua Kategori &amp; Tulisan &rarr;
+            </button>
+          </div>
+
+          <div class="portal-related-grid" id="portal-related-container">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
+
+  <!-- ==========================================================================
+       MODAL: UNGGAH KARYA / ARTIKEL PEMUDA ARUTALA
+       Fitur Upload Artikel Lengkap (Tersambung ke Supabase & LocalStorage)
+       ========================================================================== -->
+  <div class="modal-overlay" id="modal-upload-article" style="display: none;">
+    <div class="modal-window" style="max-width: 680px;">
+      <div class="modal-header">
+        <div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #0F172A; margin-bottom: 2px;">
+            Unggah Karya &amp; Gagasan Pemuda ARUTALA
+          </h3>
+          <p style="font-size: 0.82rem; color: #64748B; margin-bottom: 0;">
+            Publikasikan naskah pemikiran kritis, riset aksi, atau intisari poin pembelajaranmu.
+          </p>
+        </div>
+        <button type="button" class="modal-close" onclick="closeUploadArticleModal()" aria-label="Tutup">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="form-upload-article-portal">
+          <div class="form-group">
+            <label for="upload-article-title">Judul Naskah / Artikel / Esai *</label>
+            <input type="text" id="upload-article-title" class="form-control" placeholder="Contoh: Merajut Moderasi di Era Algoritma: Tinjauan Kritis Pemuda" required>
+          </div>
+
+          <div class="form-group">
+            <label for="upload-article-category">Kategori Tema *</label>
+            <select id="upload-article-category" class="form-control" required>
+              <option value="pandai">MODERASI BERAGAMA (Nilai Rahmah &amp; Kebangsaan)</option>
+              <option value="bersuara">KESETARAAN (Keadilan Gender &amp; Relasi Sehat)</option>
+              <option value="cerdas">BUDAYA (Kearifan Budaya Lokal &amp; Tradisi)</option>
+              <option value="berdaya">SOSIAL MASYARAKAT (Ruang Aman &amp; Pemberdayaan)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="upload-article-author">Nama Lengkap Penulis *</label>
+              <input type="text" id="upload-article-author" class="form-control" placeholder="Nama kamu" required>
+            </div>
+            <div class="form-group">
+              <label for="upload-article-institution">Asal Instansi / Afiliasi Kampus *</label>
+              <input type="text" id="upload-article-institution" class="form-control" placeholder="Contoh: UIN Sunan Gunung Djati Bandung" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="upload-article-summary">Ringkasan / Sinopsis Singkat *</label>
+            <textarea id="upload-article-summary" class="form-control" rows="3" placeholder="Jelaskan secara ringkas latar belakang dan intisari tulisan..." required></textarea>
+          </div>
+
+          <!-- POIN-POIN BESAR GAGASAN UTAMA -->
+          <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 12px; padding: 16px 18px; margin-bottom: 18px;">
+            <div style="font-size: 0.88rem; font-weight: 800; color: #2F4F87; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <span>3 POIN BESAR GAGASAN POKOK (KEY TAKEAWAYS)</span>
+            </div>
+            <p style="font-size: 0.78rem; color: #64748B; margin-bottom: 14px;">
+              Tuliskan 3 intisari gagasan pokok yang langsung dapat dipahami pembaca.
+            </p>
+
+            <!-- Poin 1 -->
+            <div class="form-group" style="margin-bottom: 10px;">
+              <label style="font-size: 0.8rem; font-weight: 700; color: #334155;">Poin 01: Judul &amp; Uraian</label>
+              <input type="text" id="upload-article-pt1-title" class="form-control" placeholder="Judul Poin 1 (misal: Rekonseptualisasi Nilai)" style="margin-bottom: 6px;" required>
+              <textarea id="upload-article-pt1-desc" class="form-control" rows="2" placeholder="Penjelasan poin 1..." required></textarea>
+            </div>
+
+            <!-- Poin 2 -->
+            <div class="form-group" style="margin-bottom: 10px;">
+              <label style="font-size: 0.8rem; font-weight: 700; color: #334155;">Poin 02: Judul &amp; Uraian</label>
+              <input type="text" id="upload-article-pt2-title" class="form-control" placeholder="Judul Poin 2 (misal: Ruang Aman Partisipatif)" style="margin-bottom: 6px;" required>
+              <textarea id="upload-article-pt2-desc" class="form-control" rows="2" placeholder="Penjelasan poin 2..." required></textarea>
+            </div>
+
+            <!-- Poin 3 -->
+            <div class="form-group" style="margin-bottom: 0;">
+              <label style="font-size: 0.8rem; font-weight: 700; color: #334155;">Poin 03: Judul &amp; Uraian</label>
+              <input type="text" id="upload-article-pt3-title" class="form-control" placeholder="Judul Poin 3 (misal: Langkah Nyata Advokasi)" style="margin-bottom: 6px;" required>
+              <textarea id="upload-article-pt3-desc" class="form-control" rows="2" placeholder="Penjelasan poin 3..." required></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="upload-article-action">Catatan Refleksi &amp; Aksi Nyata Pemuda *</label>
+            <textarea id="upload-article-action" class="form-control" rows="2" placeholder="Bagikan langkah konkrit yang bisa dilakukan pembaca di lingkungannya..." required></textarea>
+          </div>
+
+          <!-- Upload Berkas Foto & Dokumen -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="upload-article-cover">Foto Sampul (Opsional)</label>
+              <input type="file" id="upload-article-cover" class="form-control" accept="image/*">
+              <span style="font-size: 0.72rem; color: #64748B;">Format JPG/PNG/WebP</span>
+            </div>
+            <div class="form-group">
+              <label for="upload-article-doc">Dokumen Riset / PDF (Opsional)</label>
+              <input type="file" id="upload-article-doc" class="form-control" accept=".pdf,.doc,.docx">
+              <span style="font-size: 0.72rem; color: #64748B;">Berkas naskah lengkap terlampir</span>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="padding: 16px 0 0; display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid #E2E8F0;">
+            <button type="button" class="btn btn-secondary" onclick="closeUploadArticleModal()">Batal</button>
+            <button type="submit" class="btn btn-primary" id="btn-submit-upload-portal" style="background: #2F4F87; color: #FFFFFF; font-weight: 700;">
+              Publikasikan Artikel Sekarang
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toast-container"></div>
 
   <!-- ==========================================================================
-       FOOTER (Konsisten dengan Halaman Utama)
+       FOOTER
        ========================================================================== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-            <img src="img/logo.png" alt="Logo ARUTALA" style="width: 38px; height: 38px; object-fit: contain; border-radius: 8px;">
-            <img src="img/uin_logo.png" alt="UIN Bandung" style="width: 32px; height: 32px; object-fit: contain; opacity: 0.9;">
-            <h3 style="margin-bottom: 0;">ARUTALA</h3>
+            <h3 style="margin-bottom: 0; font-family: var(--font-heading); font-weight: 900; font-size: 1.6rem; color: #0F172A; letter-spacing: -0.02em;">ARUTALA</h3>
           </div>
           <p>
             Akses Ruang Tumbuh yang Agamis, Setara, dan Adil. Model inovasi ekosistem pengembangan kapasitas pemuda yang inklusif berbasis nilai keagamaan dan kesetaraan gender.
           </p>
-          <span class="badge badge-blue" style="font-size: 0.75rem;">OASE III PTKIN 2026</span>
+          <span class="badge badge-blue" style="font-size: 0.75rem;">Inovasi Sosial 2026</span>
         </div>
 
         <div class="footer-col">
@@ -207,8 +505,11 @@
           <ul class="footer-links">
             <li><a href="index.html#beranda">Beranda</a></li>
             <li><a href="index.html#nilai-dasar">Nilai &amp; Fondasi</a></li>
-            <li><a href="index.html#artikel-opini">Artikel &amp; Opini</a></li>
-            <li><a href="index.html#pustaka-modul">7 Modul Kapasitas</a></li>
+            <li><a href="artikel.html">Artikel &amp; 4 Pilar</a></li>
+            <li><a href="karsa.html">Pilar KARSA</a></li>
+            <li><a href="nuansa.html">Pilar NUANSA</a></li>
+            <li><a href="temara.html">Pilar TEMARA</a></li>
+            <li><a href="aksara.html">Pilar AKSARA</a></li>
           </ul>
         </div>
 
@@ -238,7 +539,7 @@
 
       <div class="footer-bottom">
         <div>
-          &copy; 2026 ARUTALA - UIN Sunan Gunung Djati Bandung. Dikembangkan untuk OASE III PTKIN.
+          &copy; 2026 ARUTALA - UIN Sunan Gunung Djati Bandung. Seluruh hak cipta dilindungi.
         </div>
         <div>
           Prinsip: <em>Silih Asah, Silih Asih, Silih Asuh</em> / Bebas Diskriminasi
@@ -272,24 +573,24 @@
       <span>Tentang</span>
     </a>
 
-    <a href="index.html#artikel-opini" class="bottom-dock-item active">
+    <a href="artikel.html" class="bottom-dock-item active">
       <div class="dock-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
         </svg>
       </div>
-      <span>Aktivitas</span>
+      <span>Artikel</span>
     </a>
 
-    <a href="modul.html" class="bottom-dock-item">
+    <a href="karsa.html" class="bottom-dock-item">
       <div class="dock-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
           <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
           <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
         </svg>
       </div>
-      <span>7 Modul</span>
+      <span>KARSA</span>
     </a>
 
     <a href="index.html#registrasi-circle" class="bottom-dock-item">

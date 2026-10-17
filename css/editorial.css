@@ -1,0 +1,46 @@
+/* ARUTALA Editorial Override v4 — netral 80 / navy 15 / aksen 5 */
+:root{--ink:#0F172A;--navy:#1D428A;--cream:#FAF8F5;--line:#E2E8F0;--muted:#64748B}
+body{background:var(--cream);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+h1,h2,.uss-hero-headline{font-family:'Fraunces','Playfair Display',serif;letter-spacing:-.01em}
+.serif-italic-accent{font-style:italic;color:var(--navy)}
+.two-tier-header{box-shadow:none}.main-header-bar{border-bottom:1px solid var(--line)}
+.sub-header-bar{background:var(--cream);border-bottom:1px solid var(--line)}
+.mod-badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;margin-left:8px;padding:0 6px;border:1px solid var(--navy);border-radius:4px;font-size:.72rem;font-weight:800;color:var(--navy)}
+/* Statistik: bersih, garis vertikal tipis */
+.uss-impact-bar,.impact-stats-banner{background:#fff!important;border-top:1px solid var(--line);border-bottom:1px solid var(--line);box-shadow:none!important}
+.uss-impact-col,.impact-stat-col{background:transparent!important;border-right:1px solid var(--line)}
+.uss-impact-col:last-child,.impact-stat-col:last-child{border-right:0}
+.uss-stat-number,.impact-stat-num{color:var(--navy)!important;font-family:'Fraunces',serif;font-size:2.2rem;font-weight:700}
+.uss-stat-label,.impact-stat-label{color:var(--muted)!important;font-size:.85rem}
+/* Artikel: featured + grid 3 kolom, tanpa border/shadow */
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px 32px}
+.ed-card{cursor:pointer;background:transparent;border:0;box-shadow:none}
+.ed-media{aspect-ratio:4/3;overflow:hidden;border-radius:4px;background:#E2E8F0}
+.ed-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.ed-card:hover .ed-media img{transform:scale(1.04)}
+.ed-cat{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin:14px 0 6px}
+.ed-cat i{width:7px;height:7px;border-radius:50%;display:inline-block}
+.ed-title{font-family:'Fraunces',serif;font-size:1.3rem;line-height:1.3;font-weight:700;margin:0 0 8px}
+.ed-card:hover .ed-title{text-decoration:underline;text-underline-offset:4px}
+.ed-sum{color:var(--muted);font-size:.92rem;line-height:1.6;margin:0 0 10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.ed-by{font-size:.8rem;color:var(--muted)}.ed-by b{color:var(--ink)}
+.ed-featured{grid-column:1/-1;display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center;padding-bottom:40px;border-bottom:1px solid var(--line)}
+.ed-featured .ed-media{aspect-ratio:4/3}.ed-featured .ed-title{font-size:2.2rem}.ed-featured .ed-sum{font-size:1.05rem;-webkit-line-clamp:5}
+/* ARUTALA Action: bento asimetris ala WePresent */
+.actions-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-flow:dense;grid-auto-rows:230px;gap:16px}
+.bento{position:relative;overflow:hidden;border-radius:4px;background:#0F172A}
+.bento:nth-child(5n+1){grid-column:span 2;grid-row:span 2}.bento:nth-child(5n+4){grid-column:span 2}
+.bento img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s,opacity .3s}
+.bento:hover img{transform:scale(1.05);opacity:.8}
+.bento-cap{position:absolute;left:0;right:0;bottom:0;padding:48px 18px 16px;color:#fff;background:linear-gradient(transparent,rgba(15,23,42,.85))}
+.bento-cap h3{font-family:'Fraunces',serif;font-size:1.1rem;margin:0 0 4px;color:#fff}
+.bento:nth-child(5n+1) .bento-cap h3{font-size:1.6rem}
+.bento-cap p{font-size:.78rem;margin:0;opacity:.85}.bento-cap small{display:block;margin-top:6px;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+/* Donasi: split ala charity: water */
+.donation-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.donor-feed-card{order:-1;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+.donation-photo{margin:0 0 20px}.donation-photo img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:4px}
+.donation-photo figcaption{font-size:.8rem;color:var(--muted);margin-top:8px}
+.donation-card{background:#fff!important;border:1px solid var(--line)!important;border-radius:12px!important;padding:32px!important;box-shadow:none!important}
+@media(max-width:900px){.articles-grid{grid-template-columns:1fr 1fr}.ed-featured,.donation-grid{grid-template-columns:1fr;gap:24px}.ed-featured .ed-title{font-size:1.7rem}.actions-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.articles-grid,.actions-grid{grid-template-columns:1fr}.bento:nth-child(n){grid-column:auto;grid-row:auto}}

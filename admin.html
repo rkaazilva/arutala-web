@@ -1,0 +1,1284 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Studio LMS â€” ARUTALA | Akses Ruang Tumbuh Aman, Layak &amp; Adil</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet">
+
+  <!-- Core Styling & Admin CSS -->
+  <link rel="stylesheet" href="css/style.css?v=3.2">
+  <link rel="stylesheet" href="css/vibrant.css?v=1.0">
+  <link rel="icon" type="image/png" href="img/logo.png">
+
+  <style>
+    :root {
+      --admin-bg: #F8FAFC;
+      --admin-card: #FFFFFF;
+      --admin-border: #E2E8F0;
+      --admin-text-main: #0F172A;
+      --admin-text-muted: #64748B;
+      --admin-primary: #1D428A;
+      --admin-primary-dark: #142F64;
+      --admin-accent-karsa: #166534;
+      --admin-accent-nuansa: #0369A1;
+      --admin-accent-temara: #B45309;
+    }
+
+    body.admin-body {
+      background-color: var(--admin-bg);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--admin-text-main);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Admin Navbar */
+    .admin-navbar {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--admin-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .admin-nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .admin-brand img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .admin-brand-text h1 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--admin-text-main);
+      margin: 0;
+      line-height: 1.2;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .admin-badge-role {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: #EEF3FA;
+      color: var(--admin-primary);
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(29, 66, 138, 0.2);
+    }
+
+    .admin-brand-text p {
+      font-size: 0.74rem;
+      color: var(--admin-text-muted);
+      margin: 2px 0 0;
+    }
+
+    .admin-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-admin-preview {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #334155;
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-admin-preview:hover {
+      background: #E2E8F0;
+      color: var(--admin-text-main);
+    }
+
+    .btn-admin-logout {
+      background: none;
+      border: 1px solid #E2E8F0;
+      padding: 8px 14px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #DC2626;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-admin-logout:hover {
+      background: #FEF2F2;
+      border-color: #FCA5A5;
+    }
+
+    /* Admin Container */
+    .admin-main-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px 60px;
+      width: 100%;
+      box-sizing: border-box;
+      flex: 1;
+    }
+
+    /* Header Studio & Description */
+    .admin-studio-header {
+      background: #FFFFFF;
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .admin-studio-info h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--admin-text-main);
+      margin: 0 0 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .admin-studio-info p {
+      font-size: 0.92rem;
+      color: var(--admin-text-muted);
+      margin: 0;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    .admin-studio-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-admin-primary {
+      background: var(--admin-primary);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 6px rgba(29, 66, 138, 0.25);
+      transition: all 0.2s ease;
+    }
+
+    .btn-admin-primary:hover {
+      background: var(--admin-primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-admin-outline {
+      background: #FFFFFF;
+      color: #475569;
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-admin-outline:hover {
+      background: #F8FAFC;
+      border-color: #94A3B8;
+      color: var(--admin-text-main);
+    }
+
+    /* Track Tabs */
+    .admin-track-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #E2E8F0;
+      padding-bottom: 2px;
+      overflow-x: auto;
+    }
+
+    .admin-track-tab {
+      padding: 12px 24px;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--admin-text-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      margin-bottom: -2px;
+    }
+
+    .admin-track-tab:hover {
+      color: var(--admin-text-main);
+    }
+
+    .admin-track-tab.active-karsa {
+      color: #166534;
+      border-bottom-color: #166534;
+      background: rgba(34, 197, 94, 0.08);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .admin-track-tab.active-nuansa {
+      color: #0369A1;
+      border-bottom-color: #0369A1;
+      background: rgba(14, 165, 233, 0.08);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .admin-track-tab.active-temara {
+      color: #B45309;
+      border-bottom-color: #B45309;
+      background: rgba(245, 158, 11, 0.08);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .admin-track-tab.active-nuansa-video {
+      color: #BE185D;
+      border-bottom-color: #BE185D;
+      background: rgba(190, 24, 93, 0.08);
+      border-radius: 8px 8px 0 0;
+    }
+
+    .tab-badge {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #E2E8F0;
+      color: #475569;
+      font-weight: 800;
+    }
+
+    /* Track Summary Banner */
+    .track-banner {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .track-banner-karsa {
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      color: #166534;
+    }
+
+    .track-banner-nuansa {
+      background: #F0F9FF;
+      border: 1px solid #BAE6FD;
+      color: #0369A1;
+    }
+
+    .track-banner-temara {
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      color: #92400E;
+    }
+
+    .track-banner-nuansa-video {
+      background: #FDF2F8;
+      border: 1px solid #FBCFE8;
+      color: #9D174D;
+    }
+
+    .track-banner-text h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin: 0 0 3px;
+    }
+
+    .track-banner-text p {
+      font-size: 0.84rem;
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    /* List Modules Table Card */
+    .admin-card {
+      background: #FFFFFF;
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      overflow: hidden;
+    }
+
+    .admin-card-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--admin-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #FAFAFA;
+    }
+
+    .admin-card-header h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin: 0;
+      color: var(--admin-text-main);
+    }
+
+    .item-count-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #64748B;
+      background: #E2E8F0;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* Module Row Items */
+    .module-item-row {
+      padding: 18px 24px;
+      border-bottom: 1px solid #F1F5F9;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      transition: background 0.15s ease;
+    }
+
+    .module-item-row:last-child {
+      border-bottom: none;
+    }
+
+    .module-item-row:hover {
+      background: #F8FAFC;
+    }
+
+    .module-left-col {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .module-order-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: #EEF2F6;
+      color: #1E293B;
+      font-weight: 800;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid #CBD5E1;
+    }
+
+    .module-order-badge.badge-quiz {
+      background: #FDF2F8;
+      color: #BE185D;
+      border-color: #FBCFE8;
+    }
+
+    .module-order-badge.badge-video {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border-color: #BFDBFE;
+    }
+
+    .module-details {
+      flex: 1;
+    }
+
+    .module-type-tag {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .type-tag-module {
+      background: #F1F5F9;
+      color: #334155;
+    }
+
+    .type-tag-video {
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+
+    .type-tag-quiz {
+      background: #FCE7F3;
+      color: #9D174D;
+    }
+
+    .module-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--admin-text-main);
+      margin: 0 0 4px;
+      line-height: 1.3;
+    }
+
+    .module-subtitle {
+      font-size: 0.85rem;
+      color: var(--admin-text-muted);
+      margin: 0 0 8px;
+      line-height: 1.4;
+    }
+
+    .module-summary-snippet {
+      font-size: 0.84rem;
+      color: #475569;
+      background: #F8FAFC;
+      border-left: 3px solid #CBD5E1;
+      padding: 8px 12px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .module-meta-chips {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: #64748B;
+      flex-wrap: wrap;
+    }
+
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .meta-chip a {
+      color: var(--admin-primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .meta-chip a:hover {
+      text-decoration: underline;
+    }
+
+    /* Actions Column */
+    .module-actions-col {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .btn-action-icon {
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #475569;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action-icon:hover {
+      background: #F1F5F9;
+      color: var(--admin-text-main);
+      border-color: #94A3B8;
+    }
+
+    .btn-action-icon.btn-delete:hover {
+      background: #FEF2F2;
+      color: #DC2626;
+      border-color: #FCA5A5;
+    }
+
+    .btn-action-edit {
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--admin-primary);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action-edit:hover {
+      background: #EEF3FA;
+      border-color: var(--admin-primary);
+    }
+
+    /* Modal Styling */
+    .admin-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .admin-modal-overlay.active {
+      display: flex;
+    }
+
+    .admin-modal-window {
+      background: #FFFFFF;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 760px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+      animation: modalFadeIn 0.2s ease-out;
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .admin-modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .admin-modal-header h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--admin-text-main);
+      margin: 0 0 2px;
+    }
+
+    .admin-modal-header p {
+      font-size: 0.82rem;
+      color: var(--admin-text-muted);
+      margin: 0;
+    }
+
+    .admin-modal-close {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: #64748B;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .admin-modal-close:hover {
+      color: var(--admin-text-main);
+    }
+
+    .admin-modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .admin-form-group {
+      margin-bottom: 18px;
+    }
+
+    .admin-form-group label {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .admin-form-group .form-hint {
+      font-size: 0.76rem;
+      color: var(--admin-text-muted);
+      margin-top: 4px;
+    }
+
+    .admin-form-control {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 14px;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--admin-text-main);
+      background: #FFFFFF;
+      transition: border-color 0.15s ease;
+    }
+
+    .admin-form-control:focus {
+      outline: none;
+      border-color: var(--admin-primary);
+      box-shadow: 0 0 0 3px rgba(29, 66, 138, 0.1);
+    }
+
+    .admin-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    /* Type Selector Pills */
+    .type-selector-wrap {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .type-pill-btn {
+      flex: 1;
+      padding: 12px;
+      border: 1.5px solid #CBD5E1;
+      border-radius: 8px;
+      background: #FFFFFF;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .type-pill-btn:hover {
+      background: #F8FAFC;
+    }
+
+    .type-pill-btn.active {
+      border-color: var(--admin-primary);
+      background: #EEF3FA;
+      color: var(--admin-primary);
+      font-weight: 700;
+      box-shadow: 0 2px 6px rgba(29, 66, 138, 0.1);
+    }
+
+    .type-pill-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: block;
+    }
+
+    .type-pill-desc {
+      font-size: 0.72rem;
+      color: var(--admin-text-muted);
+      margin-top: 2px;
+      display: block;
+    }
+
+    /* Quiz Builder Section */
+    .quiz-builder-section {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 14px;
+    }
+
+    .quiz-question-card {
+      background: #FFFFFF;
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .quiz-question-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .quiz-question-header strong {
+      font-size: 0.9rem;
+      color: var(--admin-primary);
+    }
+
+    .btn-remove-question {
+      background: none;
+      border: none;
+      color: #DC2626;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 2px 6px;
+    }
+
+    .quiz-opt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .quiz-opt-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      padding: 6px 10px;
+    }
+
+    .quiz-opt-item input[type="radio"] {
+      cursor: pointer;
+      accent-color: var(--admin-primary);
+    }
+
+    .quiz-opt-item input[type="text"] {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .admin-modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      background: #FAFAFA;
+    }
+
+    /* Toast Notification */
+    .admin-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0F172A;
+      color: #FFFFFF;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      animation: toastIn 0.2s ease-out;
+    }
+
+    .admin-toast.success {
+      background: #166534;
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Auth Screen Modal (Jika belum login) */
+    .admin-auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: #0F172A;
+      z-index: 5000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .admin-auth-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 100%;
+      padding: 36px 32px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      text-align: center;
+    }
+
+    .admin-auth-card img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      margin-bottom: 14px;
+    }
+
+    .admin-auth-card h2 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #0F172A;
+      margin: 0 0 6px;
+    }
+
+    .admin-auth-card p {
+      font-size: 0.85rem;
+      color: #64748B;
+      margin: 0 0 24px;
+    }
+  </style>
+</head>
+
+<body class="admin-body">
+
+  <!-- ==========================================================================
+       LOGIN / AUTH OVERLAY (Melindungi Studio LMS)
+       ========================================================================== -->
+  <div class="admin-auth-overlay" id="admin-auth-overlay" style="display: none;">
+    <div class="admin-auth-card">
+      <h2 style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; color: #0F172A; margin-bottom: 6px;">ARUTALA Studio Admin</h2>
+      <p>Masukkan Kunci Akses Pengelola untuk Mengelola Modul &amp; Kuis Terpadu.</p>
+
+      <form id="form-admin-login" onsubmit="handleAdminLogin(event)">
+        <div class="admin-form-group" style="text-align: left;">
+          <label for="admin-pin-input">PIN / Password Admin</label>
+          <input type="password" id="admin-pin-input" class="admin-form-control" placeholder="Default: admin123" required autofocus>
+          <div class="form-hint">Gunakan PIN default: <code>admin123</code> atau <code>arutala2026</code></div>
+        </div>
+        <button type="submit" class="btn-admin-primary" style="width: 100%; justify-content: center; padding: 12px;">
+          Buka Studio Admin &rarr;
+        </button>
+      </form>
+      <div style="margin-top: 18px;">
+        <a href="index.html" style="font-size: 0.8rem; color: #64748B; text-decoration: none;">&larr; Kembali ke Beranda Publik</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       ADMIN NAVIGATION TOP BAR
+       ========================================================================== -->
+  <header class="admin-navbar">
+    <div class="admin-nav-container">
+      <a href="admin.html" class="admin-brand" style="text-decoration: none;">
+        <div class="admin-brand-text">
+          <h1 style="font-family: var(--font-heading); font-weight: 900; color: #0F172A;">
+            ARUTALA Studio
+            <span class="admin-badge-role">LMS Admin Back-Office</span>
+          </h1>
+          <p>Pengelolaan Kurikulum Modul, Link Download PDF, Video &amp; Kuis Dinamis</p>
+        </div>
+      </a>
+
+      <div class="admin-nav-actions">
+        <a href="karsa.html" target="_blank" class="btn-admin-preview" id="link-preview-page">
+          <span>Lihat Halaman LMS &rarr;</span>
+        </a>
+        <button type="button" class="btn-admin-logout" onclick="handleAdminLogout()">
+          Keluar Admin
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== -->
+  <main class="admin-main-wrap">
+
+    <!-- Studio Header -->
+    <div class="admin-studio-header">
+      <div class="admin-studio-info">
+        <h2>Manajemen Silabus &amp; Konten Pembelajaran</h2>
+        <p>
+          Atur urutan modul, tulis ringkasan materi (summary), tempel link unduh PDF resmi, tambahkan materi video di Nuansa, serta susun butir kuis interaktif yang langsung dinilai oleh sistem.
+        </p>
+      </div>
+      <div class="admin-studio-actions">
+        <button type="button" class="btn-admin-outline" id="btn-reset-default" onclick="handleResetDefaults()" title="Kembalikan modul ke draft proposal default">
+          Reset Default
+        </button>
+        <button type="button" class="btn-admin-primary" id="btn-header-add-action" onclick="handleHeaderAddAction()">
+          <span id="btn-header-add-text">+ Tambah Modul / Kuis Baru</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Track Selector Tabs (KARSA, NUANSA, TEMARA, VIDEO NUANSA) -->
+    <nav class="admin-track-nav" aria-label="Pilih Pilar">
+      <button type="button" class="admin-track-tab active-karsa" id="tab-btn-karsa" onclick="switchTrack('karsa')">
+        <span>KARSA</span>
+        <span class="tab-badge" id="badge-count-karsa">8 Item</span>
+      </button>
+      <button type="button" class="admin-track-tab" id="tab-btn-nuansa" onclick="switchTrack('nuansa')">
+        <span>NUANSA (Modul &amp; Kuis)</span>
+        <span class="tab-badge" id="badge-count-nuansa">5 Item</span>
+      </button>
+      <button type="button" class="admin-track-tab" id="tab-btn-temara" onclick="switchTrack('temara')">
+        <span>TEMARA</span>
+        <span class="tab-badge" id="badge-count-temara">4 Item</span>
+      </button>
+      <button type="button" class="admin-track-tab" id="tab-btn-nuansa-video" onclick="switchTrack('nuansa-video')">
+        <span>Video Edukasi Nuansa</span>
+        <span class="tab-badge" id="badge-count-nuansa-video" style="background: #FCE7F3; color: #BE185D;">0 Video</span>
+      </button>
+    </nav>
+
+    <!-- Track Summary Info Banner -->
+    <div class="track-banner track-banner-karsa" id="track-banner-info">
+      <div class="track-banner-text">
+        <h3 id="track-banner-title">Pilar KARSA: Karya, Aktualisasi, dan Ruang Skill</h3>
+        <p id="track-banner-desc">
+          Struktur: Penjelasan ringkasan materi per modul + Tombol Unduh PDF Lengkap + Slot Kuis Interaktif Terpadu di bagian akhir.
+        </p>
+      </div>
+      <div>
+        <a href="karsa.html" target="_blank" class="btn-admin-preview" style="background:#FFFFFF;" id="btn-visit-current-track">
+          Buka Tampilan KARSA &rarr;
+        </a>
+      </div>
+    </div>
+
+    <!-- Modul List Card -->
+    <div class="admin-card">
+      <div class="admin-card-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <h3 id="current-track-heading">Daftar Modul &amp; Kuis Aktif (KARSA)</h3>
+          <span class="item-count-badge" id="track-items-count-badge">8 Item Terdaftar</span>
+        </div>
+        <button type="button" class="btn-admin-primary" id="btn-card-add-action" style="padding: 7px 14px; font-size: 0.8rem;" onclick="handleHeaderAddAction()">
+          <span id="btn-card-add-text">+ Tambah Item</span>
+        </button>
+      </div>
+
+      <!-- Modules List Rows -->
+      <div id="admin-modules-list">
+        <!-- Rendered dynamically by admin.js -->
+        <div style="padding: 40px; text-align: center; color: #64748B;">
+          Memuat data silabus modul dari database cloud...
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       MODAL: FORM TAMBAH / EDIT MODUL & KUIS
+       ========================================================================== -->
+  <div class="admin-modal-overlay" id="admin-module-modal">
+    <div class="admin-modal-window">
+      <div class="admin-modal-header">
+        <div>
+          <h3 id="modal-form-title">Tambah Modul / Konten Baru</h3>
+          <p id="modal-form-sub">Masukkan rincian materi, ringkasan, berkas unduh, atau butir kuis.</p>
+        </div>
+        <button type="button" class="admin-modal-close" onclick="closeModuleModal()">&times;</button>
+      </div>
+
+      <form id="form-manage-module" onsubmit="handleSaveModule(event)">
+        <div class="admin-modal-body">
+          <input type="hidden" id="field-item-id">
+          <input type="hidden" id="field-item-track" value="karsa">
+
+          <!-- Type Selector Pills -->
+          <div class="admin-form-group">
+            <label>Pilih Tipe Konten *</label>
+            <div class="type-selector-wrap" id="type-selector-container">
+              <button type="button" class="type-pill-btn active" id="btn-type-module" onclick="selectContentType('module')">
+                <span class="type-pill-title">Modul Bacaan</span>
+                <span class="type-pill-desc">Ringkasan Materi + File PDF</span>
+              </button>
+              <button type="button" class="type-pill-btn" id="btn-type-quiz" onclick="selectContentType('quiz')">
+                <span class="type-pill-title">Kuis Interaktif</span>
+                <span class="type-pill-desc">Soal Pilihan Ganda &amp; Nilai</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Basic Metadata Fields -->
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label for="field-item-code">Kode Modul / Kuis *</label>
+              <input type="text" id="field-item-code" class="admin-form-control" placeholder="Contoh: MOD-01 atau KUIS-01" required>
+            </div>
+            <div class="admin-form-group">
+              <label for="field-item-duration">Estimasi Durasi Belajar *</label>
+              <input type="text" id="field-item-duration" class="admin-form-control" placeholder="Contoh: 45 Menit atau 15 Menit Kuis" required>
+            </div>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="field-item-title">Judul Utama *</label>
+            <input type="text" id="field-item-title" class="admin-form-control" placeholder="Contoh: Mengenali Diri dan Potensi" required>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="field-item-subtitle">Sub-Judul / Topik Pembahasan Singkat</label>
+            <input type="text" id="field-item-subtitle" class="admin-form-control" placeholder="Contoh: Fondasi Self-Love, Identifikasi Bakat, dan Perencanaan Masa Depan">
+          </div>
+
+          <!-- Summary / Ringkasan Materi -->
+          <div class="admin-form-group">
+            <label for="field-item-summary">Ringkasan / Summary Materi (Tampil di Layar) *</label>
+            <textarea id="field-item-summary" class="admin-form-control" rows="5" placeholder="Tuliskan poin-poin penjelasan eksekutif materi ini..." required></textarea>
+            <div class="form-hint">Ringkasan ini yang akan dibaca pertama kali oleh peserta sebelum mengunduh modul lengkap.</div>
+          </div>
+
+          <!-- Download PDF Link Section (Khusus Modul & Video) -->
+          <div id="section-pdf-download" style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; margin-bottom: 18px;">
+            <h4 style="font-size: 0.92rem; font-weight: 800; color: #0F172A; margin: 0 0 10px;">
+              Tautan Download Modul Lengkap (PDF)
+            </h4>
+            <div class="admin-form-group">
+              <label for="field-item-docurl">Link Dokumen PDF (Google Drive / Cloud URL) *</label>
+              <input type="url" id="field-item-docurl" class="admin-form-control" placeholder="https://drive.google.com/file/d/.../view atau link publik PDF">
+              <div class="form-hint">Tip: Upload PDF ke Google Drive pribadi/organisasi, lalu bagikan dengan akses "Siapa saja yang memiliki link".</div>
+            </div>
+            <div class="admin-form-row">
+              <div class="admin-form-group" style="margin-bottom: 0;">
+                <label for="field-item-docname">Label Nama Berkas</label>
+                <input type="text" id="field-item-docname" class="admin-form-control" placeholder="Contoh: MODUL-01-Mengenali-Diri.pdf">
+              </div>
+              <div class="admin-form-group" style="margin-bottom: 0;">
+                <label for="field-item-docsize">Perkiraan Ukuran Berkas</label>
+                <input type="text" id="field-item-docsize" class="admin-form-control" placeholder="Contoh: 2.4 MB (32 Halaman)">
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Section (Khusus Tipe Video) -->
+          <div id="section-video-embed" style="display: none; background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 16px; margin-bottom: 18px;">
+            <h4 style="font-size: 0.92rem; font-weight: 800; color: #1E40AF; margin: 0 0 10px;">
+              Video Pembelajaran (YouTube / Embed Link)
+            </h4>
+            <div class="admin-form-group" style="margin-bottom: 0;">
+              <label for="field-item-videourl">Link Video YouTube / Drive</label>
+              <input type="url" id="field-item-videourl" class="admin-form-control" placeholder="https://www.youtube.com/watch?v=... atau link embed">
+              <div class="form-hint">Sistem otomatis mengubah link YouTube menjadi format embed player yang rapi.</div>
+            </div>
+          </div>
+
+          <!-- Quiz Questions Builder (Khusus Tipe Kuis) -->
+          <div id="section-quiz-builder" style="display: none;">
+            <div class="quiz-builder-section">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div>
+                  <h4 style="font-size: 0.95rem; font-weight: 800; color: #9D174D; margin: 0;">
+                    Butir Soal Kuis Pilihan Ganda
+                  </h4>
+                  <p style="font-size: 0.78rem; color: #64748B; margin: 2px 0 0;">
+                    Tentukan pertanyaan, 4 pilihan opsi (A-D), dan klik radio button opsi yang benar.
+                  </p>
+                </div>
+                <button type="button" class="btn-admin-primary" style="padding: 6px 14px; font-size: 0.78rem; background: #BE185D;" onclick="addQuizQuestionField()">
+                  + Tambah Butir Soal
+                </button>
+              </div>
+
+              <!-- Questions Container -->
+              <div id="quiz-questions-list">
+                <!-- Dynamically rendered -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-admin-outline" onclick="closeModuleModal()">Batal</button>
+          <button type="submit" class="btn-admin-primary" id="btn-save-module-submit">
+            Simpan Modul / Kuis
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: FORM UPLOAD & EDIT VIDEO EDUKASI NUANSA (KHUSUS ADMIN)
+       ========================================================================== -->
+  <div class="admin-modal-overlay" id="admin-nuansa-video-modal">
+    <div class="admin-modal-window" style="max-width: 640px;">
+      <div class="admin-modal-header">
+        <div>
+          <h3 id="modal-nuansa-video-title">Upload Video YouTube ke Pojok NUANSA</h3>
+          <p id="modal-nuansa-video-sub">Konten video ini akan langsung tampil di etalase Pojok Video NUANSA (bagian bawah nuansa.html).</p>
+        </div>
+        <button type="button" class="admin-modal-close" onclick="closeNuansaVideoModal()">&times;</button>
+      </div>
+
+      <form id="form-manage-nuansa-video" onsubmit="handleSaveNuansaVideo(event)">
+        <div class="admin-modal-body">
+          <input type="hidden" id="field-nuansa-video-id">
+
+          <!-- Tautan YouTube dengan Live Auto-Preview -->
+          <div class="admin-form-group">
+            <label for="field-nuansa-video-url">Tautan / Link Video YouTube *</label>
+            <input type="url" id="field-nuansa-video-url" class="admin-form-control"
+              placeholder="Contoh: https://www.youtube.com/watch?v=VN7talTjE14 atau https://youtu.be/..." required>
+            <div class="form-hint">Mendukung semua format link YouTube: desktop watch?v=, tautan shorts, maupun youtu.be</div>
+
+            <!-- Box Preview Thumbnail Realtime -->
+            <div id="admin-video-preview-box" style="display: none; align-items: center; gap: 12px; margin-top: 10px; padding: 10px 14px; background: #F8FAFC; border: 1.5px dashed #CBD5E1; border-radius: 8px;">
+              <img id="admin-video-preview-thumb" src="" alt="Thumbnail Video" style="width: 110px; height: 62px; object-fit: cover; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+              <div>
+                <span style="font-size: 0.72rem; font-weight: 800; color: #166534; background: #DCFCE7; padding: 2px 8px; border-radius: 4px;">Link Terdeteksi Valid</span>
+                <p style="font-size: 0.8rem; color: #475569; margin: 4px 0 0;">Thumbnail YouTube siap ditayangkan di website.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="field-nuansa-video-name">Judul Video Edukasi *</label>
+            <input type="text" id="field-nuansa-video-name" class="admin-form-control"
+              placeholder="Contoh: Moderat Sejak Dini â€” Menjalin Harmoni &amp; Kesetaraan Hakiki" required>
+          </div>
+
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label for="field-nuansa-video-channel">Nama Kanal / Inisiator *</label>
+              <input type="text" id="field-nuansa-video-channel" class="admin-form-control"
+                placeholder="Contoh: Kementerian Agama RI / Tim ARUTALA" required>
+            </div>
+            <div class="admin-form-group">
+              <label for="field-nuansa-video-cat">Kategori Video *</label>
+              <select id="field-nuansa-video-cat" class="admin-form-control" required>
+                <option value="Moderasi &amp; Gender">Moderasi &amp; Gender</option>
+                <option value="Pemberdayaan Sebaya">Pemberdayaan Sebaya</option>
+                <option value="Inklusivitas Kampus">Inklusivitas Kampus</option>
+                <option value="Toleransi &amp; Nilai">Toleransi &amp; Nilai</option>
+                <option value="Kearifan Budaya">Kearifan Budaya</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="admin-form-group">
+            <label for="field-nuansa-video-takeaways">Poin Pembelajaran &amp; Pesan Utama (Takeaways) *</label>
+            <textarea id="field-nuansa-video-takeaways" class="admin-form-control" rows="3"
+              placeholder="Tuliskan pesan moral, rangkuman refleksi, atau nilai utama yang ingin disampaikan video ini..." required></textarea>
+            <div class="form-hint">Pesan ini akan tampil di pemutar video saat pengguna menonton di halaman NUANSA.</div>
+          </div>
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-admin-outline" onclick="closeNuansaVideoModal()">Batal</button>
+          <button type="submit" class="btn-admin-primary" id="btn-save-nuansa-video" style="background: #BE185D; border-color: #BE185D;">
+            Simpan &amp; Tayangkan Video &rarr;
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: PEMUTAR VIDEO PREVIEW ADMIN
+       ========================================================================== -->
+  <div class="admin-modal-overlay" id="admin-video-player-modal">
+    <div class="admin-modal-window" style="max-width: 760px; padding: 0; overflow: hidden; background: #0F172A; border-radius: 12px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: #1E293B; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <span id="admin-player-title" style="color: #FFFFFF; font-size: 0.95rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 600px;">Pratinjau Video</span>
+        <button type="button" onclick="closeAdminVideoPlayer()" style="color: #FFFFFF; font-size: 1.4rem; background: none; border: none; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; background: #000;">
+        <iframe id="admin-player-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="admin-toast" id="admin-toast">
+    <span id="admin-toast-text">Perubahan berhasil disimpan!</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/data.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/admin.js?v=4.6"></script>
+
+</body>
+
+</html>

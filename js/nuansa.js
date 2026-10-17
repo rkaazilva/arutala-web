@@ -11,7 +11,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   initNuansaVideos();
   initNuansaLiteracyQuiz();
-  setupNuansaUploadVideoModal();
+  initNuansaLiveChat();
   setupNuansaNavDrawer();
   initScrollReveal();
   setupFloatingBackToTop();
@@ -125,19 +125,29 @@ const NUANSA_DATA = {
   ]
 };
 
+let NUANSA_LMS_ITEMS = [];
 let CURRENT_NUANSA_TOPIC_INDEX = 0;
 let SELECTED_QUIZ_OPT = null;
 
-function initNuansaLiteracyQuiz() {
+async function initNuansaLiteracyQuiz() {
   const tabsContainer = document.getElementById("nuansa-topic-tabs");
   if (!tabsContainer) return;
 
+  // 1. Ambil data dinamis dari Supabase / Local Storage
+  if (window.ArutalaDB && typeof window.ArutalaDB.fetchLmsItems === "function") {
+    NUANSA_LMS_ITEMS = await window.ArutalaDB.fetchLmsItems("nuansa");
+  } else {
+    NUANSA_LMS_ITEMS = window.ArutalaDB.getDefaultLmsItems("nuansa");
+  }
+
   tabsContainer.innerHTML = "";
-  NUANSA_DATA.values.forEach((val, idx) => {
+  NUANSA_LMS_ITEMS.forEach((item, idx) => {
+    const isQuiz = item.type === "quiz";
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = `nuansa-tab-btn ${idx === CURRENT_NUANSA_TOPIC_INDEX ? 'active' : ''}`;
-    btn.innerHTML = `<span>0${idx + 1}</span> ${val.title.split(" ")[0]} (${val.title.split("(")[1].replace(")", "")}`;
+    const label = isQuiz ? (item.title.split(":")[0] || 'KUIS') : `0${idx + 1}. ${(item.title || "").split(" ")[0]} ${(item.title.includes("(") ? "(" + item.title.split("(")[1] : "")}`;
+    btn.innerHTML = `<span>${isQuiz ? 'KUIS' : '0' + (idx + 1)}</span> ${item.code || 'NUA'}: ${(item.title || '').substring(0, 24)}...`;
     btn.addEventListener("click", () => {
       CURRENT_NUANSA_TOPIC_INDEX = idx;
       document.querySelectorAll(".nuansa-tab-btn").forEach((b, i) => {
@@ -152,81 +162,231 @@ function initNuansaLiteracyQuiz() {
 }
 
 function loadNuansaTopic(idx) {
-  const val = NUANSA_DATA.values[idx];
-  if (!val) return;
+  const item = NUANSA_LMS_ITEMS[idx];
+  if (!item) return;
 
   const titleEl = document.getElementById("nuansa-topic-title");
   const subEl = document.getElementById("nuansa-topic-sub");
   const readtimeEl = document.getElementById("nuansa-topic-readtime");
   const bodyEl = document.getElementById("nuansa-topic-body");
-  const questionEl = document.getElementById("nuansa-quiz-question");
-  const optionsEl = document.getElementById("nuansa-quiz-options");
-  const feedbackEl = document.getElementById("nuansa-quiz-feedback");
-  const submitBtn = document.getElementById("btn-submit-nuansa-quiz");
+  const quizBox = document.querySelector(".nuansa-content-card .lms-quiz-panel");
 
-  if (titleEl) titleEl.textContent = val.title;
-  if (subEl) subEl.textContent = val.sub;
-  if (readtimeEl) readtimeEl.textContent = val.readTime;
-  if (bodyEl) bodyEl.innerHTML = val.content;
+  if (titleEl) titleEl.textContent = item.title;
+  if (subEl) subEl.textContent = item.subtitle || "";
+  if (readtimeEl) readtimeEl.textContent = item.duration || "45 Menit";
 
-  // Render Quiz
-  SELECTED_QUIZ_OPT = null;
-  if (feedbackEl) {
-    feedbackEl.style.display = "none";
-    feedbackEl.innerHTML = "";
+  // JIKA TIPE KUIS INTERAKTIF
+  if (item.type === "quiz") {
+    if (quizBox) quizBox.style.display = "none";
+    renderNuansaMultiQuiz(item, bodyEl);
+    return;
   }
-  if (questionEl) questionEl.textContent = val.quiz.question;
 
-  if (optionsEl) {
-    optionsEl.innerHTML = "";
-    val.quiz.options.forEach((optText, oIdx) => {
-      const optDiv = document.createElement("div");
-      optDiv.className = "lms-quiz-opt";
-      optDiv.innerHTML = `<strong>${String.fromCharCode(65 + oIdx)}.</strong> <span>${optText}</span>`;
-      optDiv.addEventListener("click", () => {
-        SELECTED_QUIZ_OPT = oIdx;
-        document.querySelectorAll("#nuansa-quiz-options .lms-quiz-opt").forEach((o, i) => {
-          o.classList.toggle("selected", i === oIdx);
-        });
-      });
-      optionsEl.appendChild(optDiv);
+  // JIKA TIPE MODUL / VIDEO
+  if (quizBox) quizBox.style.display = "none";
+
+  // Video embed (jika ada video)
+  let videoEmbedHtml = "";
+  if (item.videoUrl) {
+    const embedUrl = formatNuansaVideoEmbed(item.videoUrl);
+    videoEmbedHtml = `
+      <div class="lms-video-embed-wrap">
+        <iframe src="${embedUrl}" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    `;
+  }
+
+  // Ringkasan Materi (Summary)
+  const paragraphs = (item.summary || item.content || "Materi refleksi sedang disiapkan oleh fasilitator.")
+    .split("\n\n")
+    .filter(p => p.trim() !== "");
+
+  const summaryHtml = paragraphs.map(p => {
+    if (p.startsWith("<") && p.endsWith(">")) return p;
+    return `<p style="font-size: 1.05rem; line-height: 1.75; color: #334155; margin-bottom: 18px;">${p.replace(/\n/g, "<br>")}</p>`;
+  }).join("");
+
+  // Download Card
+  const downloadCardHtml = `
+    <div class="lms-download-card">
+      <div class="download-card-info">
+        <div class="download-icon-box" style="background:#E0F2FE; color:#0369A1; font-weight: 800; font-size: 0.85rem;">PDF</div>
+        <div class="download-card-text">
+          <span style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #0369A1; display: block; margin-bottom: 2px;">
+            DOKUMEN RESMI MODUL NUANSA
+          </span>
+          <h4>${item.docName || item.title + '.pdf'}</h4>
+          <p>${item.docSize || 'File PDF Lengkap'} • Pustaka literasi keagamaan inklusif &amp; studi kasus etika sosial.</p>
+        </div>
+      </div>
+      <div>
+        ${item.docUrl ? `
+          <a href="${item.docUrl}" target="_blank" rel="noopener" class="btn-download-pdf" style="background:#0369A1;">
+            <span>Unduh Modul Lengkap (PDF)</span>
+          </a>
+        ` : `
+          <button type="button" class="btn-download-pdf" style="opacity: 0.6; cursor: not-allowed; background:#0369A1;" title="File PDF sedang disiapkan">
+            <span>PDF Segera Diunggah</span>
+          </button>
+        `}
+      </div>
+    </div>
+  `;
+
+  if (bodyEl) {
+    bodyEl.innerHTML = `
+      <div class="summary-body-wrap">
+        ${videoEmbedHtml}
+        <div style="background: #F0F9FF; border-left: 4px solid #0369A1; padding: 14px 18px; border-radius: 0 8px 8px 0; margin-bottom: 24px;">
+          <span style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #0369A1; display: block; margin-bottom: 3px;">
+            RINGKASAN LITERASI &amp; NILAI KEAGAMAAN KONTEKSTUAL
+          </span>
+          <p style="font-size: 0.94rem; color: #334155; margin: 0; line-height: 1.5;">
+            Simak ringkasan nilai etis di bawah ini dan pelajari modul PDF lengkap untuk pendalaman refleksi kelompok.
+          </p>
+        </div>
+        ${summaryHtml}
+        ${downloadCardHtml}
+      </div>
+    `;
+  }
+}
+
+function renderNuansaMultiQuiz(item, container) {
+  if (!container) return;
+  const questions = Array.isArray(item.questions) ? item.questions : [];
+
+  if (questions.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 40px; background: #F8FAFC; border-radius: 12px;">
+        <h4>Kuis Refleksi Sedang Disiapkan</h4>
+        <p style="color: #64748B;">Admin belum mengunggah butir soal untuk kuis ini.</p>
+      </div>
+    `;
+    return;
+  }
+
+  let questionsHtml = "";
+  questions.forEach((q, qIdx) => {
+    questionsHtml += `
+      <div class="lms-single-question-card" id="nuansa-qcard-${qIdx}">
+        <div class="single-q-header">
+          <span class="single-q-number" style="background:#E0F2FE; color:#0369A1;">Studi Kasus #${qIdx + 1} dari ${questions.length}</span>
+          <span style="font-size: 0.78rem; color: #64748B;">Refleksi Etika</span>
+        </div>
+        <h4 class="single-q-text">${q.question}</h4>
+        <div class="single-q-options">
+          ${(q.options || []).map((optText, optIdx) => `
+            <label class="single-q-option" id="nuansa-optlabel-${qIdx}-${optIdx}">
+              <input type="radio" name="nuansa_quiz_q_${qIdx}" value="${optIdx}">
+              <span class="single-q-option-label">
+                <strong>${String.fromCharCode(65 + optIdx)}.</strong> ${optText}
+              </span>
+            </label>
+          `).join("")}
+        </div>
+        <div class="single-q-explanation" id="nuansa-expl-${qIdx}" style="border-left-color: #0369A1;">
+          <strong>Refleksi Nilai:</strong> ${q.explanation || "Jawaban sesuai dengan nilai moderasi dan etika Islam rahmah."}
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = `
+    <div class="lms-multi-quiz-panel">
+      <div class="lms-quiz-summary-card" id="nuansa-quiz-banner" style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%); border-color: rgba(3, 105, 161, 0.2);">
+        <div>
+          <span style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #0369A1; display: block; margin-bottom: 4px;">
+            KUIS REFLEKSI ETIKA SOSIAL &amp; AGAMA
+          </span>
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">
+            Uji Sikap &amp; Resolusi Dilema Etika (${questions.length} Soal)
+          </h3>
+          <p style="font-size: 0.92rem; color: #475569; margin: 0; line-height: 1.5;">
+            Pilih respons tindakan yang paling mencerminkan nilai Al-'Adl, Ukhuwah, Rahmah, dan Maslahah dalam studi kasus di bawah ini.
+          </p>
+        </div>
+        <div style="text-align: right;" id="nuansa-score-badge-area">
+          <div class="quiz-score-badge" style="color: #0369A1;">${questions.length}</div>
+          <div class="quiz-score-label">Studi Kasus</div>
+        </div>
+      </div>
+
+      <form id="form-nuansa-quiz" onsubmit="submitNuansaMultiQuiz(event, ${questions.length})">
+        ${questionsHtml}
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; flex-wrap: wrap; gap: 16px;">
+          <button type="submit" class="btn btn-primary btn-pill" id="btn-submit-nuansa-multiquiz" style="background: #0369A1; color: #FFFFFF; font-size: 1rem; font-weight: 700; padding: 14px 32px; box-shadow: 0 6px 18px rgba(3, 105, 161, 0.3);">
+            Periksa Jawaban Refleksi &rarr;
+          </button>
+          <button type="button" class="btn btn-secondary btn-pill" id="btn-reset-nuansa-quiz" onclick="loadNuansaTopic(${CURRENT_NUANSA_TOPIC_INDEX})" style="display: none; background: #FFFFFF; border: 1.5px solid #CBD5E1; color: #334155; font-weight: 700; padding: 12px 24px;">
+            Ulangi Refleksi
+          </button>
+        </div>
+      </form>
+    </div>
+  `;
+}
+
+function submitNuansaMultiQuiz(event, totalQ) {
+  event.preventDefault();
+  const item = NUANSA_LMS_ITEMS[CURRENT_NUANSA_TOPIC_INDEX];
+  if (!item || !Array.isArray(item.questions)) return;
+
+  const form = document.getElementById("form-nuansa-quiz");
+  let correctCount = 0;
+
+  item.questions.forEach((q, qIdx) => {
+    const selectedInput = form.querySelector(`input[name="nuansa_quiz_q_${qIdx}"]:checked`);
+    const userAns = selectedInput ? Number(selectedInput.value) : null;
+    const correctAns = Number(q.correctIndex);
+    const explBox = document.getElementById(`nuansa-expl-${qIdx}`);
+    if (explBox) explBox.classList.add("show");
+
+    (q.options || []).forEach((_, optIdx) => {
+      const optLabel = document.getElementById(`nuansa-optlabel-${qIdx}-${optIdx}`);
+      if (!optLabel) return;
+      optLabel.classList.remove("correct", "wrong");
+      if (optIdx === correctAns) {
+        optLabel.classList.add("correct");
+      } else if (userAns === optIdx && userAns !== correctAns) {
+        optLabel.classList.add("wrong");
+      }
     });
+
+    if (userAns === correctAns) {
+      correctCount++;
+    }
+  });
+
+  const finalScore = Math.round((correctCount / totalQ) * 100);
+  const isPassed = finalScore >= 70;
+
+  const badgeArea = document.getElementById("nuansa-score-badge-area");
+  if (badgeArea) {
+    badgeArea.innerHTML = `
+      <div class="quiz-score-badge" style="color: ${isPassed ? '#166534' : '#DC2626'};">${finalScore}%</div>
+      <div class="quiz-score-label">${correctCount} dari ${totalQ} Benar</div>
+    `;
   }
 
-  if (submitBtn) {
-    submitBtn.onclick = () => {
-      if (SELECTED_QUIZ_OPT === null) {
-        alert("Silakan pilih salah satu opsi jawaban terlebih dahulu!");
-        return;
-      }
+  const submitBtn = document.getElementById("btn-submit-nuansa-multiquiz");
+  const resetBtn = document.getElementById("btn-reset-nuansa-quiz");
+  if (submitBtn) submitBtn.style.display = "none";
+  if (resetBtn) resetBtn.style.display = "inline-flex";
 
-      const isCorrect = SELECTED_QUIZ_OPT === val.quiz.correctIndex;
-      const opts = document.querySelectorAll("#nuansa-quiz-options .lms-quiz-opt");
+  form.querySelectorAll("input[type='radio']").forEach(r => r.disabled = true);
+  document.getElementById("nuansa-quiz-banner")?.scrollIntoView({ behavior: "smooth", block: "center" });
+}
 
-      opts.forEach((o, i) => {
-        if (i === val.quiz.correctIndex) {
-          o.classList.add("correct");
-        } else if (i === SELECTED_QUIZ_OPT && !isCorrect) {
-          o.classList.add("wrong");
-        }
-      });
-
-      if (feedbackEl) {
-        feedbackEl.style.display = "block";
-        if (isCorrect) {
-          feedbackEl.style.backgroundColor = "#DCFCE7";
-          feedbackEl.style.color = "#166534";
-          feedbackEl.style.border = "1px solid #86EFAC";
-          feedbackEl.innerHTML = `<strong>✓ Luar Biasa, Jawaban Kamu Tepat!</strong><p style="margin: 6px 0 0;">${val.quiz.explanation}</p>`;
-        } else {
-          feedbackEl.style.backgroundColor = "#FEE2E2";
-          feedbackEl.style.color = "#991B1B";
-          feedbackEl.style.border = "1px solid #FCA5A5";
-          feedbackEl.innerHTML = `<strong>✕ Jawaban Kurang Tepat</strong><p style="margin: 6px 0 0;">${val.quiz.explanation}</p>`;
-        }
-      }
-    };
+function formatNuansaVideoEmbed(url) {
+  if (!url) return "";
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  if (match && match[2].length === 11) {
+    return `https://www.youtube.com/embed/${match[2]}`;
   }
+  return url;
 }
 
 // HELPER EKSTRAKSI ID YOUTUBE
@@ -255,47 +415,36 @@ function initNuansaVideos() {
     : [
         {
           id: "vid-1",
-          youtubeId: "zzWGNlDuTkA",
-          title: "Video Profil PANCAWALA: Media Literasi Pemuda & Moderasi Beragama",
-          channel: "Pancawala",
-          duration: "06:12",
-          thumbnail: "https://img.youtube.com/vi/zzWGNlDuTkA/hqdefault.jpg",
+          youtubeId: "VN7talTjE14",
+          title: "Video Kampanye: Moderat Sejak Dini — Menjalin Harmoni & Kesetaraan",
+          channel: "Kementerian Agama RI",
+          duration: "04:15",
+          thumbnail: "https://img.youtube.com/vi/VN7talTjE14/hqdefault.jpg",
           takeaways: "Menjelaskan urgensi platform dinamis pemuda dalam mempromosikan moderasi beragama, kearifan budaya, dan kesetaraan gender bagi Gen Z.",
           category: "Moderasi & Gender",
-          videoUrl: "https://www.youtube.com/embed/zzWGNlDuTkA"
+          videoUrl: "https://www.youtube.com/embed/VN7talTjE14"
         },
         {
           id: "vid-2",
-          youtubeId: "YOUTUBE_DEMO_2",
-          title: "Girls4Change: Membangun Masa Depan Berdaya bagi Remaja Perempuan",
-          channel: "RISE Foundation & Let's Read",
-          duration: "04:45",
-          thumbnail: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80",
-          takeaways: "Penerapan metodologi peer facilitation, self-love, dan ruang aman untuk mendorong kepemimpinan remaja perempuan di komunitas.",
-          category: "Pemberdayaan Sebaya",
-          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+          youtubeId: "gkjvWcuXw9Y",
+          title: "HeForShe: Membangun Gerakan Solidaritas Pemuda untuk Keadilan Gender",
+          channel: "UN Women Global",
+          duration: "11:45",
+          thumbnail: "https://img.youtube.com/vi/gkjvWcuXw9Y/hqdefault.jpg",
+          takeaways: "Pidato reflektif bersejarah mengenai pentingnya keterlibatan laki-laki sebagai sekutu (allies) dalam kesetaraan gender.",
+          category: "Moderasi & Gender",
+          videoUrl: "https://www.youtube.com/embed/gkjvWcuXw9Y"
         },
         {
           id: "vid-3",
-          youtubeId: "YOUTUBE_DEMO_3",
-          title: "Pemuda Bergerak: Menghapus Bias Gender dan Diskriminasi di Kampus",
+          youtubeId: "zzWGNlDuTkA",
+          title: "Karya Pemuda: Voice of Change — Ruang Aman Bebas Diskriminasi di Kampus",
           channel: "ARUTALA Youth Media",
           duration: "05:18",
-          thumbnail: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+          thumbnail: "https://img.youtube.com/vi/zzWGNlDuTkA/hqdefault.jpg",
           takeaways: "Simulasi studi kasus cara pemuda merespons perilaku diskriminatif dan membangun aturan organisasi kemahasiswaan yang inklusif.",
           category: "Inklusivitas Kampus",
-          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
-        },
-        {
-          id: "vid-4",
-          youtubeId: "YOUTUBE_DEMO_4",
-          title: "Harmoni Keberagaman: Menghidupkan Kearifan Silih Asah, Asih, Asuh",
-          channel: "UIN SGD Youth Movement",
-          duration: "05:40",
-          thumbnail: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80",
-          takeaways: "Menghubungkan nilai Islam dan kearifan lokal Sunda sebagai etika memperlakukan sesama, menghormati martabat kemanusiaan, dan memperkuat kohesi sosial.",
-          category: "Toleransi & Nilai",
-          videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+          videoUrl: "https://www.youtube.com/embed/zzWGNlDuTkA"
         }
       ];
 
@@ -613,3 +762,350 @@ function setupFloatingBackToTop() {
   });
 }
 window.setupFloatingBackToTop = setupFloatingBackToTop;
+window.openNuansaVideoModal = openNuansaVideoModal;
+window.closeNuansaVideoModal = closeNuansaVideoModal;
+window.initNuansaVideos = initNuansaVideos;
+
+/**
+ * ==========================================================================
+ * FITUR 3: RUANG DISKUSI & LIVE CHAT KAJIAN NILAI ISLAM MODERAT (NUANSA)
+ * ==========================================================================
+ */
+const DEFAULT_NUANSA_CHATS = [
+  {
+    id: "chat-nuansa-1",
+    senderName: "Ahmad Fauzan",
+    senderRole: "peserta",
+    roleLabel: "Mahasiswa Santri",
+    avatarInitial: "AF",
+    time: "13:35 WIB",
+    text: "Assalamu'alaikum kawan-kawan sekalian. Sangat berbobot penjelasan modul Al-'Adl tadi mengenai konsep 'Mubadalah' (kesalingan). Ada yang bisa berbagi contoh konkret penerapannya dalam pembagian tugas kepanitiaan organisasi mahasiswa di kampus?",
+    likes: 8,
+    isLiked: false,
+    replyTo: null
+  },
+  {
+    id: "chat-nuansa-2",
+    senderName: "Ust. Nurul Hidayah, M.Hum",
+    senderRole: "facilitator",
+    roleLabel: "Fasilitator Kajian NUANSA",
+    avatarInitial: "NH",
+    time: "13:38 WIB",
+    text: "Wa'alaikumussalam warahmatullah, Ahmad. Bentuk konkretnya: hilangkan stereotip bias gender. Jangan lagi menganggap seksi konsumsi atau sekretaris otomatis harus perempuan, sementara koordinator lapangan atau logistik harus laki-laki. Bagikan tanggung jawab berdasarkan kesepakatan, kompetensi, dan kapasitas belajar yang setara.",
+    likes: 24,
+    isLiked: false,
+    replyTo: {
+      name: "Ahmad Fauzan",
+      text: "Ada yang bisa berbagi contoh konkret penerapannya dalam pembagian tugas kepanitiaan..."
+    }
+  },
+  {
+    id: "chat-nuansa-3",
+    senderName: "Nadia Maharani",
+    senderRole: "peserta",
+    roleLabel: "Aktivis KSR Relawan",
+    avatarInitial: "NM",
+    time: "13:41 WIB",
+    text: "Betul sekali Ustadz! Di unit kegiatan relawan kami, koordinator divisi evakuasi dan logistik bencana dipimpin oleh mahasiswi dan kinerjanya sangat taktis. Yang utama adalah keterbukaan komunikasi dan saling mendukung tanpa meremehkan.",
+    likes: 14,
+    isLiked: false,
+    replyTo: {
+      name: "Ust. Nurul Hidayah, M.Hum",
+      text: "Bagikan tanggung jawab berdasarkan kesepakatan, kompetensi, dan kapasitas belajar yang setara."
+    }
+  },
+  {
+    id: "chat-nuansa-4",
+    senderName: "Dimas Arya",
+    senderRole: "peserta",
+    roleLabel: "Kader Moderasi",
+    avatarInitial: "DA",
+    time: "13:46 WIB",
+    text: "Mengenai prinsip Rahmah (Anti-Kekerasan), bagaimana respon etis kita sebagai pemuda muslim ketika mendapati narasi ujaran kebencian di media sosial yang mengutip potongan ayat suci di luar konteks?",
+    likes: 9,
+    isLiked: false,
+    replyTo: null
+  },
+  {
+    id: "chat-nuansa-5",
+    senderName: "Ust. Nurul Hidayah, M.Hum",
+    senderRole: "facilitator",
+    roleLabel: "Fasilitator Kajian NUANSA",
+    avatarInitial: "NH",
+    time: "13:50 WIB",
+    text: "Pegang teguh kaidah dakwah Al-Qur'an (QS. An-Nahl: 125): 'Ajaklah dengan hikmah, nasihat yang santun, dan bantahlah dengan cara yang terbaik'. Jangan membalas caci maki dengan kebencian serupa. Hadirkan kontra-narasi damai, tampilkan konteks asbabun nuzul yang utuh, dan tegakkan nilai kasih sayang (rahmatan lil 'alamin).",
+    likes: 29,
+    isLiked: false,
+    replyTo: {
+      name: "Dimas Arya",
+      text: "bagaimana respon etis kita sebagai pemuda muslim ketika mendapati narasi ujaran kebencian..."
+    }
+  }
+];
+
+let ALL_NUANSA_CHATS = [];
+let NUANSA_REPLY_TARGET = null;
+
+function initNuansaLiveChat() {
+  const container = document.getElementById("nuansa-livechat-container");
+  if (!container) return;
+
+  const stored = localStorage.getItem("arutala_livechat_nuansa");
+  if (stored) {
+    try {
+      ALL_NUANSA_CHATS = JSON.parse(stored);
+    } catch (e) {
+      ALL_NUANSA_CHATS = [...DEFAULT_NUANSA_CHATS];
+    }
+  } else {
+    ALL_NUANSA_CHATS = [...DEFAULT_NUANSA_CHATS];
+  }
+
+  renderNuansaChatUI();
+}
+window.initNuansaLiveChat = initNuansaLiveChat;
+
+function renderNuansaChatUI() {
+  const container = document.getElementById("nuansa-livechat-container");
+  if (!container) return;
+
+  const savedName = localStorage.getItem("arutala_chat_user_name") || "";
+
+  container.innerHTML = `
+    <div class="arutala-live-chat-card">
+      <!-- Chat Header -->
+      <div class="chat-room-header" style="border-top: 3px solid #0F766E;">
+        <div class="chat-room-title-wrap">
+          <div class="chat-live-pulse-dot" style="background: #0F766E; box-shadow: 0 0 8px #0F766E;" title="Live Aktif"></div>
+          <h3 class="chat-room-name">
+            # Ruang-Kajian-Nuansa
+          </h3>
+          <span class="chat-room-online-badge" style="background: #CCFBF1; color: #0F766E;">● 34 Mahasiswa &amp; Santri Aktif</span>
+        </div>
+        <div class="chat-room-tags">
+          <span class="chat-room-tag" style="color: #0F766E; background: #E6FFFA;">#AlAdl</span>
+          <span class="chat-room-tag" style="color: #0F766E; background: #E6FFFA;">#Ukhuwah</span>
+          <span class="chat-room-tag" style="color: #0F766E; background: #E6FFFA;">#Rahmah</span>
+          <span class="chat-room-tag" style="color: #0F766E; background: #E6FFFA;">#Maslahah</span>
+          <span class="chat-room-tag" style="color: #0F766E; background: #E6FFFA;">#TafsirModerasi</span>
+        </div>
+      </div>
+
+      <!-- Messages Stream -->
+      <div class="chat-messages-container" id="nuansa-messages-stream">
+        ${ALL_NUANSA_CHATS.map(msg => {
+          const isFacil = msg.senderRole === "facilitator";
+          const avatarClass = isFacil ? "chat-avatar facilitator" : "chat-avatar";
+          const roleBadgeClass = isFacil ? "chat-sender-role badge-facil" : "chat-sender-role";
+          const roleText = isFacil ? "Fasilitator Kajian" : (msg.roleLabel || "Mahasiswa / Santri");
+          const likedClass = msg.isLiked ? "chat-btn-action chat-btn-like liked" : "chat-btn-action chat-btn-like";
+
+          return `
+            <div class="chat-message-bubble ${msg.isSelf ? 'is-self' : ''}" id="${msg.id}">
+              <div class="${avatarClass}" style="${!isFacil ? 'background: #0369A1;' : ''}" title="${msg.senderName}">
+                ${msg.avatarInitial || msg.senderName.charAt(0).toUpperCase()}
+              </div>
+              <div class="chat-body">
+                <div class="chat-header-row">
+                  <span class="chat-sender-name">${escapeNuansaHTML(msg.senderName)}</span>
+                  <span class="${roleBadgeClass}">${roleText}</span>
+                  <span class="chat-time">${msg.time}</span>
+                </div>
+
+                ${msg.replyTo ? `
+                  <div class="chat-reply-quote" style="border-left-color: #0F766E;">
+                    ↳ Membalas <strong>@${escapeNuansaHTML(msg.replyTo.name)}</strong>: "${escapeNuansaHTML(msg.replyTo.text)}"
+                  </div>
+                ` : ""}
+
+                <p class="chat-text">${escapeNuansaHTML(msg.text)}</p>
+
+                <div class="chat-action-row">
+                  <button type="button" class="${likedClass}" onclick="toggleNuansaChatLike('${msg.id}')" title="Sukai tanggapan ini">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="${msg.isLiked ? '#BE185D' : 'none'}" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:3px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> <span>${msg.likes || 0}</span>
+                  </button>
+                  <button type="button" class="chat-btn-action" onclick="setNuansaChatReply('${msg.id}')" title="Balas pesan ini">
+                    Balas
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("")}
+      </div>
+
+      <!-- Reply Banner (Jika sedang membalas) -->
+      <div class="chat-reply-banner" id="nuansa-reply-banner" style="${NUANSA_REPLY_TARGET ? 'display:flex; background: #E6FFFA; border-top-color: #99F6E4; color: #0F766E;' : 'display:none;'}">
+        <span id="nuansa-reply-banner-text">
+          ${NUANSA_REPLY_TARGET ? `↳ Membalas <strong>@${escapeNuansaHTML(NUANSA_REPLY_TARGET.name)}</strong>: "${escapeNuansaHTML(NUANSA_REPLY_TARGET.text)}"` : ''}
+        </span>
+        <button type="button" class="chat-btn-cancel-reply" onclick="cancelNuansaChatReply()" title="Batalkan balasan">Batal</button>
+      </div>
+
+      <!-- Input Bar -->
+      <form class="chat-input-bar" id="nuansa-chat-form" onsubmit="handleSendNuansaChat(event)">
+        <div class="chat-input-row-top">
+          <input 
+            type="text" 
+            id="nuansa-chat-name-input" 
+            class="chat-name-input" 
+            placeholder="Nama / Panggilanmu" 
+            value="${escapeNuansaHTML(savedName)}" 
+            required
+            title="Nama pengirim pesan"
+          >
+          <span style="font-size: 0.74rem; color: #64748B;">
+            Diskusikan tafsir moderasi, nilai <em>Al-'Adl, Ukhuwah, Rahmah, Maslahah</em> dengan santun dan beradab.
+          </span>
+        </div>
+        <div class="chat-input-row-main">
+          <input 
+            type="text" 
+            id="nuansa-chat-text-input" 
+            class="chat-text-input" 
+            placeholder="Tulis refleksi atau tanggapan kajianmu di sini... (Tekan Enter untuk kirim)" 
+            autocomplete="off" 
+            required
+          >
+          <button type="submit" class="chat-send-btn" id="nuansa-chat-send-btn" style="background: #0F766E;">
+            <span>Kirim</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  `;
+
+  scrollNuansaChatToBottom();
+}
+
+function scrollNuansaChatToBottom() {
+  setTimeout(() => {
+    const stream = document.getElementById("nuansa-messages-stream");
+    if (stream) {
+      stream.scrollTop = stream.scrollHeight;
+    }
+  }, 50);
+}
+
+function escapeNuansaHTML(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+window.handleSendNuansaChat = function(e) {
+  if (e) e.preventDefault();
+
+  const nameInput = document.getElementById("nuansa-chat-name-input");
+  const textInput = document.getElementById("nuansa-chat-text-input");
+
+  const nameVal = nameInput ? nameInput.value.trim() : "";
+  const textVal = textInput ? textInput.value.trim() : "";
+
+  if (!nameVal) {
+    alert("Silakan masukkan nama atau panggilanmu terlebih dahulu.");
+    if (nameInput) nameInput.focus();
+    return;
+  }
+
+  if (!textVal) {
+    if (textInput) textInput.focus();
+    return;
+  }
+
+  // Simpan nama pengguna agar konsisten di kedua ruang chat
+  localStorage.setItem("arutala_chat_user_name", nameVal);
+
+  const initials = nameVal.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase() || "MA";
+  const now = new Date();
+  const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} WIB`;
+
+  const newChat = {
+    id: "chat-nuansa-" + Date.now(),
+    senderName: nameVal,
+    senderRole: "peserta",
+    roleLabel: "Peserta Kajian",
+    avatarInitial: initials,
+    time: timeStr,
+    text: textVal,
+    likes: 0,
+    isLiked: false,
+    isSelf: true,
+    replyTo: NUANSA_REPLY_TARGET ? {
+      name: NUANSA_REPLY_TARGET.name,
+      text: NUANSA_REPLY_TARGET.text
+    } : null
+  };
+
+  ALL_NUANSA_CHATS.push(newChat);
+  localStorage.setItem("arutala_livechat_nuansa", JSON.stringify(ALL_NUANSA_CHATS));
+
+  NUANSA_REPLY_TARGET = null;
+  renderNuansaChatUI();
+
+  const newTextInput = document.getElementById("nuansa-chat-text-input");
+  if (newTextInput) newTextInput.focus();
+};
+
+window.setNuansaChatReply = function(msgId) {
+  const target = ALL_NUANSA_CHATS.find(m => m.id === msgId);
+  if (!target) return;
+
+  const snippet = target.text.length > 60 ? target.text.slice(0, 57) + "..." : target.text;
+
+  NUANSA_REPLY_TARGET = {
+    id: target.id,
+    name: target.senderName,
+    text: snippet
+  };
+
+  const banner = document.getElementById("nuansa-reply-banner");
+  const bannerText = document.getElementById("nuansa-reply-banner-text");
+
+  if (banner && bannerText) {
+    bannerText.innerHTML = `↳ Membalas <strong>@${escapeNuansaHTML(NUANSA_REPLY_TARGET.name)}</strong>: "${escapeNuansaHTML(NUANSA_REPLY_TARGET.text)}"`;
+    banner.style.display = "flex";
+  }
+
+  const textInput = document.getElementById("nuansa-chat-text-input");
+  if (textInput) {
+    textInput.placeholder = `Balas pesan @${target.senderName}...`;
+    textInput.focus();
+  }
+};
+
+window.cancelNuansaChatReply = function() {
+  NUANSA_REPLY_TARGET = null;
+  const banner = document.getElementById("nuansa-reply-banner");
+  if (banner) banner.style.display = "none";
+
+  const textInput = document.getElementById("nuansa-chat-text-input");
+  if (textInput) {
+    textInput.placeholder = "Tulis refleksi atau tanggapan kajianmu di sini... (Tekan Enter untuk kirim)";
+  }
+};
+
+window.toggleNuansaChatLike = function(msgId) {
+  const msg = ALL_NUANSA_CHATS.find(m => m.id === msgId);
+  if (!msg) return;
+
+  if (msg.isLiked) {
+    msg.isLiked = false;
+    msg.likes = Math.max(0, (msg.likes || 1) - 1);
+  } else {
+    msg.isLiked = true;
+    msg.likes = (msg.likes || 0) + 1;
+  }
+
+  localStorage.setItem("arutala_livechat_nuansa", JSON.stringify(ALL_NUANSA_CHATS));
+  renderNuansaChatUI();
+};
+

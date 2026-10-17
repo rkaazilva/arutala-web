@@ -14,7 +14,7 @@ const ARUTALA_DATA = {
       themeColor: "coral",
       accentColor: "#FF64C5",
       accentBg: "#FFF0F9",
-      coverImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
+      coverImage: "img/pelatihan_fasilitator_auditorium.jpg",
       quoteHighlight: "Keadilan bukan memberi setiap orang ukuran sepatu sama, melainkan yang pas dengan kakinya.",
       author: "Nuzhatul Hilawah",
       authorRole: "Fasilitator Pemuda UIN Bandung",
@@ -32,6 +32,21 @@ const ARUTALA_DATA = {
         <h3>Menghapus Polarisasi: Peran Laki-laki sebagai Sekutu (Allies)</h3>
         <p>Edukasi kesetaraan gender bukanlah ajang persaingan antar-gender. Justru, pemuda laki-laki memiliki peran yang sangat krusial sebagai sekutu (allies) dalam menciptakan norma pergaulan kampus dan komunitas yang menghargai martabat manusia, menolak 'locker room talk' yang merendahkan, serta bersama-sama menumbuhkan empati aktif.</p>
       `,
+      keyPoints: [
+        {
+          title: "Distingsi Equality vs Equity",
+          desc: "Kesetaraan bukan memberi perlakuan sama rata secara buta, melainkan memberikan dukungan sesuai kebutuhan riil dan hambatan struktural yang dihadapi masing-masing gender."
+        },
+        {
+          title: "Fasilitas Afirmatif Bukan Diskriminasi",
+          desc: "Gerbong khusus perempuan dan ruang laktasi adalah langkah mitigasi empiris terhadap kerentanan kekerasan seksual, bukan pengistimewaan sepihak."
+        },
+        {
+          title: "Laki-Laki sebagai Sekutu (Allies)",
+          desc: "Gerakan kesetaraan bukan perang gender; pemuda laki-laki berperan sentral menolak 'locker room talk' dan menciptakan ruang aman di komunitas."
+        }
+      ],
+      actionNote: "Dukung ruang aman di sekitarmu dengan berani menegur lelucon seksis dan mendorong fasilitas inklusif di lingkungan kampus/organisasi.",
       tags: ["Keadilan Gender", "Ruang Publik", "Edukasi Pemuda"]
     },
     {
@@ -42,7 +57,7 @@ const ARUTALA_DATA = {
       themeColor: "emerald",
       accentColor: "#66BB6A",
       accentBg: "#F1F9F2",
-      coverImage: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
+      coverImage: "img/harmoni_pemuda_aljabbar.png",
       quoteHighlight: "Kesalehan beragama senantiasa berbanding lurus dengan kehangatan dalam merangkul martabat sesama.",
       author: "Alfath Fadillah Ridwannur",
       authorRole: "Inisiator ARUTALA",
@@ -63,6 +78,21 @@ const ARUTALA_DATA = {
 
         <p>Melalui dialog damai, kita membuktikan bahwa kesalehan beragama senantiasa berbanding lurus dengan kepedulian sosial dan kehangatan dalam merangkul sesama.</p>
       `,
+      keyPoints: [
+        {
+          title: "Prinsip Rahmah & Karamah Insaniyyah",
+          desc: "Agama hadir sebagai rahmat semesta yang memuliakan martabat kemanusiaan melampaui sekat identitas dan latar belakang keyakinan."
+        },
+        {
+          title: "Empat Indikator Moderasi Pemuda",
+          desc: "Menjaga komitmen kebangsaan, merawat toleransi aktif, menolak kekerasan verbal maupun fisik, serta menghargai tradisi luhur nusantara."
+        },
+        {
+          title: "Kesalehan Berbanding Lurus dengan Empati",
+          desc: "Kedalaman spiritual seorang pemuda tercermin dari kehangatan hati dan kepedulian sosialnya dalam merangkul keberagaman."
+        }
+      ],
+      actionNote: "Jadikan perbedaan keyakinan sebagai ruang dialog yang memperkaya wawasan, bukan alasan untuk memecah belah dan menghakimi.",
       tags: ["Moderasi Beragama", "Toleransi", "Dialog Damai"]
     },
     {
@@ -73,7 +103,7 @@ const ARUTALA_DATA = {
       themeColor: "blue",
       accentColor: "#8ABCEE",
       accentBg: "#F0F6FD",
-      coverImage: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=800&q=80",
+      coverImage: "img/seminar_cakrawala_muda.png",
       quoteHighlight: "Mengubah budaya saling menjatuhkan di jagat digital menjadi tradisi saling membesarkan hati.",
       author: "M. Rifqi Nurhidayat",
       authorRole: "Tim Riset Sosial UIN Bandung",
@@ -86,6 +116,21 @@ const ARUTALA_DATA = {
         <h3>Menghidupkan Budaya Lokal di Era Digital</h3>
         <p>Di masa kini, friksi antar pemuda sering kali dipicu oleh gesekan di dunia maya. Mengadopsi kearifan lokal ini berarti mengubah pola perdebatan yang saling menjatuhkan menjadi budaya diskusi yang saling membesarkan hati. Ketika ada teman sebaya yang terpuruk atau merasa tidak berdaya, ekosistem pemuda hadir untuk mengasuh dan menguatkan, bukan menghakimi.</p>
       `,
+      keyPoints: [
+        {
+          title: "Trilogi Filosofi Pasundan",
+          desc: "Silih Asah (saling mengasah nalar), Silih Asih (saling mengasihi dengan tulus), dan Silih Asuh (saling mendampingi dan menguatkan)."
+        },
+        {
+          title: "Resolusi Polarisasi Jagat Maya",
+          desc: "Mengubah budaya saling serang di media sosial menjadi diskursus konstruktif yang membesarkan mentalitas pemuda."
+        },
+        {
+          title: "Pendampingan Sebaya Tanpa Stigma",
+          desc: "Membangun circle pemuda yang sigap mendengarkan dan merangkul teman yang rapuh tanpa penghakiman moral sepihak."
+        }
+      ],
+      actionNote: "Terapkan prinsip 'Silih Asah, Asih, Asuh' dalam forum organisasi atau grup pertemanan saat menghadapi gesekan opini.",
       tags: ["Kearifan Lokal", "Budaya Sunda", "Resolusi Konflik"]
     },
     {
@@ -96,7 +141,7 @@ const ARUTALA_DATA = {
       themeColor: "amber",
       accentColor: "#2F4F87",
       accentBg: "#EEF3FA",
-      coverImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+      coverImage: "img/circle_mentoring_sebaya.jpg",
       quoteHighlight: "Menetapkan batasan pribadi bukan ketidaksopanan, melainkan bentuk tertinggi penghargaan diri.",
       author: "Wanda Faring",
       authorRole: "Kontributor Pemuda",
@@ -111,6 +156,21 @@ const ARUTALA_DATA = {
 
         <p>Jika kamu merasa tidak nyaman terhadap percakapan daring atau tuntutan foto pribadi di luar kesepakatan, kamu berhak menolak secara tegas dan mencari pertolongan kepada fasilitator sebaya atau lembaga pendamping terpercaya.</p>
       `,
+      keyPoints: [
+        {
+          title: "Hak Penuh Batasan Diri (Boundaries)",
+          desc: "Menolak komunikasi digital yang tidak nyaman bukan ketidaksopanan, melainkan bentuk tertinggi penghargaan terhadap diri sendiri."
+        },
+        {
+          title: "Prinsip Konsen Sadar & Sukarela",
+          desc: "Persetujuan dalam interaksi digital harus bebas dari tekanan manipulatif dan berhak ditarik kembali kapan saja."
+        },
+        {
+          title: "Mitigasi KBGO (Kekerasan Gender Online)",
+          desc: "Lindungi data pribadi, waspadai modus pertemanan daring yang manipulatif, dan segera hubungi fasilitator terpercaya jika terancam."
+        }
+      ],
+      actionNote: "Tegas tetapkan batasan privasimu dan jangan ragu berkata TIDAK pada permintaan di media sosial yang melanggar kenyamananmu.",
       tags: ["Ruang Aman", "Keamanan Digital", "Relasi Sehat"]
     },
     {
@@ -121,7 +181,7 @@ const ARUTALA_DATA = {
       themeColor: "purple",
       accentColor: "#FF64C5",
       accentBg: "#FFF0F9",
-      coverImage: "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?auto=format&fit=crop&w=800&q=80",
+      coverImage: "img/santriwati_galeri_rasulullah.png",
       quoteHighlight: "Perubahan nyata terjadi saat pemuda tidak menunggu panggung, melainkan merangkul desanya.",
       author: "Siti Rahmawati",
       authorRole: "Alumni Circle ARUTALA 2025",
@@ -134,6 +194,21 @@ const ARUTALA_DATA = {
         <h3>Langkah Awal: Menghadirkan Ruang Belajar Ramah Remaja</h3>
         <p>Bermula dari diskusi kecil di serambi pesantren, Rahmawati menginisiasi program pendampingan sebaya mingguan untuk membantu remaja perempuan yang terancam putus sekolah agar memiliki keterampilan literasi dan pemahaman hak asasi dasar.</p>
       `,
+      keyPoints: [
+        {
+          title: "Kapasitas Transformatif Santriwati",
+          desc: "Integrasi nilai agama yang kuat dengan literasi kesetaraan gender melahirkan inovator sosial perempuan yang solutif di akar rumput."
+        },
+        {
+          title: "Literasi Digital bagi 150 Remaja Putri Desa",
+          desc: "Mendirikan ruang belajar mandiri di serambi pesantren untuk memberdayakan remaja perempuan pedesaan agar terhindar dari putus sekolah."
+        },
+        {
+          title: "Aksi Nyata Tanpa Menunggu Panggung",
+          desc: "Dampak sosial paling berkelanjutan dimulai dari kepekaan merespons kebutuhan riil di komunitas terdekat kita."
+        }
+      ],
+      actionNote: "Mulailah inisiatif kecil dari keterampilan yang kamu punya untuk memberdayakan adik-adik atau teman di lingkungan terdekatmu.",
       tags: ["Santri Inovator", "Pendidikan Desa", "Inklusi Sosial"]
     },
     {
@@ -144,7 +219,7 @@ const ARUTALA_DATA = {
       themeColor: "teal",
       accentColor: "#66BB6A",
       accentBg: "#F1F9F2",
-      coverImage: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
+      coverImage: "img/orasi_pemuda_podium.jpg",
       quoteHighlight: "Membangun rumah tangga berkeadilan adalah ibadah sosial yang memuliakan kedua belah pihak.",
       author: "Ahmad Fauzan & Larasati",
       authorRole: "Pegiat Parenting Inklusif",
@@ -154,6 +229,21 @@ const ARUTALA_DATA = {
       content: `
         <p>Konsep kesalingan (mubadalah) mengingatkan kita bahwa kebahagiaan keluarga berakar dari gotong royong dan apresiasi setara antara suami dan istri tanpa ada salah satu pihak yang merasa dieksploitasi tenaganya.</p>
       `,
+      keyPoints: [
+        {
+          title: "Prinsip Mubadalah (Kesalingan)",
+          desc: "Relasi kemitraan keluarga sehat bertumpu pada kerjasama setara dan gotong royong tanpa eksploitasi beban pada satu pihak saja."
+        },
+        {
+          title: "Menepis Stigma Peran Domestik",
+          desc: "Pengasuhan anak dan kebersihan rumah tangga adalah keterampilan hidup bersama serta bernilai ibadah mulia bagi laki-laki maupun perempuan."
+        },
+        {
+          title: "Komunikasi Dialogis Mencegah Beban Ganda",
+          desc: "Membiasakan musyawarah dan empati untuk mencegah beban ganda (double burden) dan kelelahan mental dalam keluarga muda."
+        }
+      ],
+      actionNote: "Bagi tugas keseharian secara adil dan hargai setiap kontribusi tenaga pasangan atau anggota keluarga di rumah.",
       tags: ["Keluarga Sakinah", "Mubadalah", "Kesetaraan Gender"]
     }
   ],
@@ -177,7 +267,7 @@ const ARUTALA_DATA = {
       title: "Girls4Change: Membangun Masa Depan Berdaya bagi Remaja Perempuan",
       channel: "RISE Foundation & Let's Read",
       duration: "04:45",
-      thumbnail: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80",
+      thumbnail: "img/santriwati_galeri_rasulullah.png",
       takeaways: "Penerapan metodologi peer facilitation, self-love, dan ruang aman untuk mendorong kepemimpinan remaja perempuan di komunitas.",
       category: "Pemberdayaan Sebaya",
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
@@ -188,7 +278,7 @@ const ARUTALA_DATA = {
       title: "Pemuda Bergerak: Menghapus Bias Gender dan Diskriminasi di Kampus",
       channel: "ARUTALA Youth Media",
       duration: "05:18",
-      thumbnail: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+      thumbnail: "img/pelatihan_fasilitator_auditorium.jpg",
       takeaways: "Simulasi studi kasus cara pemuda merespons perilaku diskriminatif dan membangun aturan organisasi kemahasiswaan yang inklusif.",
       category: "Inklusivitas Kampus",
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
@@ -199,14 +289,14 @@ const ARUTALA_DATA = {
       title: "Harmoni Keberagaman: Menghidupkan Kearifan Silih Asah, Asih, Asuh",
       channel: "UIN SGD Youth Movement",
       duration: "05:40",
-      thumbnail: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80",
+      thumbnail: "img/harmoni_pemuda_aljabbar.png",
       takeaways: "Menghubungkan nilai Islam dan kearifan lokal Sunda sebagai etika memperlakukan sesama, menghormati martabat kemanusiaan, dan memperkuat kohesi sosial.",
       category: "Toleransi & Nilai",
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ"
     }
   ],
 
-  // 3. PUSTAKA 7 MODUL PEMBELAJARAN ARUTALA (Sesuai Proposal OASE III)
+  // 3. PUSTAKA 7 MODUL PEMBELAJARAN ARUTALA
   modules: [
     {
       id: 1,
@@ -460,7 +550,7 @@ const ARUTALA_DATA = {
       location: "Kampus UIN SGD Bandung",
       impact: "Telah diadopsi oleh 4 Himpunan Mahasiswa Jurusan (HMJ)",
       badge: "Inklusivitas Kampus",
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=85",
+      image: "img/pelatihan_fasilitator_auditorium.jpg",
       description: "Menyusun pakta integritas pertemuan ormawa yang menjamin keterlibatan setara, pembagian tugas tanpa bias gender, dan mekanisme pelaporan aman.",
       date: "12 Oktober 2026",
       participants: "85 Mahasiswa",
@@ -473,7 +563,7 @@ const ARUTALA_DATA = {
       location: "Kelurahan Cipadung, Bandung Timur",
       impact: "Menjangkau 45 remaja perempuan & laki-laki",
       badge: "Literasi Digital",
-      image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=85",
+      image: "img/seminar_cakrawala_muda.png",
       description: "Pelatihan simulasi mengenali modus manipulasi daring, batasan konsen percakapan media sosial, dan etika menyebarkan konten perdamaian.",
       date: "5 Oktober 2026",
       participants: "45 Remaja",
@@ -486,7 +576,7 @@ const ARUTALA_DATA = {
       location: "Desa Ciburial, Kab. Bandung",
       impact: "Menyediakan 120 buku & ruang kumpul ramah pemuda desa",
       badge: "Pemberdayaan Desa",
-      image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=85",
+      image: "img/pojok_baca_anak.jpg",
       description: "Mengubah balai pertemuan menjadi ruang literasi publik bersama pemuda desa untuk mendiskusikan nilai kearifan Silih Asah, Silih Asih, Silih Asuh.",
       date: "28 September 2026",
       participants: "110 Warga & Pemuda",
@@ -499,7 +589,7 @@ const ARUTALA_DATA = {
       location: "SMKN 1 Katapang, Bandung",
       impact: "Melatih 24 konselor sebaya tingkat sekolah menengah",
       badge: "Kesehatan Mental",
-      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=85",
+      image: "img/circle_mentoring_sebaya.jpg",
       description: "Pembentukan ruang curhat aman di sekolah dengan panduan empati aktif guna mencegah perundungan dan kekerasan verbal antarpelajar.",
       date: "20 September 2026",
       participants: "24 Konselor & 150 Siswa",
@@ -512,7 +602,7 @@ const ARUTALA_DATA = {
       location: "Kaki Gunung Manglayang, Sumedang",
       impact: "Diikuti 60 pemuda dari 5 organisasi kemahasiswaan",
       badge: "Moderasi Beragama",
-      image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=85",
+      image: "img/harmoni_pemuda_aljabbar.png",
       description: "Inisiatif berkemah bersama dengan agenda bedah toleransi beragama dan aksi penanaman bibit pohon di lereng kritis.",
       date: "14 September 2026",
       participants: "60 Mahasiswa",
@@ -525,7 +615,7 @@ const ARUTALA_DATA = {
       location: "Pondok Pesantren Al-Ihsan, Cibiru",
       impact: "40 santriwati menyelesaikan modul literasi digital dasar",
       badge: "Kemandirian Pemuda",
-      image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=85",
+      image: "img/santriwati_galeri_rasulullah.png",
       description: "Pelatihan pengenalan pembuatan website sederhana dan penulisan artikel advokasi agar santriwati memiliki medium bersuara di internet.",
       date: "05 September 2026",
       participants: "40 Santriwati",
@@ -549,7 +639,7 @@ const ARUTALA_DATA = {
       donorName: "Siti Rahmawati",
       amount: 50000,
       targetPackage: "Paket Ruang Belajar Modul",
-      message: "Keren banget gagasannya! Semangat untuk tim OASE III PTKIN.",
+      message: "Keren banget gagasannya! Semangat untuk tim pemuda inspiratif.",
       time: "1 jam lalu",
       isAnonymous: false
     },
@@ -592,3 +682,164 @@ const ARUTALA_DATA = {
 
 // Ekspor ke window global untuk kemudahan prototipe
 window.ARUTALA_DATA = ARUTALA_DATA;
+
+// ==========================================================================
+// HELPER GLOBAL: FORMAT POIN-POIN BESAR ARTIKEL (KEY TAKEAWAYS)
+// ==========================================================================
+window.getArticleKeyPoints = function(art) {
+  if (art && Array.isArray(art.keyPoints) && art.keyPoints.length > 0) {
+    return art.keyPoints;
+  }
+  
+  const points = [];
+  if (art && art.content) {
+    try {
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = art.content;
+      
+      const headings = tempDiv.querySelectorAll("h3, h4");
+      if (headings.length > 0) {
+        headings.forEach((h, i) => {
+          if (i < 4) {
+            let nextP = h.nextElementSibling;
+            while (nextP && nextP.tagName !== "P" && nextP.tagName !== "UL" && nextP.tagName !== "H3" && nextP.tagName !== "H4") {
+              nextP = nextP.nextElementSibling;
+            }
+            const desc = (nextP ? nextP.textContent.trim() : (art.summary || ""));
+            points.push({
+              title: h.textContent.trim(),
+              desc: desc.length > 175 ? desc.substring(0, 172) + "..." : desc
+            });
+          }
+        });
+      }
+      
+      if (points.length === 0) {
+        const listItems = tempDiv.querySelectorAll("li");
+        if (listItems.length > 0) {
+          listItems.forEach((li, i) => {
+            if (i < 4) {
+              const strong = li.querySelector("strong, b");
+              const title = strong ? strong.textContent.replace(/:$/, "").trim() : `Poin Pokok #${i + 1}`;
+              const desc = li.textContent.replace(title, "").replace(/^[:\s-]+/, "").trim();
+              points.push({
+                title: title,
+                desc: desc.length > 175 ? desc.substring(0, 172) + "..." : desc
+              });
+            }
+          });
+        }
+      }
+
+      if (points.length === 0) {
+        const paras = tempDiv.querySelectorAll("p");
+        paras.forEach((p, i) => {
+          const text = p.textContent.trim();
+          if (text && i < 3) {
+            const sentences = text.split(/(?<=[.?!])\s+/);
+            const firstSentence = sentences[0] || `Pokok Pikiran #${i + 1}`;
+            const rest = sentences.slice(1).join(" ") || text;
+            points.push({
+              title: firstSentence.length > 60 ? firstSentence.substring(0, 57) + "..." : firstSentence,
+              desc: rest.length > 175 ? rest.substring(0, 172) + "..." : rest
+            });
+          }
+        });
+      }
+    } catch (e) {
+      console.warn("Gagal ekstraksi poin artikel:", e);
+    }
+  }
+
+  if (points.length === 0) {
+    points.push(
+      { title: "Intisari Gagasan Pokok", desc: (art && art.summary) || "Gagasan penting literasi pemuda untuk menciptakan ruang tumbuh yang setara dan adil." },
+      { title: "Konteks & Relevansi Sosial", desc: "Pentingnya memperkuat kesadaran kritis, empati sebaya, dan perlindungan ruang aman bersama." },
+      { title: "Langkah Transformasi Pemuda", desc: "Menerapkan nilai-nilai kepemimpinan inklusif dalam kehidupan kampus, organisasi, dan ranah digital." }
+    );
+  }
+
+  return points;
+};
+
+window.buildArticleKeyPointsHtml = function(art) {
+  if (!art) return "";
+  const points = window.getArticleKeyPoints(art);
+  const actionNote = art.actionNote || (art.quoteHighlight ? art.quoteHighlight : "Terapkan intisari pemikiran ini dalam langkah aksi nyata pemuda di lingkungan sekitarmu.");
+  
+  const docDownloadHtml = art.docUrl ? `
+    <div class="keypoints-doc-box">
+      <div class="keypoints-doc-info">
+        <div class="keypoints-doc-icon" style="font-weight: 800; font-size: 0.82rem; color: #2F4F87;">PDF</div>
+        <div>
+          <strong style="color: #0F172A; font-size: 0.88rem; display: block;">Dokumen Naskah / Jurnal Terlampir</strong>
+          <span style="color: #64748B; font-size: 0.74rem;">Tersimpan resmi di Cloud Storage ARUTALA</span>
+        </div>
+      </div>
+      <a href="${art.docUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="background: #2F4F87; color: #FFFFFF; font-weight: 700; border-radius: 6px; padding: 7px 14px; text-decoration: none; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 4px;">
+        <span>Unduh Naskah</span> &rarr;
+      </a>
+    </div>
+  ` : "";
+
+  return `
+    <div class="article-keypoints-box">
+      <div class="keypoints-top-banner">
+        <div class="keypoints-badge">
+          <span class="keypoints-badge-text">POIN-POIN BESAR GAGASAN UTAMA</span>
+        </div>
+        <span class="keypoints-meta-tag">Intisari Pembelajaran Pemuda</span>
+      </div>
+
+      <div class="keypoints-list">
+        ${points.map((pt, idx) => `
+          <div class="keypoint-card">
+            <div class="keypoint-num-badge">${String(idx + 1).padStart(2, '0')}</div>
+            <div class="keypoint-card-content">
+              <h5 class="keypoint-card-title">${pt.title}</h5>
+              <p class="keypoint-card-desc">${pt.desc}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="keypoints-action-callout">
+        <div class="action-callout-header">
+          <strong>REFLEKSI &amp; AKSI NYATA PEMUDA:</strong>
+        </div>
+        <p class="action-callout-text">${actionNote}</p>
+      </div>
+
+      ${docDownloadHtml}
+
+      <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid #E2E8F0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <a href="index.html" class="btn btn-secondary btn-sm" style="background: #F1F5F9; color: #2F4F87; border: 1px solid #CBD5E1; font-weight: 700; border-radius: 6px; padding: 8px 16px; text-decoration: none; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;">
+          <span>&larr; Kembali ke Beranda</span>
+        </a>
+        <a href="karsa.html" class="btn btn-outline-primary btn-sm" style="color: #2F4F87; border: 1px solid #2F4F87; font-weight: 700; border-radius: 6px; padding: 8px 16px; text-decoration: none; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;">
+          <span>Jelajahi Karya KARSA &rarr;</span>
+        </a>
+      </div>
+    </div>
+  `;
+};
+
+window.toggleArticleFullText = function(btn) {
+  if (!btn) return;
+  const container = btn.nextElementSibling;
+  const icon = btn.querySelector(".toggle-icon");
+  const text = btn.querySelector(".toggle-text");
+  if (!container) return;
+  
+  const isHidden = container.style.display === "none" || !container.style.display;
+  if (isHidden) {
+    container.style.display = "block";
+    if (icon) icon.textContent = "▲";
+    if (text) text.textContent = "Tutup Naskah Narasi Lengkap";
+  } else {
+    container.style.display = "none";
+    if (icon) icon.textContent = "▼";
+    if (text) text.textContent = "Buka Naskah Narasi Lengkap";
+  }
+};
+
