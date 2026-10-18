@@ -1232,6 +1232,75 @@ img {
   }
 }
 
+/* Varian Pemisah Gelombang Organik untuk Halaman Pilar KARSA */
+.arutala-wave-divider.wave-divider-karsa {
+  background: #E2EDFA;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+.wave-divider-karsa svg {
+  height: 110px;
+}
+
+@media (max-width: 992px) {
+  .wave-divider-karsa svg {
+    height: 85px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wave-divider-karsa svg {
+    height: 60px;
+  }
+}
+
+/* Varian Pemisah Gelombang Organik untuk Halaman Pilar NUANSA */
+.arutala-wave-divider.wave-divider-nuansa {
+  background: #DCFCE7;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+.wave-divider-nuansa svg {
+  height: 110px;
+}
+
+/* Varian Pemisah Gelombang Organik untuk Halaman Pilar TEMARA */
+.arutala-wave-divider.wave-divider-temara {
+  background: #E0F2FE;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+.wave-divider-temara svg {
+  height: 110px;
+}
+
+/* Varian Pemisah Gelombang Organik untuk Halaman Pilar AKSARA */
+.arutala-wave-divider.wave-divider-aksara {
+  background: #FCE7F3;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+.wave-divider-aksara svg {
+  height: 110px;
+}
+
+@media (max-width: 992px) {
+  .wave-divider-nuansa svg,
+  .wave-divider-temara svg,
+  .wave-divider-aksara svg {
+    height: 85px;
+  }
+}
+
+@media (max-width: 768px) {
+  .wave-divider-nuansa svg,
+  .wave-divider-temara svg,
+  .wave-divider-aksara svg {
+    height: 60px;
+  }
+}
+
 .cycle-box-card {
   background: #FFFFFF;
   border: 1px solid var(--border);

@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PILAR NUANSA â€” Nilai Ukhuwah, Agama, dan Sosial | ARUTALA</title>
+  <title>PILAR NUANSA - Nilai Ukhuwah, Agama, dan Sosial | ARUTALA</title>
   
   <!-- SEO & Social Meta -->
   <meta name="description" content="NUANSA (Nilai Ukhuwah, Agama, dan Sosial Arutala) - Literasi keagamaan kontekstual, modul & kuis etika Islam (Al-'Adl, Ukhuwah, Rahmah, Maslahah), dan video edukasi sosial-keagamaan.">
-  <meta property="og:title" content="PILAR NUANSA â€” Nilai Ukhuwah, Agama, dan Sosial | ARUTALA">
+  <meta property="og:title" content="PILAR NUANSA - Nilai Ukhuwah, Agama, dan Sosial | ARUTALA">
   <meta property="og:description" content="Akses Ruang Tumbuh yang Agamis, Setara, dan Adil - Model Inovasi Ekosistem Pemuda Berbasis Nilai Keagamaan - UIN Sunan Gunung Djati Bandung.">
   <meta property="og:type" content="website">
 
@@ -38,11 +38,31 @@
        1. HERO BANNER BERWARNA (COLORED BANNER DENGAN SOFT GRADIENT & GLOW)
        -------------------------------------------------------------------------- */
     .nuansa-hero-banner {
-      background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%);
-      border-bottom: 1px solid rgba(255, 100, 197, 0.3);
-      box-shadow: 0 10px 30px -10px rgba(255, 100, 197, 0.18);
-      padding: 68px 0 54px;
+      background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+      border-bottom: none !important;
+      box-shadow: none !important;
+      padding: 68px 0 34px;
       position: relative;
+    }
+
+    /* Pemisah Gelombang Organik Cirikhas ARUTALA (NUANSA) */
+    .arutala-wave-divider.wave-divider-nuansa {
+      background: #DCFCE7;
+      margin-top: -1px;
+      margin-bottom: -1px;
+    }
+    .wave-divider-nuansa svg {
+      height: 110px;
+    }
+    @media (max-width: 992px) {
+      .wave-divider-nuansa svg {
+        height: 85px;
+      }
+    }
+    @media (max-width: 768px) {
+      .wave-divider-nuansa svg {
+        height: 60px;
+      }
     }
 
     .nuansa-hero-kicker {
@@ -50,13 +70,13 @@
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #BE185D;
+      color: #166534;
       margin-bottom: 14px;
       display: inline-block;
-      background: rgba(255, 100, 197, 0.18);
+      background: rgba(102, 187, 106, 0.18);
       padding: 5px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 100, 197, 0.35);
+      border: 1px solid rgba(102, 187, 106, 0.35);
     }
 
     .nuansa-hero-title {
@@ -73,7 +93,7 @@
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 600;
-      color: #2F4F87;
+      color: #2E7D32;
     }
 
     .nuansa-hero-desc {
@@ -81,7 +101,7 @@
       color: #334155;
       line-height: 1.7;
       max-width: 820px;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }
 
     .nuansa-cta-row {
@@ -95,18 +115,18 @@
        2. POP-OUT INTERACTIVE BUTTONS
        -------------------------------------------------------------------------- */
     .btn-primary {
-      background: #2F4F87 !important;
-      border-color: #2F4F87 !important;
+      background: #2E7D32 !important;
+      border-color: #2E7D32 !important;
       color: #FFFFFF !important;
       font-weight: 700 !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
     .btn-primary:hover {
-      background: #3A5C9A !important;
-      border-color: #3A5C9A !important;
+      background: #1B5E20 !important;
+      border-color: #1B5E20 !important;
       transform: translateY(-2px) !important;
-      box-shadow: 0 6px 16px rgba(47, 79, 135, 0.25) !important;
+      box-shadow: 0 6px 16px rgba(46, 125, 50, 0.28) !important;
     }
 
     .btn-secondary {
@@ -252,7 +272,7 @@
 
     @media (max-width: 768px) {
       .nuansa-hero-banner {
-        padding: 44px 0 38px;
+        padding: 44px 0 22px;
       }
       .nuansa-hero-kicker {
         font-size: 0.72rem;
@@ -331,7 +351,7 @@
           <li><a href="karsa.html" class="uss-nav-item">KARSA</a></li>
           
           <!-- NUANSA (ACTIVE) -->
-          <li><a href="nuansa.html" class="uss-nav-item active" style="color: #2F4F87; font-weight: 800; border-bottom: 2px solid #2F4F87;">NUANSA</a></li>
+          <li><a href="nuansa.html" class="uss-nav-item active" style="color: #2E7D32; font-weight: 800; border-bottom: 2px solid #2E7D32;">NUANSA</a></li>
           <li><a href="temara.html" class="uss-nav-item">TEMARA</a></li>
           <li><a href="aksara.html" class="uss-nav-item">AKSARA</a></li>
         </ul>
@@ -353,7 +373,7 @@
         <li><a href="index.html#beranda" class="drawer-link">BERANDA</a></li>
         <li><a href="artikel.html" class="drawer-link">ARTIKEL &amp; JURNAL</a></li>
         <li><a href="karsa.html" class="drawer-link">KARSA</a></li>
-        <li><a href="nuansa.html" class="drawer-link active" style="font-weight: 800; color: #2F4F87;">NUANSA</a></li>
+        <li><a href="nuansa.html" class="drawer-link active" style="font-weight: 800; color: #2E7D32;">NUANSA</a></li>
         <li><a href="temara.html" class="drawer-link">TEMARA</a></li>
         <li><a href="aksara.html" class="drawer-link">AKSARA</a></li>
       </ul>
@@ -361,46 +381,97 @@
   </aside>
 
   <!-- ==========================================================================
-       HERO BANNER: INTRODUKSI RESMI PILAR NUANSA (Sesuai Naskah Proposal)
+       HERO BANNER: INTRODUKSI RESMI PILAR NUANSA (PILAR 02 - FRESH GREEN)
        ========================================================================== -->
   <section class="nuansa-hero-banner">
     <div class="container">
-      <span class="nuansa-hero-kicker">NUANSA (NILAI UKHUWAH, AGAMA, DAN SOSIAL ARUTALA)</span>
+      <span class="nuansa-hero-kicker">NUANSA / PILAR 02 ARUTALA</span>
       <h1 class="nuansa-hero-title">
         Ruang Pembelajaran Reflektif &amp; <em>Kesadaran Sosial-Keagamaan</em>
       </h1>
       <p class="nuansa-hero-desc">
-        NUANSA merupakan pilar pembelajaran reflektif yang menghubungkan nilai keagamaan dengan persoalan sosial dan kemasyarakatan. Pilar ini bertujuan membangun pemahaman bahwa nilai agama tidak hanya dipelajari sebagai pengetahuan, tetapi juga menjadi landasan etis dalam memperlakukan sesama, menghadapi perbedaan, dan mendorong keadilan sosial.
+        NUANSA merupakan pilar pembelajaran reflektif yang mengintegrasikan nilai keluhuran etika Islam berkeadilan (<em>Al-'Adl, Ukhuwah, Rahmah, dan Maslahah</em>) untuk merawat ruang aman, kesetaraan gender, dan moderasi beragama di tengah masyarakat.
       </p>
 
       <!-- Action Buttons -->
       <div class="nuansa-cta-row">
-        <a href="#workspace-modul" class="btn btn-primary btn-pill" style="padding: 12px 24px; background: #0369A1; border-color: #0369A1;">
-          Mulai Belajar Modul &amp; Kuis &darr;
+        <a href="#workspace-modul" class="btn btn-primary btn-pill" style="padding: 12px 24px; background: #2E7D32; border-color: #2E7D32;">
+          Pelajari Modul Resmi PDF &darr;
         </a>
         <a href="#video-edukasi" class="btn btn-secondary btn-pill" style="padding: 12px 24px;">
           Tonton Video Edukasi &darr;
         </a>
-        <a href="#ruang-diskusi-nuansa" class="btn btn-ghost btn-pill" style="color: #0369A1; font-weight: 700; padding: 12px 20px;">
+        <a href="#ruang-diskusi-nuansa" class="btn btn-ghost btn-pill" style="color: #2E7D32; font-weight: 700; padding: 12px 20px;">
           Live Chat Kajian &rarr;
         </a>
       </div>
-
-      <!-- Dokumentasi Perkembangan Pembelajaran (Progress Tracking) -->
-      <div class="lms-progress-card">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="font-weight: 800; font-size: 1.25rem; color: #0369A1;" id="lms-progress-percent">0%</div>
-          <div>
-            <div style="font-weight: 700; font-size: 0.92rem; color: #0F172A;">Dokumentasi Perkembangan Mandiri</div>
-            <span style="font-size: 0.82rem; color: #64748B;" id="lms-progress-label">0 dari 5 modul &amp; kuis diselesaikan</span>
-          </div>
-        </div>
-        <div class="lms-progress-bar-wrap">
-          <div class="lms-progress-bar-fill" id="lms-progress-bar"></div>
-        </div>
-      </div>
     </div>
   </section>
+
+  <!-- ==========================================================================
+       PEMISAH CIRIKHAS: ARUTALA DYNAMIC WAVE RIBBON (NUANSA SIGNATURE)
+       Transisi Organik Elegan dari Soft Green Banner ke White Workspace
+       ========================================================================== -->
+  <div class="arutala-wave-divider wave-divider-nuansa" aria-hidden="true">
+    <svg viewBox="0 0 1440 130" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs>
+        <!-- Dominant Fresh Green Gradient (Nuansa Core) -->
+        <linearGradient id="nuansaWaveGreenMain" x1="0%" y1="0%" x2="100%" y2="80%">
+          <stop offset="0%" stop-color="#4ADE80" stop-opacity="0.95" />
+          <stop offset="45%" stop-color="#22C55E" stop-opacity="0.92" />
+          <stop offset="100%" stop-color="#15803D" stop-opacity="0.95" />
+        </linearGradient>
+
+        <!-- Soft Emerald Canopy (Upper Wave) -->
+        <linearGradient id="nuansaWaveGreenSoft" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#86EFAC" stop-opacity="0.55" />
+          <stop offset="100%" stop-color="#22C55E" stop-opacity="0.20" />
+        </linearGradient>
+
+        <!-- Deep Navy Grounding Wave (Arutala Identity) -->
+        <linearGradient id="nuansaWaveNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#2F4F87" stop-opacity="0.88" />
+          <stop offset="100%" stop-color="#1B335A" stop-opacity="0.92" />
+        </linearGradient>
+
+        <!-- Sky Blue Breeze Ribbon -->
+        <linearGradient id="nuansaWaveSky" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.85" />
+          <stop offset="100%" stop-color="#0284C7" stop-opacity="0.80" />
+        </linearGradient>
+
+        <!-- Soft Rose Accent Swoosh -->
+        <linearGradient id="nuansaWavePink" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F472B6" stop-opacity="0.80" />
+          <stop offset="100%" stop-color="#E11D48" stop-opacity="0.70" />
+        </linearGradient>
+      </defs>
+
+      <!-- 1. Base White Fill: Kontur Gelombang Organik Khas Nuansa ke Kanvas Putih -->
+      <path d="M 0,130 L 1440,130 L 1440,12 C 1220,78 980,50 740,92 C 480,136 220,68 0,120 Z" fill="#FFFFFF" />
+
+      <!-- 2. Soft Green Canopy di Kiri Atas (Karakter Teduh Nuansa) -->
+      <path d="M 0,0 C 260,54 520,38 780,82 C 540,68 280,30 0,0 Z" fill="url(#nuansaWaveGreenSoft)" />
+
+      <!-- 3. Dynamic Fresh Green Main Wave (Pita Hijau Lebar yang Berkelok Lembut) -->
+      <path d="M 160,0 C 380,48 640,96 920,72 C 1120,55 1300,82 1440,110 L 1440,96 C 1300,70 1120,42 920,58 C 640,82 380,34 160,0 Z" fill="url(#nuansaWaveGreenMain)" />
+
+      <!-- 4a. Kanopi Hijau Lembut di Kanan Atas (Karakter Alami & Segar Nuansa) -->
+      <path d="M 840,0 C 1040,26 1250,54 1440,64 L 1440,0 Z" fill="url(#nuansaWaveGreenSoft)" />
+
+      <!-- 4b. Pita Ramping Langsing Navy (Aksen Tipis Anggun, Lembut & Proporsional) -->
+      <path d="M 1020,0 C 1160,24 1300,48 1440,58 L 1440,48 C 1300,38 1160,16 1020,0 Z" fill="url(#nuansaWaveNavy)" />
+
+      <!-- 5. Sky Blue Dynamic Ribbon Menjalar di Bawah Lekukan Hijau -->
+      <path d="M 0,65 C 220,108 460,118 720,86 C 980,54 1220,95 1440,124 L 1440,118 C 1220,88 980,48 720,78 C 460,110 220,100 0,58 Z" fill="url(#nuansaWaveSky)" />
+
+      <!-- 6. Aksen Lembut Rose/Pink Mengikuti Kelokan Bawah -->
+      <path d="M 420,104 C 620,118 840,92 1080,74 C 920,86 700,104 420,104 Z" fill="url(#nuansaWavePink)" />
+
+      <!-- 7. Aksen Tunas Hijau Segar di Kiri Bawah -->
+      <path d="M 0,22 C 140,65 310,95 510,110 C 320,100 150,70 0,38 Z" fill="url(#nuansaWaveGreenMain)" />
+    </svg>
+  </div>
 
   <!-- ==========================================================================
        FITUR 1: MODUL PEMBELAJARAN NUANSA & KUIS REFLEKSI INTERAKTIF

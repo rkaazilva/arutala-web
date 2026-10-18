@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PILAR KARSA Ã¢â‚¬â€ Karya, Aktualisasi, dan Ruang Skill | ARUTALA</title>
-  
+  <title>PILAR KARSA - Karya, Aktualisasi, dan Ruang Skill | ARUTALA</title>
+
   <!-- SEO & Social Meta -->
-  <meta name="description" content="KARSA (Karya, Aktualisasi, dan Ruang Skill Arutala) - Ruang belajar mandiri 7 modul kapasitas pemuda, kuis interaktif, dan portofolio publikasi karya reflektif.">
-  <meta property="og:title" content="PILAR KARSA Ã¢â‚¬â€ Ruang Skill & Publikasi Karya Pemuda | ARUTALA">
-  <meta property="og:description" content="Akses Ruang Tumbuh yang Agamis, Setara, dan Adil - Model Inovasi Ekosistem Pemuda Berbasis Nilai Keagamaan - UIN Sunan Gunung Djati Bandung.">
+  <meta name="description"
+    content="KARSA (Karya, Aktualisasi, dan Ruang Skill Arutala) - Ruang belajar mandiri 7 modul kapasitas pemuda, kuis interaktif, dan portofolio publikasi karya reflektif.">
+  <meta property="og:title" content="PILAR KARSA - Ruang Skill &amp; Publikasi Karya Pemuda | ARUTALA">
+  <meta property="og:description"
+    content="Akses Ruang Tumbuh yang Agamis, Setara, dan Adil - Model Inovasi Ekosistem Pemuda Berbasis Nilai Keagamaan - UIN Sunan Gunung Djati Bandung.">
   <meta property="og:type" content="website">
 
   <!-- Google Fonts: Plus Jakarta Sans & Fraunces / Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700;1,9..144,800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700;1,9..144,800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+    rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css?v=4.5">
   <link rel="stylesheet" href="css/vibrant.css?v=1.0">
-  
+
   <!-- Favicon Resmi ARUTALA -->
   <link rel="icon" type="image/png" href="img/logo.png">
 
@@ -38,11 +43,31 @@
        1. HERO BANNER BERWARNA (COLORED BANNER DENGAN SOFT GRADIENT & GLOW)
        -------------------------------------------------------------------------- */
     .karsa-hero-banner {
-      background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
-      border-bottom: 1px solid rgba(102, 187, 106, 0.3);
-      box-shadow: 0 10px 30px -10px rgba(102, 187, 106, 0.18);
-      padding: 68px 0 54px;
+      background: linear-gradient(135deg, #EEF4FB 0%, #E2EDFA 100%);
+      border-bottom: none !important;
+      box-shadow: none !important;
+      padding: 68px 0 34px;
       position: relative;
+    }
+
+    /* Pemisah Gelombang Organik Cirikhas ARUTALA */
+    .arutala-wave-divider.wave-divider-karsa {
+      background: #E2EDFA;
+      margin-top: -1px;
+      margin-bottom: -1px;
+    }
+    .wave-divider-karsa svg {
+      height: 110px;
+    }
+    @media (max-width: 992px) {
+      .wave-divider-karsa svg {
+        height: 85px;
+      }
+    }
+    @media (max-width: 768px) {
+      .wave-divider-karsa svg {
+        height: 60px;
+      }
     }
 
     .karsa-hero-kicker {
@@ -50,13 +75,13 @@
       font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #166534;
+      color: #2F4F87;
       margin-bottom: 14px;
       display: inline-block;
-      background: rgba(102, 187, 106, 0.18);
+      background: rgba(47, 79, 135, 0.12);
       padding: 5px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(102, 187, 106, 0.35);
+      border: 1px solid rgba(47, 79, 135, 0.28);
     }
 
     .karsa-hero-title {
@@ -89,7 +114,7 @@
       align-items: center;
       gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 30px;
+      margin-bottom: 0;
     }
 
     /* --------------------------------------------------------------------------
@@ -474,9 +499,11 @@
       .lms-workspace-grid {
         grid-template-columns: 100%;
       }
+
       .lms-sidebar-card {
         position: static;
       }
+
       .lms-content-card {
         padding: 24px 20px;
       }
@@ -484,28 +511,33 @@
 
     @media (max-width: 768px) {
       .karsa-hero-banner {
-        padding: 44px 0 38px;
+        padding: 44px 0 22px;
       }
+
       .karsa-hero-kicker {
         font-size: 0.72rem;
         padding: 4px 12px;
         line-height: 1.4;
       }
+
       .karsa-hero-title {
         font-size: 1.65rem !important;
         line-height: 1.3 !important;
         margin-bottom: 14px !important;
       }
+
       .karsa-hero-desc {
         font-size: 0.94rem !important;
         line-height: 1.65 !important;
         margin-bottom: 22px !important;
       }
+
       .karsa-cta-row {
         flex-direction: column !important;
         align-items: stretch !important;
         gap: 12px !important;
       }
+
       .karsa-cta-row .btn {
         width: 100% !important;
         justify-content: center !important;
@@ -514,6 +546,7 @@
         font-size: 0.92rem !important;
         white-space: normal !important;
       }
+
       .karsa-progress-card {
         flex-direction: column;
         align-items: stretch;
@@ -522,6 +555,7 @@
     }
   </style>
 </head>
+
 <body class="karsa-page-body" data-theme="genu" data-track="karsa">
 
   <!-- ==========================================================================
@@ -531,7 +565,8 @@
     <div class="uss-header-top">
       <div class="uss-header-top-container">
         <!-- Kiri: Hamburger Menu Icon -->
-        <button type="button" class="uss-icon-btn" id="btn-uss-menu-toggle" aria-label="Buka Menu Navigasi" title="Menu Navigasi">
+        <button type="button" class="uss-icon-btn" id="btn-uss-menu-toggle" aria-label="Buka Menu Navigasi"
+          title="Menu Navigasi">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -547,7 +582,8 @@
         </a>
 
         <!-- Kanan: Tombol Unggah Karya Cepat -->
-        <button type="button" class="btn btn-primary btn-sm btn-pill" onclick="openSubmitArticleModal(event)" style="background: #2F4F87; color: #FFFFFF; font-size: 0.78rem; font-weight: 700; padding: 7px 16px;">
+        <button type="button" class="btn btn-primary btn-sm btn-pill" onclick="openSubmitArticleModal(event)"
+          style="background: #2F4F87; color: #FFFFFF; font-size: 0.78rem; font-weight: 700; padding: 7px 16px;">
           + Upload Karya
         </button>
       </div>
@@ -567,7 +603,8 @@
           </li>
 
           <!-- KARSA (ACTIVE) -->
-          <li><a href="karsa.html" class="uss-nav-item active" style="color: #2F4F87; font-weight: 800; border-bottom: 2px solid #2F4F87;">KARSA</a></li>
+          <li><a href="karsa.html" class="uss-nav-item active"
+              style="color: #2F4F87; font-weight: 800; border-bottom: 2px solid #2F4F87;">KARSA</a></li>
           <li><a href="nuansa.html" class="uss-nav-item">NUANSA</a></li>
           <li><a href="temara.html" class="uss-nav-item">TEMARA</a></li>
           <li><a href="aksara.html" class="uss-nav-item">AKSARA</a></li>
@@ -581,7 +618,8 @@
   <aside class="uss-side-drawer" id="uss-side-drawer" aria-label="Menu Samping">
     <div class="uss-drawer-header">
       <div class="uss-drawer-brand">
-        <span style="font-family: var(--font-heading); font-weight: 900; font-size: 1.3rem; color: #0F172A;">ARUTALA</span>
+        <span
+          style="font-family: var(--font-heading); font-weight: 900; font-size: 1.3rem; color: #0F172A;">ARUTALA</span>
       </div>
       <button type="button" class="uss-drawer-close" id="btn-uss-drawer-close" aria-label="Tutup Menu">&times;</button>
     </div>
@@ -595,7 +633,8 @@
         <li><a href="aksara.html" class="drawer-link">AKSARA</a></li>
       </ul>
       <div class="uss-drawer-ctas" style="margin-top: 24px;">
-        <button type="button" class="btn btn-primary" style="width: 100%; background: #2F4F87; color: #FFFFFF;" onclick="openSubmitArticleModal(event)">
+        <button type="button" class="btn btn-primary" style="width: 100%; background: #2F4F87; color: #FFFFFF;"
+          onclick="openSubmitArticleModal(event)">
           + Upload Karya / Esai
         </button>
       </div>
@@ -603,71 +642,141 @@
   </aside>
 
   <!-- ==========================================================================
-       HERO BANNER: INTRODUKSI RESMI PILAR KARSA (Sesuai Naskah Proposal)
+       HERO BANNER: INTRODUKSI RESMI PILAR KARSA (PILAR 01 - DEEP NAVY)
        ========================================================================== -->
   <section class="karsa-hero-banner">
     <div class="container">
-      <span class="karsa-hero-kicker">KARSA (KARYA, AKTUALISASI, DAN RUANG SKILL ARUTALA)</span>
+      <span class="karsa-hero-kicker">KARSA / PILAR 01 ARUTALA</span>
       <h1 class="karsa-hero-title">
-        Ruang Pengembangan Kapasitas, Skill, &amp; <em>Publikasi Karya Pemuda</em>
+        Ruang Pengembangan Kapasitas, Skill &amp; <em>Publikasi Karya Pemuda</em>
       </h1>
       <p class="karsa-hero-desc">
-        KARSA merupakan pilar pengembangan kapasitas yang membantu pemuda meningkatkan keterampilan, mengembangkan potensi, dan menghasilkan karya yang merepresentasikan proses pembelajarannya. Fokus utama KARSA adalah mengubah akses terhadap pengetahuan menjadi kemampuan yang dapat digunakan dalam kehidupan pribadi, pendidikan, organisasi, maupun masyarakat.
+        KARSA merupakan pilar pengembangan kapasitas yang membimbing generasi muda meningkatkan kecakapan hidup (*life
+        skills*), mengasah kepemimpinan inklusif, dan melahirkan karya nyata berbasis prinsip <em>Silih Asah, Silih
+          Asih, dan Silih Asuh</em>.
       </p>
 
       <!-- Action Buttons -->
       <div class="karsa-cta-row">
         <a href="#workspace-modul" class="btn btn-primary btn-pill" style="padding: 12px 24px;">
-          Mulai Belajar <span style="white-space: nowrap;">7 Modul &darr;</span>
+          Pelajari Modul Resmi PDF &darr;
         </a>
-        <button type="button" class="btn btn-secondary btn-pill" onclick="openSubmitArticleModal(event)" style="padding: 12px 24px;">
-          Unggah Karya / <span style="white-space: nowrap;">Esai Kamu &uarr;</span>
+        <button type="button" class="btn btn-secondary btn-pill" onclick="openSubmitArticleModal(event)"
+          style="padding: 12px 24px;">
+          Unggah Karya / Esai Kamu &uarr;
         </button>
-      </div>
-
-      <!-- Dokumentasi Perkembangan Pembelajaran (Progress Tracking) -->
-      <div class="karsa-progress-card">
-        <div style="display: flex; align-items: center; gap: 14px;">
-          <div style="font-weight: 800; font-size: 1.25rem; color: #2F4F87;" id="lms-progress-percent">0%</div>
-          <div>
-            <div style="font-weight: 700; font-size: 0.92rem; color: #0F172A;">Dokumentasi Perkembangan Mandiri</div>
-            <span style="font-size: 0.82rem; color: #64748B;" id="lms-progress-label">0 dari 7 modul diselesaikan</span>
-          </div>
-        </div>
-        <div class="karsa-progress-bar-wrap">
-          <div class="karsa-progress-bar-fill" id="lms-progress-bar"></div>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================================================================  <!-- ==========================================================================
+  <!-- ==========================================================================
+       PEMISAH CIRIKHAS: ARUTALA DYNAMIC WAVE RIBBON (KARSA SIGNATURE)
+       Transisi Organik Elegan dari Soft Blue-Navy Banner ke White Workspace
+       ========================================================================== -->
+  <div class="arutala-wave-divider wave-divider-karsa" aria-hidden="true">
+    <svg viewBox="0 0 1440 130" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <defs>
+        <!-- Softened Deep Navy (Karsa Signature) -->
+        <linearGradient id="karsaWaveNavy" x1="0%" y1="0%" x2="100%" y2="80%">
+          <stop offset="0%" stop-color="#2F4F87" stop-opacity="0.92" />
+          <stop offset="60%" stop-color="#233E6D" stop-opacity="0.95" />
+          <stop offset="100%" stop-color="#182A4D" stop-opacity="0.98" />
+        </linearGradient>
+
+        <!-- Softened Sky Blue Ribbon (Temara Signature) -->
+        <linearGradient id="karsaWaveSky" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.8" />
+          <stop offset="35%" stop-color="#38BDF8" stop-opacity="0.9" />
+          <stop offset="70%" stop-color="#0284C7" stop-opacity="0.9" />
+          <stop offset="100%" stop-color="#0369A1" stop-opacity="0.85" />
+        </linearGradient>
+
+        <!-- Translucent Sky Light Swoosh -->
+        <linearGradient id="karsaWaveSkySoft" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.6" />
+          <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.2" />
+        </linearGradient>
+
+        <!-- Softened Fresh Green (Nuansa Signature) -->
+        <linearGradient id="karsaWaveGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#4ADE80" stop-opacity="0.85" />
+          <stop offset="50%" stop-color="#22C55E" stop-opacity="0.8" />
+          <stop offset="100%" stop-color="#15803D" stop-opacity="0.85" />
+        </linearGradient>
+
+        <!-- Softened Rose/Magenta Accent (Aksara Signature) -->
+        <linearGradient id="karsaWavePink" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#F472B6" stop-opacity="0.85" />
+          <stop offset="100%" stop-color="#E11D48" stop-opacity="0.75" />
+        </linearGradient>
+      </defs>
+
+      <!-- 1. Base White Fill: Melengkung Mulus Membentuk Kanvas Putih Section di Bawahnya -->
+      <path d="M 0,130 L 1440,130 L 1440,0 C 1310,48 1140,82 950,76 C 680,68 450,110 0,126 Z" fill="#FFFFFF" />
+
+      <!-- 2. Navy Dynamic Wedge (Upper Right Brand Arch) -->
+      <path d="M 690,0 C 900,42 1180,82 1440,96 L 1440,0 Z" fill="url(#karsaWaveNavy)" />
+
+      <!-- 3. Upper Left Light Sky Ambient Wave -->
+      <path d="M 0,0 C 180,42 380,85 640,78 C 420,65 210,32 0,0 Z" fill="url(#karsaWaveSkySoft)" />
+
+      <!-- 4. Dynamic Sky Blue Main Ribbon (Organic Sweep across center to right) -->
+      <path d="M 240,0 C 430,36 680,78 970,64 C 1140,56 1315,90 1440,118 L 1440,105 C 1315,78 1140,46 970,54 C 680,68 430,24 240,0 Z" fill="url(#karsaWaveSky)" />
+
+      <!-- 5. Delicate Magenta / Pink Accent Swoosh (Trailing organically beneath sky ribbon) -->
+      <path d="M 990,54 C 1115,70 1270,98 1440,128 C 1320,106 1165,80 990,54 Z" fill="url(#karsaWavePink)" />
+
+      <!-- 6. Fresh Green Ribbon (Organic lower wave trailing across base) -->
+      <path d="M 0,82 C 240,118 510,128 800,114 C 1040,102 1250,116 1440,130 L 1440,125 C 1250,110 1040,96 800,108 C 510,122 240,111 0,75 Z" fill="url(#karsaWaveGreen)" />
+
+      <!-- 7. Left Sky Blue Accent Curve -->
+      <path d="M 0,8 C 110,54 245,98 440,118 C 245,108 110,68 0,30 Z" fill="url(#karsaWaveSky)" />
+    </svg>
+  </div>
+
+  <!-- ==========================================================================
        FITUR 1: MODUL PENGEMBANGAN KETERAMPILAN (TAMPILAN PDF LANGSUNG SCROLLABLE)
        ========================================================================== -->
   <main class="lms-workspace-section" id="workspace-modul">
     <div class="container">
       <div class="lms-pdf-standalone-container">
-        
+
         <!-- Header & Toolbar Kontrol Dokumen PDF -->
         <div class="lms-pdf-header-card">
           <div class="lms-pdf-header-info">
-            <span class="lms-code-chip" style="background: #EEF3FA; color: #2F4F87; font-weight: 800; font-size: 0.74rem; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.05em; display: inline-block;">DOKUMEN RESMI MODUL KARSA</span>
+            <span class="lms-code-chip"
+              style="background: #EEF3FA; color: #2F4F87; font-weight: 800; font-size: 0.74rem; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.05em; display: inline-block;">DOKUMEN
+              RESMI MODUL KARSA</span>
             <h2>Modul Pembelajaran &amp; Kapasitas Pemuda</h2>
             <p>
-              Pelajari modul resmi KARSA langsung di bawah ini. Dokumen dapat digulir (*scroll*), diperbesar, atau dibuka di layar penuh.
+              Pelajari modul resmi KARSA langsung di bawah ini. Dokumen dapat digulir (*scroll*), diperbesar, atau
+              dibuka di layar penuh.
             </p>
           </div>
           <div class="lms-pdf-header-actions">
-            <button type="button" class="btn-pdf-action" onclick="togglePdfFullscreen('pdf-viewer-box-karsa')" title="Layar Penuh">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+            <button type="button" class="btn-pdf-action" onclick="togglePdfFullscreen('pdf-viewer-box-karsa')"
+              title="Layar Penuh">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <path
+                  d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+              </svg>
               <span>Layar Penuh</span>
             </button>
             <a href="COVER KARSA.pdf" target="_blank" rel="noopener" class="btn-pdf-action" title="Buka Tab Baru">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
               <span>Buka Tab Baru</span>
             </a>
-            <a href="COVER KARSA.pdf" download="Modul-KARSA-Arutala.pdf" class="btn-pdf-action btn-pdf-primary" style="background: #2F4F87; border-color: #2F4F87;" title="Unduh File PDF">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <a href="COVER KARSA.pdf" download="Modul-KARSA-Arutala.pdf" class="btn-pdf-action btn-pdf-primary"
+              style="background: #2F4F87; border-color: #2F4F87;" title="Unduh File PDF">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
               <span>Unduh PDF</span>
             </a>
           </div>
@@ -675,11 +784,8 @@
 
         <!-- Frame PDF Viewer Scrollable Langsung -->
         <div class="lms-pdf-viewer-frame-box" id="pdf-viewer-box-karsa">
-          <iframe
-            src="COVER KARSA.pdf#toolbar=1&navpanes=0&scrollbar=1"
-            class="lms-standalone-pdf-frame"
-            title="Dokumen Modul KARSA"
-            allow="fullscreen">
+          <iframe src="COVER KARSA.pdf#toolbar=1&navpanes=0&scrollbar=1" class="lms-standalone-pdf-frame"
+            title="Dokumen Modul KARSA" allow="fullscreen">
           </iframe>
         </div>
 
@@ -695,54 +801,69 @@
     <div class="container">
       <div class="karsa-section-header">
         <div>
-          <span class="section-kicker" style="color: #2F4F87; font-weight: 800; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;">
+          <span class="section-kicker"
+            style="color: #2F4F87; font-weight: 800; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;">
             PORTOFOLIO &amp; PUBLIKASI KARYA
           </span>
-          <h2 style="font-family: var(--font-heading); font-size: 2.1rem; font-weight: 800; color: #0F172A; letter-spacing: -0.02em; margin-bottom: 8px;">
+          <h2
+            style="font-family: var(--font-heading); font-size: 2.1rem; font-weight: 800; color: #0F172A; letter-spacing: -0.02em; margin-bottom: 8px;">
             Etalase Karya &amp; Esai Reflektif Pemuda
           </h2>
           <p style="color: #64748B; font-size: 0.98rem; max-width: 680px; margin-bottom: 0; line-height: 1.6;">
-            Wadah bagi pemuda untuk mengunggah dan menampilkan karya yang dihasilkan dari proses pembelajaran: artikel reflektif, esai kritis, dan rancangan inovasi sosial.
+            Wadah bagi pemuda untuk mengunggah dan menampilkan karya yang dihasilkan dari proses pembelajaran: artikel
+            reflektif, esai kritis, dan rancangan inovasi sosial.
           </p>
         </div>
 
-        <button type="button" class="btn btn-primary btn-pill" onclick="openSubmitArticleModal(event)" style="background: #2F4F87; border-color: #2F4F87; color: #FFFFFF; font-weight: 700; padding: 12px 24px; box-shadow: 0 4px 14px rgba(47, 79, 135, 0.2);">
+        <button type="button" class="btn btn-primary btn-pill" onclick="openSubmitArticleModal(event)"
+          style="background: #2F4F87; border-color: #2F4F87; color: #FFFFFF; font-weight: 700; padding: 12px 24px; box-shadow: 0 4px 14px rgba(47, 79, 135, 0.2);">
           + Unggah Karya (Artikel / Video)
         </button>
       </div>
 
       <!-- Dokumentasi Nyata Kegiatan & Orasi Pemikiran KARSA -->
-      <div style="margin-bottom: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
-        <div style="background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+      <div
+        style="margin-bottom: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <div
+          style="background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
           <div style="position: relative; height: 210px; overflow: hidden;">
-            <img src="img/seminar_cakrawala_muda.png" alt="Seminar Cakrawala Muda" style="width: 100%; height: 100%; object-fit: cover;">
-            <span style="position: absolute; top: 12px; left: 12px; background: rgba(47, 79, 135, 0.92); color: #FFFFFF; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 4px;">
+            <img src="img/seminar_cakrawala_muda.png" alt="Seminar Cakrawala Muda"
+              style="width: 100%; height: 100%; object-fit: cover;">
+            <span
+              style="position: absolute; top: 12px; left: 12px; background: rgba(47, 79, 135, 0.92); color: #FFFFFF; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 4px;">
               WORKSHOP &amp; CAPACITY BUILDING
             </span>
           </div>
           <div style="padding: 18px 20px;">
-            <h4 style="font-family: var(--font-heading); font-size: 1.12rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">
+            <h4
+              style="font-family: var(--font-heading); font-size: 1.12rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">
               Seminar Cakrawala Muda &amp; Diskusi Kritis Pemuda
             </h4>
             <p style="color: #64748B; font-size: 0.88rem; line-height: 1.5; margin: 0;">
-              Ruang dialog publik untuk mengasah nalar kritis, literasi digital, dan kepemimpinan transformatif generasi muda lintas kampus.
+              Ruang dialog publik untuk mengasah nalar kritis, literasi digital, dan kepemimpinan transformatif generasi
+              muda lintas kampus.
             </p>
           </div>
         </div>
 
-        <div style="background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+        <div
+          style="background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
           <div style="position: relative; height: 210px; overflow: hidden;">
-            <img src="img/IMG_7690_rotated.jpg" alt="Orasi & Presentasi Pemuda" style="width: 100%; height: 100%; object-fit: cover;">
-            <span style="position: absolute; top: 12px; left: 12px; background: rgba(15, 23, 42, 0.88); color: #FFFFFF; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 4px;">
+            <img src="img/IMG_7690_rotated.jpg" alt="Orasi & Presentasi Pemuda"
+              style="width: 100%; height: 100%; object-fit: cover;">
+            <span
+              style="position: absolute; top: 12px; left: 12px; background: rgba(15, 23, 42, 0.88); color: #FFFFFF; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 4px;">
               PUBLIKASI GAGASAN
             </span>
           </div>
           <div style="padding: 18px 20px;">
-            <h4 style="font-family: var(--font-heading); font-size: 1.12rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">
+            <h4
+              style="font-family: var(--font-heading); font-size: 1.12rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">
               Panggung Orasi &amp; Presentasi Karya Pemuda
             </h4>
             <p style="color: #64748B; font-size: 0.88rem; line-height: 1.5; margin: 0;">
-              Wadah penyampaian gagasan, hasil riset aksi, dan solusi inovasi sosial di hadapan publik dan pemangku kebijakan.
+              Wadah penyampaian gagasan, hasil riset aksi, dan solusi inovasi sosial di hadapan publik dan pemangku
+              kebijakan.
             </p>
           </div>
         </div>
@@ -788,16 +909,19 @@
       <div class="modal-body">
         <!-- Pilihan 2 Tipe: Artikel vs Video -->
         <div class="karsa-upload-type-selector">
-          <button type="button" class="upload-type-card active" id="btn-type-article" onclick="switchKarsaUploadType('article')">
-            <span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: #DCFCE7; color: #166534; font-weight: 800; font-size: 0.82rem;">DOC</span>
+          <button type="button" class="upload-type-card active" id="btn-type-article"
+            onclick="switchKarsaUploadType('article')">
+            <span
+              style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: #DCFCE7; color: #166534; font-weight: 800; font-size: 0.82rem;">DOC</span>
             <div>
               <strong style="display: block; font-size: 0.92rem; color: #0F172A;">Unggah Artikel / Esai</strong>
               <span style="font-size: 0.74rem; color: #64748B;">Naskah tulisan refleksi &amp; esai analisis modul</span>
             </div>
           </button>
-          
+
           <button type="button" class="upload-type-card" id="btn-type-video" onclick="switchKarsaUploadType('video')">
-            <span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: #FCE7F3; color: #BE185D; font-weight: 800; font-size: 0.82rem;">VID</span>
+            <span
+              style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: #FCE7F3; color: #BE185D; font-weight: 800; font-size: 0.82rem;">VID</span>
             <div>
               <strong style="display: block; font-size: 0.92rem; color: #0F172A;">Unggah Video Kreatif</strong>
               <span style="font-size: 0.74rem; color: #64748B;">Tautan video YouTube hasil pembelajaran</span>
@@ -849,7 +973,8 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="article-author-input">Nama Penulis / Inovator *</label>
-                <input type="text" id="article-author-input" class="form-control" placeholder="Nama lengkap kamu" required>
+                <input type="text" id="article-author-input" class="form-control" placeholder="Nama lengkap kamu"
+                  required>
               </div>
               <div class="form-group">
                 <label for="article-institution-input">Asal Instansi / Kampus *</label>
@@ -869,20 +994,23 @@
             <div class="form-group">
               <label for="article-doc-input">Lampiran Naskah Lengkap PDF / Word (Opsional)</label>
               <input type="file" id="article-doc-input" class="form-control" accept=".pdf,.doc,.docx">
-              <small style="color: #64748B; font-size: 0.74rem;">Unggah draft lembar kerja atau naskah lengkapmu.</small>
+              <small style="color: #64748B; font-size: 0.74rem;">Unggah draft lembar kerja atau naskah
+                lengkapmu.</small>
             </div>
 
             <!-- Content Body -->
             <div class="form-group">
               <label for="article-content-input">Isi Esai Reflektif / Ringkasan Karya *</label>
               <textarea id="article-content-input" class="form-control" rows="5"
-                placeholder="Tuliskan gagasan, refleksi pembelajaran, atau inovasi sosial yang kamu kembangkan..." required></textarea>
+                placeholder="Tuliskan gagasan, refleksi pembelajaran, atau inovasi sosial yang kamu kembangkan..."
+                required></textarea>
             </div>
 
             <div class="checkbox-wrap" style="margin-bottom: 20px;">
               <input type="checkbox" id="article-agree-checkbox" required>
               <label for="article-agree-checkbox" style="font-size: 0.8rem; line-height: 1.45;">
-                Saya menyatakan bahwa karya ini merupakan hasil pemikiran orisinal saya dan selaras dengan prinsip ruang aman bebas ujaran kebencian.
+                Saya menyatakan bahwa karya ini merupakan hasil pemikiran orisinal saya dan selaras dengan prinsip ruang
+                aman bebas ujaran kebencian.
               </label>
             </div>
 
@@ -915,7 +1043,8 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="video-author-input">Nama Kreator / Sutradara *</label>
-                <input type="text" id="video-author-input" class="form-control" placeholder="Nama lengkap kreator" required>
+                <input type="text" id="video-author-input" class="form-control" placeholder="Nama lengkap kreator"
+                  required>
               </div>
               <div class="form-group">
                 <label for="video-institution-input">Asal Instansi / Komunitas *</label>
@@ -929,28 +1058,36 @@
               <label for="video-url-input">Tautan / Link Video YouTube *</label>
               <input type="url" id="video-url-input" class="form-control"
                 placeholder="Contoh: https://www.youtube.com/watch?v=... atau https://youtu.be/..." required>
-              <small style="color: #64748B; font-size: 0.74rem;">Mendukung tautan standar YouTube, YouTube Shorts, atau link sharing youtu.be.</small>
+              <small style="color: #64748B; font-size: 0.74rem;">Mendukung tautan standar YouTube, YouTube Shorts, atau
+                link sharing youtu.be.</small>
             </div>
 
             <!-- Live Thumbnail Preview -->
-            <div id="karsa-yt-preview" style="display: none; align-items: center; gap: 14px; background: #F8FAFC; border: 1px solid #E2E8F0; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
-              <img id="karsa-yt-thumb" src="" alt="Thumbnail Preview" style="width: 120px; height: 68px; object-fit: cover; border-radius: 6px;">
+            <div id="karsa-yt-preview"
+              style="display: none; align-items: center; gap: 14px; background: #F8FAFC; border: 1px solid #E2E8F0; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+              <img id="karsa-yt-thumb" src="" alt="Thumbnail Preview"
+                style="width: 120px; height: 68px; object-fit: cover; border-radius: 6px;">
               <div>
-                <span style="font-size: 0.72rem; font-weight: 800; color: #166534; background: #DCFCE7; padding: 2px 8px; border-radius: 4px;">Link Terdeteksi</span>
-                <p style="font-size: 0.8rem; color: #475569; margin: 4px 0 0;">Thumbnail video YouTube siap ditampilkan di etalase karya.</p>
+                <span
+                  style="font-size: 0.72rem; font-weight: 800; color: #166534; background: #DCFCE7; padding: 2px 8px; border-radius: 4px;">Link
+                  Terdeteksi</span>
+                <p style="font-size: 0.8rem; color: #475569; margin: 4px 0 0;">Thumbnail video YouTube siap ditampilkan
+                  di etalase karya.</p>
               </div>
             </div>
 
             <div class="form-group">
               <label for="video-desc-input">Deskripsi / Poin Kunci Video *</label>
               <textarea id="video-desc-input" class="form-control" rows="4"
-                placeholder="Jelaskan sinopsis singkat, pesan utama, dan relevansi video terhadap nilai kesetaraan gender &amp; moderasi..." required></textarea>
+                placeholder="Jelaskan sinopsis singkat, pesan utama, dan relevansi video terhadap nilai kesetaraan gender &amp; moderasi..."
+                required></textarea>
             </div>
 
             <div class="checkbox-wrap" style="margin-bottom: 20px;">
               <input type="checkbox" id="video-agree-checkbox" required>
               <label for="video-agree-checkbox" style="font-size: 0.8rem; line-height: 1.45;">
-                Saya menyatakan bahwa video ini merupakan karya orisinal/kolaboratif yang mematuhi etika ruang aman dan tidak memuat konten diskriminatif.
+                Saya menyatakan bahwa video ini merupakan karya orisinal/kolaboratif yang mematuhi etika ruang aman dan
+                tidak memuat konten diskriminatif.
               </label>
             </div>
 
@@ -971,13 +1108,17 @@
     <div class="modal-window" style="max-width: 760px;">
       <div class="modal-header">
         <div>
-          <span id="modal-article-cat" style="display: inline-block; padding: 4px 10px; font-size: 0.72rem; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 4px;">Kategori</span>
-          <h3 id="modal-article-title" style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Judul Karya</h3>
+          <span id="modal-article-cat"
+            style="display: inline-block; padding: 4px 10px; font-size: 0.72rem; font-weight: 800; border-radius: 4px; text-transform: uppercase; margin-bottom: 4px;">Kategori</span>
+          <h3 id="modal-article-title" style="font-size: 1.35rem; font-weight: 800; color: #0F172A; margin: 0;">Judul
+            Karya</h3>
         </div>
-        <button type="button" class="modal-close" id="btn-close-article-modal" onclick="closeKarsaArticleModal()" aria-label="Tutup">&times;</button>
+        <button type="button" class="modal-close" id="btn-close-article-modal" onclick="closeKarsaArticleModal()"
+          aria-label="Tutup">&times;</button>
       </div>
       <div class="modal-body">
-        <div id="modal-article-cover-wrap" style="width: 100%; height: 260px; border-radius: 8px; overflow: hidden; margin-bottom: 18px; display: none;">
+        <div id="modal-article-cover-wrap"
+          style="width: 100%; height: 260px; border-radius: 8px; overflow: hidden; margin-bottom: 18px; display: none;">
           <img id="modal-article-img" src="" alt="Cover" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div style="display: flex; gap: 12px; font-size: 0.82rem; color: #64748B; margin-bottom: 20px;">
@@ -998,19 +1139,30 @@
        MODAL: PEMUTAR VIDEO KARYA KARSA
        ========================================================================== -->
   <div class="modal-overlay" id="modal-karsa-video-player">
-    <div class="modal-window" style="max-width: 820px; padding: 0; overflow: hidden; background: #0F172A; border-radius: 14px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: #1E293B; border-bottom: 1px solid rgba(255,255,255,0.1);">
+    <div class="modal-window"
+      style="max-width: 820px; padding: 0; overflow: hidden; background: #0F172A; border-radius: 14px;">
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: #1E293B; border-bottom: 1px solid rgba(255,255,255,0.1);">
         <div style="display: flex; align-items: center; gap: 8px;">
-          <span style="background: #2F4F87; color: #FFFFFF; font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px;">VIDEO KARYA</span>
-          <h4 id="karsa-player-title" style="color: #FFFFFF; margin: 0; font-size: 1rem; font-weight: 700; max-width: 600px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Pemutar Video</h4>
+          <span
+            style="background: #2F4F87; color: #FFFFFF; font-size: 0.72rem; font-weight: 800; padding: 3px 8px; border-radius: 4px;">VIDEO
+            KARYA</span>
+          <h4 id="karsa-player-title"
+            style="color: #FFFFFF; margin: 0; font-size: 1rem; font-weight: 700; max-width: 600px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            Pemutar Video</h4>
         </div>
-        <button type="button" class="modal-close" onclick="closeKarsaVideoModal()" style="color: #FFFFFF; font-size: 1.5rem; line-height: 1; opacity: 0.8; cursor: pointer; background: transparent; border: none;">&times;</button>
+        <button type="button" class="modal-close" onclick="closeKarsaVideoModal()"
+          style="color: #FFFFFF; font-size: 1.5rem; line-height: 1; opacity: 0.8; cursor: pointer; background: transparent; border: none;">&times;</button>
       </div>
       <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000000;">
-        <iframe id="karsa-player-iframe" src="" style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="karsa-player-iframe" src=""
+          style="position: absolute; top:0; left: 0; width: 100%; height: 100%; border: 0;"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
       </div>
       <div style="padding: 16px 20px; background: #1E293B; color: #E2E8F0; font-size: 0.88rem;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.8rem; color: #94A3B8;">
+        <div
+          style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.8rem; color: #94A3B8;">
           <span id="karsa-player-creator">Oleh: -</span>
           <span id="karsa-player-cat">Kategori: -</span>
         </div>
@@ -1027,10 +1179,13 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-            <h3 style="margin-bottom: 0; font-family: var(--font-heading); font-weight: 900; font-size: 1.6rem; color: #0F172A; letter-spacing: -0.02em;">ARUTALA</h3>
+            <h3
+              style="margin-bottom: 0; font-family: var(--font-heading); font-weight: 900; font-size: 1.6rem; color: #0F172A; letter-spacing: -0.02em;">
+              ARUTALA</h3>
           </div>
           <p>
-            Akses Ruang Tumbuh yang Agamis, Setara, dan Adil. Model Inovasi Ekosistem Pengembangan Kapasitas Pemuda yang inklusif berbasis nilai keagamaan dan kesetaraan gender.
+            Akses Ruang Tumbuh yang Agamis, Setara, dan Adil. Model Inovasi Ekosistem Pengembangan Kapasitas Pemuda yang
+            inklusif berbasis nilai keagamaan dan kesetaraan gender.
           </p>
           <span class="badge badge-blue" style="font-size: 0.75rem;">Inovasi Sosial 2026</span>
         </div>
@@ -1087,4 +1242,5 @@
   <script src="js/modul.js"></script>
   <script src="js/karsa.js?v=4.5"></script>
 </body>
+
 </html>
