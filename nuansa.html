@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PILAR NUANSA — Nilai Ukhuwah, Agama, dan Sosial | ARUTALA</title>
+  <title>PILAR NUANSA â€” Nilai Ukhuwah, Agama, dan Sosial | ARUTALA</title>
   
   <!-- SEO & Social Meta -->
   <meta name="description" content="NUANSA (Nilai Ukhuwah, Agama, dan Sosial Arutala) - Literasi keagamaan kontekstual, modul & kuis etika Islam (Al-'Adl, Ukhuwah, Rahmah, Maslahah), dan video edukasi sosial-keagamaan.">
-  <meta property="og:title" content="PILAR NUANSA — Nilai Ukhuwah, Agama, dan Sosial | ARUTALA">
+  <meta property="og:title" content="PILAR NUANSA â€” Nilai Ukhuwah, Agama, dan Sosial | ARUTALA">
   <meta property="og:description" content="Akses Ruang Tumbuh yang Agamis, Setara, dan Adil - Model Inovasi Ekosistem Pemuda Berbasis Nilai Keagamaan - UIN Sunan Gunung Djati Bandung.">
   <meta property="og:type" content="website">
 
@@ -17,7 +17,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600;1,9..144,700;1,9..144,800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700;1,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css?v=3.2">
+  <link rel="stylesheet" href="css/style.css?v=4.9">
+  <link rel="stylesheet" href="css/vibrant.css?v=1.0">
   
   <!-- Favicon Resmi ARUTALA -->
   <link rel="icon" type="image/png" href="img/logo.png">
@@ -290,7 +291,7 @@
     }
   </style>
 </head>
-<body class="nuansa-page-body" data-theme="genu">
+<body class="nuansa-page-body" data-theme="genu" data-track="nuansa">
 
   <!-- ==========================================================================
        HEADER RESMI ARUTALA (Gaya USS Feed - Bersih dari Dots)
@@ -309,7 +310,6 @@
 
         <!-- Tengah: Logo ARUTALA CIRCLE (Bersih dari titik) -->
         <a href="index.html" class="uss-brand-center" id="nav-brand-logo">
-          <img src="img/logo.png" alt="Logo Resmi ARUTALA" class="uss-brand-img">
           <div class="uss-brand-text">
             <span class="uss-brand-name">ARUTALA</span>
             <span class="uss-brand-sub">CIRCLE</span>
@@ -328,18 +328,13 @@
       <div class="uss-nav-container">
         <ul class="uss-nav-list" id="main-nav-links">
           <li><a href="index.html#beranda" class="uss-nav-item">BERANDA</a></li>
-          <li><a href="index.html#artikel-opini" class="uss-nav-item">ARTIKEL &amp; JURNAL</a></li>
-          <li><a href="karsa.html" class="uss-nav-item">KARSA (MODUL SKILL)</a></li>
+          <li><a href="artikel.html" class="uss-nav-item">ARTIKEL &amp; JURNAL</a></li>
+          <li><a href="karsa.html" class="uss-nav-item">KARSA</a></li>
           
           <!-- NUANSA (ACTIVE) -->
-          <li><a href="nuansa.html" class="uss-nav-item active" style="color: #2F4F87; font-weight: 800; border-bottom: 2px solid #2F4F87;">NUANSA (AGAMA &amp; VIDEO)</a></li>
-          <li><a href="temara.html" class="uss-nav-item">TEMARA (TUTOR SEBAYA)</a></li>
-          <li><a href="aksara.html" class="uss-nav-item">AKSARA (AKSI &amp; DONASI)</a></li>
-          <li>
-            <a href="karsa.html#modal-submit-article" class="uss-nav-item uss-nav-write">
-              WRITE / UPLOAD
-            </a>
-          </li>
+          <li><a href="nuansa.html" class="uss-nav-item active" style="color: #2F4F87; font-weight: 800; border-bottom: 2px solid #2F4F87;">NUANSA</a></li>
+          <li><a href="temara.html" class="uss-nav-item">TEMARA</a></li>
+          <li><a href="aksara.html" class="uss-nav-item">AKSARA</a></li>
         </ul>
       </div>
     </nav>
@@ -350,19 +345,18 @@
   <aside class="uss-side-drawer" id="uss-side-drawer" aria-label="Menu Samping">
     <div class="uss-drawer-header">
       <div class="uss-drawer-brand">
-        <img src="img/logo.png" alt="Logo ARUTALA" style="width: 28px; height: 28px; object-fit: contain;">
-        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 1.15rem; color: #0F172A;">ARUTALA</span>
+        <span style="font-family: var(--font-heading); font-weight: 900; font-size: 1.3rem; color: #0F172A;">ARUTALA</span>
       </div>
       <button type="button" class="uss-drawer-close" id="btn-uss-drawer-close" aria-label="Tutup Menu">&times;</button>
     </div>
     <div class="uss-drawer-body">
       <ul class="uss-drawer-links">
         <li><a href="index.html#beranda" class="drawer-link">BERANDA</a></li>
-        <li><a href="index.html#artikel-opini" class="drawer-link">ARTIKEL &amp; JURNAL</a></li>
-        <li><a href="karsa.html" class="drawer-link">KARSA (MODUL SKILL)</a></li>
-        <li><a href="nuansa.html" class="drawer-link active" style="font-weight: 800; color: #2F4F87;">NUANSA (AGAMA &amp; VIDEO)</a></li>
-        <li><a href="temara.html" class="drawer-link">TEMARA (TUTOR SEBAYA)</a></li>
-        <li><a href="aksara.html" class="drawer-link">AKSARA (AKSI &amp; DONASI)</a></li>
+        <li><a href="artikel.html" class="drawer-link">ARTIKEL &amp; JURNAL</a></li>
+        <li><a href="karsa.html" class="drawer-link">KARSA</a></li>
+        <li><a href="nuansa.html" class="drawer-link active" style="font-weight: 800; color: #2F4F87;">NUANSA</a></li>
+        <li><a href="temara.html" class="drawer-link">TEMARA</a></li>
+        <li><a href="aksara.html" class="drawer-link">AKSARA</a></li>
       </ul>
     </div>
   </aside>
@@ -372,7 +366,7 @@
        ========================================================================== -->
   <section class="nuansa-hero-banner">
     <div class="container">
-      <span class="nuansa-hero-kicker">PILAR 02 / NUANSA (NILAI UKHUWAH, AGAMA, DAN SOSIAL ARUTALA)</span>
+      <span class="nuansa-hero-kicker">NUANSA (NILAI UKHUWAH, AGAMA, DAN SOSIAL ARUTALA)</span>
       <h1 class="nuansa-hero-title">
         Ruang Pembelajaran Reflektif &amp; <em>Kesadaran Sosial-Keagamaan</em>
       </h1>
@@ -382,12 +376,29 @@
 
       <!-- Action Buttons -->
       <div class="nuansa-cta-row">
-        <a href="#fondasi-nilai" class="btn btn-primary btn-pill" style="padding: 12px 24px;">
-          Pelajari 4 Fondasi <span style="white-space: nowrap;">Etis Islam &darr;</span>
+        <a href="#workspace-modul" class="btn btn-primary btn-pill" style="padding: 12px 24px; background: #0369A1; border-color: #0369A1;">
+          Mulai Belajar Modul &amp; Kuis &darr;
         </a>
         <a href="#video-edukasi" class="btn btn-secondary btn-pill" style="padding: 12px 24px;">
-          Tonton Video <span style="white-space: nowrap;">Edukasi &darr;</span>
+          Tonton Video Edukasi &darr;
         </a>
+        <a href="#ruang-diskusi-nuansa" class="btn btn-ghost btn-pill" style="color: #0369A1; font-weight: 700; padding: 12px 20px;">
+          Live Chat Kajian &rarr;
+        </a>
+      </div>
+
+      <!-- Dokumentasi Perkembangan Pembelajaran (Progress Tracking) -->
+      <div class="lms-progress-card">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="font-weight: 800; font-size: 1.25rem; color: #0369A1;" id="lms-progress-percent">0%</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.92rem; color: #0F172A;">Dokumentasi Perkembangan Mandiri</div>
+            <span style="font-size: 0.82rem; color: #64748B;" id="lms-progress-label">0 dari 5 modul &amp; kuis diselesaikan</span>
+          </div>
+        </div>
+        <div class="lms-progress-bar-wrap">
+          <div class="lms-progress-bar-fill" id="lms-progress-bar"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -471,79 +482,114 @@
           </p>
         </div>
       </div>
+
+      <!-- Dokumentasi Nyata Nilai Keagamaan & Moderasi -->
+      <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <div style="background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+          <div style="position: relative; height: 230px; overflow: hidden;">
+            <img src="img/harmoni_pemuda_aljabbar.png" alt="Harmoni Pemuda & Moderasi Beragama" style="width: 100%; height: 100%; object-fit: cover;">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(15, 118, 110, 0.92); color: #FFFFFF; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 4px;">
+              MODERASI BERAGAMA
+            </span>
+          </div>
+          <div style="padding: 20px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">
+              Kebersamaan Pemuda &amp; Salam Simbolis ARUTALA
+            </h4>
+            <p style="color: #64748B; font-size: 0.9rem; line-height: 1.5; margin: 0;">
+              Dokumentasi pemuda dan santri di pelataran Masjid Raya Al-Jabbar merawat persaudaraan lintas identitas, toleransi aktif, dan komitmen kebangsaan.
+            </p>
+          </div>
+        </div>
+
+        <div style="background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+          <div style="position: relative; height: 230px; overflow: hidden;">
+            <img src="img/santriwati_galeri_rasulullah.png" alt="Kunjungan Galeri Rasulullah" style="width: 100%; height: 100%; object-fit: cover;">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(3, 105, 161, 0.92); color: #FFFFFF; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 4px;">
+              NILAI LUHUR ISLAM
+            </span>
+          </div>
+          <div style="padding: 20px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">
+              Kajian Keteladanan &amp; Duta Talenta Pemuda
+            </h4>
+            <p style="color: #64748B; font-size: 0.9rem; line-height: 1.5; margin: 0;">
+              Refleksi nilai keteladanan Rasulullah SAW sebagai landasan etis memuliakan perempuan, menolak kekerasan, dan menumbuhkan kepemimpinan yang berkeadilan.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ==========================================================================
-       FITUR 1: LITERASI KEAGAMAAN KONTEKSTUAL (MODUL & KUIS REFLEKSI INTERAKTIF)
+       FITUR 1: MODUL PEMBELAJARAN NUANSA & KUIS REFLEKSI INTERAKTIF
        Materi penghubung nilai Islam (Al-'Adl, Ukhuwah, Rahmah, Maslahah)
        ========================================================================== -->
-  <section class="nuansa-literacy-section" id="literasi-kontekstual">
+  <main class="lms-workspace-section" id="workspace-modul">
+    <span id="literasi-kontekstual" style="position: absolute; margin-top: -80px;"></span>
     <div class="container">
-      <div class="section-header" style="margin-bottom: 24px;">
-        <span class="section-kicker" style="color: #2F4F87; font-weight: 800; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;">
-          FITUR 1 / LITERASI KEAGAMAAN KONTEKSTUAL
-        </span>
-        <h2 style="font-family: var(--font-heading); font-size: 2.1rem; font-weight: 800; color: #0F172A; letter-spacing: -0.02em; margin-bottom: 8px;">
-          Modul Refleksi Nilai Islam dalam Isu Sosial &amp; Kuis Etika
-        </h2>
-        <p style="color: #64748B; font-size: 0.98rem; max-width: 720px; line-height: 1.6; margin: 0;">
-          Pilih salah satu topik nilai etis untuk membaca materi kontekstual mendalam, lalu uji pemahaman etikamu melalui kuis reflektif studi kasus nyata pemuda.
-        </p>
+      <div class="lms-workspace-grid">
+        
+        <!-- Kolom Kiri: Silabus 4 Modul + 1 Kuis Terstruktur -->
+        <aside class="lms-sidebar-card">
+          <div class="lms-sidebar-header">
+            <h4>Silabus Pembelajaran NUANSA</h4>
+            <span>Pilih modul, video, atau kuis untuk belajar</span>
+          </div>
+          <div id="lms-modules-list">
+            <!-- Populated dynamically by js/modul.js -->
+          </div>
+        </aside>
+
+        <!-- Kolom Kanan: Reader Materi, Video, Ringkasan & Kuis -->
+        <article class="lms-content-card">
+          <div class="lms-content-header">
+            <div class="lms-content-meta">
+              <span class="lms-code-chip" id="mod-code">NUA-01</span>
+              <span class="lms-duration-chip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="mod-duration">45 Menit</span>
+              </span>
+            </div>
+            <h2 class="lms-content-title" id="mod-title">Al-'Adl (Keadilan &amp; Kesetaraan Gender)</h2>
+            <p class="lms-content-subtitle" id="mod-subtitle">Membangun Kesetaraan Berdasarkan Martabat Luhur Kemanusiaan</p>
+          </div>
+
+          <!-- Reading Content Body (Video + Executive Summary + Download Card + Next Button) -->
+          <div class="lms-reading-body" id="mod-body">
+            <!-- Injected dynamically by js/modul.js -->
+          </div>
+
+          <!-- Interactive Quiz Box (Fallback standalone panel) -->
+          <div class="lms-quiz-panel" id="mod-quiz-panel" style="display: none;">
+            <div class="lms-quiz-header">
+              <h4>Kuis Pemahaman Materi</h4>
+              <span class="badge badge-blue" style="font-size: 0.72rem; background: #E0F2FE; color: #0369A1; font-weight: 700; padding: 4px 10px; border-radius: 4px;">Uji Pemahaman</span>
+            </div>
+
+            <p class="lms-quiz-question" id="quiz-question-text">Pertanyaan kuis sedang dimuat...</p>
+
+            <div class="lms-quiz-options" id="quiz-options-container">
+              <!-- Radio choices injected by js/modul.js -->
+            </div>
+
+            <div class="lms-quiz-feedback" id="quiz-feedback-box"></div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px; flex-wrap: wrap; gap: 12px;">
+              <button class="btn btn-primary btn-pill btn-sm" id="btn-submit-quiz" style="background: #0369A1; border-color: #0369A1; color: #FFFFFF; font-weight: 700; padding: 10px 20px;">
+                Periksa Jawaban Kuis
+              </button>
+              <button class="btn btn-secondary btn-pill btn-sm" id="btn-next-module" style="display: none; background: #0F172A; color: #FFFFFF; font-weight: 700; padding: 10px 20px;">
+                Lanjut ke Modul Berikutnya &rarr;
+              </button>
+            </div>
+          </div>
+        </article>
+
       </div>
-
-      <!-- Tabs Pemilihan 4 Topik Nilai -->
-      <div class="nuansa-tabs-wrap" id="nuansa-topic-tabs">
-        <!-- Rendered by js/nuansa.js -->
-      </div>
-
-      <!-- Main Reader Card & Interactive Quiz -->
-      <article class="nuansa-content-card">
-        <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid #E2E8F0; flex-wrap: wrap; gap: 10px;">
-          <div>
-            <h3 id="nuansa-topic-title" style="font-family: var(--font-heading); font-size: 1.65rem; font-weight: 800; color: #0F172A; margin-bottom: 4px;">
-              Al-'Adl (Keadilan &amp; Kesetaraan Gender)
-            </h3>
-            <p id="nuansa-topic-sub" style="font-size: 0.95rem; color: #64748B; margin: 0;">
-              Membangun Kesetaraan Berdasarkan Martabat Kemanusiaan
-            </p>
-          </div>
-          <span class="lms-code-chip" id="nuansa-topic-readtime" style="background: #EEF3FA; color: #2F4F87; font-weight: 700;">
-            6 Menit Refleksi
-          </span>
-        </div>
-
-        <!-- Content Body -->
-        <div class="nuansa-reading-body" id="nuansa-topic-body">
-          <!-- Injected by js/nuansa.js -->
-        </div>
-
-        <!-- Interactive Quiz Box -->
-        <div class="lms-quiz-panel" style="margin-top: 36px; border-radius: 12px; background: #F8FAFC; border: 1px solid #E2E8F0; padding: 26px 28px;">
-          <div class="lms-quiz-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-            <h4 style="font-size: 1.1rem; font-weight: 800; color: #0F172A; margin: 0;">Kuis Refleksi Etika Sosial-Keagamaan</h4>
-            <span class="badge badge-green" style="font-size: 0.72rem; background: #DCFCE7; color: #166534; font-weight: 700; padding: 4px 10px; border-radius: 4px;">Studi Kasus Pemuda</span>
-          </div>
-
-          <p class="lms-quiz-question" id="nuansa-quiz-question" style="font-size: 1rem; font-weight: 600; color: #1E293B; line-height: 1.55; margin-bottom: 16px;">
-            Pertanyaan studi kasus sedang dimuat...
-          </p>
-
-          <div class="lms-quiz-options" id="nuansa-quiz-options">
-            <!-- Injected by js/nuansa.js -->
-          </div>
-
-          <div class="lms-quiz-feedback" id="nuansa-quiz-feedback" style="display: none; padding: 14px 18px; border-radius: 8px; font-size: 0.9rem; line-height: 1.55; margin-bottom: 16px;"></div>
-
-          <div style="margin-top: 18px;">
-            <button type="button" class="btn btn-primary btn-pill btn-sm" id="btn-submit-nuansa-quiz" style="background: #2F4F87; border-color: #2F4F87; color: #FFFFFF; font-weight: 700; padding: 10px 22px;">
-              Periksa Jawaban Refleksi
-            </button>
-          </div>
-        </div>
-      </article>
     </div>
-  </section>
+  </main>
 
   <!-- ==========================================================================
        FITUR 2: VIDEO EDUKASI SOSIAL-KEAGAMAAN (AUDIOVISUAL INSPIRATIF)
@@ -554,7 +600,7 @@
       <div class="section-header" style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 18px; margin-bottom: 36px;">
         <div style="max-width: 720px;">
           <span class="section-kicker" style="color: #2F4F87; font-weight: 800; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;">
-            FITUR 2 / KONTEN AUDIOVISUAL EDUKATIF
+            KONTEN AUDIOVISUAL EDUKATIF
           </span>
           <h2 style="font-family: var(--font-heading); font-size: 2.1rem; font-weight: 800; color: #0F172A; letter-spacing: -0.02em; margin-bottom: 8px;">
             Pojok Video Edukasi: Moderasi, Kesetaraan &amp; Martabat Manusia
@@ -563,13 +609,6 @@
             Kurasi konten video karya anak bangsa mengenai moderasi beragama, kepemimpinan pemuda, toleransi, inklusi sosial, dan penerapan nilai agama dalam kehidupan sehari-hari.
           </p>
         </div>
-        <button type="button" class="btn btn-primary btn-pill" onclick="openUploadVideoModal()" style="padding: 11px 22px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18">
-            <polygon points="23 7 16 12 23 17 23 7"></polygon>
-            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-          </svg>
-          + Upload Video YouTube
-        </button>
       </div>
 
       <!-- Container Video Grid (Populated by js/nuansa.js) -->
@@ -580,81 +619,29 @@
   </section>
 
   <!-- ==========================================================================
-       MODAL 1: UPLOAD TAUTAN VIDEO YOUTUBE EDUKASI
+       FITUR 3: RUANG DISKUSI & LIVE CHAT KAJIAN MODERASI BERAGAMA REAL-TIME
+       Mendiskusikan 4 Fondasi Etis, Refleksi Modul, dan Moderasi Beragama
        ========================================================================== -->
-  <div class="modal-overlay" id="modal-upload-video">
-    <div class="modal-window" style="max-width: 620px; padding: 28px;">
-      <div class="modal-header" style="padding-bottom: 14px; margin-bottom: 18px;">
-        <div>
-          <span style="font-size: 0.72rem; font-weight: 800; color: #BE185D; text-transform: uppercase; letter-spacing: 0.08em;">KONTRIBUSI AUDIOVISUAL PEMUDA</span>
-          <h3 style="font-size: 1.3rem; font-weight: 800; color: #0F172A; margin: 4px 0 0;">Upload Video YouTube Edukasi</h3>
-        </div>
-        <button type="button" class="modal-close" onclick="closeUploadVideoModal()" aria-label="Tutup">&times;</button>
+  <section class="nuansa-dialog-section" id="ruang-diskusi-nuansa" style="padding: 50px 0 65px; background: #F8FAFC; border-top: 1px solid #E2E8F0;">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 24px;">
+        <span class="section-kicker" style="color: #0F766E; font-weight: 800; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;">
+          LIVE CHAT &amp; KAJIAN MODERASI REAL-TIME
+        </span>
+        <h2 style="font-family: var(--font-heading); font-size: 2.1rem; font-weight: 800; color: #0F172A; letter-spacing: -0.02em; margin-bottom: 8px;">
+          Ruang Diskusi &amp; Live Chat Nilai Islam Moderat
+        </h2>
+        <p style="color: #64748B; font-size: 0.98rem; max-width: 760px; line-height: 1.6; margin: 0;">
+          Forum live chat interaktif untuk mengkaji 4 Fondasi Etis Islam (<em>Al-'Adl, Ukhuwah, Rahmah, Maslahah</em>), mendiskusikan materi video edukasi, dan berbagi pandangan tentang moderasi beragama bersama rekan sebaya.
+        </p>
       </div>
 
-      <div class="modal-body">
-        <form id="form-upload-video">
-          <div class="form-group" style="margin-bottom: 14px;">
-            <label for="yt-video-url" style="font-weight: 700; font-size: 0.88rem; color: #0F172A; display: block; margin-bottom: 6px;">
-              Tautan / Link Video YouTube <span style="color: #EF4444;">*</span>
-            </label>
-            <input type="url" id="yt-video-url" class="form-control" placeholder="Contoh: https://www.youtube.com/watch?v=zzWGNlDuTkA atau https://youtu.be/..." required>
-            <small style="color: #64748B; font-size: 0.78rem; display: block; margin-top: 4px;">Mendukung format link YouTube biasa, shorts, maupun youtu.be</small>
-
-            <!-- Live Preview Mini Box -->
-            <div id="yt-preview-box" style="display: none; margin-top: 10px; padding: 10px; border-radius: 8px; background: #F8FAFC; border: 1px solid #E2E8F0; align-items: center; gap: 12px;">
-              <img id="yt-preview-thumb" src="" alt="Preview Thumbnail" style="width: 100px; height: 58px; object-fit: cover; border-radius: 6px;">
-              <div style="font-size: 0.82rem; color: #166534; font-weight: 700;">✓ Tautan YouTube Valid Terdeteksi</div>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 14px;">
-            <label for="yt-video-title" style="font-weight: 700; font-size: 0.88rem; color: #0F172A; display: block; margin-bottom: 6px;">
-              Judul Video Edukasi <span style="color: #EF4444;">*</span>
-            </label>
-            <input type="text" id="yt-video-title" class="form-control" placeholder="Contoh: Refleksi Ukhuwah &amp; Kesetaraan Pemuda Kampus" required>
-          </div>
-
-          <div class="form-grid-2" style="margin-bottom: 14px;">
-            <div class="form-group">
-              <label for="yt-video-channel" style="font-weight: 700; font-size: 0.88rem; color: #0F172A; display: block; margin-bottom: 6px;">
-                Nama Kanal / Inisiator <span style="color: #EF4444;">*</span>
-              </label>
-              <input type="text" id="yt-video-channel" class="form-control" placeholder="Contoh: ARUTALA Media / Nama Kamu" required>
-            </div>
-            <div class="form-group">
-              <label for="yt-video-category" style="font-weight: 700; font-size: 0.88rem; color: #0F172A; display: block; margin-bottom: 6px;">
-                Kategori Video <span style="color: #EF4444;">*</span>
-              </label>
-              <select id="yt-video-category" class="form-control" required>
-                <option value="Moderasi &amp; Gender">Moderasi &amp; Gender</option>
-                <option value="Pemberdayaan Sebaya">Pemberdayaan Sebaya</option>
-                <option value="Inklusivitas Kampus">Inklusivitas Kampus</option>
-                <option value="Toleransi &amp; Nilai">Toleransi &amp; Nilai</option>
-                <option value="Kearifan Budaya">Kearifan Budaya</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-bottom: 18px;">
-            <label for="yt-video-takeaways" style="font-weight: 700; font-size: 0.88rem; color: #0F172A; display: block; margin-bottom: 6px;">
-              Poin Pembelajaran / Refleksi Singkat <span style="color: #EF4444;">*</span>
-            </label>
-            <textarea id="yt-video-takeaways" class="form-control" rows="3" placeholder="Tuliskan pesan moral, poin refleksi, atau ringkasan edukasi yang ingin dibagikan..." required></textarea>
-          </div>
-
-          <div id="yt-video-status" style="display: none; padding: 10px 14px; border-radius: 8px; margin-bottom: 14px; font-size: 0.88rem;"></div>
-
-          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px;">
-            <button type="button" class="btn btn-outline" onclick="closeUploadVideoModal()">Batal</button>
-            <button type="submit" id="btn-submit-upload-video" class="btn btn-primary" style="background: #2F4F87; color: #FFFFFF; font-weight: 700; padding: 10px 22px;">
-              Tayangkan Video
-            </button>
-          </div>
-        </form>
+      <!-- Live Chat Container Component -->
+      <div id="nuansa-livechat-container">
+        <!-- Rendered dynamically by js/nuansa.js -->
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- ==========================================================================
        MODAL: VIDEO PLAYER POPUP
@@ -678,32 +665,30 @@
   </div>
 
   <!-- ==========================================================================
-       FOOTER RESMI ARUTALA (Sesuai Standar OASE III PTKIN)
+       FOOTER RESMI ARUTALA
        ========================================================================== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-            <img src="img/logo.png" alt="Logo ARUTALA" style="width: 38px; height: 38px; object-fit: contain; border-radius: 8px;">
-            <img src="img/uin_logo.png" alt="UIN Bandung" style="width: 32px; height: 32px; object-fit: contain; opacity: 0.9;">
-            <h3 style="margin-bottom: 0;">ARUTALA</h3>
+            <h3 style="margin-bottom: 0; font-family: var(--font-heading); font-weight: 900; font-size: 1.6rem; color: #0F172A; letter-spacing: -0.02em;">ARUTALA</h3>
           </div>
           <p>
             Akses Ruang Tumbuh yang Agamis, Setara, dan Adil. Model Inovasi Ekosistem Pengembangan Kapasitas Pemuda yang inklusif berbasis nilai keagamaan dan kesetaraan gender.
           </p>
-          <span class="badge badge-blue" style="font-size: 0.75rem;">OASE III PTKIN 2026</span>
+          <span class="badge badge-blue" style="font-size: 0.75rem;">Inovasi Sosial 2026</span>
         </div>
 
         <div class="footer-col">
           <h4>Navigasi Halaman</h4>
           <ul class="footer-links">
             <li><a href="index.html#beranda">Beranda Utama</a></li>
-            <li><a href="index.html#artikel-opini">Artikel &amp; Jurnal</a></li>
-            <li><a href="karsa.html">Pilar KARSA (Modul Skill)</a></li>
-            <li><a href="nuansa.html">Pilar NUANSA (Agama &amp; Video)</a></li>
-            <li><a href="index.html#registrasi-circle">Pilar TEMARA (Tutor Sebaya)</a></li>
-            <li><a href="index.html#aksi-sosial">Pilar AKSARA (Aksi &amp; Donasi)</a></li>
+            <li><a href="artikel.html">Artikel &amp; Jurnal</a></li>
+            <li><a href="karsa.html">Pilar KARSA</a></li>
+            <li><a href="nuansa.html">Pilar NUANSA</a></li>
+            <li><a href="temara.html">Pilar TEMARA</a></li>
+            <li><a href="aksara.html">Pilar AKSARA</a></li>
           </ul>
         </div>
 
@@ -714,6 +699,7 @@
             <li><a href="#literasi-kontekstual">Literasi Kontekstual</a></li>
             <li><a href="#literasi-kontekstual">Kuis Refleksi Etika</a></li>
             <li><a href="#video-edukasi">Video Edukasi Moderasi</a></li>
+            <li><a href="#ruang-diskusi-nuansa">Live Chat Kajian Moderasi</a></li>
           </ul>
         </div>
 
@@ -730,7 +716,7 @@
 
       <div class="footer-bottom">
         <div>
-          &copy; 2026 ARUTALA - UIN Sunan Gunung Djati Bandung. Dikembangkan untuk OASE III PTKIN.
+          &copy; 2026 ARUTALA - UIN Sunan Gunung Djati Bandung. Seluruh hak cipta dilindungi.
         </div>
         <div>
           Prinsip: <em>Silih Asah, Silih Asih, Silih Asuh</em> / Bebas Diskriminasi
@@ -744,6 +730,10 @@
   <script src="js/supabase.js"></script>
   <script src="js/data.js"></script>
   <script src="js/interactions.js"></script>
-  <script src="js/nuansa.js"></script>
+  <script>
+    window.ARUTALA_CURRENT_TRACK = "nuansa";
+  </script>
+  <script src="js/modul.js"></script>
+  <script src="js/nuansa.js?v=4.2"></script>
 </body>
 </html>

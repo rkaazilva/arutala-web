@@ -12,70 +12,21 @@ document.addEventListener("DOMContentLoaded", () => {
   initAksaraProjects();
   initProposalSubmission();
   initAksaraDonations();
-  initAksaraDialogForum();
+  initAksaraLiveChat();
   initNewDialogModalForm();
   setupAksaraDrawer();
 });
 
 // --------------------------------------------------------------------------
-// 1. PENGAJUAN PROYEK SOSIAL & GALERI BENTO AKSI NYATA (FITUR 1)
+// 1. PENGAJUAN DANA PROYEK SOSIAL PEMUDA (FITUR 1) - TANPA FOTO DUMMY
 // --------------------------------------------------------------------------
-const DEFAULT_ACTIONS_DATA = [
-  {
-    id: "act-1",
-    title: "Pojok Literasi & Edukasi Digital Ramah Difabel",
-    category: "inklusi",
-    categoryLabel: "Inklusi Sosial",
-    badge: "Inklusi & Difabel",
-    circleName: "Circle UIN Bandung x Komunitas Difabel",
-    location: "Cibiru, Kota Bandung",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1000&q=80",
-    description: "Penyediaan modul audio dan gawai ramah disabilitas bagi 45 remaja berkebutuhan khusus untuk memperluas akses literasi keagamaan dan keterampilan digital.",
-    date: "10 Oktober 2026"
-  },
-  {
-    id: "act-2",
-    title: "Gerakan Santriwati Tanggap Anti-Kekerasan Seksual",
-    category: "gender",
-    categoryLabel: "Kesetaraan Gender",
-    badge: "Kesetaraan Gender",
-    circleName: "Fasilitator Sebaya ARUTALA",
-    location: "Pesantren Al-Hikmah, Jawa Barat",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=80",
-    description: "Pelatihan fasilitasi sebaya dan pembentukan posko pengaduan ramah santriwati untuk menciptakan lingkungan pesantren yang aman, adil, dan bermartabat.",
-    date: "05 Oktober 2026"
-  },
-  {
-    id: "act-3",
-    title: "Dialog Budaya Silih Asah Asuh Pemuda Lintas Iman",
-    category: "kemanusiaan",
-    categoryLabel: "Solidaritas Kemanusiaan",
-    badge: "Lintas Iman & Budaya",
-    circleName: "Aliansi Pemuda Bandung Damai",
-    location: "Balai Warga Dago, Bandung",
-    image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1000&q=80",
-    description: "Sarasehan budaya dan kerja bakti lintas keyakinan untuk merawat tradisi gotong royong dan memutus polarisasi di ruang akar rumput.",
-    date: "28 September 2026"
-  },
-  {
-    id: "act-4",
-    title: "Aksi Bersih Sungai & Penghijauan Berkelanjutan",
-    category: "lingkungan",
-    categoryLabel: "Lingkungan Hidup",
-    badge: "Kelestarian Alam",
-    circleName: "Relawan Hijau ARUTALA",
-    location: "Bantaran Sungai Citarum Hulu",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80",
-    description: "Menghubungkan nilai Islam menjaga alam (hifzh al-bi'ah) dengan penanaman 500 bibit pohon keras bersama masyarakat setempat.",
-    date: "20 September 2026"
-  }
-];
+const DEFAULT_ACTIONS_DATA = [];
 
 let ALL_PROJECTS = [];
 let CURRENT_PROJECT_FILTER = "all";
 
 async function initAksaraProjects() {
-  const container = document.getElementById("aksara-bento-container");
+  const container = document.getElementById("aksara-proposals-container") || document.getElementById("aksara-bento-container");
   if (!container) return;
 
   ALL_PROJECTS = [...DEFAULT_ACTIONS_DATA];
@@ -86,14 +37,24 @@ async function initAksaraProjects() {
       if (Array.isArray(cloudActions) && cloudActions.length > 0) {
         const formattedCloud = cloudActions.map(act => ({
           id: act.id,
+          ticketId: act.ticketId || act.ticket_id || ("PROP-" + String(act.id).slice(-4)),
           title: act.title,
-          category: "literasi",
-          categoryLabel: "Proyek Terverifikasi",
-          badge: act.badge || "Aksi Terverifikasi",
-          circleName: act.circleName || act.submitter || "Komunitas ARUTALA",
+          category: act.category || "gender",
+          categoryLabel: act.categoryLabel || act.category_label || "Aksi Sosial",
+          circleName: act.circleName || act.circle_name || act.submitter || "Komunitas Pengusung",
+          picName: act.picName || act.pic_name || act.initiator || "PIC Komunitas",
+          contact: act.contact || "-",
+          email: act.email || "-",
           location: act.location || "Indonesia",
-          image: act.image || "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=1000&q=80",
+          rawBudget: Number(act.rawBudget || act.budget || 0),
+          budgetAmount: act.budgetAmount || (act.budget ? Number(act.budget).toLocaleString('id-ID') : "-"),
+          beneficiaries: act.beneficiaries || "Penerima Manfaat",
+          duration: act.duration || "1 Bulan",
           description: act.description || "",
+          docLink: act.docLink || act.doc_link || "",
+          bankInfo: act.bankInfo || act.bank_info || "-",
+          status: act.status || "review",
+          statusLabel: act.statusLabel || "Menunggu Kurasi Review Tim ARUTALA",
           date: act.date || "Baru saja"
         }));
         ALL_PROJECTS = [...formattedCloud, ...ALL_PROJECTS];
@@ -108,7 +69,7 @@ async function initAksaraProjects() {
     ALL_PROJECTS = [...localProposals, ...ALL_PROJECTS];
   }
 
-  renderBentoProjects();
+  renderAksaraProposals();
 
   const filterBtns = document.querySelectorAll(".aksara-filter-btn");
   filterBtns.forEach(btn => {
@@ -116,13 +77,13 @@ async function initAksaraProjects() {
       filterBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       CURRENT_PROJECT_FILTER = btn.getAttribute("data-filter") || "all";
-      renderBentoProjects();
+      renderAksaraProposals();
     });
   });
 }
 
-function renderBentoProjects() {
-  const container = document.getElementById("aksara-bento-container");
+function renderAksaraProposals() {
+  const container = document.getElementById("aksara-proposals-container") || document.getElementById("aksara-bento-container");
   if (!container) return;
 
   const filtered = ALL_PROJECTS.filter(p => {
@@ -132,48 +93,88 @@ function renderBentoProjects() {
 
   if (filtered.length === 0) {
     container.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 48px 20px; background: #F8FAFC; border-radius: 12px; border: 1px dashed #CBD5E1;">
-        <h4 style="font-size: 1.1rem; color: #475569; margin-bottom: 8px;">Belum ada proyek dalam kategori ini</h4>
-        <p style="color: #64748B; font-size: 0.9rem; margin-bottom: 16px;">Jadilah yang pertama mengajukan inisiatif aksi sosialmu!</p>
-        <button type="button" class="btn btn-primary btn-sm btn-pill" onclick="openProposalModal()" style="background: #2F4F87; color: #FFFFFF;">
-          + Ajukan Proposal Sekarang
+      <div class="proposals-empty-state">
+        <div class="empty-state-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="46" height="46">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <h4 class="empty-state-title">Belum Ada Pengajuan Proposal Proyek Sosial</h4>
+        <p class="empty-state-desc">
+          Komunitas atau kelompok pemudamu memiliki rancangan aksi sosial nyata untuk perubahan di lingkunganmu? Daftarkan proposal proyek sosialmu sekarang untuk dikurasi, dipublikasikan, dan dikolaborasikan bersama ekosistem pemuda ARUTALA.
+        </p>
+        <button type="button" class="btn btn-primary btn-pill" onclick="openProposalModal()" style="padding: 12px 26px; font-weight: 700; background: #2F4F87; color: #FFFFFF;">
+          + Ajukan Proposal Proyek Sosial Sekarang
         </button>
       </div>
     `;
     return;
   }
 
-  container.innerHTML = filtered.map((act, idx) => {
-    const isSpan2 = (idx === 0 || idx === 3);
-    const submitter = act.circleName || act.submitter || "Komunitas ARUTALA";
-    const loc = act.location || "Jawa Barat";
+  container.innerHTML = filtered.map(prop => {
+    const isApproved = prop.status === "approved";
+    const statusText = prop.statusLabel || (isApproved ? "Terkurasi &amp; Siap Aksi" : "Menunggu Kurasi &amp; Review");
+    const statusClass = isApproved ? "status-approved" : "status-review";
+    const ticket = prop.ticketId || prop.id || "PROP-2026";
+    const budgetDisplay = prop.rawBudget ? `Rp ${Number(prop.rawBudget).toLocaleString('id-ID')}` : (prop.budgetAmount || "-");
 
     return `
-      <div class="bento-item ${isSpan2 ? 'bento-span-2' : ''}" onclick="alert('${act.title}\\n\\nLokasi: ${loc}\\nDokumentasi oleh: ${submitter}\\n\\n${act.description}')">
-        <div class="bento-media">
-          <img src="${act.image}" alt="${act.title}" class="bento-img" loading="lazy">
-          <span class="bento-badge">${act.badge || 'Dokumentasi Aksi'}</span>
+      <div class="proposal-card-item">
+        <div class="prop-card-header">
+          <div class="prop-card-badge-row">
+            <span class="prop-badge-cat">${prop.categoryLabel || prop.category || 'Proyek Sosial'}</span>
+            <span class="prop-badge-status ${statusClass}">${statusText}</span>
+          </div>
+          <span class="prop-card-ticket">#${ticket}</span>
         </div>
-        <div class="bento-overlay">
-          <div class="bento-overlay-body">
-            <div class="bento-location">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14" height="14">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              <span>${loc}</span>
-            </div>
-            <h3 class="bento-title">${act.title}</h3>
-            <p class="bento-description">${act.description}</p>
-            <div class="bento-credit">
-              <span class="credit-label">Dokumentasi oleh</span>
-              <strong class="credit-name">${submitter}</strong>
-            </div>
+
+        <h3 class="prop-card-title">${prop.title}</h3>
+
+        <div class="prop-card-meta-grid">
+          <div class="prop-meta-item">
+            <span class="prop-meta-label">Komunitas Pengusung</span>
+            <strong class="prop-meta-val">${prop.circleName || 'Komunitas ARUTALA'}</strong>
+          </div>
+          <div class="prop-meta-item">
+            <span class="prop-meta-label">Penanggung Jawab (PIC)</span>
+            <strong class="prop-meta-val">${prop.picName || '-'} (${prop.contact || '-'})</strong>
+          </div>
+          <div class="prop-meta-item">
+            <span class="prop-meta-label">Lokasi &amp; Sasaran Manfaat</span>
+            <strong class="prop-meta-val">${prop.location || 'Indonesia'} / ${prop.beneficiaries || '-'}</strong>
+          </div>
+          <div class="prop-meta-item">
+            <span class="prop-meta-label">Estimasi Anggaran Proyek</span>
+            <strong class="prop-meta-val prop-budget-highlight">${budgetDisplay}</strong>
+          </div>
+        </div>
+
+        <div class="prop-card-desc">
+          <p>${prop.description}</p>
+        </div>
+
+        <div class="prop-card-footer">
+          <span class="prop-card-date">Diajukan: ${prop.date || 'Baru saja'}</span>
+          <div>
+            ${prop.docLink ? `
+              <a href="${prop.docLink}" target="_blank" rel="noopener noreferrer" class="prop-doc-btn">
+                Buka Dokumen Proposal &rarr;
+              </a>
+            ` : ''}
           </div>
         </div>
       </div>
     `;
   }).join("");
+}
+
+// Backward-compatibility alias
+function renderBentoProjects() {
+  renderAksaraProposals();
 }
 
 function initProposalSubmission() {
@@ -187,32 +188,49 @@ function initProposalSubmission() {
     e.preventDefault();
 
     const title = document.getElementById("prop-title")?.value.trim() || "";
-    const category = document.getElementById("prop-category")?.value || "literasi";
+    const category = document.getElementById("prop-category")?.value || "gender";
     const categoryLabel = document.getElementById("prop-category")?.selectedOptions[0]?.text || "Aksi Sosial";
     const location = document.getElementById("prop-location")?.value.trim() || "";
     const initiator = document.getElementById("prop-initiator")?.value.trim() || "";
+    const picName = document.getElementById("prop-pic-name")?.value.trim() || initiator;
     const contact = document.getElementById("prop-contact")?.value.trim() || "";
+    const email = document.getElementById("prop-email")?.value.trim() || "";
+    const budgetRaw = document.getElementById("prop-budget")?.value.trim() || "0";
+    const beneficiaries = document.getElementById("prop-beneficiaries")?.value.trim() || "-";
+    const duration = document.getElementById("prop-duration")?.value.trim() || "1 Bulan";
     const desc = document.getElementById("prop-desc")?.value.trim() || "";
-    const budget = document.getElementById("prop-budget")?.value.trim() || "-";
+    const docLink = document.getElementById("prop-doc-link")?.value.trim() || "";
+    const bankInfo = document.getElementById("prop-bank-info")?.value.trim() || "-";
 
-    if (!title || !location || !initiator || !contact || !desc) {
+    if (!title || !location || !initiator || !picName || !contact || !desc || !budgetRaw) {
       showStatus("Mohon lengkapi seluruh kolom wajib bertanda bintang (*).", "error");
       return;
     }
 
+    const budgetNum = Number(budgetRaw) || 0;
+    const ticketId = "PROP-2026-" + Math.floor(1000 + Math.random() * 9000);
+
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.textContent = "Mengirim Proposal...";
+      submitBtn.textContent = "Mengirim Proposal Proyek Sosial...";
     }
 
     const payload = {
       title: title,
+      ticket_id: ticketId,
       location: location,
       circle_name: initiator,
-      circleName: initiator,
       submitter: initiator,
-      image: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=1000&q=80",
-      description: `[Fokus: ${categoryLabel}] ${desc} (PIC: ${contact} | Estimasi: ${budget})`
+      pic_name: picName,
+      contact: contact,
+      email: email,
+      budget: budgetNum,
+      beneficiaries: beneficiaries,
+      duration: duration,
+      doc_link: docLink,
+      bank_info: bankInfo,
+      status: "review",
+      description: desc
     };
 
     try {
@@ -224,27 +242,37 @@ function initProposalSubmission() {
         }
       }
 
-      const newActionItem = {
+      const newProposalItem = {
         id: "prop-" + Date.now(),
+        ticketId: ticketId,
         title: title,
         category: category,
         categoryLabel: categoryLabel,
-        badge: categoryLabel,
-        circleName: initiator,
         location: location,
-        image: payload.image,
+        circleName: initiator,
+        picName: picName,
+        contact: contact,
+        email: email,
+        rawBudget: budgetNum,
+        budgetAmount: `Rp ${budgetNum.toLocaleString('id-ID')}`,
+        beneficiaries: beneficiaries,
+        duration: duration,
         description: desc,
-        date: "Baru saja diajukan"
+        docLink: docLink,
+        bankInfo: bankInfo,
+        status: "review",
+        statusLabel: "Menunggu Kurasi & Kolaborasi Tim ARUTALA",
+        date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
       };
 
       const existingLocal = JSON.parse(localStorage.getItem("arutala_proposals_local") || "[]");
-      existingLocal.unshift(newActionItem);
+      existingLocal.unshift(newProposalItem);
       localStorage.setItem("arutala_proposals_local", JSON.stringify(existingLocal));
 
-      ALL_PROJECTS.unshift(newActionItem);
-      renderBentoProjects();
+      ALL_PROJECTS.unshift(newProposalItem);
+      renderAksaraProposals();
 
-      showStatus("✓ Proposal Berhasil Diajukan! Tim Kurasi ARUTALA akan meninjau dan menghubungi kontak penanggung jawab dalam 2x24 jam.", "success");
+      showStatus(`<strong>Proposal Proyek Sosial Berhasil Dikirim!</strong><br>No. Tiket: <strong>#${ticketId}</strong>. Tim Kurasi ARUTALA akan meninjau rancangan aksi dan menghubungi penanggung jawab (PIC) via WhatsApp (${contact}) dalam 2x24 jam kerja.`, "success");
       form.reset();
 
       setTimeout(() => {
@@ -257,7 +285,7 @@ function initProposalSubmission() {
     } finally {
       if (submitBtn) {
         submitBtn.disabled = false;
-        submitBtn.textContent = "Kirim Proposal Proyek Sosial";
+        submitBtn.textContent = "Kirim Proposal Proyek Sosial →";
       }
     }
   });
@@ -273,44 +301,141 @@ function initProposalSubmission() {
 }
 
 // --------------------------------------------------------------------------
-// 2. DUKUNGAN DAN DONASI SOSIAL DENGAN QRIS RESMI (FITUR 2)
+// 2. PLATFORM DONASI TANGGAP BENCANA ALAM & SOLIDARITAS KEMANUSIAAN (FITUR 2)
 // --------------------------------------------------------------------------
+const AKSARA_SOCIAL_CAMPAIGNS = [
+  {
+    id: "camp-banjir-bandang",
+    category: "BANJIR BANDANG & LOGISTIK",
+    title: "Tanggap Darurat Banjir Bandang & Bantuan Dapur Umum Pengungsi",
+    shortTitle: "Bantuan Banjir Bandang & Dapur Umum",
+    organizer: "Posko Siaga Bencana Relawan ARUTALA",
+    verified: true,
+    image: "img/harmoni_pemuda_aljabbar.png",
+    target: 35000000,
+    collected: 27850000,
+    donorCount: 264,
+    daysLeft: 12,
+    description: "Pengadaan bahan pangan dapur umum siap santap, air minum bersih, pakaian kering, selimut hangat, dan perlengkapan bayi bagi warga pengungsi terdampak banjir bandang.",
+    highlightDoc: "img/harmoni_pemuda_aljabbar.png",
+    docCaption: "Penyaluran Nyata: Distribusi Makanan Siap Santap Dapur Umum Korban Banjir"
+  },
+  {
+    id: "camp-gempa-bumi",
+    category: "GEMPA BUMI & SHELTER",
+    title: "Paket Tenda Darurat, Terpal Alas Tidur & Hygiene Kit Korban Gempa",
+    shortTitle: "Posko Gempa & Tenda Pengungsian",
+    organizer: "Tim Tanggap Darurat Bencana ARUTALA",
+    verified: true,
+    image: "img/santriwati_galeri_rasulullah.png",
+    target: 45000000,
+    collected: 34200000,
+    donorCount: 312,
+    daysLeft: 16,
+    description: "Penyediaan tenda darurat keluarga, terpal tahan air, paket sanitasi (sabun, pembalut, pasta gigi), dan tikar alas tidur bagi warga yang kehilangan tempat tinggal pascagempa.",
+    highlightDoc: "img/santriwati_galeri_rasulullah.png",
+    docCaption: "Penyaluran Nyata: Pendirian Tenda Darurat & Distribusi Logistik Pengungsi Gempa"
+  },
+  {
+    id: "camp-tanah-longsor",
+    category: "LONGSOR & EVAKUASI",
+    title: "Aksi Medis Cepat & Bantuan Sembako Warga Terdampak Tanah Longsor",
+    shortTitle: "Tanggap Darurat Tanah Longsor",
+    organizer: "Satgas Bencana Pemuda ARUTALA",
+    verified: true,
+    image: "img/circle_mentoring_sebaya.jpg",
+    target: 25000000,
+    collected: 18400000,
+    donorCount: 178,
+    daysLeft: 9,
+    description: "Bantuan logistik sembako cepat, obat luka & pertolongan pertama, senter penerangan darurat, serta dukungan bagi warga yang rumahnya tertimbun longsor.",
+    highlightDoc: "img/circle_mentoring_sebaya.jpg",
+    docCaption: "Penyaluran Nyata: Penyaluran Paket Sembako & Obat-obatan Bencana Longsor"
+  },
+  {
+    id: "camp-erupsi-krisis",
+    category: "ERUPSI GUNUNG & ABU",
+    title: "Distribusi Masker Respirator N95, Air Bersih & Posko Trauma Healing",
+    shortTitle: "Bantuan Erupsi Gunung & Krisis Udara",
+    organizer: "Jejaring Relawan Kemanusiaan ARUTALA",
+    verified: true,
+    image: "img/pojok_baca_anak.jpg",
+    target: 30000000,
+    collected: 22150000,
+    donorCount: 195,
+    daysLeft: 22,
+    description: "Pembagian masker respirator medis/N95 penyaring abu vulkanik pekat, tangki distribusi air bersih, kacamata pelindung, serta posko ramah anak di pengungsian erupsi.",
+    highlightDoc: "img/pojok_baca_anak.jpg",
+    docCaption: "Penyaluran Nyata: Distribusi Masker & Trauma Healing Anak Pengungsi Erupsi"
+  }
+];
+
 const DEFAULT_DONORS_DATA = [
   {
     id: "don-1",
     donorName: "Hamba Allah (Alumni UIN)",
     amount: 100000,
-    targetPackage: "Paket Pendampingan Mentee Sebaya",
-    message: "Semoga gerakan ruang aman ini terus meluas dan memberkahi adik-adik mahasiswa.",
-    time: "10 menit lalu",
+    targetPackage: "Bantuan Banjir Bandang & Dapur Umum",
+    campaignId: "camp-banjir-bandang",
+    message: "Bismillah untuk bantuan saudara-saudara kita korban banjir bandang. Semoga lekas surut dan selalu dalam lindungan-Nya!",
+    time: "8 menit lalu",
     initial: "H"
   },
   {
     id: "don-2",
-    donorName: "Siti Rahmawati",
+    donorName: "Siti Nurhaliza",
     amount: 50000,
-    targetPackage: "Paket Ruang Belajar Modul",
-    message: "Keren banget gagasannya! Semangat untuk tim OASE III PTKIN.",
-    time: "1 jam lalu",
+    targetPackage: "Posko Gempa & Tenda Pengungsian",
+    campaignId: "camp-gempa-bumi",
+    message: "Semoga tenda darurat dan selimut ini bisa sedikit menghangatkan kawan-kawan pengungsi gempa. Tetap kuat ya saudaraku!",
+    time: "35 menit lalu",
     initial: "S"
   },
   {
     id: "don-3",
     donorName: "Fajar Nugraha",
     amount: 25000,
-    targetPackage: "Dukungan Aksi Sosial Desa",
-    message: "Sedekah pemuda untuk masa depan yang lebih adil dan toleran.",
-    time: "3 jam lalu",
+    targetPackage: "Tanggap Darurat Tanah Longsor",
+    campaignId: "camp-tanah-longsor",
+    message: "Sedekah untuk posko sembako dan balita di posko pengungsian longsor. Lekas pulih kampung halaman tercinta.",
+    time: "2 jam lalu",
     initial: "F"
+  },
+  {
+    id: "don-4",
+    donorName: "dr. Hendra Pratama",
+    amount: 150000,
+    targetPackage: "Bantuan Banjir Bandang & Dapur Umum",
+    campaignId: "camp-banjir-bandang",
+    message: "Untuk tambahan obat-obatan darurat dan nutrisi anak-anak di posko banjir. Semangat seluruh relawan di lapangan!",
+    time: "3 jam lalu",
+    initial: "H"
+  },
+  {
+    id: "don-5",
+    donorName: "Hamba Allah (Keluarga Berkah)",
+    amount: 50000,
+    targetPackage: "Bantuan Erupsi Gunung & Krisis Udara",
+    campaignId: "camp-erupsi-krisis",
+    message: "Semoga saudara kita yang terdampak erupsi selalu diberi kesehatan paru-paru, air bersih cukup, dan keselamatan.",
+    time: "5 jam lalu",
+    initial: "H"
   }
 ];
 
+let ACTIVE_CAMPAIGNS = [];
 let CURRENT_DONORS = [];
+let SELECTED_CAMPAIGN_ID = "camp-banjir-bandang";
 let SELECTED_DONATION_AMOUNT = 10000;
 
 async function initAksaraDonations() {
-  const container = document.getElementById("donor-feed-list");
-  if (!container) return;
+  const localCamps = JSON.parse(localStorage.getItem("arutala_social_campaigns_local") || "null");
+  if (Array.isArray(localCamps) && localCamps.length > 0 && localCamps.some(c => c.id && (c.id.includes("banjir") || c.id.includes("gempa")))) {
+    ACTIVE_CAMPAIGNS = localCamps;
+  } else {
+    ACTIVE_CAMPAIGNS = [...AKSARA_SOCIAL_CAMPAIGNS];
+    localStorage.setItem("arutala_social_campaigns_local", JSON.stringify(ACTIVE_CAMPAIGNS));
+  }
 
   CURRENT_DONORS = [...DEFAULT_DONORS_DATA];
 
@@ -320,12 +445,13 @@ async function initAksaraDonations() {
       if (Array.isArray(cloudDonations) && cloudDonations.length > 0) {
         const formatted = cloudDonations.map(d => ({
           id: d.id,
-          donorName: d.donorName || "Hamba Allah",
-          amount: d.amount || 50000,
-          targetPackage: d.targetPackage || "Paket Edukasi Pemuda",
-          message: d.message || "Semoga bermanfaat untuk gerakan pemuda.",
+          donorName: d.donorName || d.donor_name || "Hamba Allah",
+          amount: Number(d.amount) || 50000,
+          targetPackage: d.targetPackage || d.package_name || "Bantuan Tanggap Bencana",
+          campaignId: d.campaignId || d.campaign_id || "camp-banjir-bandang",
+          message: d.message || "Semoga bermanfaat dan lekas pulih untuk saudara kita.",
           time: d.time || "Baru saja",
-          initial: d.donorName ? d.donorName.charAt(0).toUpperCase() : "H"
+          initial: (d.donorName || d.donor_name) ? (d.donorName || d.donor_name).charAt(0).toUpperCase() : "H"
         }));
         CURRENT_DONORS = [...formatted, ...CURRENT_DONORS];
       }
@@ -339,15 +465,140 @@ async function initAksaraDonations() {
     CURRENT_DONORS = [...localDons, ...CURRENT_DONORS];
   }
 
+  renderSocialCampaigns();
+  populateCampaignDropdown();
+  selectAksaraCampaign(SELECTED_CAMPAIGN_ID, false);
   renderDonorsFeed();
-  updateAksaraDonationProgress();
 }
+
+function renderSocialCampaigns() {
+  const container = document.getElementById("social-campaigns-container");
+  if (!container) return;
+
+  container.innerHTML = ACTIVE_CAMPAIGNS.map(camp => {
+    const isSelected = camp.id === SELECTED_CAMPAIGN_ID;
+    const percent = Math.min(100, Math.round((camp.collected / camp.target) * 100));
+
+    return `
+      <div class="social-campaign-card ${isSelected ? 'active-selected' : ''}" id="card-${camp.id}" onclick="selectAksaraCampaign('${camp.id}', true)">
+        <div class="campaign-card-thumb-wrap">
+          <img src="${camp.image}" alt="${camp.title}" class="campaign-card-thumb-img" loading="lazy">
+          <span class="campaign-cat-pill">${camp.category}</span>
+          ${isSelected ? `<span class="campaign-selected-badge">Dipilih</span>` : ''}
+        </div>
+        <div class="campaign-card-content">
+          <div class="campaign-verified-row">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            <span>Terverifikasi ARUTALA Care</span>
+          </div>
+          <h4 class="campaign-card-title" title="${camp.title}">${camp.title}</h4>
+          <div class="campaign-card-organizer">
+            <span>Oleh: <strong>${camp.organizer}</strong></span>
+          </div>
+
+          <div class="campaign-card-progress">
+            <div class="campaign-card-bar-bg">
+              <div class="campaign-card-bar-fill" style="width: ${percent}%;"></div>
+            </div>
+            <div class="campaign-card-amounts">
+              <div>
+                <span style="font-size: 0.68rem; color: #64748B; display: block;">Terkumpul:</span>
+                <span class="campaign-card-collected">Rp ${camp.collected.toLocaleString('id-ID')}</span>
+              </div>
+              <div style="text-align: right;">
+                <span style="font-size: 0.68rem; color: #64748B; display: block;">Target:</span>
+                <span class="campaign-card-target">Rp ${camp.target.toLocaleString('id-ID')}</span>
+              </div>
+            </div>
+            <div class="campaign-card-meta">
+              <span>${camp.donorCount} Donatur</span>
+              <span style="color: #D97706; font-weight: 700;">${camp.daysLeft} Hari lagi</span>
+            </div>
+            <button type="button" class="campaign-btn-select">
+              ${isSelected ? 'Program Sedang Dipilih' : 'Donasi Program Ini &rarr;'}
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function populateCampaignDropdown() {
+  const select = document.getElementById("don-program-select");
+  if (!select) return;
+
+  select.innerHTML = ACTIVE_CAMPAIGNS.map(camp => `
+    <option value="${camp.id}" ${camp.id === SELECTED_CAMPAIGN_ID ? 'selected' : ''}>
+      ${camp.title} (Terkumpul Rp ${camp.collected.toLocaleString('id-ID')})
+    </option>
+  `).join("");
+}
+
+window.selectAksaraCampaign = function (campaignId, scrollDown) {
+  const found = ACTIVE_CAMPAIGNS.find(c => c.id === campaignId);
+  if (!found) return;
+
+  SELECTED_CAMPAIGN_ID = campaignId;
+
+  document.querySelectorAll(".social-campaign-card").forEach(card => {
+    card.classList.remove("active-selected");
+    const badge = card.querySelector(".campaign-selected-badge");
+    if (badge) badge.remove();
+    const btn = card.querySelector(".campaign-btn-select");
+    if (btn) btn.textContent = "Donasi Program Ini →";
+  });
+
+  const activeCard = document.getElementById(`card-${campaignId}`);
+  if (activeCard) {
+    activeCard.classList.add("active-selected");
+    const thumbWrap = activeCard.querySelector(".campaign-card-thumb-wrap");
+    if (thumbWrap && !thumbWrap.querySelector(".campaign-selected-badge")) {
+      const badge = document.createElement("span");
+      badge.className = "campaign-selected-badge";
+      badge.innerHTML = "Dipilih";
+      thumbWrap.appendChild(badge);
+    }
+    const btn = activeCard.querySelector(".campaign-btn-select");
+    if (btn) btn.textContent = "Program Sedang Dipilih";
+  }
+
+  const dropdown = document.getElementById("don-program-select");
+  if (dropdown) dropdown.value = campaignId;
+
+  const kicker = document.getElementById("active-campaign-badge");
+  if (kicker) kicker.textContent = `PROGRAM PILIHAN: ${found.category}`;
+
+  const titleEl = document.getElementById("active-campaign-title");
+  if (titleEl) titleEl.textContent = found.title;
+
+  const photoEl = document.getElementById("active-campaign-hero-photo");
+  if (photoEl && found.highlightDoc) photoEl.src = found.highlightDoc;
+
+  const captionEl = document.getElementById("active-campaign-photo-caption");
+  if (captionEl && found.docCaption) captionEl.textContent = found.docCaption;
+
+  updateAksaraDonationProgress();
+
+  if (scrollDown) {
+    const station = document.getElementById("donation-interactive-station");
+    if (station) {
+      station.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+};
+
+window.onSelectCampaignFromDropdown = function (campaignId) {
+  selectAksaraCampaign(campaignId, false);
+};
 
 function renderDonorsFeed() {
   const container = document.getElementById("donor-feed-list");
   if (!container) return;
 
-  container.innerHTML = CURRENT_DONORS.slice(0, 5).map(item => `
+  container.innerHTML = CURRENT_DONORS.slice(0, 6).map(item => `
     <div class="donor-feed-item">
       <div class="donor-avatar" style="background: #2F4F87; color: #FFFFFF;">${item.initial || 'H'}</div>
       <div class="donor-info">
@@ -355,8 +606,8 @@ function renderDonorsFeed() {
           <strong class="donor-name">${item.donorName}</strong>
           <span class="donor-amount-badge">Rp ${Number(item.amount).toLocaleString('id-ID')}</span>
         </div>
-        <div class="donor-package-tag">${item.targetPackage}</div>
-        <p class="donor-message">“${item.message || 'Semoga barokah dan bermanfaat bagi sesama.'}”</p>
+        <div class="donor-package-tag" style="color: #15803D; font-weight: 700;">${item.targetPackage}</div>
+        <p class="donor-message">“${item.message || 'Semoga barokah dan meringankan beban sesama.'}”</p>
         <span class="donor-time">${item.time}</span>
       </div>
     </div>
@@ -364,22 +615,27 @@ function renderDonorsFeed() {
 }
 
 function updateAksaraDonationProgress() {
-  const target = 25000000;
-  const baseCollected = 18750000;
-  const additional = CURRENT_DONORS.reduce((sum, d) => sum + (Number(d.amount) || 0), 0) - DEFAULT_DONORS_DATA.reduce((sum, d) => sum + d.amount, 0);
-  const total = Math.max(baseCollected, baseCollected + Math.max(0, additional));
+  const currentCamp = ACTIVE_CAMPAIGNS.find(c => c.id === SELECTED_CAMPAIGN_ID) || ACTIVE_CAMPAIGNS[0];
+  if (!currentCamp) return;
+
+  const target = currentCamp.target;
+  const total = currentCamp.collected;
   const percent = Math.min(100, Math.round((total / target) * 100));
 
   const amountEl = document.getElementById("donation-current-amount");
+  const targetEl = document.getElementById("donation-target-amount");
   const barEl = document.getElementById("donation-progress-bar");
   const percentEl = document.getElementById("donation-progress-percent");
+  const donorsCountEl = document.getElementById("donation-donors-count");
 
   if (amountEl) amountEl.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+  if (targetEl) targetEl.textContent = `Target Rp ${target.toLocaleString('id-ID')}`;
   if (barEl) barEl.style.width = `${percent}%`;
-  if (percentEl) percentEl.textContent = `${percent}% Terkumpul`;
+  if (percentEl) percentEl.textContent = `${percent}% Tercapai`;
+  if (donorsCountEl) donorsCountEl.textContent = `${currentCamp.donorCount} Donasi Kebaikan`;
 }
 
-window.selectAksaraDonationAmount = function(amt, elem) {
+window.selectAksaraDonationAmount = function (amt, elem) {
   SELECTED_DONATION_AMOUNT = Number(amt);
   document.querySelectorAll(".donation-pill").forEach(p => p.classList.remove("active"));
   if (elem) elem.classList.add("active");
@@ -388,7 +644,7 @@ window.selectAksaraDonationAmount = function(amt, elem) {
   if (customInput) customInput.value = "";
 };
 
-window.handleAksaraCustomDonation = function(input) {
+window.handleAksaraCustomDonation = function (input) {
   const val = Number(input.value);
   if (val && val >= 5000) {
     SELECTED_DONATION_AMOUNT = val;
@@ -396,7 +652,7 @@ window.handleAksaraCustomDonation = function(input) {
   }
 };
 
-window.toggleAksaraAnonymous = function(checkbox) {
+window.toggleAksaraAnonymous = function (checkbox) {
   const nameInput = document.getElementById("don-name-input");
   if (!nameInput) return;
   if (checkbox.checked) {
@@ -408,7 +664,7 @@ window.toggleAksaraAnonymous = function(checkbox) {
   }
 };
 
-window.openQRISPaymentModal = function() {
+window.openQRISPaymentModal = function () {
   const nameInput = document.getElementById("don-name-input");
   const isAnonymous = document.getElementById("don-anonymous-checkbox")?.checked;
   let donorName = nameInput ? nameInput.value.trim() : "";
@@ -423,11 +679,15 @@ window.openQRISPaymentModal = function() {
     donorName = "Hamba Allah";
   }
 
+  const currentCamp = ACTIVE_CAMPAIGNS.find(c => c.id === SELECTED_CAMPAIGN_ID) || ACTIVE_CAMPAIGNS[0];
+
   const modalAmountEl = document.getElementById("qris-modal-amount");
   const modalDonorEl = document.getElementById("qris-modal-donor");
+  const modalProgEl = document.getElementById("qris-modal-program");
 
   if (modalAmountEl) modalAmountEl.textContent = `Rp ${SELECTED_DONATION_AMOUNT.toLocaleString('id-ID')}`;
   if (modalDonorEl) modalDonorEl.textContent = `Oleh: ${donorName}`;
+  if (modalProgEl && currentCamp) modalProgEl.innerHTML = `Peruntukan: <strong>${currentCamp.title}</strong>`;
 
   const modal = document.getElementById("modal-qris-payment");
   if (modal) {
@@ -436,7 +696,7 @@ window.openQRISPaymentModal = function() {
   }
 };
 
-window.closeQRISPaymentModal = function() {
+window.closeQRISPaymentModal = function () {
   const modal = document.getElementById("modal-qris-payment");
   if (modal) {
     modal.classList.remove("active");
@@ -444,10 +704,10 @@ window.closeQRISPaymentModal = function() {
   }
 };
 
-window.copyAccountNumber = function(text, btn) {
+window.copyAccountNumber = function (text, btn) {
   navigator.clipboard.writeText(text).then(() => {
     const orig = btn.textContent;
-    btn.textContent = "✓ Tersalin!";
+    btn.textContent = "Tersalin!";
     btn.style.background = "#DCFCE7";
     btn.style.color = "#166534";
     setTimeout(() => {
@@ -458,21 +718,24 @@ window.copyAccountNumber = function(text, btn) {
   });
 };
 
-window.confirmDonationComplete = async function() {
+window.confirmDonationComplete = async function () {
   const isAnonymous = document.getElementById("don-anonymous-checkbox")?.checked;
   const nameInput = document.getElementById("don-name-input");
   const messageInput = document.getElementById("don-message-input");
 
   const donorName = isAnonymous ? "Hamba Allah" : (nameInput?.value.trim() || "Hamba Allah");
-  const message = messageInput?.value.trim() || "Infaq kebaikan untuk kemajuan ekosistem pemuda.";
+  const currentCamp = ACTIVE_CAMPAIGNS.find(c => c.id === SELECTED_CAMPAIGN_ID) || ACTIVE_CAMPAIGNS[0];
+  const programName = currentCamp ? currentCamp.shortTitle : "Bantuan Kemanusiaan";
+  const message = messageInput?.value.trim() || "Infaq kebaikan sosial, semoga membawa berkah dan bermanfaat bagi sesama.";
   const amount = SELECTED_DONATION_AMOUNT;
 
   const payload = {
     donor_name: donorName,
     name: donorName,
     amount: amount,
-    package_name: "Paket Dukungan ARUTALA",
-    package: "Paket Dukungan ARUTALA",
+    package_name: programName,
+    package: programName,
+    campaign_id: SELECTED_CAMPAIGN_ID,
     message: message,
     is_anonymous: isAnonymous,
     isAnonymous: isAnonymous
@@ -487,11 +750,18 @@ window.confirmDonationComplete = async function() {
       }
     }
 
+    if (currentCamp) {
+      currentCamp.collected += amount;
+      currentCamp.donorCount += 1;
+      localStorage.setItem("arutala_social_campaigns_local", JSON.stringify(ACTIVE_CAMPAIGNS));
+    }
+
     const newDonItem = {
       id: "don-" + Date.now(),
       donorName: donorName,
       amount: amount,
-      targetPackage: "Paket Dukungan ARUTALA",
+      targetPackage: programName,
+      campaignId: SELECTED_CAMPAIGN_ID,
       message: message,
       time: "Baru saja",
       initial: donorName.charAt(0).toUpperCase()
@@ -504,12 +774,16 @@ window.confirmDonationComplete = async function() {
     CURRENT_DONORS.unshift(newDonItem);
     renderDonorsFeed();
     updateAksaraDonationProgress();
+    renderSocialCampaigns();
 
     closeQRISPaymentModal();
-    alert(`✓ Terima kasih banyak, ${donorName}! Konfirmasi donasi sebesar Rp ${amount.toLocaleString('id-ID')} telah tercatat di sistem transparansi ARUTALA.`);
+    alert(`Terima kasih banyak, ${donorName}! Konfirmasi donasi tanggap bencana sebesar Rp ${amount.toLocaleString('id-ID')} untuk '${currentCamp.title}' telah tercatat di transparansi ARUTALA Peduli.`);
 
     if (nameInput) nameInput.value = "";
     if (messageInput) messageInput.value = "";
+    const anonCheckbox = document.getElementById("don-anonymous-checkbox");
+    if (anonCheckbox) anonCheckbox.checked = false;
+    if (nameInput) nameInput.disabled = false;
   } catch (e) {
     console.error("Donation confirmation error:", e);
     alert("Gagal mencatat konfirmasi donasi.");
@@ -517,210 +791,355 @@ window.confirmDonationComplete = async function() {
 };
 
 // --------------------------------------------------------------------------
-// 3. RUANG DIALOG LINTAS KEBERAGAMAN (FORUM Q&A PEMUDA - FITUR 3)
+// 3. RUANG DIALOG & LIVE CHAT LINTAS KEBERAGAMAN (FITUR 3 REAL-TIME)
 // --------------------------------------------------------------------------
-const DEFAULT_QA_DATA = [
+const DEFAULT_AKSARA_CHATS = [
   {
-    id: "qa-1",
-    author: "Rian_UINBdg",
-    question: "Bagaimana cara menyikapi teman satu organisasi yang masih sering membuat lelucon seksis di grup tanpa membuat suasana jadi canggung?",
-    tags: ["Kesetaraan Gender"],
-    upvotes: 14,
-    date: "12 Oktober 2026",
-    bestAnswer: {
-      author: "Fasilitator Sebaya ARUTALA",
-      content: "Gunakan pendekatan 'Call in, bukan Call out'. Ajak ia bicara santai secara personal, jelaskan dampak perasaan dari lelucon tersebut tanpa menyerang kepribadiannya. Beritahu bahwa ruang organisasi harus aman dan nyaman bagi semua kader."
+    id: "chat-aksara-1",
+    senderName: "Rian Satria",
+    senderRole: "peserta",
+    roleLabel: "Kader Kampus",
+    avatarInitial: "RS",
+    time: "13:40 WIB",
+    text: "Halo kawan-kawan! Mau minta saran dong, di organisasi kami di kampus sering ada candaan bernada seksis saat rapat proker. Gimana cara menegurnya secara elegan tanpa bikin suasana jadi canggung atau memicu konflik ya?",
+    likes: 6,
+    isLiked: false,
+    replyTo: null
+  },
+  {
+    id: "chat-aksara-2",
+    senderName: "Fasilitator Sebaya ARUTALA",
+    senderRole: "facilitator",
+    roleLabel: "Fasilitator Sebaya",
+    avatarInitial: "FA",
+    time: "13:42 WIB",
+    text: "Halo Rian! Terima kasih sudah mengangkat ini. Coba gunakan metode 'Call in, bukan Call out'. Ajak ia ngobrol santai empat mata setelah rapat, fokus ke perasaan dan kenyamanan kawan lain, bukan menghakimi karakternya. Sampaikan: 'Eh bro, guyonan tadi agak bikin kawan-kawan gak nyaman lho, ruang rapat kita kan rumah aman bersama'.",
+    likes: 18,
+    isLiked: false,
+    replyTo: {
+      name: "Rian Satria",
+      text: "Gimana cara menegurnya secara elegan tanpa bikin suasana jadi canggung..."
     }
   },
   {
-    id: "qa-2",
-    author: "Fatimah_Santri",
-    question: "Apakah prinsip Ukhuwah Wathaniyyah memperbolehkan kita bekerja sama dalam kegiatan sosial kemasyarakatan dengan teman yang berbeda agama?",
-    tags: ["Moderasi Beragama"],
-    upvotes: 21,
-    date: "10 Oktober 2026",
-    bestAnswer: {
-      author: "Fasilitator Sebaya ARUTALA",
-      content: "Sangat dianjurkan! Dalam ranah muamalah dan kemaslahatan umum (kebersihan lingkungan, bantuan bencana, pendidikan), Islam mengajarkan tolong-menolong atas dasar kebaikan (ta'awun 'alal birri wat taqwa) dan memuliakan kemanusiaan."
+    id: "chat-aksara-3",
+    senderName: "Fatimah Zahra",
+    senderRole: "peserta",
+    roleLabel: "Mahasiswi UIN",
+    avatarInitial: "FZ",
+    time: "13:45 WIB",
+    text: "Sepakat banget sama masukan kak Fasilitator! Dulu di komisariat saya juga pernah coba cara obrolan santai personal itu, hasilnya jauh lebih diterima dan teman yang bersangkutan justru berterima kasih karena diingatkan secara baik-baik tanpa dipermalukan.",
+    likes: 11,
+    isLiked: false,
+    replyTo: {
+      name: "Fasilitator Sebaya ARUTALA",
+      text: "Ajak ia ngobrol santai empat mata setelah rapat, fokus ke perasaan dan kenyamanan kawan lain..."
     }
   },
   {
-    id: "qa-3",
-    author: "Kawan_Dago",
-    question: "Bagaimana mengintegrasikan kearifan lokal 'Silih Asah, Asih, Asuh' ketika kita menghadapi konflik perbedaan pendapat yang memanas di kampus?",
-    tags: ["Kearifan Budaya"],
-    upvotes: 9,
-    date: "08 Oktober 2026",
-    bestAnswer: {
-      author: "Fasilitator Sebaya ARUTALA",
-      content: "Terapkan jeda emosional (Silih Asih), lalu fokus pada substansi masalah untuk saling mencerdaskan bukan saling mengalahkan (Silih Asah), dan akhiri dengan komitmen saling menjaga persahabatan (Silih Asuh)."
+    id: "chat-aksara-4",
+    senderName: "Fajar Pratama",
+    senderRole: "peserta",
+    roleLabel: "Inisiator Komunitas",
+    avatarInitial: "FP",
+    time: "13:48 WIB",
+    text: "Izin bertanya juga kak, untuk proposal proyek sosial di atas, apakah komunitas kami boleh berkolaborasi dengan kawan-kawan pemuda lintas agama dari gereja sekitar untuk aksi bedah sanitasi desa?",
+    likes: 8,
+    isLiked: false,
+    replyTo: null
+  },
+  {
+    id: "chat-aksara-5",
+    senderName: "Fasilitator Sebaya ARUTALA",
+    senderRole: "facilitator",
+    roleLabel: "Fasilitator Sebaya",
+    avatarInitial: "FA",
+    time: "13:50 WIB",
+    text: "Sangat dianjurkan dan dipersilakan, Fajar! Aksi sosial kemanusiaan lintas keyakinan adalah implementasi nyata dari Ukhuwah Wathaniyyah dan prinsip Ta'awun 'alal birri wat taqwa. Silakan langsung submit lewat tombol '+ Ajukan Proyek' di atas ya, tim kurasi kami sangat mendukung inisiatif kolaboratif seperti ini!",
+    likes: 22,
+    isLiked: false,
+    replyTo: {
+      name: "Fajar Pratama",
+      text: "apakah komunitas kami boleh berkolaborasi dengan kawan-kawan pemuda lintas agama..."
     }
   }
 ];
 
-let ALL_QA_POSTS = [];
+let ALL_AKSARA_CHATS = [];
+let AKSARA_REPLY_TARGET = null;
 
-async function initAksaraDialogForum() {
-  const container = document.getElementById("dialog-feed-container");
+function initAksaraLiveChat() {
+  const container = document.getElementById("aksara-livechat-container");
   if (!container) return;
 
-  ALL_QA_POSTS = [...DEFAULT_QA_DATA];
-
-  try {
-    if (window.ArutalaDB && typeof window.ArutalaDB.fetchQAPosts === "function") {
-      const cloudQA = await window.ArutalaDB.fetchQAPosts();
-      if (Array.isArray(cloudQA) && cloudQA.length > 0) {
-        ALL_QA_POSTS = [...cloudQA, ...ALL_QA_POSTS];
-      }
+  const stored = localStorage.getItem("arutala_livechat_aksara");
+  if (stored) {
+    try {
+      ALL_AKSARA_CHATS = JSON.parse(stored);
+    } catch (e) {
+      ALL_AKSARA_CHATS = [...DEFAULT_AKSARA_CHATS];
     }
-  } catch (err) {
-    console.warn("Supabase fetchQAPosts failed, using fallback:", err);
+  } else {
+    ALL_AKSARA_CHATS = [...DEFAULT_AKSARA_CHATS];
   }
 
-  const localQA = JSON.parse(localStorage.getItem("arutala_qa_local") || "[]");
-  if (localQA.length > 0) {
-    ALL_QA_POSTS = [...localQA, ...ALL_QA_POSTS];
-  }
-
-  renderDialogFeed();
+  renderAksaraChatUI();
 }
 
-function renderDialogFeed() {
-  const container = document.getElementById("dialog-feed-container");
+function renderAksaraChatUI() {
+  const container = document.getElementById("aksara-livechat-container");
   if (!container) return;
 
-  // Render menggunakan struktur Grid resmi css/style.css:
-  // Kolom 1 (56px): .qa-vote-col
-  // Kolom 2 (1fr): .qa-main-col
-  container.innerHTML = ALL_QA_POSTS.map(post => {
-    const tag = (post.tags && post.tags[0]) || "Ruang Aman";
-    const author = post.author || "Kawan_ARUTALA";
-    const date = post.date || "Baru saja";
-    const upvotes = post.upvotes || 1;
+  const savedName = localStorage.getItem("arutala_chat_user_name") || "";
 
-    return `
-      <div class="qa-card" id="qa-post-${post.id}">
-        <div class="qa-vote-col">
-          <button type="button" class="vote-btn" onclick="upvoteDialogPost('${post.id}')" title="Dukung pertanyaan ini">▲</button>
-          <div class="vote-count" id="vote-count-${post.id}">${upvotes}</div>
-          <small style="font-size: 0.68rem; color: #64748B;">Suara</small>
+  container.innerHTML = `
+    <div class="arutala-live-chat-card">
+      <!-- Chat Header -->
+      <div class="chat-room-header">
+        <div class="chat-room-title-wrap">
+          <div class="chat-live-pulse-dot" title="Live Aktif"></div>
+          <h3 class="chat-room-name">
+            # Ruang-Dialog-Keberagaman
+          </h3>
+          <span class="chat-room-online-badge">28 Pemuda Aktif</span>
         </div>
-        <div class="qa-main-col">
-          <div class="qa-tags">
-            <span class="qa-tag">#${tag}</span>
-            <span style="font-size: 0.75rem; color: #64748B; margin-left: auto;">${date} oleh <strong>${author}</strong></span>
-          </div>
-          <h3>${post.question}</h3>
-          ${post.bestAnswer ? `
-            <div class="qa-best-answer">
-              <strong>💬 Tanggapan Fasilitator Sebaya (${post.bestAnswer.author || 'Tim ARUTALA'}):</strong>
-              ${post.bestAnswer.content}
-            </div>
-          ` : `
-            <div style="font-size: 0.82rem; color: #64748B; margin-top: 8px; font-style: italic;">
-              Menunggu tanggapan dari fasilitator sebaya...
-            </div>
-          `}
+        <div class="chat-room-tags">
+          <span class="chat-room-tag">#KesetaraanGender</span>
+          <span class="chat-room-tag">#AntiKekerasan</span>
+          <span class="chat-room-tag">#ModerasiBeragama</span>
+          <span class="chat-room-tag">#SilihAsahAsihAsuh</span>
         </div>
       </div>
-    `;
-  }).join("");
+
+      <!-- Messages Stream -->
+      <div class="chat-messages-container" id="aksara-messages-stream">
+        ${ALL_AKSARA_CHATS.map(msg => {
+    const isFacil = msg.senderRole === "facilitator";
+    const avatarClass = isFacil ? "chat-avatar facilitator" : "chat-avatar";
+    const roleBadgeClass = isFacil ? "chat-sender-role badge-facil" : "chat-sender-role";
+    const roleText = isFacil ? "Fasilitator Sebaya" : (msg.roleLabel || "Peserta");
+    const likedClass = msg.isLiked ? "chat-btn-action chat-btn-like liked" : "chat-btn-action chat-btn-like";
+
+    return `
+            <div class="chat-message-bubble ${msg.isSelf ? 'is-self' : ''}" id="${msg.id}">
+              <div class="${avatarClass}" title="${msg.senderName}">
+                ${msg.avatarInitial || msg.senderName.charAt(0).toUpperCase()}
+              </div>
+              <div class="chat-body">
+                <div class="chat-header-row">
+                  <span class="chat-sender-name">${escapeAksaraHTML(msg.senderName)}</span>
+                  <span class="${roleBadgeClass}">${roleText}</span>
+                  <span class="chat-time">${msg.time}</span>
+                </div>
+
+                ${msg.replyTo ? `
+                  <div class="chat-reply-quote">
+                    ↳ Membalas <strong>@${escapeAksaraHTML(msg.replyTo.name)}</strong>: "${escapeAksaraHTML(msg.replyTo.text)}"
+                  </div>
+                ` : ""}
+
+                <p class="chat-text">${escapeAksaraHTML(msg.text)}</p>
+
+                <div class="chat-action-row">
+                  <button type="button" class="${likedClass}" onclick="toggleAksaraChatLike('${msg.id}')" title="Sukai tanggapan ini">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="${msg.isLiked ? '#EF4444' : 'none'}" stroke="currentColor" stroke-width="2" style="vertical-align:middle; margin-right:3px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg> <span>${msg.likes || 0}</span>
+                  </button>
+                  <button type="button" class="chat-btn-action" onclick="setAksaraChatReply('${msg.id}')" title="Balas pesan ini">
+                    Balas
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+  }).join("")}
+      </div>
+
+      <!-- Reply Banner (Jika sedang membalas) -->
+      <div class="chat-reply-banner" id="aksara-reply-banner" style="${AKSARA_REPLY_TARGET ? 'display:flex;' : 'display:none;'}">
+        <span id="aksara-reply-banner-text">
+          ${AKSARA_REPLY_TARGET ? `↳ Membalas <strong>@${escapeAksaraHTML(AKSARA_REPLY_TARGET.name)}</strong>: "${escapeAksaraHTML(AKSARA_REPLY_TARGET.text)}"` : ''}
+        </span>
+        <button type="button" class="chat-btn-cancel-reply" onclick="cancelAksaraChatReply()" title="Batalkan balasan">Batal</button>
+      </div>
+
+      <!-- Input Bar -->
+      <form class="chat-input-bar" id="aksara-chat-form" onsubmit="handleSendAksaraChat(event)">
+        <div class="chat-input-row-top">
+          <input 
+            type="text" 
+            id="aksara-chat-name-input" 
+            class="chat-name-input" 
+            placeholder="Nama / Panggilanmu" 
+            value="${escapeAksaraHTML(savedName)}" 
+            required
+            title="Nama pengirim pesan"
+          >
+          <span style="font-size: 0.74rem; color: #64748B;">
+            Berbagi gagasan dan saling menanggapi dengan etika <em>Silih Asih, Silih Asah, Silih Asuh</em>.
+          </span>
+        </div>
+        <div class="chat-input-row-main">
+          <input 
+            type="text" 
+            id="aksara-chat-text-input" 
+            class="chat-text-input" 
+            placeholder="Tulis pesan atau tanggapanmu di sini... (Tekan Enter untuk kirim)" 
+            autocomplete="off" 
+            required
+          >
+          <button type="submit" class="chat-send-btn" id="aksara-chat-send-btn">
+            <span>Kirim</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="16" height="16">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  `;
+
+  scrollAksaraChatToBottom();
 }
 
-window.upvoteDialogPost = async function(id) {
-  const post = ALL_QA_POSTS.find(p => String(p.id) === String(id));
-  if (!post) return;
-
-  post.upvotes = (post.upvotes || 1) + 1;
-  const countEl = document.getElementById(`vote-count-${id}`);
-  if (countEl) countEl.textContent = post.upvotes;
-
-  try {
-    if (window.ArutalaDB && typeof window.ArutalaDB.updateQAVote === "function") {
-      await window.ArutalaDB.updateQAVote(id, post.upvotes);
+function scrollAksaraChatToBottom() {
+  setTimeout(() => {
+    const stream = document.getElementById("aksara-messages-stream");
+    if (stream) {
+      stream.scrollTop = stream.scrollHeight;
     }
-  } catch (err) {
-    console.warn("Update vote failed on cloud:", err);
+  }, 50);
+}
+
+function escapeAksaraHTML(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+window.handleSendAksaraChat = function (e) {
+  if (e) e.preventDefault();
+
+  const nameInput = document.getElementById("aksara-chat-name-input");
+  const textInput = document.getElementById("aksara-chat-text-input");
+
+  const nameVal = nameInput ? nameInput.value.trim() : "";
+  const textVal = textInput ? textInput.value.trim() : "";
+
+  if (!nameVal) {
+    alert("Silakan masukkan nama atau panggilanmu terlebih dahulu.");
+    if (nameInput) nameInput.focus();
+    return;
+  }
+
+  if (!textVal) {
+    if (textInput) textInput.focus();
+    return;
+  }
+
+  // Simpan nama pengguna agar tidak perlu ketik ulang
+  localStorage.setItem("arutala_chat_user_name", nameVal);
+
+  // Buat initial
+  const initials = nameVal.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase() || "KP";
+
+  // Waktu saat ini
+  const now = new Date();
+  const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} WIB`;
+
+  const newChat = {
+    id: "chat-aksara-" + Date.now(),
+    senderName: nameVal,
+    senderRole: "peserta",
+    roleLabel: "Peserta Live",
+    avatarInitial: initials,
+    time: timeStr,
+    text: textVal,
+    likes: 0,
+    isLiked: false,
+    isSelf: true,
+    replyTo: AKSARA_REPLY_TARGET ? {
+      name: AKSARA_REPLY_TARGET.name,
+      text: AKSARA_REPLY_TARGET.text
+    } : null
+  };
+
+  ALL_AKSARA_CHATS.push(newChat);
+  localStorage.setItem("arutala_livechat_aksara", JSON.stringify(ALL_AKSARA_CHATS));
+
+  // Reset reply target & text input
+  AKSARA_REPLY_TARGET = null;
+
+  renderAksaraChatUI();
+
+  // Kembalikan fokus ke text input
+  const newTextInput = document.getElementById("aksara-chat-text-input");
+  if (newTextInput) newTextInput.focus();
+};
+
+window.setAksaraChatReply = function (msgId) {
+  const target = ALL_AKSARA_CHATS.find(m => m.id === msgId);
+  if (!target) return;
+
+  const snippet = target.text.length > 60 ? target.text.slice(0, 57) + "..." : target.text;
+
+  AKSARA_REPLY_TARGET = {
+    id: target.id,
+    name: target.senderName,
+    text: snippet
+  };
+
+  const banner = document.getElementById("aksara-reply-banner");
+  const bannerText = document.getElementById("aksara-reply-banner-text");
+
+  if (banner && bannerText) {
+    bannerText.innerHTML = `↳ Membalas <strong>@${escapeAksaraHTML(AKSARA_REPLY_TARGET.name)}</strong>: "${escapeAksaraHTML(AKSARA_REPLY_TARGET.text)}"`;
+    banner.style.display = "flex";
+  }
+
+  const textInput = document.getElementById("aksara-chat-text-input");
+  if (textInput) {
+    textInput.placeholder = `Balas pesan @${target.senderName}...`;
+    textInput.focus();
   }
 };
 
+window.cancelAksaraChatReply = function () {
+  AKSARA_REPLY_TARGET = null;
+  const banner = document.getElementById("aksara-reply-banner");
+  if (banner) banner.style.display = "none";
+
+  const textInput = document.getElementById("aksara-chat-text-input");
+  if (textInput) {
+    textInput.placeholder = "Tulis pesan atau tanggapanmu di sini... (Tekan Enter untuk kirim)";
+  }
+};
+
+window.toggleAksaraChatLike = function (msgId) {
+  const msg = ALL_AKSARA_CHATS.find(m => m.id === msgId);
+  if (!msg) return;
+
+  if (msg.isLiked) {
+    msg.isLiked = false;
+    msg.likes = Math.max(0, (msg.likes || 1) - 1);
+  } else {
+    msg.isLiked = true;
+    msg.likes = (msg.likes || 0) + 1;
+  }
+
+  localStorage.setItem("arutala_livechat_aksara", JSON.stringify(ALL_AKSARA_CHATS));
+  renderAksaraChatUI();
+};
+
 function initNewDialogModalForm() {
-  const form = document.getElementById("form-submit-dialog-modal");
-  const submitBtn = document.getElementById("btn-send-dialog");
-
-  if (!form) return;
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const author = document.getElementById("dlg-author-modal")?.value.trim() || "Kawan_ARUTALA";
-    const tag = document.getElementById("dlg-tag-modal")?.value || "Ruang Aman";
-    const question = document.getElementById("dlg-question-modal")?.value.trim() || "";
-
-    if (!question) {
-      alert("Silakan tuliskan pertanyaan atau pemantik dialogmu terlebih dahulu!");
-      return;
-    }
-
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Menayangkan...";
-    }
-
-    const payload = {
-      author: author,
-      question: question,
-      tag: tag,
-      tags: [tag],
-      votes: 1,
-      answer: "Terima kasih atas pertanyaanmu! Tim fasilitator sebaya sedang meninjau dialog ini untuk memberikan refleksi bersama."
-    };
-
-    try {
-      if (window.ArutalaDB && typeof window.ArutalaDB.insertQAPost === "function") {
-        try {
-          await window.ArutalaDB.insertQAPost(payload);
-        } catch (supaErr) {
-          console.warn("Supabase insertQAPost error, saving locally:", supaErr);
-        }
-      }
-
-      const newPostItem = {
-        id: "qa-" + Date.now(),
-        author: author,
-        question: question,
-        tags: [tag],
-        upvotes: 1,
-        date: "Baru saja",
-        bestAnswer: {
-          author: "Fasilitator Sebaya ARUTALA",
-          content: "Terima kasih atas pertanyaanmu! Tim fasilitator sebaya sedang meninjau dialog ini untuk memberikan refleksi bersama."
-        }
-      };
-
-      const existingLocal = JSON.parse(localStorage.getItem("arutala_qa_local") || "[]");
-      existingLocal.unshift(newPostItem);
-      localStorage.setItem("arutala_qa_local", JSON.stringify(existingLocal));
-
-      ALL_QA_POSTS.unshift(newPostItem);
-      renderDialogFeed();
-
-      form.reset();
-      closeAskDialogModal();
-      alert("✓ Topik dialogmu berhasil ditayangkan di Forum Keberagaman ARUTALA!");
-    } catch (err) {
-      console.error("Error creating QA post:", err);
-      alert("Terjadi kesalahan saat memposting dialog.");
-    } finally {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = "Tayangkan ke Forum Dialog";
-      }
-    }
-  });
+  // Kompatibilitas modal jika dipanggil dari luar
 }
 
-window.openAskDialogModal = function() {
+window.openAskDialogModal = function () {
   const modal = document.getElementById("modal-ask-dialog");
   if (modal) {
     modal.classList.add("active");
@@ -728,7 +1147,7 @@ window.openAskDialogModal = function() {
   }
 };
 
-window.closeAskDialogModal = function() {
+window.closeAskDialogModal = function () {
   const modal = document.getElementById("modal-ask-dialog");
   if (modal) {
     modal.classList.remove("active");
@@ -736,7 +1155,7 @@ window.closeAskDialogModal = function() {
   }
 };
 
-window.openProposalModal = function() {
+window.openProposalModal = function () {
   const modal = document.getElementById("modal-proposal-action");
   if (modal) {
     modal.classList.add("active");
@@ -744,7 +1163,7 @@ window.openProposalModal = function() {
   }
 };
 
-window.closeProposalModal = function() {
+window.closeProposalModal = function () {
   const modal = document.getElementById("modal-proposal-action");
   if (modal) {
     modal.classList.remove("active");
@@ -776,7 +1195,7 @@ function setupAksaraDrawer() {
   if (overlay) overlay.addEventListener("click", closeDrawer);
 }
 
-window.closeAksaraDrawer = function() {
+window.closeAksaraDrawer = function () {
   const drawer = document.getElementById("uss-side-drawer");
   const overlay = document.getElementById("uss-drawer-overlay");
   if (drawer) drawer.classList.remove("open");

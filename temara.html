@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PILAR TEMARA — Teman Bermakna Arutala | Kaderisasi &amp; Fasilitator Sebaya</title>
+  <title>PILAR TEMARA â€” Teman Bermakna Arutala | Kaderisasi &amp; Fasilitator Sebaya</title>
   
   <!-- SEO & Social Meta -->
   <meta name="description" content="TEMARA (Teman Bermakna Arutala) - Pilar kaderisasi dan pengembangan fasilitator sebaya untuk keberlanjutan ekosistem ARUTALA. Dilengkapi modul panduan fasilitator dan rekrutmen fasilitator baru.">
-  <meta property="og:title" content="PILAR TEMARA — Kaderisasi &amp; Fasilitator Sebaya | ARUTALA">
+  <meta property="og:title" content="PILAR TEMARA â€” Kaderisasi &amp; Fasilitator Sebaya | ARUTALA">
   <meta property="og:description" content="Akses Ruang Tumbuh yang Agamis, Setara, dan Adil - Model Inovasi Ekosistem Pemuda Berbasis Nilai Keagamaan - UIN Sunan Gunung Djati Bandung.">
   <meta property="og:type" content="website">
 
@@ -18,6 +18,7 @@
 
   <!-- Stylesheet Terpadu -->
   <link rel="stylesheet" href="css/style.css?v=3.2">
+  <link rel="stylesheet" href="css/vibrant.css?v=1.0">
   
   <!-- Favicon Resmi ARUTALA -->
   <link rel="icon" type="image/png" href="img/logo.png">
@@ -403,15 +404,42 @@
 
     /* Small modifier for button in navbar & card headers */
     .temara-page-body .btn-sm {
-      padding: 8px 18px !important;
-      font-size: 0.82rem !important;
+      padding: 7px 16px !important;
+      font-size: 0.78rem !important;
+      border-radius: 9999px !important;
+    }
+
+    #nav-btn-rekrutmen {
+      background: #2F4F87 !important;
+      border: 1px solid #2F4F87 !important;
+      color: #FFFFFF !important;
+      font-size: 0.78rem !important;
+      font-weight: 700 !important;
+      padding: 7px 16px !important;
+      border-radius: 9999px !important;
+      line-height: 1.2 !important;
+      text-transform: none !important;
+      box-shadow: 0 1px 4px rgba(47, 79, 135, 0.16) !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      white-space: nowrap !important;
+      transition: all 0.2s ease !important;
+    }
+    #nav-btn-rekrutmen:hover {
+      background: #243E6B !important;
+      border-color: #243E6B !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 4px 10px rgba(47, 79, 135, 0.22) !important;
     }
 
     #btn-submit-fasilitator {
       width: 100% !important;
-      padding: 15px 24px !important;
-      font-size: 1rem !important;
-      letter-spacing: 0.02em;
+      padding: 12px 24px !important;
+      font-size: 0.94rem !important;
+      font-weight: 700 !important;
+      border-radius: 9999px !important;
+      letter-spacing: 0.01em;
     }
 
     /* --------------------------------------------------------------------------
@@ -520,7 +548,7 @@
     }
   </style>
 </head>
-<body class="temara-page-body" data-theme="genu">
+<body class="temara-page-body" data-theme="genu" data-track="temara">
 
   <!-- ==========================================================================
        HEADER RESMI ARUTALA (Gaya USS Feed - Bersih dari Dots)
@@ -539,7 +567,6 @@
 
         <!-- Tengah: Logo ARUTALA CIRCLE (Bersih dari titik) -->
         <a href="index.html" class="uss-brand-center" id="nav-brand-logo">
-          <img src="img/logo.png" alt="Logo Resmi ARUTALA" class="uss-brand-img">
           <div class="uss-brand-text">
             <span class="uss-brand-name">ARUTALA</span>
             <span class="uss-brand-sub">CIRCLE</span>
@@ -547,7 +574,8 @@
         </a>
 
         <!-- Kanan: Tombol Gabung Fasilitator -->
-        <a href="#rekrutmen-fasilitator" class="btn btn-primary btn-sm" id="nav-btn-rekrutmen">
+        <a href="#rekrutmen-fasilitator" class="btn btn-primary btn-sm btn-pill" id="nav-btn-rekrutmen"
+          style="background: #2F4F87; color: #FFFFFF; font-size: 0.78rem; font-weight: 700; padding: 7px 16px; border-radius: 9999px; text-transform: none;">
           Daftar Fasilitator
         </a>
       </div>
@@ -558,17 +586,12 @@
       <div class="uss-nav-container">
         <ul class="uss-nav-list" id="main-nav-links">
           <li><a href="index.html#beranda" class="uss-nav-item">BERANDA</a></li>
-          <li><a href="index.html#artikel-opini" class="uss-nav-item">ARTIKEL &amp; JURNAL</a></li>
-          <li><a href="karsa.html" class="uss-nav-item">KARSA (MODUL SKILL)</a></li>
-          <li><a href="nuansa.html" class="uss-nav-item">NUANSA (AGAMA &amp; VIDEO)</a></li>
+          <li><a href="artikel.html" class="uss-nav-item">ARTIKEL &amp; JURNAL</a></li>
+          <li><a href="karsa.html" class="uss-nav-item">KARSA</a></li>
+          <li><a href="nuansa.html" class="uss-nav-item">NUANSA</a></li>
           
-          <li><a href="temara.html" class="uss-nav-item active" style="color: #2F4F87; font-weight: 800; border-bottom: 2px solid #2F4F87;">TEMARA (TUTOR SEBAYA)</a></li>
-          <li><a href="aksara.html" class="uss-nav-item">AKSARA (AKSI &amp; DONASI)</a></li>
-          <li>
-            <a href="karsa.html#modal-submit-article" class="uss-nav-item uss-nav-write">
-              WRITE / UPLOAD
-            </a>
-          </li>
+          <li><a href="temara.html" class="uss-nav-item active" style="color: #2F4F87; font-weight: 800; border-bottom: 2px solid #2F4F87;">TEMARA</a></li>
+          <li><a href="aksara.html" class="uss-nav-item">AKSARA</a></li>
         </ul>
       </div>
     </nav>
@@ -579,19 +602,18 @@
   <aside class="uss-side-drawer" id="uss-side-drawer" aria-label="Menu Samping">
     <div class="uss-drawer-header">
       <div class="uss-drawer-brand">
-        <img src="img/logo.png" alt="Logo ARUTALA" style="width: 28px; height: 28px; object-fit: contain;">
-        <span style="font-family: var(--font-heading); font-weight: 800; font-size: 1.15rem; color: #0F172A;">ARUTALA</span>
+        <span style="font-family: var(--font-heading); font-weight: 900; font-size: 1.3rem; color: #0F172A;">ARUTALA</span>
       </div>
       <button type="button" class="uss-drawer-close" id="btn-uss-drawer-close" aria-label="Tutup Menu">&times;</button>
     </div>
     <div class="uss-drawer-body">
       <ul class="uss-drawer-links">
         <li><a href="index.html#beranda" class="drawer-link">BERANDA</a></li>
-        <li><a href="index.html#artikel-opini" class="drawer-link">ARTIKEL &amp; JURNAL</a></li>
-        <li><a href="karsa.html" class="drawer-link">KARSA (MODUL SKILL)</a></li>
-        <li><a href="nuansa.html" class="drawer-link">NUANSA (AGAMA &amp; VIDEO)</a></li>
-        <li><a href="temara.html" class="drawer-link active" style="font-weight: 800; color: #2F4F87;">TEMARA (TUTOR SEBAYA)</a></li>
-        <li><a href="aksara.html" class="drawer-link">AKSARA (AKSI &amp; DONASI)</a></li>
+        <li><a href="artikel.html" class="drawer-link">ARTIKEL &amp; JURNAL</a></li>
+        <li><a href="karsa.html" class="drawer-link">KARSA</a></li>
+        <li><a href="nuansa.html" class="drawer-link">NUANSA</a></li>
+        <li><a href="temara.html" class="drawer-link active" style="font-weight: 800; color: #2F4F87;">TEMARA</a></li>
+        <li><a href="aksara.html" class="drawer-link">AKSARA</a></li>
       </ul>
       <div class="uss-drawer-ctas" style="margin-top: 24px;">
         <a href="#rekrutmen-fasilitator" class="btn btn-primary" style="width: 100%; display: block; text-align: center; background: #2F4F87; color: #FFFFFF;" onclick="closeTemaraDrawer()">
@@ -606,7 +628,7 @@
        ========================================================================== -->
   <section class="temara-hero-banner">
     <div class="container">
-      <span class="temara-hero-kicker">PILAR 03 / TEMARA (TEMAN BERMAKNA ARUTALA)</span>
+      <span class="temara-hero-kicker">TEMARA (TEMAN BERMAKNA ARUTALA)</span>
       <h1 class="temara-hero-title">
         Kaderisasi Berkelanjutan &amp; <em>Ekosistem Fasilitator Sebaya</em>
       </h1>
@@ -616,12 +638,26 @@
 
       <!-- Action Buttons -->
       <div class="temara-cta-row">
-        <a href="#panduan-fasilitator" class="btn btn-primary">
-          Buka Panduan <span style="white-space: nowrap;">Fasilitator &darr;</span>
+        <a href="#workspace-modul" class="btn btn-primary" style="background: #2F4F87; border-color: #2F4F87; font-size: 0.88rem; font-weight: 700; padding: 10px 20px; border-radius: 9999px;">
+          Buka Modul &amp; Panduan <span style="white-space: nowrap;">Fasilitator &darr;</span>
         </a>
-        <a href="#rekrutmen-fasilitator" class="btn btn-secondary">
+        <a href="#rekrutmen-fasilitator" class="btn btn-secondary" style="font-size: 0.88rem; font-weight: 700; padding: 10px 20px; border-radius: 9999px;">
           Formulir Rekrutmen <span style="white-space: nowrap;">Fasilitator &darr;</span>
         </a>
+      </div>
+
+      <!-- Dokumentasi Perkembangan Pembelajaran (Progress Tracking) -->
+      <div class="lms-progress-card">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="font-weight: 800; font-size: 1.25rem; color: #B45309;" id="lms-progress-percent">0%</div>
+          <div>
+            <div style="font-weight: 700; font-size: 0.92rem; color: #0F172A;">Dokumentasi Perkembangan Mandiri</div>
+            <span style="font-size: 0.82rem; color: #64748B;" id="lms-progress-label">0 dari 4 modul diselesaikan</span>
+          </div>
+        </div>
+        <div class="lms-progress-bar-wrap">
+          <div class="lms-progress-bar-fill" id="lms-progress-bar"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -681,60 +717,92 @@
           </p>
         </div>
       </div>
+
+      <!-- Dokumentasi Nyata Kaderisasi & Circle Sebaya -->
+      <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <div style="background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+          <div style="position: relative; height: 230px; overflow: hidden;">
+            <img src="img/pelatihan_fasilitator_auditorium.jpg" alt="Pelatihan Fasilitator Sebaya ARUTALA" style="width: 100%; height: 100%; object-fit: cover;">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(47, 79, 135, 0.92); color: #FFFFFF; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 4px;">
+              DOKUMENTASI RESMI
+            </span>
+          </div>
+          <div style="padding: 20px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">
+              Pelatihan &amp; Kaderisasi Fasilitator Pemuda
+            </h4>
+            <p style="color: #64748B; font-size: 0.9rem; line-height: 1.5; margin: 0;">
+              Pembekalan komprehensif bagi kader fasilitator sebaya untuk menguasai komunikasi empatik, etika ruang aman, dan pemecahan studi kasus keberagaman.
+            </p>
+          </div>
+        </div>
+
+        <div style="background: #FFFFFF; border-radius: 12px; overflow: hidden; border: 1px solid #E2E8F0; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
+          <div style="position: relative; height: 230px; overflow: hidden;">
+            <img src="img/circle_mentoring_sebaya.jpg" alt="Praktik ARUTALA Circle Sebaya" style="width: 100%; height: 100%; object-fit: cover;">
+            <span style="position: absolute; top: 12px; left: 12px; background: rgba(180, 83, 9, 0.92); color: #FFFFFF; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 4px;">
+              ARUTALA CIRCLE
+            </span>
+          </div>
+          <div style="padding: 20px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #0F172A; margin-bottom: 6px;">
+              Praktik Pendampingan Kelompok Sebaya
+            </h4>
+            <p style="color: #64748B; font-size: 0.9rem; line-height: 1.5; margin: 0;">
+              Lingkaran dialog aman (*Circle*) 6â€“8 peserta yang dipandu fasilitator sebaya untuk saling mendengarkan, merefleksikan nilai, dan saling menguatkan tanpa stigma.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ==========================================================================
        FITUR 1: MODUL & PANDUAN FASILITATOR (PERANGKAT PELAKSANAAN LENGKAP)
-       Materi, tujuan kegiatan, panduan diskusi, lembar aktivitas, studi kasus,
-       metode refleksi, serta petunjuk pelaksanaan aksi sosial.
+       Materi, panduan diskusi, lembar aktivitas, studi kasus, serta SOP aksi sosial.
        ========================================================================== -->
-  <section class="temara-toolkit-section" id="panduan-fasilitator">
+  <main class="lms-workspace-section" id="workspace-modul">
+    <span id="panduan-fasilitator" style="position: absolute; margin-top: -80px;"></span>
     <div class="container">
-      <div class="section-header" style="margin-bottom: 24px; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
-        <div>
-          <span class="section-kicker" style="color: #2F4F87; font-weight: 800; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;">
-            FITUR 1 / MODUL &amp; PANDUAN FASILITATOR
-          </span>
-          <h2 style="font-family: var(--font-heading); font-size: 2.1rem; font-weight: 800; color: #0F172A; letter-spacing: -0.02em; margin-bottom: 8px;">
-            Perangkat Pelaksanaan Circle &amp; Aksi Sosial
-          </h2>
-          <p style="color: #64748B; font-size: 0.98rem; max-width: 720px; line-height: 1.6; margin: 0;">
-            Panduan komprehensif bagi fasilitator sebaya untuk memoderasi sesi dialog aman, menjalankan lembar aktivitas, memecahkan studi kasus, dan mengeksekusi aksi sosial.
-          </p>
-        </div>
-        <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()">
-          🖨️ Cetak / Unduh Panduan Ringkas
-        </button>
-      </div>
-
-      <!-- Tab Navigasi 6 Perangkat Pelaksanaan -->
-      <div class="toolkit-tabs" id="toolkit-nav-tabs">
-        <!-- Rendered by js/temara.js -->
-      </div>
-
-      <!-- Kartu Konten Interaktif Perangkat Pelaksanaan -->
-      <article class="toolkit-content-card">
-        <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; margin-bottom: 22px; border-bottom: 1px solid #E2E8F0; flex-wrap: wrap; gap: 10px;">
-          <div>
-            <h3 id="toolkit-title" style="font-family: var(--font-heading); font-size: 1.65rem; font-weight: 800; color: #0F172A; margin-bottom: 4px;">
-              Memuat Panduan Fasilitator...
-            </h3>
-            <p id="toolkit-sub" style="font-size: 0.95rem; color: #64748B; margin: 0;">
-              Perangkat Standar Pelaksanaan Lingkaran Teman Sebaya
-            </p>
+      <div class="lms-workspace-grid">
+        
+        <!-- Kolom Kiri: Silabus Pembelajaran TEMARA -->
+        <aside class="lms-sidebar-card">
+          <div class="lms-sidebar-header">
+            <h4>Silabus Pembelajaran TEMARA</h4>
+            <span>Pilih modul atau panduan fasilitator</span>
           </div>
-          <span class="lms-code-chip" id="toolkit-category" style="background: #EEF3FA; color: #2F4F87; font-weight: 700;">
-            SOP Fasilitator
-          </span>
-        </div>
+          <div id="lms-modules-list">
+            <!-- Populated dynamically by js/modul.js -->
+          </div>
+        </aside>
 
-        <div class="toolkit-body" id="toolkit-content-body">
-          <!-- Injected dynamically by js/temara.js -->
-        </div>
-      </article>
+        <!-- Kolom Kanan: Reader Materi & Panduan Fasilitator (Summary + PDF Download Card) -->
+        <article class="lms-content-card">
+          <div class="lms-content-header">
+            <div class="lms-content-meta">
+              <span class="lms-code-chip" id="mod-code">TEM-01</span>
+              <span class="lms-duration-chip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="mod-duration">40 Menit</span>
+              </span>
+            </div>
+            <h2 class="lms-content-title" id="mod-title">SOP &amp; Etika Fasilitator Sebaya ARUTALA</h2>
+            <p class="lms-content-subtitle" id="mod-subtitle">Standar Operasional Prosedur Pendampingan &amp; Prinsip Kerahasiaan Safe Space</p>
+          </div>
+
+          <!-- Reading Content Body (Summary + PDF Download Card + Next Button, NO QUIZ) -->
+          <div class="lms-reading-body" id="mod-body">
+            <!-- Injected dynamically by js/modul.js -->
+          </div>
+
+          <!-- Standalone Quiz Panel (Hidden for Temara since Temara has no quiz) -->
+          <div class="lms-quiz-panel" id="mod-quiz-panel" style="display: none;"></div>
+        </article>
+
+      </div>
     </div>
-  </section>
+  </main>
 
   <!-- ==========================================================================
        FITUR 2: FITUR REKRUTMEN FASILITATOR SEBAYA (INTEGRASI SUPABASE)
@@ -744,7 +812,7 @@
     <div class="container">
       <div class="section-header" style="text-align: center; max-width: 760px; margin: 0 auto 36px;">
         <span class="section-kicker" style="color: #2F4F87; font-weight: 800; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;">
-          FITUR 2 / REKRUTMEN FASILITATOR SEBAYA
+          REKRUTMEN FASILITATOR SEBAYA
         </span>
         <h2 style="font-family: var(--font-heading); font-size: 2.15rem; font-weight: 800; color: #0F172A; letter-spacing: -0.02em; margin-bottom: 10px;">
           Bergabung Menjadi Fasilitator Sebaya ARUTALA
@@ -755,19 +823,6 @@
       </div>
 
       <div class="recruit-wrap">
-        <!-- Keuntungan Menjadi Fasilitator -->
-        <div class="temara-benefits-card">
-          <h4 style="font-size: 1.05rem; font-weight: 800; color: #0F172A; margin-bottom: 14px;">
-            Benefit &amp; Portofolio Fasilitator:
-          </h4>
-          <div class="temara-benefits-grid">
-            <div class="benefit-chip">✔ Pelatihan Fasilitasi Bersertifikat Resmi OASE III</div>
-            <div class="benefit-chip">✔ Akses Eksklusif Toolkit &amp; Modul Interaktif</div>
-            <div class="benefit-chip">✔ Jejaring Pemuda Pemimpin Lintas Kampus PTKIN</div>
-            <div class="benefit-chip">✔ Kesempatan Menginisiasi Proyek Aksi Berkelanjutan</div>
-          </div>
-        </div>
-
         <!-- Form Pendaftaran Fasilitator (Connected to Supabase registrations table) -->
         <form id="form-rekrutmen-fasilitator" novalidate>
           <div class="form-grid-2">
@@ -847,32 +902,30 @@
   </section>
 
   <!-- ==========================================================================
-       FOOTER RESMI ARUTALA (Sesuai Standar OASE III PTKIN)
+       FOOTER RESMI ARUTALA
        ========================================================================== -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-            <img src="img/logo.png" alt="Logo ARUTALA" style="width: 38px; height: 38px; object-fit: contain; border-radius: 8px;">
-            <img src="img/uin_logo.png" alt="UIN Bandung" style="width: 32px; height: 32px; object-fit: contain; opacity: 0.9;">
-            <h3 style="margin-bottom: 0;">ARUTALA</h3>
+            <h3 style="margin-bottom: 0; font-family: var(--font-heading); font-weight: 900; font-size: 1.6rem; color: #0F172A; letter-spacing: -0.02em;">ARUTALA</h3>
           </div>
           <p>
             Akses Ruang Tumbuh yang Agamis, Setara, dan Adil. Model Inovasi Ekosistem Pengembangan Kapasitas Pemuda yang inklusif berbasis nilai keagamaan dan kesetaraan gender.
           </p>
-          <span class="badge badge-blue" style="font-size: 0.75rem;">OASE III PTKIN 2026</span>
+          <span class="badge badge-blue" style="font-size: 0.75rem;">Inovasi Sosial 2026</span>
         </div>
 
         <div class="footer-col">
           <h4>Navigasi Halaman</h4>
           <ul class="footer-links">
             <li><a href="index.html#beranda">Beranda Utama</a></li>
-            <li><a href="index.html#artikel-opini">Artikel &amp; Jurnal</a></li>
-            <li><a href="karsa.html">Pilar KARSA (Modul Skill)</a></li>
-            <li><a href="nuansa.html">Pilar NUANSA (Agama &amp; Video)</a></li>
-            <li><a href="temara.html">Pilar TEMARA (Tutor Sebaya)</a></li>
-            <li><a href="index.html#aksi-sosial">Pilar AKSARA (Aksi &amp; Donasi)</a></li>
+            <li><a href="artikel.html">Artikel &amp; Jurnal</a></li>
+            <li><a href="karsa.html">Pilar KARSA</a></li>
+            <li><a href="nuansa.html">Pilar NUANSA</a></li>
+            <li><a href="temara.html">Pilar TEMARA</a></li>
+            <li><a href="aksara.html">Pilar AKSARA</a></li>
           </ul>
         </div>
 
@@ -899,7 +952,7 @@
 
       <div class="footer-bottom">
         <div>
-          &copy; 2026 ARUTALA - UIN Sunan Gunung Djati Bandung. Dikembangkan untuk OASE III PTKIN.
+          &copy; 2026 ARUTALA - UIN Sunan Gunung Djati Bandung. Seluruh hak cipta dilindungi.
         </div>
         <div>
           Prinsip: <em>Silih Asah, Silih Asih, Silih Asuh</em> / Bebas Diskriminasi
@@ -913,6 +966,10 @@
   <script src="js/supabase.js"></script>
   <script src="js/data.js"></script>
   <script src="js/interactions.js"></script>
+  <script>
+    window.ARUTALA_CURRENT_TRACK = "temara";
+  </script>
+  <script src="js/modul.js"></script>
   <script src="js/temara.js"></script>
 </body>
 </html>
