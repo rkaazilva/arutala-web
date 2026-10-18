@@ -311,13 +311,13 @@ const AKSARA_SOCIAL_CAMPAIGNS = [
     shortTitle: "Bantuan Banjir Bandang & Dapur Umum",
     organizer: "Posko Siaga Bencana Relawan ARUTALA",
     verified: true,
-    image: "img/harmoni_pemuda_aljabbar.png",
+    image: "img/bencana_banjir_bandang.jpg",
     target: 35000000,
     collected: 27850000,
     donorCount: 264,
     daysLeft: 12,
     description: "Pengadaan bahan pangan dapur umum siap santap, air minum bersih, pakaian kering, selimut hangat, dan perlengkapan bayi bagi warga pengungsi terdampak banjir bandang.",
-    highlightDoc: "img/harmoni_pemuda_aljabbar.png",
+    highlightDoc: "img/bencana_banjir_bandang.jpg",
     docCaption: "Penyaluran Nyata: Distribusi Makanan Siap Santap Dapur Umum Korban Banjir"
   },
   {
@@ -327,13 +327,13 @@ const AKSARA_SOCIAL_CAMPAIGNS = [
     shortTitle: "Posko Gempa & Tenda Pengungsian",
     organizer: "Tim Tanggap Darurat Bencana ARUTALA",
     verified: true,
-    image: "img/santriwati_galeri_rasulullah.png",
+    image: "img/bencana_gempa_bumi.jpg",
     target: 45000000,
     collected: 34200000,
     donorCount: 312,
     daysLeft: 16,
     description: "Penyediaan tenda darurat keluarga, terpal tahan air, paket sanitasi (sabun, pembalut, pasta gigi), dan tikar alas tidur bagi warga yang kehilangan tempat tinggal pascagempa.",
-    highlightDoc: "img/santriwati_galeri_rasulullah.png",
+    highlightDoc: "img/bencana_gempa_bumi.jpg",
     docCaption: "Penyaluran Nyata: Pendirian Tenda Darurat & Distribusi Logistik Pengungsi Gempa"
   },
   {
@@ -343,13 +343,13 @@ const AKSARA_SOCIAL_CAMPAIGNS = [
     shortTitle: "Tanggap Darurat Tanah Longsor",
     organizer: "Satgas Bencana Pemuda ARUTALA",
     verified: true,
-    image: "img/circle_mentoring_sebaya.jpg",
+    image: "img/bencana_tanah_longsor.jpg",
     target: 25000000,
     collected: 18400000,
     donorCount: 178,
     daysLeft: 9,
     description: "Bantuan logistik sembako cepat, obat luka & pertolongan pertama, senter penerangan darurat, serta dukungan bagi warga yang rumahnya tertimbun longsor.",
-    highlightDoc: "img/circle_mentoring_sebaya.jpg",
+    highlightDoc: "img/bencana_tanah_longsor.jpg",
     docCaption: "Penyaluran Nyata: Penyaluran Paket Sembako & Obat-obatan Bencana Longsor"
   },
   {
@@ -359,14 +359,14 @@ const AKSARA_SOCIAL_CAMPAIGNS = [
     shortTitle: "Bantuan Erupsi Gunung & Krisis Udara",
     organizer: "Jejaring Relawan Kemanusiaan ARUTALA",
     verified: true,
-    image: "img/pojok_baca_anak.jpg",
+    image: "img/bencana_erupsi_gunung.jpg",
     target: 30000000,
     collected: 22150000,
     donorCount: 195,
     daysLeft: 22,
     description: "Pembagian masker respirator medis/N95 penyaring abu vulkanik pekat, tangki distribusi air bersih, kacamata pelindung, serta posko ramah anak di pengungsian erupsi.",
-    highlightDoc: "img/pojok_baca_anak.jpg",
-    docCaption: "Penyaluran Nyata: Distribusi Masker & Trauma Healing Anak Pengungsi Erupsi"
+    highlightDoc: "img/bencana_erupsi_gunung.jpg",
+    docCaption: "Penyaluran Nyata: Distribusi Masker & Bantuan Pengungsi Erupsi Gunung"
   }
 ];
 
@@ -431,7 +431,15 @@ let SELECTED_DONATION_AMOUNT = 10000;
 async function initAksaraDonations() {
   const localCamps = JSON.parse(localStorage.getItem("arutala_social_campaigns_local") || "null");
   if (Array.isArray(localCamps) && localCamps.length > 0 && localCamps.some(c => c.id && (c.id.includes("banjir") || c.id.includes("gempa")))) {
-    ACTIVE_CAMPAIGNS = localCamps;
+    // Pastikan foto bencana selalu tersinkronisasi ke gambar bencana terbaru
+    ACTIVE_CAMPAIGNS = localCamps.map(c => {
+      const match = AKSARA_SOCIAL_CAMPAIGNS.find(def => def.id === c.id);
+      if (match) {
+        return { ...c, image: match.image, highlightDoc: match.highlightDoc, docCaption: match.docCaption };
+      }
+      return c;
+    });
+    localStorage.setItem("arutala_social_campaigns_local", JSON.stringify(ACTIVE_CAMPAIGNS));
   } else {
     ACTIVE_CAMPAIGNS = [...AKSARA_SOCIAL_CAMPAIGNS];
     localStorage.setItem("arutala_social_campaigns_local", JSON.stringify(ACTIVE_CAMPAIGNS));

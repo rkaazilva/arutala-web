@@ -371,6 +371,120 @@
   };
 
   /**
+   * 6. SIKLUS TRANSFORMASI CAROUSEL (geser / swipe / drag)
+   */
+  window.initCycleCarousel = function () {
+    var track = document.getElementById('cycle-carousel-track');
+    var wrap = document.getElementById('cycle-carousel');
+    if (!track || !wrap || track._cycleReady) return;
+    track._cycleReady = true;
+
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.cycle-slide'));
+    var dots = Array.prototype.slice.call(wrap.querySelectorAll('.cycle-dot'));
+    var btnPrev = document.getElementById('cycle-carousel-prev');
+    var btnNext = document.getElementById('cycle-carousel-next');
+    var current = 0;
+    var isDragging = false;
+    var startX = 0;
+    var startScroll = 0;
+    var moved = false;
+
+    function slideTo(index) {
+      if (window.innerWidth > 768 || !slides.length) return;
+      current = (index + slides.length) % slides.length;
+      var target = slides[current];
+      var left = target.offsetLeft - (track.clientWidth - target.offsetWidth) / 2;
+      track.scrollTo({ left: Math.max(0, left), behavior: 'smooth' });
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle('active', i === current);
+      });
+    }
+
+    function nearestIndex() {
+      var trackRect = track.getBoundingClientRect();
+      var center = trackRect.left + trackRect.width / 2;
+      var best = 0;
+      var bestDist = Infinity;
+      slides.forEach(function (slide, i) {
+        var r = slide.getBoundingClientRect();
+        var dist = Math.abs((r.left + r.width / 2) - center);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = i;
+        }
+      });
+      return best;
+    }
+
+    function syncFromScroll() {
+      if (window.innerWidth > 768 || isDragging) return;
+      var idx = nearestIndex();
+      if (idx !== current) {
+        current = idx;
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle('active', i === current);
+        });
+      }
+    }
+
+    track.addEventListener('scroll', function () {
+      if (window.innerWidth <= 768) {
+        window.requestAnimationFrame(syncFromScroll);
+      }
+    }, { passive: true });
+
+    track.addEventListener('pointerdown', function (e) {
+      if (window.innerWidth > 768) return;
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      isDragging = true;
+      moved = false;
+      startX = e.clientX;
+      startScroll = track.scrollLeft;
+      track.classList.add('is-dragging');
+      try { track.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+
+    track.addEventListener('pointermove', function (e) {
+      if (!isDragging) return;
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > 6) moved = true;
+      track.scrollLeft = startScroll - dx;
+    });
+
+    function endDrag(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      track.classList.remove('is-dragging');
+      var dx = e && typeof e.clientX === 'number' ? e.clientX - startX : 0;
+      if (dx > 50) slideTo(current - 1);
+      else if (dx < -50) slideTo(current + 1);
+      else slideTo(nearestIndex());
+    }
+
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+
+    track.addEventListener('click', function (e) {
+      if (moved) {
+        e.preventDefault();
+        e.stopPropagation();
+        moved = false;
+      }
+    }, true);
+
+    if (btnPrev) btnPrev.addEventListener('click', function () { slideTo(current - 1); });
+    if (btnNext) btnNext.addEventListener('click', function () { slideTo(current + 1); });
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        slideTo(parseInt(dot.getAttribute('data-index'), 10) || 0);
+      });
+    });
+
+    slideTo(0);
+  };
+
+  /**
    * Inisialisasi saat DOM siap
    */
   function startInteractions() {
@@ -379,6 +493,7 @@
     window.initAutoScrollVideoCarousel();
     window.initHeroShowcaseSlider();
     window.initHeroCounterStats();
+    window.initCycleCarousel();
   }
 
   if (document.readyState === 'loading') {
@@ -386,4 +501,27 @@
   } else {
     startInteractions();
   }
+
+  /**
+   * PDF Standalone Viewer Fullscreen Toggle
+   */
+  window.togglePdfFullscreen = function(frameBoxId) {
+    const elem = (frameBoxId ? document.getElementById(frameBoxId) : null) || document.querySelector(".lms-pdf-viewer-frame-box");
+    if (!elem) return;
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    }
+  };
 })();

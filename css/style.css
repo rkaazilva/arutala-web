@@ -881,6 +881,357 @@ img {
   gap: 20px;
 }
 
+/* ==========================================================================
+   SIKLUS TRANSFORMASI PEMUDA ARUTALA (MODERN 4-PILAR EDITORIAL GRID / MOBILE KOLASE)
+   Laptop: Grid 4 Kolom Luas & Megah (Spacious & Full-Width 4 Columns)
+   Tablet: Grid 2 Kolom Seimbang
+   Mobile (HP): Kolase 1 Baris Horizontal Scroll-Snap (Seamless Swipe Track)
+   ========================================================================== */
+
+.cycle-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* Grid 4 Kolom Luas di Laptop/Desktop */
+.cycle-carousel-track {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  width: 100%;
+  padding: 8px 0 16px;
+}
+
+/* Kartu Siklus Mewah, Modern & Berwarna Sesuai Palet (Tidak Putih Polos) */
+.cycle-slide {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.06);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.cycle-slide:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+}
+
+/* Background Kartu Menggunakan Palet Warna (Bukan Putih Polos) & Border Sesuai Palet */
+.cycle-slide-navy {
+  background: #EEF4FB !important;
+  border: 1.5px solid rgba(47, 79, 135, 0.28) !important;
+}
+.cycle-slide-green {
+  background: #EAF7EE !important;
+  border: 1.5px solid rgba(102, 187, 106, 0.38) !important;
+}
+.cycle-slide-sky {
+  background: #EAF4FD !important;
+  border: 1.5px solid rgba(137, 187, 238, 0.55) !important;
+}
+.cycle-slide-pink {
+  background: #FDEBF6 !important;
+  border: 1.5px solid rgba(255, 100, 197, 0.38) !important;
+}
+
+/* Garis Aksen Warna Menonjol di Bagian Atas Tiap Kartu */
+.cycle-slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  z-index: 5;
+}
+
+.cycle-slide-navy::before  { background: linear-gradient(90deg, #2F4F87 0%, #3E69B5 100%); }
+.cycle-slide-green::before { background: linear-gradient(90deg, #66BB6A 0%, #43A047 100%); }
+.cycle-slide-sky::before   { background: linear-gradient(90deg, #89BBEE 0%, #5B9FE6 100%); }
+.cycle-slide-pink::before  { background: linear-gradient(90deg, #FF64C5 0%, #E83F9F 100%); }
+
+.cycle-slide-navy:hover  { border-color: #2F4F87 !important; }
+.cycle-slide-green:hover { border-color: #66BB6A !important; }
+.cycle-slide-sky:hover   { border-color: #89BBEE !important; }
+.cycle-slide-pink:hover  { border-color: #FF64C5 !important; }
+
+/* Bagian Media Foto Nyata */
+.cycle-slide-media {
+  position: relative;
+  height: 205px;
+  overflow: hidden;
+}
+
+.cycle-slide-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.cycle-slide:hover .cycle-slide-media img {
+  transform: scale(1.06);
+}
+
+.cycle-slide-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.12) 0%, rgba(15, 23, 42, 0.4) 45%, rgba(15, 23, 42, 0.92) 100%);
+  z-index: 1;
+}
+
+/* Badge Nomor Tahap - Warna Menonjol & Tegas */
+.cycle-slide-step {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.88rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.cycle-slide-navy .cycle-slide-step  { background: #2F4F87; color: #FFFFFF; }
+.cycle-slide-green .cycle-slide-step { background: #66BB6A; color: #FFFFFF; }
+.cycle-slide-sky .cycle-slide-step   { background: #89BBEE; color: #0F172A; font-weight: 900; }
+.cycle-slide-pink .cycle-slide-step  { background: #FF64C5; color: #FFFFFF; }
+
+/* Judul Tahap di Bawah Foto */
+.cycle-slide-overlay-title {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  z-index: 3;
+  margin: 0;
+  color: #FFFFFF !important;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800 !important;
+  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Badan Kartu */
+.cycle-slide-body {
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.cycle-slide-body p {
+  margin: 0 0 18px;
+  color: #1E293B !important;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Tombol Aksi "Pelajari Selengkapnya" - Solid Berwarna Sesuai Palet */
+.cycle-slide-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.84rem;
+  text-decoration: none !important;
+  transition: all 0.22s ease;
+  margin-top: auto;
+}
+
+.cycle-slide-more svg {
+  transition: transform 0.22s ease;
+}
+
+.cycle-slide-more:hover svg {
+  transform: translateX(4px);
+}
+
+.cycle-slide-navy .cycle-slide-more  {
+  background: #2F4F87 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #2F4F87 !important;
+  box-shadow: 0 4px 12px rgba(47, 79, 135, 0.25);
+}
+.cycle-slide-navy .cycle-slide-more:hover  {
+  background: #243E6B !important;
+  box-shadow: 0 6px 16px rgba(47, 79, 135, 0.35);
+  transform: translateY(-2px);
+}
+
+.cycle-slide-green .cycle-slide-more {
+  background: #2E7D32 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #2E7D32 !important;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.25);
+}
+.cycle-slide-green .cycle-slide-more:hover {
+  background: #1B5E20 !important;
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.35);
+  transform: translateY(-2px);
+}
+
+.cycle-slide-sky .cycle-slide-more   {
+  background: #0284C7 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #0284C7 !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+}
+.cycle-slide-sky .cycle-slide-more:hover   {
+  background: #0369A1 !important;
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+  transform: translateY(-2px);
+}
+
+.cycle-slide-pink .cycle-slide-more  {
+  background: #D81B60 !important;
+  color: #FFFFFF !important;
+  border: 1px solid #D81B60 !important;
+  box-shadow: 0 4px 12px rgba(216, 27, 96, 0.25);
+}
+.cycle-slide-pink .cycle-slide-more:hover  {
+  background: #BE185D !important;
+  box-shadow: 0 6px 16px rgba(216, 27, 96, 0.35);
+  transform: translateY(-2px);
+}
+
+/* Tombol Panah & Dots Default Hidden di Laptop */
+.cycle-carousel-arrow {
+  display: none !important;
+}
+
+.cycle-carousel-dots {
+  display: none !important;
+}
+
+/* Tablet (769px - 992px) */
+@media (min-width: 769px) and (max-width: 992px) {
+  .cycle-carousel-track {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 18px;
+  }
+}
+
+/* Mobile (HP): Kolase 1 Baris Horizontal Scroll-Snap */
+@media (max-width: 768px) {
+  .cycle-carousel-track {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 14px !important;
+    padding: 8px calc((100% - min(82vw, 290px)) / 2) 18px !important;
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    scroll-padding: 0 calc((100% - min(82vw, 290px)) / 2) !important;
+    scrollbar-width: none !important;
+    cursor: grab;
+  }
+
+  .cycle-carousel-track::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .cycle-slide {
+    flex: 0 0 min(82vw, 290px) !important;
+    width: min(82vw, 290px) !important;
+    max-width: 290px !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
+    border-radius: 16px !important;
+  }
+
+  .cycle-slide-media {
+    height: 190px !important;
+  }
+
+  .cycle-slide-overlay-title {
+    font-size: 1rem !important;
+  }
+
+  /* Tampilkan Dots Navigasi pada Mobile */
+  .cycle-carousel-dots {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    margin-top: 10px !important;
+  }
+
+  .cycle-dot {
+    width: 8px !important;
+    height: 8px !important;
+    border: none !important;
+    border-radius: 999px !important;
+    background: #CBD5E1 !important;
+    padding: 0 !important;
+    cursor: pointer !important;
+    transition: width 0.25s ease, background 0.25s ease !important;
+  }
+
+  .cycle-dot.active {
+    width: 22px !important;
+    background: #2F4F87 !important;
+  }
+}
+
+/* ==========================================================================
+   ARUTALA WAVE DIVIDER (PEMISAH SECTION DINAMIS DENGAN PALET 4 WARNA)
+   Pemisah Gelombang Pita Organik Elegan Antara Siklus Pemuda & Artikel Opini
+   ========================================================================== */
+.arutala-wave-divider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+  background: #FAFCFF;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.arutala-wave-divider svg {
+  display: block;
+  width: 100%;
+  height: 125px;
+  vertical-align: bottom;
+}
+
+@media (max-width: 992px) {
+  .arutala-wave-divider svg {
+    height: 95px;
+  }
+}
+
+@media (max-width: 768px) {
+  .arutala-wave-divider svg {
+    height: 70px;
+  }
+}
+
 .cycle-box-card {
   background: #FFFFFF;
   border: 1px solid var(--border);
@@ -6313,13 +6664,7 @@ img {
   }
 
   .uss-brand-sub {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-    font-size: 0.65rem !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.16em !important;
-    color: #2F4F87 !important;
-    text-transform: uppercase !important;
-    margin-top: 3px;
+    display: none !important;
   }
 
   /* Quick Search Bar */
@@ -6949,7 +7294,7 @@ img {
   .uss-feed-section {
     background: #FFFFFF !important;
     border-bottom: 1px solid #E2E8F0 !important;
-    padding: 84px 0 !important;
+    padding: 44px 0 84px !important;
   }
 
   .uss-feed-controls {
@@ -7241,8 +7586,8 @@ img {
   /* 6. SIKLUS PEMUDA & 4 PILAR NILAI (SOFT MESH PASTEL TINT) */
   #siklus-pemuda {
     background: #FAFCFF !important;
-    border-bottom: 1px solid #E2E8F0 !important;
-    padding: 84px 0 !important;
+    border-bottom: none !important;
+    padding: 80px 0 20px !important;
   }
 
   .cycle-box-card {
@@ -9541,23 +9886,24 @@ body[data-track="temara"] .lms-module-item-btn.active .mod-code {
   flex-wrap: wrap;
 }
 
-/* 4 KARTU BESAR KATEGORI GRID */
+/* 4 KARTU KATEGORI PILAR LITERASI (COMPACT, SLEEK & SESUAI 4 PALET ARUTALA) */
 .portal-4-pillars-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-bottom: 50px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 38px;
 }
 
 .pillar-big-card {
   background: #FFFFFF;
-  border: 1.5px solid #E2E8F0;
-  border-radius: 18px;
-  padding: 32px 28px 26px;
-  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.04);
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 20px 18px 18px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
   display: flex;
   flex-direction: column;
-  transition: all 0.22s ease;
+  justify-content: space-between;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
   position: relative;
   cursor: pointer;
   text-decoration: none;
@@ -9565,116 +9911,123 @@ body[data-track="temara"] .lms-module-item-btn.active .mod-code {
 }
 
 .pillar-big-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 36px -4px rgba(15, 23, 42, 0.1);
-  border-color: #CBD5E1;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.1);
 }
 
-.pillar-big-card.card-theme-moderasi {
-  border-top: 5px solid #10B981;
-}
-.pillar-big-card.card-theme-kesetaraan {
-  border-top: 5px solid #FF64C5;
-}
-.pillar-big-card.card-theme-budaya {
-  border-top: 5px solid #0284C7;
-}
-.pillar-big-card.card-theme-sosial {
-  border-top: 5px solid #F59E0B;
-}
+/* 4 Palet Resmi ARUTALA: Fresh Green, Pink, Sky Blue, Deep Navy */
+.pillar-big-card.card-theme-moderasi  { border-top: 4px solid #66BB6A; }
+.pillar-big-card.card-theme-kesetaraan { border-top: 4px solid #FF64C5; }
+.pillar-big-card.card-theme-budaya     { border-top: 4px solid #89BBEE; }
+.pillar-big-card.card-theme-sosial     { border-top: 4px solid #2F4F87; }
+
+.pillar-big-card.card-theme-moderasi:hover  { border-color: #66BB6A; }
+.pillar-big-card.card-theme-kesetaraan:hover { border-color: #FF64C5; }
+.pillar-big-card.card-theme-budaya:hover     { border-color: #89BBEE; }
+.pillar-big-card.card-theme-sosial:hover     { border-color: #2F4F87; }
 
 .pillar-card-badge-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .pillar-theme-badge {
-  font-size: 0.72rem;
+  font-size: 0.65rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 4px 12px;
+  padding: 3px 8px;
   border-radius: 6px;
 }
 
-.badge-moderasi { background: #ECFDF5; color: #059669; }
-.badge-kesetaraan { background: #FDF2F8; color: #BE185D; }
-.badge-budaya { background: #F0F9FF; color: #0284C7; }
-.badge-sosial { background: #FFFBEB; color: #D97706; }
+.badge-moderasi  { background: #F0FDF4; color: #166534; border: 1px solid rgba(102, 187, 106, 0.3); }
+.badge-kesetaraan { background: #FFF0F9; color: #BE185D; border: 1px solid rgba(255, 100, 197, 0.3); }
+.badge-budaya    { background: #F0F7FF; color: #0284C7; border: 1px solid rgba(137, 187, 238, 0.45); }
+.badge-sosial    { background: #EEF3FA; color: #2F4F87; border: 1px solid rgba(47, 79, 135, 0.25); }
 
 .pillar-card-count {
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #64748B;
 }
 
 .pillar-big-title {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #0F172A;
-  margin: 0 0 6px;
-  line-height: 1.3;
+  margin: 0 0 2px;
+  line-height: 1.25;
 }
 
 .pillar-big-subtitle {
-  font-size: 0.92rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: #2F4F87;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  line-height: 1.35;
 }
 
+.card-theme-moderasi .pillar-big-subtitle  { color: #166534; }
+.card-theme-kesetaraan .pillar-big-subtitle { color: #BE185D; }
+.card-theme-budaya .pillar-big-subtitle     { color: #0284C7; }
+.card-theme-sosial .pillar-big-subtitle     { color: #2F4F87; }
+
 .pillar-big-desc {
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   color: #475569;
-  line-height: 1.62;
-  margin: 0 0 18px;
+  line-height: 1.5;
+  margin: 0 0 12px;
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .pillar-big-features {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 22px;
+  gap: 5px;
+  margin-bottom: 14px;
 }
 
 .pillar-big-feat-chip {
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 2px 7px;
+  border-radius: 5px;
   background: #F8FAFC;
   border: 1px solid #E2E8F0;
   color: #334155;
+  white-space: nowrap;
 }
 
 .pillar-big-btn {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  padding: 11px 18px;
-  border-radius: 10px;
+  padding: 8px 14px;
+  border-radius: 8px;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.80rem;
   text-decoration: none;
-  transition: all 0.18s ease;
+  transition: all 0.2s ease;
   margin-top: auto;
 }
 
-.btn-card-moderasi { background: #10B981; color: #FFFFFF; }
-.btn-card-moderasi:hover { background: #059669; }
+.btn-card-moderasi  { background: #66BB6A; color: #FFFFFF; }
+.btn-card-moderasi:hover  { background: #55A859; box-shadow: 0 4px 12px rgba(102, 187, 106, 0.3); }
 
 .btn-card-kesetaraan { background: #FF64C5; color: #FFFFFF; }
-.btn-card-kesetaraan:hover { background: #DB2777; }
+.btn-card-kesetaraan:hover { background: #E83F9F; box-shadow: 0 4px 12px rgba(255, 100, 197, 0.3); }
 
-.btn-card-budaya { background: #0284C7; color: #FFFFFF; }
-.btn-card-budaya:hover { background: #0369A1; }
+.btn-card-budaya    { background: #89BBEE; color: #0F172A; font-weight: 800; }
+.btn-card-budaya:hover    { background: #75A7DC; box-shadow: 0 4px 12px rgba(137, 187, 238, 0.35); }
 
-.btn-card-sosial { background: #F59E0B; color: #FFFFFF; }
-.btn-card-sosial:hover { background: #D97706; }
+.btn-card-sosial    { background: #2F4F87; color: #FFFFFF; }
+.btn-card-sosial:hover    { background: #243E6B; box-shadow: 0 4px 12px rgba(47, 79, 135, 0.3); }
 
 /* FEED ARTIKEL LIST */
 .portal-feed-header-bar {
@@ -9708,9 +10061,10 @@ body[data-track="temara"] .lms-module-item-btn.active .mod-code {
   gap: 24px;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .portal-4-pillars-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
   .portal-articles-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -9718,11 +10072,146 @@ body[data-track="temara"] .lms-module-item-btn.active .mod-code {
 }
 
 @media (max-width: 640px) {
+  .portal-4-pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
   .portal-articles-grid {
     grid-template-columns: 1fr;
   }
   .portal-hub-title {
     font-size: 1.7rem;
+  }
+}
+
+/* ==========================================================================
+   ARUTALA FULL-WIDTH STANDALONE PDF VIEWER
+   ========================================================================== */
+.lms-pdf-standalone-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+}
+
+.lms-pdf-header-card {
+  padding: 24px 28px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.lms-pdf-header-info {
+  flex: 1;
+  min-width: 280px;
+}
+
+.lms-pdf-header-info h2 {
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 8px 0 4px;
+  letter-spacing: -0.02em;
+}
+
+.lms-pdf-header-info p {
+  color: #64748B;
+  font-size: 0.92rem;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.lms-pdf-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-pdf-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid #CBD5E1;
+  background: #F8FAFC;
+  color: #0F172A;
+}
+
+.btn-pdf-action:hover {
+  background: #F1F5F9;
+  border-color: #94A3B8;
+  transform: translateY(-1px);
+}
+
+.btn-pdf-action.btn-pdf-primary {
+  background: #2F4F87;
+  border-color: #2F4F87;
+  color: #FFFFFF;
+  box-shadow: 0 4px 12px rgba(47, 79, 135, 0.2);
+}
+
+.btn-pdf-action.btn-pdf-primary:hover {
+  filter: brightness(1.1);
+  color: #FFFFFF;
+}
+
+.lms-pdf-viewer-frame-box {
+  position: relative;
+  width: 100%;
+  height: 800px;
+  max-height: 82vh;
+  background: #F8FAFC;
+}
+
+.lms-standalone-pdf-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #FFFFFF;
+}
+
+/* Fullscreen mode for the PDF frame box */
+.lms-pdf-viewer-frame-box:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  background: #000;
+}
+.lms-pdf-viewer-frame-box:-webkit-full-screen {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .lms-pdf-header-card {
+    padding: 18px 16px;
+  }
+  .lms-pdf-header-info h2 {
+    font-size: 1.35rem;
+  }
+  .lms-pdf-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .lms-pdf-viewer-frame-box {
+    height: 560px;
   }
 }
 

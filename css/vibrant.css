@@ -558,10 +558,10 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
   transform: translateY(-2px);
 }
 
-/* 3. 4 PILARS CARDS GRID - CRISP, HIGH-CONTRAST MODERN WHITE CARDS */
+/* 3. 4 PILARS CARDS GRID - LUXURY EDITORIAL GLASS / PORCELAIN CARDS */
 .hero-pillars-container {
   width: 100%;
-  max-width: 1220px;
+  max-width: 1240px;
   margin: 0 auto;
 }
 
@@ -569,22 +569,40 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   padding: 0 4px;
 }
 
 .hero-pillars-kicker {
-  font-size: 0.76rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #FFFFFF;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pillar-kicker-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 10px #38BDF8;
 }
 
 .hero-pillars-sub {
-  font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
   margin: 0;
 }
@@ -592,32 +610,26 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
 .hero-pillars-cards-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 18px;
 }
 
-/* Clean, Solid White Cards with Great Contrast & Clarity */
+/* Elevated Luxury Porcelain Card with Soft Dynamic Gradient Wash */
 .hero-pillar-glass-card {
   position: relative;
   background: #FFFFFF !important;
-  border: 1px solid #E2E8F0;
-  border-radius: 16px;
-  padding: 20px 18px 16px;
+  border-radius: 18px;
+  padding: 22px 20px 18px;
   text-align: left;
   text-decoration: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-  transition: transform 0.26s ease, box-shadow 0.26s ease;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18), 0 2px 6px rgba(15, 23, 42, 0.08);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
   overflow: hidden;
 }
 
-.hero-pillar-glass-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
-}
-
-/* Top Color Accent Line on each card */
+/* Smooth Top Gradient Accent Line */
 .hero-pillar-glass-card::before {
   content: '';
   position: absolute;
@@ -625,105 +637,278 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
   left: 0;
   right: 0;
   height: 4px;
+  transition: height 0.2s ease;
+  z-index: 3;
 }
 
-.pillar-card-karsa::before  { background: #2F4F87; }
-.pillar-card-nuansa::before { background: #059669; }
-.pillar-card-temara::before { background: #D97706; }
-.pillar-card-aksara::before { background: #BE185D; }
+.hero-pillar-glass-card:hover::before {
+  height: 5px;
+}
 
+/* 4 Distinct Aesthetic Identities per Brand Palette */
+.pillar-card-karsa {
+  background: linear-gradient(180deg, #F4F8FD 0%, #FFFFFF 42%) !important;
+  border: 1.5px solid rgba(47, 79, 135, 0.22) !important;
+}
+.pillar-card-karsa::before {
+  background: linear-gradient(90deg, #2F4F87 0%, #3B82F6 100%);
+}
+.pillar-card-karsa:hover {
+  border-color: #2F4F87 !important;
+  transform: translateY(-6px);
+  box-shadow: 0 20px 42px rgba(47, 79, 135, 0.24);
+}
+
+.pillar-card-nuansa {
+  background: linear-gradient(180deg, #F2FAF4 0%, #FFFFFF 42%) !important;
+  border: 1.5px solid rgba(102, 187, 106, 0.30) !important;
+}
+.pillar-card-nuansa::before {
+  background: linear-gradient(90deg, #2E7D32 0%, #66BB6A 100%);
+}
+.pillar-card-nuansa:hover {
+  border-color: #43A047 !important;
+  transform: translateY(-6px);
+  box-shadow: 0 20px 42px rgba(46, 125, 50, 0.24);
+}
+
+.pillar-card-temara {
+  background: linear-gradient(180deg, #F3F8FE 0%, #FFFFFF 42%) !important;
+  border: 1.5px solid rgba(137, 187, 238, 0.48) !important;
+}
+.pillar-card-temara::before {
+  background: linear-gradient(90deg, #0284C7 0%, #89BBEE 100%);
+}
+.pillar-card-temara:hover {
+  border-color: #0284C7 !important;
+  transform: translateY(-6px);
+  box-shadow: 0 20px 42px rgba(2, 132, 199, 0.24);
+}
+
+.pillar-card-aksara {
+  background: linear-gradient(180deg, #FDF4FA 0%, #FFFFFF 42%) !important;
+  border: 1.5px solid rgba(255, 100, 197, 0.30) !important;
+}
+.pillar-card-aksara::before {
+  background: linear-gradient(90deg, #D81B60 0%, #FF64C5 100%);
+}
+.pillar-card-aksara:hover {
+  border-color: #FF64C5 !important;
+  transform: translateY(-6px);
+  box-shadow: 0 20px 42px rgba(216, 27, 96, 0.24);
+}
+
+/* Header Inside Card: Icon Badge & Pillar Tag */
 .pillar-glass-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
+/* Premium Solid Gradient Squircle Badge with Pure White Crisp SVG Icon */
 .pillar-icon-badge {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.25s ease;
 }
 
-.pillar-card-karsa .pillar-icon-badge  { background: #EFF6FF; color: #2F4F87; }
-.pillar-card-nuansa .pillar-icon-badge { background: #ECFDF5; color: #059669; }
-.pillar-card-temara .pillar-icon-badge { background: #FFFBEB; color: #D97706; }
-.pillar-card-aksara .pillar-icon-badge { background: #FDF2F8; color: #BE185D; }
+.hero-pillar-glass-card:hover .pillar-icon-badge {
+  transform: scale(1.08);
+}
+
+.pillar-card-karsa .pillar-icon-badge {
+  background: linear-gradient(135deg, #2F4F87 0%, #1E3A8A 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(47, 79, 135, 0.32);
+}
+.pillar-card-nuansa .pillar-icon-badge {
+  background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.32);
+}
+.pillar-card-temara .pillar-icon-badge {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.32);
+}
+.pillar-card-aksara .pillar-icon-badge {
+  background: linear-gradient(135deg, #FF64C5 0%, #D81B60 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(216, 27, 96, 0.32);
+}
 
 .pillar-icon-badge svg {
-  width: 19px;
-  height: 19px;
+  width: 21px;
+  height: 21px;
+  stroke: #FFFFFF !important;
 }
 
-.pillar-tag-glow {
-  font-size: 0.65rem;
+/* Subtle Editorial Tag (PILAR 01, PILAR 02, etc.) */
+.pillar-number-tag {
+  font-size: 0.68rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: var(--font-heading);
 }
 
-.pillar-card-karsa .pillar-tag-glow  { background: #EFF6FF; color: #2F4F87; }
-.pillar-card-nuansa .pillar-tag-glow { background: #ECFDF5; color: #059669; }
-.pillar-card-temara .pillar-tag-glow { background: #FFFBEB; color: #D97706; }
-.pillar-card-aksara .pillar-tag-glow { background: #FDF2F8; color: #BE185D; }
+.pillar-card-karsa .pillar-number-tag {
+  background: #EEF4FB;
+  color: #2F4F87;
+  border: 1px solid rgba(47, 79, 135, 0.18);
+}
+.pillar-card-nuansa .pillar-number-tag {
+  background: #EAF7EE;
+  color: #2E7D32;
+  border: 1px solid rgba(102, 187, 106, 0.28);
+}
+.pillar-card-temara .pillar-number-tag {
+  background: #EAF4FD;
+  color: #0369A1;
+  border: 1px solid rgba(137, 187, 238, 0.40);
+}
+.pillar-card-aksara .pillar-number-tag {
+  background: #FDEBF6;
+  color: #BE185D;
+  border: 1px solid rgba(255, 100, 197, 0.28);
+}
 
+/* Body Content */
 .pillar-glass-body {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .pillar-glass-title {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
+  font-size: 1.34rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   color: #0F172A !important;
-  margin: 0 0 2px;
+  margin: 0 0 3px;
   line-height: 1.2;
 }
 
 .pillar-glass-role {
   font-size: 0.78rem;
   font-weight: 700;
-  color: #64748B;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
+
+.pillar-glass-role::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.pillar-card-karsa .pillar-glass-role { color: #2F4F87 !important; }
+.pillar-card-karsa .pillar-glass-role::before { background: #2F4F87; }
+
+.pillar-card-nuansa .pillar-glass-role { color: #2E7D32 !important; }
+.pillar-card-nuansa .pillar-glass-role::before { background: #2E7D32; }
+
+.pillar-card-temara .pillar-glass-role { color: #0284C7 !important; }
+.pillar-card-temara .pillar-glass-role::before { background: #0284C7; }
+
+.pillar-card-aksara .pillar-glass-role { color: #D81B60 !important; }
+.pillar-card-aksara .pillar-glass-role::before { background: #D81B60; }
 
 .pillar-glass-desc {
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   color: #475569 !important;
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  min-height: 60px;
 }
 
+/* Footer: Interactive Solid Action Pill Button */
 .pillar-glass-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(226, 232, 240, 0.75);
+}
+
+.pillar-action-pill {
+  width: 100%;
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-size: 0.80rem;
+  font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 10px;
-  border-top: 1px solid #F1F5F9;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.pillar-enter-btn {
-  font-size: 0.80rem;
-  font-weight: 700;
-  color: #2F4F87 !important;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: gap 0.2s ease;
+.pillar-action-pill svg {
+  transition: transform 0.24s ease;
 }
 
-.hero-pillar-glass-card:hover .pillar-enter-btn {
-  gap: 8px;
+.hero-pillar-glass-card:hover .pillar-action-pill svg {
+  transform: translateX(4px);
+}
+
+/* KARSA Action Pill */
+.pillar-card-karsa .pillar-action-pill {
+  background: #EEF4FB;
+  color: #2F4F87;
+  border: 1px solid rgba(47, 79, 135, 0.18);
+}
+.hero-pillar-glass-card.pillar-card-karsa:hover .pillar-action-pill {
+  background: #2F4F87;
+  color: #FFFFFF;
+  border-color: #2F4F87;
+  box-shadow: 0 4px 14px rgba(47, 79, 135, 0.32);
+}
+
+/* NUANSA Action Pill */
+.pillar-card-nuansa .pillar-action-pill {
+  background: #EAF7EE;
+  color: #2E7D32;
+  border: 1px solid rgba(102, 187, 106, 0.26);
+}
+.hero-pillar-glass-card.pillar-card-nuansa:hover .pillar-action-pill {
+  background: #2E7D32;
+  color: #FFFFFF;
+  border-color: #2E7D32;
+  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.32);
+}
+
+/* TEMARA Action Pill */
+.pillar-card-temara .pillar-action-pill {
+  background: #EAF4FD;
+  color: #0369A1;
+  border: 1px solid rgba(137, 187, 238, 0.40);
+}
+.hero-pillar-glass-card.pillar-card-temara:hover .pillar-action-pill {
+  background: #0284C7;
+  color: #FFFFFF;
+  border-color: #0284C7;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.32);
+}
+
+/* AKSARA Action Pill */
+.pillar-card-aksara .pillar-action-pill {
+  background: #FDEBF6;
+  color: #BE185D;
+  border: 1px solid rgba(255, 100, 197, 0.28);
+}
+.hero-pillar-glass-card.pillar-card-aksara:hover .pillar-action-pill {
+  background: #D81B60;
+  color: #FFFFFF;
+  border-color: #D81B60;
+  box-shadow: 0 4px 14px rgba(216, 27, 96, 0.32);
 }
 
 /* 4. DOCKED 4-COLUMN VIBRANT STATISTIC STRIP (FAITHFUL TO REFERENCE IMAGE) */
@@ -749,25 +934,34 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
   overflow: hidden;
 }
 
-/* Exact high-vibrancy color blocks as in reference image */
+/* Palet Resmi ARUTALA:
+   1. Pink: #FF64C5 (Fasilitator)
+   2. Sky Blue: #8ABCEE (Remaja Terjangkau)
+   3. Deep Navy: #2F4F87 (Penerima Manfaat)
+   4. Fresh Green: #66BB6A (Implementasi)
+*/
+.stat-block-pink,
 .stat-block-gold {
-  background: #F59E0B;
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  background: #FF64C5;
+  background: linear-gradient(135deg, #FF64C5 0%, #E83F9F 100%);
 }
 
+.stat-block-sky,
 .stat-block-coral {
-  background: #F43F5E;
-  background: linear-gradient(135deg, #F43F5E 0%, #E11D48 100%);
+  background: #8ABCEE;
+  background: linear-gradient(135deg, #8ABCEE 0%, #5B9FE6 100%);
 }
 
+.stat-block-navy,
 .stat-block-magenta {
-  background: #D946EF;
-  background: linear-gradient(135deg, #D946EF 0%, #C026D3 100%);
+  background: #2F4F87;
+  background: linear-gradient(135deg, #375D9E 0%, #203761 100%);
 }
 
+.stat-block-green,
 .stat-block-purple {
-  background: #7C3AED;
-  background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+  background: #66BB6A;
+  background: linear-gradient(135deg, #66BB6A 0%, #43A047 100%);
 }
 
 .hero-stat-block:hover {
@@ -850,7 +1044,7 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
 }
 
 /* 5. RESPONSIVE DESIGN */
-@media (max-width: 1080px) {
+@media (max-width: 991px) and (min-width: 769px) {
   .hero-pillars-cards-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
@@ -882,15 +1076,101 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
   .hero-main-lead {
     font-size: 0.92rem;
   }
-  .hero-pillars-cards-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+
+  /* 4 Pilar Mobile Collage: 1 Baris Horizontal Swipeable Row (Centered & Symmetrical) */
+  .hero-pillars-container {
+    width: 100%;
+    text-align: center;
   }
   .hero-pillars-header {
-    flex-direction: column;
-    align-items: flex-start;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
     gap: 4px;
+    margin-bottom: 14px;
+    padding: 0 12px;
+    width: 100%;
   }
+  .hero-pillars-kicker {
+    font-size: 0.72rem;
+    text-align: center !important;
+    width: 100%;
+    display: block;
+  }
+  .hero-pillars-sub {
+    font-size: 0.74rem;
+    line-height: 1.4;
+    text-align: center !important;
+    width: 100%;
+  }
+  .hero-pillars-cards-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 14px !important;
+    padding: 6px calc((100% - min(80vw, 285px)) / 2) 16px !important;
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    scroll-padding: 0 calc((100% - min(80vw, 285px)) / 2) !important;
+    scrollbar-width: none;
+  }
+  .hero-pillars-cards-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .hero-pillar-glass-card {
+    flex: 0 0 min(80vw, 285px) !important;
+    width: min(80vw, 285px) !important;
+    max-width: 285px !important;
+    min-width: 240px !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
+    padding: 16px 15px 14px !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  }
+  .pillar-glass-top {
+    margin-bottom: 10px;
+  }
+  .pillar-icon-badge {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 10px !important;
+  }
+  .pillar-icon-badge svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .pillar-number-tag {
+    font-size: 0.62rem !important;
+    padding: 3px 8px !important;
+  }
+  .pillar-glass-title {
+    font-size: 1.18rem !important;
+  }
+  .pillar-glass-role {
+    font-size: 0.73rem !important;
+    margin-bottom: 6px !important;
+  }
+  .pillar-glass-desc {
+    font-size: 0.78rem !important;
+    line-height: 1.42 !important;
+    min-height: unset !important;
+    margin-bottom: 12px !important;
+  }
+  .pillar-glass-footer {
+    padding-top: 10px !important;
+  }
+  .pillar-action-pill {
+    padding: 7px 11px !important;
+    font-size: 0.74rem !important;
+  }
+
   .hero-docked-stats-banner {
     grid-template-columns: 1fr;
   }

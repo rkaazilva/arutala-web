@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -670,63 +670,44 @@
        ========================================================================== -->
   <main class="lms-workspace-section">
     <div class="container">
-      <div class="lms-workspace-grid">
+      <div class="lms-pdf-standalone-container">
         
-        <!-- Left Column: Syllabus Playlist -->
-        <aside class="lms-sidebar-card">
-          <div class="lms-sidebar-header">
-            <h4>Silabus 7 Modul</h4>
-            <span>Pilih modul untuk mulai membaca</span>
+        <!-- Header & Toolbar Kontrol Dokumen PDF -->
+        <div class="lms-pdf-header-card">
+          <div class="lms-pdf-header-info">
+            <span class="lms-code-chip" style="background: #EEF3FA; color: #2F4F87; font-weight: 800; font-size: 0.74rem; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.05em; display: inline-block;">DOKUMEN RESMI MODUL</span>
+            <h2 style="font-family: var(--font-heading); font-size: 1.85rem; font-weight: 800; color: #0F172A; margin: 8px 0 4px; letter-spacing: -0.02em;">
+              Modul Pembelajaran &amp; Pengembangan Kapasitas Pemuda
+            </h2>
+            <p style="color: #64748B; font-size: 0.95rem; margin-bottom: 0; line-height: 1.5;">
+              Pelajari kurikulum resmi langsung di bawah ini. Dokumen dapat digulir (*scroll*), diperbesar, atau dibuka di layar penuh.
+            </p>
           </div>
-          <div id="lms-modules-list">
-            <!-- Populated by js/modul.js -->
+          <div class="lms-pdf-header-actions">
+            <button type="button" class="btn-pdf-action" onclick="togglePdfFullscreen('pdf-viewer-box-modul')" title="Layar Penuh">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              <span>Layar Penuh</span>
+            </button>
+            <a href="COVER KARSA.pdf" target="_blank" rel="noopener" class="btn-pdf-action" title="Buka Tab Baru">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Buka Tab Baru</span>
+            </a>
+            <a href="COVER KARSA.pdf" download="Modul-Pembelajaran-Arutala.pdf" class="btn-pdf-action btn-pdf-primary" style="background: #2F4F87; border-color: #2F4F87;" title="Unduh File PDF">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Unduh PDF</span>
+            </a>
           </div>
-        </aside>
+        </div>
 
-        <!-- Right Column: Rich Lesson Viewer & Quiz -->
-        <article class="lms-content-card">
-          <div class="lms-content-header">
-            <div class="lms-content-meta">
-              <span class="lms-code-chip" id="mod-code">MOD-01</span>
-              <span class="lms-duration-chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span id="mod-duration">45 Menit</span>
-              </span>
-            </div>
-            <h2 class="lms-content-title" id="mod-title">Mengenali Diri dan Potensi</h2>
-            <p class="lms-content-subtitle" id="mod-subtitle">Fondasi Self-Love, Identifikasi Bakat, dan Perencanaan Masa Depan</p>
-          </div>
-
-          <!-- Reading Content Body -->
-          <div class="lms-reading-body" id="mod-body">
-            <!-- Injected by js/modul.js -->
-          </div>
-
-          <!-- Interactive Quiz Box -->
-          <div class="lms-quiz-panel" id="mod-quiz-panel">
-            <div class="lms-quiz-header">
-              <h4>Kuis Pemahaman Materi</h4>
-              <span class="badge badge-blue" style="font-size: 0.72rem;">Uji Pemahaman</span>
-            </div>
-
-            <p class="lms-quiz-question" id="quiz-question-text">Pertanyaan kuis sedang dimuat...</p>
-
-            <div class="lms-quiz-options" id="quiz-options-container">
-              <!-- Radio choices injected by js/modul.js -->
-            </div>
-
-            <div class="lms-quiz-feedback" id="quiz-feedback-box"></div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px; flex-wrap: wrap; gap: 12px;">
-              <button class="btn btn-primary btn-pill btn-sm" id="btn-submit-quiz" style="background: #1D428A; border-color: #1D428A; color: #FFFFFF; font-weight: 700; padding: 10px 20px;">
-                Periksa Jawaban Kuis
-              </button>
-              <button class="btn btn-secondary btn-pill btn-sm" id="btn-next-module" style="display: none; background: #0F172A; color: #FFFFFF; font-weight: 700; padding: 10px 20px;">
-                Lanjut ke Modul Berikutnya &rarr;
-              </button>
-            </div>
-          </div>
-        </article>
+        <!-- Frame PDF Viewer Scrollable Langsung -->
+        <div class="lms-pdf-viewer-frame-box" id="pdf-viewer-box-modul">
+          <iframe
+            src="COVER KARSA.pdf#toolbar=1&navpanes=0&scrollbar=1"
+            class="lms-standalone-pdf-frame"
+            title="Dokumen Modul"
+            allow="fullscreen">
+          </iframe>
+        </div>
 
       </div>
     </div>

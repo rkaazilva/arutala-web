@@ -1,13 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PILAR KARSA â€” Karya, Aktualisasi, dan Ruang Skill | ARUTALA</title>
+  <title>PILAR KARSA Ã¢â‚¬â€ Karya, Aktualisasi, dan Ruang Skill | ARUTALA</title>
   
   <!-- SEO & Social Meta -->
   <meta name="description" content="KARSA (Karya, Aktualisasi, dan Ruang Skill Arutala) - Ruang belajar mandiri 7 modul kapasitas pemuda, kuis interaktif, dan portofolio publikasi karya reflektif.">
-  <meta property="og:title" content="PILAR KARSA â€” Ruang Skill & Publikasi Karya Pemuda | ARUTALA">
+  <meta property="og:title" content="PILAR KARSA Ã¢â‚¬â€ Ruang Skill & Publikasi Karya Pemuda | ARUTALA">
   <meta property="og:description" content="Akses Ruang Tumbuh yang Agamis, Setara, dan Adil - Model Inovasi Ekosistem Pemuda Berbasis Nilai Keagamaan - UIN Sunan Gunung Djati Bandung.">
   <meta property="og:type" content="website">
 
@@ -539,11 +539,10 @@
           </svg>
         </button>
 
-        <!-- Tengah: Logo ARUTALA CIRCLE (Bersih dari titik) -->
+        <!-- Tengah: Logo ARUTALA (Bersih dari titik) -->
         <a href="index.html" class="uss-brand-center" id="nav-brand-logo">
           <div class="uss-brand-text">
             <span class="uss-brand-name">ARUTALA</span>
-            <span class="uss-brand-sub">CIRCLE</span>
           </div>
         </a>
 
@@ -642,69 +641,47 @@
     </div>
   </section>
 
-  <!-- ==========================================================================
-       FITUR 1: MODUL PENGEMBANGAN KETERAMPILAN & KUIS INTERAKTIF
-       Materi terstruktur (kepemimpinan, komunikasi, kritis, digital, kolaborasi)
+  <!-- ==================================================================  <!-- ==========================================================================
+       FITUR 1: MODUL PENGEMBANGAN KETERAMPILAN (TAMPILAN PDF LANGSUNG SCROLLABLE)
        ========================================================================== -->
   <main class="lms-workspace-section" id="workspace-modul">
     <div class="container">
-      <div class="lms-workspace-grid">
+      <div class="lms-pdf-standalone-container">
         
-        <!-- Kolom Kiri: Silabus 7 Modul Terstruktur -->
-        <aside class="lms-sidebar-card">
-          <div class="lms-sidebar-header">
-            <h4>Silabus Pembelajaran KARSA</h4>
-            <span>Pilih modul atau kuis untuk belajar</span>
+        <!-- Header & Toolbar Kontrol Dokumen PDF -->
+        <div class="lms-pdf-header-card">
+          <div class="lms-pdf-header-info">
+            <span class="lms-code-chip" style="background: #EEF3FA; color: #2F4F87; font-weight: 800; font-size: 0.74rem; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.05em; display: inline-block;">DOKUMEN RESMI MODUL KARSA</span>
+            <h2>Modul Pembelajaran &amp; Kapasitas Pemuda</h2>
+            <p>
+              Pelajari modul resmi KARSA langsung di bawah ini. Dokumen dapat digulir (*scroll*), diperbesar, atau dibuka di layar penuh.
+            </p>
           </div>
-          <div id="lms-modules-list">
-            <!-- Populated by js/modul.js -->
+          <div class="lms-pdf-header-actions">
+            <button type="button" class="btn-pdf-action" onclick="togglePdfFullscreen('pdf-viewer-box-karsa')" title="Layar Penuh">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              <span>Layar Penuh</span>
+            </button>
+            <a href="COVER KARSA.pdf" target="_blank" rel="noopener" class="btn-pdf-action" title="Buka Tab Baru">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Buka Tab Baru</span>
+            </a>
+            <a href="COVER KARSA.pdf" download="Modul-KARSA-Arutala.pdf" class="btn-pdf-action btn-pdf-primary" style="background: #2F4F87; border-color: #2F4F87;" title="Unduh File PDF">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Unduh PDF</span>
+            </a>
           </div>
-        </aside>
+        </div>
 
-        <!-- Kolom Kanan: Reader Materi, Panduan Praktik & Kuis -->
-        <article class="lms-content-card">
-          <div class="lms-content-header">
-            <div class="lms-content-meta">
-              <span class="lms-code-chip" id="mod-code">MOD-01</span>
-              <span class="lms-duration-chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span id="mod-duration">45 Menit</span>
-              </span>
-            </div>
-            <h2 class="lms-content-title" id="mod-title">Mengenali Diri dan Potensi</h2>
-            <p class="lms-content-subtitle" id="mod-subtitle">Fondasi Self-Love, Identifikasi Bakat, dan Perencanaan Masa Depan</p>
-          </div>
-
-          <!-- Reading Content Body -->
-          <div class="lms-reading-body" id="mod-body">
-            <!-- Injected by js/modul.js -->
-          </div>
-
-          <!-- Interactive Quiz Box -->
-          <div class="lms-quiz-panel" id="mod-quiz-panel">
-            <div class="lms-quiz-header">
-              <h4>Kuis Pemahaman Materi</h4>
-              <span class="badge badge-blue" style="font-size: 0.72rem; background: #EEF3FA; color: #2F4F87; font-weight: 700; padding: 4px 10px; border-radius: 4px;">Uji Pemahaman</span>
-            </div>
-
-            <p class="lms-quiz-question" id="quiz-question-text">Pertanyaan kuis sedang dimuat...</p>
-
-            <div class="lms-quiz-options" id="quiz-options-container">
-              <!-- Radio choices injected by js/modul.js -->
-            </div>
-
-            <div class="lms-quiz-feedback" id="quiz-feedback-box"></div>
-
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px; flex-wrap: wrap; gap: 12px;">
-              <button class="btn btn-primary btn-pill btn-sm" id="btn-submit-quiz" style="background: #2F4F87; border-color: #2F4F87; color: #FFFFFF; font-weight: 700; padding: 10px 20px;">
-                Periksa Jawaban Kuis
-              </button>
-              <button class="btn btn-secondary btn-pill btn-sm" id="btn-next-module" style="display: none; background: #0F172A; color: #FFFFFF; font-weight: 700; padding: 10px 20px;">
-                Lanjut ke Modul Berikutnya &rarr;
-              </button>
-            </div>
-          </div>
-        </article>
+        <!-- Frame PDF Viewer Scrollable Langsung -->
+        <div class="lms-pdf-viewer-frame-box" id="pdf-viewer-box-karsa">
+          <iframe
+            src="COVER KARSA.pdf#toolbar=1&navpanes=0&scrollbar=1"
+            class="lms-standalone-pdf-frame"
+            title="Dokumen Modul KARSA"
+            allow="fullscreen">
+          </iframe>
+        </div>
 
       </div>
     </div>
