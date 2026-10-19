@@ -20,57 +20,8 @@ let KARSA_STATE = {
   currentFilter: "all" // "all", "article", "video"
 };
 
-// Default starter creative videos for KARSA (Contoh Video Karya Nyata & Edukatif)
-const DEFAULT_KARSA_VIDEOS = [
-  {
-    id: "karsa-vid-default-1",
-    type: "video",
-    title: "Video Inspirasi: HeForShe & Gerakan Pemuda Menuju Kesetaraan Gender yang Adil",
-    category: "bersuara",
-    author: "Tim Kolaboratif Pemuda ARUTALA",
-    authorRole: "UIN Sunan Gunung Djati Bandung",
-    date: "Oktober 2026",
-    readTime: "Video Edukasi",
-    thumbnail: "https://img.youtube.com/vi/gkjvWcuXw9Y/hqdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/gkjvWcuXw9Y/hqdefault.jpg",
-    videoUrl: "https://www.youtube.com/embed/gkjvWcuXw9Y",
-    youtubeId: "gkjvWcuXw9Y",
-    summary: "Refleksi audiovisual mengenai pentingnya keadilan relasi dan peran sekutu (allies) laki-laki dalam menghapus bias gender dan menciptakan ruang aman di komunitas.",
-    content: "<p>Karya audiovisual reflektif hasil kolaborasi pemuda ARUTALA yang membedah urgensi peran pemuda laki-laki sebagai sekutu (allies) dalam menciptakan lingkungan yang setara, aman, dan berkeadilan bagi semua.</p>"
-  },
-  {
-    id: "karsa-vid-default-2",
-    type: "video",
-    title: "Video Kampanye: Moderat Sejak Dini — Merawat Harmoni & Nilai Inklusif",
-    category: "pandai",
-    author: "Alfath Fadillah & Tim Fasilitator",
-    authorRole: "Fasilitator Sebaya ARUTALA",
-    date: "Oktober 2026",
-    readTime: "Video Kampanye",
-    thumbnail: "https://img.youtube.com/vi/VN7talTjE14/hqdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/VN7talTjE14/hqdefault.jpg",
-    videoUrl: "https://www.youtube.com/embed/VN7talTjE14",
-    youtubeId: "VN7talTjE14",
-    summary: "Dokumentasi kampanye penguatan nilai moderasi beragama, toleransi aktif, dan pencegahan diskriminasi di lingkungan pendidikan dan masyarakat.",
-    content: "<p>Dokumentasi kampanye kreatif berbasis nilai-nilai keagamaan yang menjunjung tinggi martabat kemanusiaan (karamah insaniyyah) dan keadilan sosial tanpa kekerasan.</p>"
-  },
-  {
-    id: "karsa-vid-default-3",
-    type: "video",
-    title: "Karya Kreatif: Voice of Change — Membedah Stereotip Gender di Ruang Belajar Kampus",
-    category: "cerdas",
-    author: "M. Rifqi Nurhidayat & Nuzhatul",
-    authorRole: "Kader Inovator ARUTALA",
-    date: "Oktober 2026",
-    readTime: "Video Kreatif",
-    thumbnail: "https://img.youtube.com/vi/zzWGNlDuTkA/hqdefault.jpg",
-    coverImage: "https://img.youtube.com/vi/zzWGNlDuTkA/hqdefault.jpg",
-    videoUrl: "https://www.youtube.com/embed/zzWGNlDuTkA",
-    youtubeId: "zzWGNlDuTkA",
-    summary: "Eksplorasi falsafah kearifan lokal Sunda 'Silih Asah, Asih, Asuh' sebagai instrumen komunikasi nir-kekerasan dan kepemimpinan pemuda yang empatik.",
-    content: "<p>Eksplorasi falsafah luhur budaya nusantara sebagai panduan kepemimpinan generasi muda dalam merajut kesetaraan hakiki dan ruang dialog yang hangat.</p>"
-  }
-];
+// Default starter creative videos for KARSA (dikosongkan agar tersinkronisasi murni dengan Cloud Database Supabase)
+const DEFAULT_KARSA_VIDEOS = [];
 
 function extractYouTubeId(url) {
   if (!url) return null;
@@ -116,6 +67,10 @@ async function initKarsaPortfolio() {
           else if (catStr.includes("cerdas") || catStr.includes("budaya") || catStr.includes("inklusif")) karsaCat = "cerdas";
           else if (catStr.includes("berdaya") || catStr.includes("sosial") || catStr.includes("toleransi")) karsaCat = "berdaya";
 
+          const validYt = (v.youtubeId && v.youtubeId.length === 11 && !v.youtubeId.includes(" ")) ? v.youtubeId : null;
+          const defaultThumb = validYt ? `https://img.youtube.com/vi/${validYt}/hqdefault.jpg` : "img/pelatihan_fasilitator_auditorium.jpg";
+          const thumb = (v.thumbnail && !v.thumbnail.includes("YOUTUBE_DEM")) ? v.thumbnail : defaultThumb;
+
           return {
             id: v.id,
             type: "video",
@@ -126,10 +81,10 @@ async function initKarsaPortfolio() {
             authorRole: v.duration || "Video Edukasi",
             date: "Oktober 2026",
             readTime: v.duration || "Video Kreatif",
-            thumbnail: v.thumbnail || `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`,
-            coverImage: v.thumbnail || `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`,
-            videoUrl: v.videoUrl || `https://www.youtube.com/embed/${v.youtubeId}`,
-            youtubeId: v.youtubeId,
+            thumbnail: thumb,
+            coverImage: thumb,
+            videoUrl: v.videoUrl || (validYt ? `https://www.youtube.com/embed/${validYt}` : "https://www.youtube.com/embed/hhjBgofv7k0"),
+            youtubeId: validYt || v.youtubeId,
             summary: v.takeaways || "",
             content: `<p>${v.takeaways || ""}</p>`,
             isFromCloud: true
@@ -141,12 +96,29 @@ async function initKarsaPortfolio() {
     }
   }
 
-  // 4. Ambil video custom lokal yang diunggah pengguna dari localStorage
+  // 4. Ambil video custom lokal yang diunggah pengguna dari localStorage & bersihkan starter lama yang nyangkut
+  const staleDefaultIds = ["karsa-vid-default-1", "karsa-vid-default-2", "karsa-vid-default-3"];
+  const isStaleStarter = (v) => {
+    if (!v) return true;
+    if (staleDefaultIds.includes(String(v.id))) return true;
+    const title = (v.title || "").toLowerCase();
+    if (title.includes("heforshe") || title.includes("moderat sejak dini") || title.includes("voice of change")) {
+      return true;
+    }
+    return false;
+  };
+
   let customVideos = [];
   try {
     const savedVids = localStorage.getItem("arutala_karsa_custom_videos");
     if (savedVids) {
-      customVideos = JSON.parse(savedVids).filter(v => v.youtubeId && v.youtubeId !== "dQw4w9WgXcQ");
+      const parsed = JSON.parse(savedVids);
+      if (Array.isArray(parsed)) {
+        customVideos = parsed.filter(v => v && v.youtubeId && v.youtubeId !== "dQw4w9WgXcQ" && !isStaleStarter(v));
+        if (customVideos.length !== parsed.length) {
+          localStorage.setItem("arutala_karsa_custom_videos", JSON.stringify(customVideos));
+        }
+      }
     }
   } catch (e) {
     customVideos = [];
@@ -158,21 +130,19 @@ async function initKarsaPortfolio() {
     ...localArticles.filter(loc => !cloudArticles.some(c => String(c.id) === String(loc.id) || c.title === loc.title))
   ];
 
-  // Gabungkan video: Cloud Supabase (prioritas 1), Custom Lokal (prioritas 2), Default KARSA (fallback)
-  const mergedVideos = [
-    ...cloudVideos,
-    ...customVideos,
-    ...DEFAULT_KARSA_VIDEOS
-  ];
-
-  const uniqueVideoMap = new Map();
-  mergedVideos.forEach(v => {
-    const key = String(v.youtubeId || v.id || v.title).trim();
-    if (!uniqueVideoMap.has(key)) {
-      uniqueVideoMap.set(key, v);
-    }
-  });
-  const allVideos = Array.from(uniqueVideoMap.values());
+  // Gabungkan video: Utamakan Cloud Supabase secara mutlak jika ada
+  let allVideos = [];
+  if (cloudVideos && cloudVideos.length > 0) {
+    // Cloud Supabase adalah sumber data utama yang tersinkronisasi
+    const newCustoms = customVideos.filter(cv => 
+      !cloudVideos.some(cl => String(cl.id) === String(cv.id) || (cl.youtubeId && cl.youtubeId === cv.youtubeId))
+    );
+    allVideos = [...cloudVideos, ...newCustoms];
+  } else if (customVideos && customVideos.length > 0) {
+    allVideos = [...customVideos];
+  } else {
+    allVideos = [];
+  }
 
   // Susun urutan karya terpadu (video & artikel)
   KARSA_STATE.articles = [
@@ -275,7 +245,7 @@ function renderKarsaPortfolio() {
           return `
             <article class="uss-clean-card" style="border: 1px solid #E2E8F0; border-top: 3px solid #BE185D !important; border-radius: 8px; overflow: hidden; background: #FFFFFF; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" onclick="openKarsaVideoModal('${item.videoUrl}', '${encodeURIComponent(item.title)}', '${encodeURIComponent(item.author || '')}', '${encodeURIComponent(getKarsaCategoryLabel(item.category))}', '${encodeURIComponent(item.summary || '')}')">
               <div class="karsa-video-card-thumb">
-                <img src="${thumb}" alt="${item.title}" loading="lazy">
+                <img src="${thumb}" onerror="this.src='img/pelatihan_fasilitator_auditorium.jpg'" alt="${item.title}" loading="lazy">
                 <div class="karsa-play-badge">
                   <div class="karsa-play-circle">▶</div>
                 </div>

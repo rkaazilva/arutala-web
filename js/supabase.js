@@ -1369,11 +1369,17 @@
         }
       }
 
-      // 2. Hapus dari cache localStorage
+      // 2. Hapus dari cache localStorage (Nuansa & Karsa)
       try {
         let currentVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
         currentVideos = currentVideos.filter(v => String(v.id) !== String(id));
         localStorage.setItem("arutala_custom_videos", JSON.stringify(currentVideos));
+      } catch (e) {}
+
+      try {
+        let karsaVideos = JSON.parse(localStorage.getItem("arutala_karsa_custom_videos") || "[]");
+        karsaVideos = karsaVideos.filter(v => String(v.id) !== String(id));
+        localStorage.setItem("arutala_karsa_custom_videos", JSON.stringify(karsaVideos));
       } catch (e) {}
 
       return true;

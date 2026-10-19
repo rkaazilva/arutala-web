@@ -448,7 +448,7 @@ async function initNuansaVideos() {
       ${videoList.map(vid => `
         <div class="video-card reveal">
           <div class="video-thumbnail-wrap" style="position: relative; width: 100%; height: 200px; background: #0F172A; cursor: pointer; overflow: hidden;" onclick="openNuansaVideoModal('${vid.videoUrl}', '${encodeURIComponent(vid.title)}', '${encodeURIComponent(vid.takeaways)}')">
-            <img src="${vid.thumbnail}" alt="${vid.title}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.88;" loading="lazy">
+            <img src="${vid.thumbnail}" onerror="this.src='img/pelatihan_fasilitator_auditorium.jpg'" alt="${vid.title}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.88;" loading="lazy">
             <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
               <div class="play-overlay">
                 ▶

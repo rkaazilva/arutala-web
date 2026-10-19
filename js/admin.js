@@ -934,7 +934,7 @@ async function renderNuansaVideosInAdmin() {
         <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 290px;">
           <!-- Thumbnail with play trigger -->
           <div style="position: relative; width: 140px; height: 80px; border-radius: 8px; overflow: hidden; background: #0F172A; flex-shrink: 0; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.12);" onclick="openAdminVideoPlayer('${vid.videoUrl}', '${encodeURIComponent(vid.title)}')">
-            <img src="${thumb}" alt="${escapeHtml(vid.title)}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.88;">
+            <img src="${thumb}" onerror="this.src='img/pelatihan_fasilitator_auditorium.jpg'" alt="${escapeHtml(vid.title)}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.88;">
             <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
               <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(190, 24, 93, 0.9); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; border: 1.5px solid #FFF;">
                 ▶
@@ -1129,6 +1129,11 @@ async function handleDeleteNuansaVideo(id, encodedTitle) {
       let customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
       customVideos = customVideos.filter(v => String(v.id) !== String(id));
       localStorage.setItem("arutala_custom_videos", JSON.stringify(customVideos));
+    } catch (e) {}
+    try {
+      let karsaVideos = JSON.parse(localStorage.getItem("arutala_karsa_custom_videos") || "[]");
+      karsaVideos = karsaVideos.filter(v => String(v.id) !== String(id));
+      localStorage.setItem("arutala_karsa_custom_videos", JSON.stringify(karsaVideos));
     } catch (e) {}
   }
 
