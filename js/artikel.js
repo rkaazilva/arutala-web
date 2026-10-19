@@ -46,7 +46,14 @@
       }
     }
 
-    // Gabungkan & dedup berdasarkan id / title
+    let deletedIds = [];
+    try {
+      deletedIds = JSON.parse(localStorage.getItem("arutala_deleted_articles") || "[]");
+    } catch (e) {
+      deletedIds = [];
+    }
+
+    // Gabungkan & dedup berdasarkan id / title (customArticles prioritas teratas)
     const merged = [
       ...customArticles,
       ...cloudArticles,
@@ -61,7 +68,7 @@
       }
     });
 
-    PortalState.articles = Array.from(uniqueMap.values());
+    PortalState.articles = Array.from(uniqueMap.values()).filter(art => !deletedIds.includes(String(art.id)));
 
     // 3. Update Angka Hitungan di 4 Kartu Pilar
     updatePillarCounts();

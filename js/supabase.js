@@ -265,6 +265,56 @@
       }
     },
 
+    async updateArticle(id, payload) {
+      if (!client || !id) return null;
+      try {
+        const updateData = {};
+        if (payload.title !== undefined) updateData.title = payload.title;
+        if (payload.category !== undefined) updateData.category = (payload.category || "pandai").toLowerCase();
+        if (payload.author !== undefined) updateData.author = payload.author;
+        if (payload.role !== undefined || payload.authorRole !== undefined) updateData.role = payload.role || payload.authorRole;
+        if (payload.read_time !== undefined || payload.readTime !== undefined) updateData.read_time = payload.read_time || payload.readTime;
+        if (payload.image !== undefined || payload.coverImage !== undefined) updateData.image = payload.image || payload.coverImage;
+        if (payload.doc_url !== undefined || payload.docUrl !== undefined) updateData.doc_url = payload.doc_url || payload.docUrl;
+        if (payload.quote !== undefined || payload.quoteHighlight !== undefined) updateData.quote = payload.quote || payload.quoteHighlight;
+        if (payload.summary !== undefined) updateData.summary = payload.summary;
+        if (payload.content !== undefined) updateData.content = payload.content;
+
+        const { data, error } = await client
+          .from("articles")
+          .update(updateData)
+          .eq("id", id)
+          .select();
+
+        if (error) {
+          console.warn("Notice update article Supabase:", error);
+          return null;
+        }
+        return data && data[0];
+      } catch (err) {
+        console.warn("Update article error:", err);
+        return null;
+      }
+    },
+
+    async deleteArticle(id) {
+      if (!client || !id) return false;
+      try {
+        const { error } = await client
+          .from("articles")
+          .delete()
+          .eq("id", id);
+        if (error) {
+          console.warn("Notice delete article Supabase:", error);
+          return false;
+        }
+        return true;
+      } catch (err) {
+        console.warn("Delete article error:", err);
+        return false;
+      }
+    },
+
     // ------------------------------------------------------------------------
     // 3. ACTIONS (ARUTALA Action Showcase)
     // ------------------------------------------------------------------------

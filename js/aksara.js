@@ -445,6 +445,9 @@ async function initAksaraDonations() {
     localStorage.setItem("arutala_social_campaigns_local", JSON.stringify(ACTIVE_CAMPAIGNS));
   }
 
+  // Terapkan konfigurasi QRIS & Rekening dari Admin
+  applyDonationSettingsToModal();
+
   CURRENT_DONORS = [...DEFAULT_DONORS_DATA];
 
   try {
@@ -672,6 +675,49 @@ window.toggleAksaraAnonymous = function (checkbox) {
   }
 };
 
+function applyDonationSettingsToModal() {
+  let settings = null;
+  try {
+    const saved = localStorage.getItem("arutala_donation_settings");
+    if (saved) settings = JSON.parse(saved);
+  } catch (e) {}
+  if (!settings) return;
+
+  const qrisImg = document.getElementById("qris-img-element");
+  if (qrisImg && settings.qrImageUrl) qrisImg.src = settings.qrImageUrl;
+
+  const qrisNmid = document.getElementById("qris-nmid-element");
+  if (qrisNmid && settings.nmid) qrisNmid.textContent = `NMID: ${settings.nmid}`;
+
+  const qrisMerchant = document.getElementById("qris-merchant-element");
+  if (qrisMerchant && settings.merchantName) qrisMerchant.textContent = settings.merchantName;
+
+  const qrisInstr = document.getElementById("qris-instruction-element");
+  if (qrisInstr && settings.instructions) qrisInstr.textContent = settings.instructions;
+
+  const b1Name = document.getElementById("qris-bank-b1-name");
+  if (b1Name && settings.bank1Name) b1Name.textContent = settings.bank1Name;
+  const b1Num = document.getElementById("bsi-acc-num");
+  if (b1Num && settings.bank1Number) b1Num.textContent = settings.bank1Number;
+  const b1Holder = document.getElementById("qris-bank-b1-holder");
+  if (b1Holder && settings.bank1Holder) b1Holder.textContent = ` a.n. ${settings.bank1Holder}`;
+  const b1Btn = document.getElementById("qris-bank-b1-btn");
+  if (b1Btn && settings.bank1Number) {
+    b1Btn.setAttribute("onclick", `copyAccountNumber('${settings.bank1Number.replace(/[^0-9]/g, '')}', this)`);
+  }
+
+  const b2Name = document.getElementById("qris-bank-b2-name");
+  if (b2Name && settings.bank2Name) b2Name.textContent = settings.bank2Name;
+  const b2Num = document.getElementById("bca-acc-num");
+  if (b2Num && settings.bank2Number) b2Num.textContent = settings.bank2Number;
+  const b2Holder = document.getElementById("qris-bank-b2-holder");
+  if (b2Holder && settings.bank2Holder) b2Holder.textContent = ` a.n. ${settings.bank2Holder}`;
+  const b2Btn = document.getElementById("qris-bank-b2-btn");
+  if (b2Btn && settings.bank2Number) {
+    b2Btn.setAttribute("onclick", `copyAccountNumber('${settings.bank2Number.replace(/[^0-9]/g, '')}', this)`);
+  }
+}
+
 window.openQRISPaymentModal = function () {
   const nameInput = document.getElementById("don-name-input");
   const isAnonymous = document.getElementById("don-anonymous-checkbox")?.checked;
@@ -686,6 +732,9 @@ window.openQRISPaymentModal = function () {
   if (isAnonymous || !donorName) {
     donorName = "Hamba Allah";
   }
+
+  // Terapkan konfigurasi QRIS dan nomor rekening dari admin
+  applyDonationSettingsToModal();
 
   const currentCamp = ACTIVE_CAMPAIGNS.find(c => c.id === SELECTED_CAMPAIGN_ID) || ACTIVE_CAMPAIGNS[0];
 

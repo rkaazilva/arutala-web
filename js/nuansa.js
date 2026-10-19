@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupNuansaNavDrawer();
   initScrollReveal();
   setupFloatingBackToTop();
+  syncPillarPdfDocument("nuansa");
 });
 
 // DATASET LITERASI KONTEKSTUAL & KUIS REFLEKSI (4 NILAI ETIS)
@@ -410,6 +411,13 @@ function initNuansaVideos() {
   if (!container) return;
 
   const customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+  let deletedIds = [];
+  try {
+    deletedIds = JSON.parse(localStorage.getItem("arutala_deleted_videos") || "[]");
+  } catch (e) {
+    deletedIds = [];
+  }
+
   const defaultVideos = (window.ARUTALA_DATA && Array.isArray(window.ARUTALA_DATA.videos))
     ? window.ARUTALA_DATA.videos
     : [
@@ -448,11 +456,11 @@ function initNuansaVideos() {
         }
       ];
 
-  // Gabungkan custom videos di paling atas (tanpa duplikasi)
+  // Gabungkan custom videos di paling atas (tanpa duplikasi) dan filter video yang dihapus
   const videoList = [
     ...customVideos,
     ...defaultVideos.filter(dv => !customVideos.some(cv => cv.youtubeId === dv.youtubeId || cv.id === dv.id))
-  ];
+  ].filter(v => !deletedIds.includes(String(v.id)) && v.youtubeId !== "dQw4w9WgXcQ");
 
   container.innerHTML = `
     <div class="video-carousel-track">
@@ -1108,4 +1116,92 @@ window.toggleNuansaChatLike = function(msgId) {
   localStorage.setItem("arutala_livechat_nuansa", JSON.stringify(ALL_NUANSA_CHATS));
   renderNuansaChatUI();
 };
+
+// --------------------------------------------------------------------------
+// SYNC DOKUMEN PDF DENGAN PENGATURAN ADMIN (ZERO-DATABASE USAGE)
+// --------------------------------------------------------------------------
+function syncPillarPdfDocument(pillarKey) {
+  try {
+    const raw = localStorage.getItem("arutala_pdf_settings");
+    if (!raw) return;
+    const allSettings = JSON.parse(raw);
+    const config = allSettings[pillarKey];
+    if (!config || !config.pdfUrl) return;
+
+    function getConvertedPdfUrls(url) {
+      if (!url) return null;
+      const trimmed = url.trim();
+      const gdriveRegex1 = /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/;
+      const gdriveRegex2 = /[?&]id=([a-zA-Z0-9_-]+)/;
+      let gdriveId = null;
+      const match1 = trimmed.match(gdriveRegex1);
+      if (match1 && match1[1]) {
+        gdriveId = match1[1];
+      } else {
+        const match2 = trimmed.match(gdriveRegex2);
+        if (trimmed.includes("drive.google.com") && match2 && match2[1]) {
+          gdriveId = match2[1];
+        }
+      }
+
+      if (gdriveId) {
+        return {
+          embedUrl: `https://drive.google.com/file/d/${gdriveId}/preview`,
+          downloadUrl: `https://drive.google.com/uc?export=download&id=${gdriveId}`,
+          viewUrl: `https://drive.google.com/file/d/${gdriveId}/view`
+        };
+      }
+
+      if (trimmed.includes("dropbox.com")) {
+        const embed = trimmed.replace("dl=0", "raw=1");
+        return { embedUrl: embed, downloadUrl: embed, viewUrl: trimmed };
+      }
+
+      const embed = trimmed.includes("#") ? trimmed : `${trimmed}#toolbar=1&navpanes=0&scrollbar=1`;
+      return { embedUrl: embed, downloadUrl: trimmed, viewUrl: trimmed };
+    }
+
+    const urls = getConvertedPdfUrls(config.pdfUrl);
+    if (!urls) return;
+
+    // 1. Update Title and Subtitle if configured
+    const titleEl = document.querySelector("#workspace-modul .lms-pdf-header-info h2");
+    if (titleEl && config.title) titleEl.textContent = config.title;
+
+    const subEl = document.querySelector("#workspace-modul .lms-pdf-header-info p");
+    if (subEl && config.subtitle) subEl.textContent = config.subtitle;
+
+    // 2. Update iframe src
+    const iframe = document.querySelector("#workspace-modul iframe.lms-standalone-pdf-frame");
+    if (iframe) {
+      iframe.src = urls.embedUrl;
+      if (config.title) iframe.title = config.title;
+    }
+
+    // 3. Update Buka Tab Baru links
+    const openLinks = document.querySelectorAll("#workspace-modul a[title='Buka Tab Baru'], #workspace-modul .lms-pdf-mobile-btn-primary");
+    openLinks.forEach(link => {
+      link.href = urls.viewUrl;
+    });
+
+    // 4. Update Unduh PDF links
+    const downloadLinks = document.querySelectorAll("#workspace-modul a[title='Unduh File PDF'], #workspace-modul .lms-pdf-mobile-btn-secondary");
+    downloadLinks.forEach(link => {
+      link.href = urls.downloadUrl;
+      if (config.downloadName) {
+        link.setAttribute("download", config.downloadName);
+      }
+    });
+
+    // 5. Update mobile fallback title
+    const mobileTitleEl = document.querySelector("#workspace-modul .lms-pdf-mobile-title");
+    if (mobileTitleEl && config.title) {
+      mobileTitleEl.textContent = config.title;
+    }
+  } catch (err) {
+    console.warn("syncPillarPdfDocument error:", err);
+  }
+}
+
+window.syncPillarPdfDocument = syncPillarPdfDocument;
 

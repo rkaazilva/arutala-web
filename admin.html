@@ -239,64 +239,68 @@
       color: var(--admin-text-main);
     }
 
-    /* Track Tabs */
+    /* Segmented Tab Navigation */
     .admin-track-nav {
       display: flex;
-      gap: 10px;
+      gap: 6px;
       margin-bottom: 24px;
-      border-bottom: 2px solid #E2E8F0;
-      padding-bottom: 2px;
+      background: #F1F5F9;
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid #E2E8F0;
       overflow-x: auto;
     }
 
     .admin-track-tab {
-      padding: 12px 24px;
+      padding: 10px 18px;
       background: transparent;
       border: none;
-      border-bottom: 3px solid transparent;
+      border-radius: 8px;
       font-family: inherit;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: var(--admin-text-muted);
+      color: #64748B;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       transition: all 0.2s ease;
       white-space: nowrap;
-      margin-bottom: -2px;
     }
 
     .admin-track-tab:hover {
       color: var(--admin-text-main);
+      background: rgba(255, 255, 255, 0.6);
     }
 
-    .admin-track-tab.active-karsa {
-      color: #166534;
-      border-bottom-color: #166534;
-      background: rgba(34, 197, 94, 0.08);
-      border-radius: 8px 8px 0 0;
-    }
-
-    .admin-track-tab.active-nuansa {
-      color: #0369A1;
-      border-bottom-color: #0369A1;
-      background: rgba(14, 165, 233, 0.08);
-      border-radius: 8px 8px 0 0;
-    }
-
-    .admin-track-tab.active-temara {
-      color: #B45309;
-      border-bottom-color: #B45309;
-      background: rgba(245, 158, 11, 0.08);
-      border-radius: 8px 8px 0 0;
+    .admin-track-tab.active-articles {
+      color: #3730A3;
+      background: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
     }
 
     .admin-track-tab.active-nuansa-video {
-      color: #BE185D;
-      border-bottom-color: #BE185D;
-      background: rgba(190, 24, 93, 0.08);
-      border-radius: 8px 8px 0 0;
+      color: #9D174D;
+      background: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    .admin-track-tab.active-temara-registrations {
+      color: #92400E;
+      background: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    .admin-track-tab.active-pdf-modules {
+      color: #0F766E;
+      background: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    .admin-track-tab.active-donations {
+      color: #166534;
+      background: #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
     }
 
     .tab-badge {
@@ -308,9 +312,34 @@
       font-weight: 800;
     }
 
+    .active-articles .tab-badge {
+      background: #EEF2FF;
+      color: #3730A3;
+    }
+
+    .active-nuansa-video .tab-badge {
+      background: #FDF2F8;
+      color: #9D174D;
+    }
+
+    .active-temara-registrations .tab-badge {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .active-pdf-modules .tab-badge {
+      background: #CCFBF1;
+      color: #0F766E;
+    }
+
+    .active-donations .tab-badge {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
     /* Track Summary Banner */
     .track-banner {
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 16px 20px;
       margin-bottom: 20px;
       display: flex;
@@ -320,28 +349,34 @@
       flex-wrap: wrap;
     }
 
-    .track-banner-karsa {
-      background: #F0FDF4;
-      border: 1px solid #BBF7D0;
-      color: #166534;
-    }
-
-    .track-banner-nuansa {
-      background: #F0F9FF;
-      border: 1px solid #BAE6FD;
-      color: #0369A1;
-    }
-
-    .track-banner-temara {
-      background: #FFFBEB;
-      border: 1px solid #FDE68A;
-      color: #92400E;
+    .track-banner-articles {
+      background: #EEF2FF;
+      border: 1px solid #C7D2FE;
+      color: #3730A3;
     }
 
     .track-banner-nuansa-video {
       background: #FDF2F8;
       border: 1px solid #FBCFE8;
       color: #9D174D;
+    }
+
+    .track-banner-temara-registrations {
+      background: #FFFBEB;
+      border: 1px solid #FDE68A;
+      color: #92400E;
+    }
+
+    .track-banner-pdf-modules {
+      background: #F0FDFA;
+      border: 1px solid #99F6E4;
+      color: #0F766E;
+    }
+
+    .track-banner-donations {
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      color: #166534;
     }
 
     .track-banner-text h3 {
@@ -555,6 +590,11 @@
       background: #F1F5F9;
       color: var(--admin-text-main);
       border-color: #94A3B8;
+    }
+
+    .btn-action-icon.btn-delete {
+      color: #EF4444;
+      border-color: #FECACA;
     }
 
     .btn-action-icon.btn-delete:hover {
@@ -949,13 +989,13 @@
             ARUTALA Studio
             <span class="admin-badge-role">LMS Admin Back-Office</span>
           </h1>
-          <p>Pengelolaan Kurikulum Modul, Link Download PDF, Video &amp; Kuis Dinamis</p>
+          <p>Pengelolaan Publikasi Artikel, Video Edukasi &amp; Konfigurasi Donasi QRIS</p>
         </div>
       </a>
 
       <div class="admin-nav-actions">
-        <a href="karsa.html" target="_blank" class="btn-admin-preview" id="link-preview-page">
-          <span>Lihat Halaman LMS &rarr;</span>
+        <a href="index.html" target="_blank" class="btn-admin-preview" id="link-preview-page">
+          <span>Lihat Beranda Publik &rarr;</span>
         </a>
         <button type="button" class="btn-admin-logout" onclick="handleAdminLogout()">
           Keluar Admin
@@ -972,53 +1012,52 @@
     <!-- Studio Header -->
     <div class="admin-studio-header">
       <div class="admin-studio-info">
-        <h2>Manajemen Silabus &amp; Konten Pembelajaran</h2>
-        <p>
-          Atur urutan modul, tulis ringkasan materi (summary), tempel link unduh PDF resmi, tambahkan materi video di Nuansa, serta susun butir kuis interaktif yang langsung dinilai oleh sistem.
+        <h2 id="page-hero-title">Studio Back-Office ARUTALA</h2>
+        <p id="page-hero-desc">
+          Pusat pengelolaan publikasi artikel &amp; jurnal pemuda, kurasi video YouTube edukatif, pendaftar circle mentoring sebaya, serta konfigurasi rekening donasi &amp; QRIS resmi.
         </p>
       </div>
       <div class="admin-studio-actions">
-        <button type="button" class="btn-admin-outline" id="btn-reset-default" onclick="handleResetDefaults()" title="Kembalikan modul ke draft proposal default">
-          Reset Default
-        </button>
+        <a href="artikel.html" target="_blank" class="btn-admin-preview" style="background: #FFFFFF;" id="btn-visit-current-track">
+          Buka Portal Bacaan (artikel.html) &rarr;
+        </a>
         <button type="button" class="btn-admin-primary" id="btn-header-add-action" onclick="handleHeaderAddAction()">
-          <span id="btn-header-add-text">+ Tambah Modul / Kuis Baru</span>
+          <span id="btn-header-add-text">+ Tulis / Tambah Artikel Baru</span>
         </button>
       </div>
     </div>
 
-    <!-- Track Selector Tabs (KARSA, NUANSA, TEMARA, VIDEO NUANSA) -->
-    <nav class="admin-track-nav" aria-label="Pilih Pilar">
-      <button type="button" class="admin-track-tab active-karsa" id="tab-btn-karsa" onclick="switchTrack('karsa')">
-        <span>KARSA</span>
-        <span class="tab-badge" id="badge-count-karsa">8 Item</span>
-      </button>
-      <button type="button" class="admin-track-tab" id="tab-btn-nuansa" onclick="switchTrack('nuansa')">
-        <span>NUANSA (Modul &amp; Kuis)</span>
-        <span class="tab-badge" id="badge-count-nuansa">5 Item</span>
-      </button>
-      <button type="button" class="admin-track-tab" id="tab-btn-temara" onclick="switchTrack('temara')">
-        <span>TEMARA</span>
-        <span class="tab-badge" id="badge-count-temara">4 Item</span>
+    <!-- Admin Navigation Tabs -->
+    <nav class="admin-track-nav" aria-label="Menu Admin ARUTALA">
+      <button type="button" class="admin-track-tab active-articles" id="tab-btn-articles" onclick="switchTrack('articles')">
+        <span>Artikel &amp; Jurnal Literasi</span>
+        <span class="tab-badge" id="badge-count-articles">0 Artikel</span>
       </button>
       <button type="button" class="admin-track-tab" id="tab-btn-nuansa-video" onclick="switchTrack('nuansa-video')">
-        <span>Video Edukasi Nuansa</span>
-        <span class="tab-badge" id="badge-count-nuansa-video" style="background: #FCE7F3; color: #BE185D;">0 Video</span>
+        <span>Video YouTube Edukasi</span>
+        <span class="tab-badge" id="badge-count-nuansa-video">0 Video</span>
+      </button>
+      <button type="button" class="admin-track-tab" id="tab-btn-temara-registrations" onclick="switchTrack('temara-registrations')">
+        <span>Pendaftar Circle (TEMARA)</span>
+        <span class="tab-badge" id="badge-count-temara-registrations">0 Pendaftar</span>
+      </button>
+      <button type="button" class="admin-track-tab" id="tab-btn-pdf-modules" onclick="switchTrack('pdf-modules')">
+        <span>Modul &amp; Dokumen PDF</span>
+        <span class="tab-badge" id="badge-count-pdf-modules">3 Modul</span>
+      </button>
+      <button type="button" class="admin-track-tab" id="tab-btn-donations" onclick="switchTrack('donations')">
+        <span>Pengaturan Donasi &amp; QRIS</span>
+        <span class="tab-badge" id="badge-count-donations">Aktif</span>
       </button>
     </nav>
 
     <!-- Track Summary Info Banner -->
-    <div class="track-banner track-banner-karsa" id="track-banner-info">
+    <div class="track-banner track-banner-articles" id="track-banner-info">
       <div class="track-banner-text">
-        <h3 id="track-banner-title">Pilar KARSA: Ruang Pengembangan Diri (Kehendak &amp; Daya Cipta)</h3>
+        <h3 id="track-banner-title">Pustaka Literasi &amp; Jurnal Utama (Kelola Artikel &amp; Foto)</h3>
         <p id="track-banner-desc">
-          Struktur: Penjelasan ringkasan materi per modul + Tombol Unduh PDF Lengkap + Slot Kuis Interaktif Terpadu di bagian akhir.
+          Kelola naskah tulisan, esai pemikiran kritis pemuda, dan jurnal 4 pilar (Moderasi, Kesetaraan, Budaya, Sosial). Anda dapat menyunting naskah yang kurang sesuai, mengganti foto sampul, menambah naskah baru, atau menghapus artikel yang tidak sesuai.
         </p>
-      </div>
-      <div>
-        <a href="karsa.html" target="_blank" class="btn-admin-preview" style="background:#FFFFFF;" id="btn-visit-current-track">
-          Buka Tampilan KARSA &rarr;
-        </a>
       </div>
     </div>
 
@@ -1026,12 +1065,9 @@
     <div class="admin-card">
       <div class="admin-card-header">
         <div style="display: flex; align-items: center; gap: 10px;">
-          <h3 id="current-track-heading">Daftar Modul &amp; Kuis Aktif (KARSA)</h3>
-          <span class="item-count-badge" id="track-items-count-badge">8 Item Terdaftar</span>
+          <h3 id="current-track-heading">Daftar Naskah &amp; Artikel Terpublikasi</h3>
+          <span class="item-count-badge" id="track-items-count-badge">Memuat artikel...</span>
         </div>
-        <button type="button" class="btn-admin-primary" id="btn-card-add-action" style="padding: 7px 14px; font-size: 0.8rem;" onclick="handleHeaderAddAction()">
-          <span id="btn-card-add-text">+ Tambah Item</span>
-        </button>
       </div>
 
       <!-- Modules List Rows -->
@@ -1254,6 +1290,170 @@
   </div>
 
   <!-- ==========================================================================
+       MODAL: FORM TAMBAH / SUNTING / EDIT ARTIKEL & FOTO SAMPUL (ADMIN)
+       ========================================================================== -->
+  <div class="admin-modal-overlay" id="admin-article-modal">
+    <div class="admin-modal-window" style="max-width: 840px;">
+      <div class="admin-modal-header">
+        <div>
+          <h3 id="modal-article-title">Sunting Naskah Artikel &amp; Foto Sampul</h3>
+          <p id="modal-article-sub">Perbarui judul, pilar kategori, penulis, ganti foto sampul, atau revisi poin gagasan naskah.</p>
+        </div>
+        <button type="button" class="admin-modal-close" onclick="closeAdminArticleModal()">&times;</button>
+      </div>
+
+      <form id="form-manage-article" onsubmit="handleSaveArticle(event)">
+        <div class="admin-modal-body">
+          <input type="hidden" id="field-article-id">
+
+          <!-- Judul Utama -->
+          <div class="admin-form-group">
+            <label for="field-article-title">Judul Naskah / Artikel *</label>
+            <input type="text" id="field-article-title" class="admin-form-control" placeholder="Contoh: Menguji Keadilan vs Kesetaraan Gender di Ruang Publik" required>
+          </div>
+
+          <!-- Kategori & Waktu Baca -->
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label for="field-article-category">Pilar Kategori *</label>
+              <select id="field-article-category" class="admin-form-control" required>
+                <option value="pandai">Moderasi Beragama (Pilar Pandai)</option>
+                <option value="bersuara">Kesetaraan Gender (Pilar Bersuara)</option>
+                <option value="cerdas">Budaya Nusantara (Pilar Cerdas)</option>
+                <option value="berdaya">Sosial Masyarakat (Pilar Berdaya)</option>
+              </select>
+            </div>
+            <div class="admin-form-group">
+              <label for="field-article-readtime">Estimasi Durasi Baca *</label>
+              <input type="text" id="field-article-readtime" class="admin-form-control" placeholder="Contoh: 5 menit baca" required>
+            </div>
+          </div>
+
+          <!-- Penulis & Peran/Institusi -->
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label for="field-article-author">Nama Penulis / Inisiator *</label>
+              <input type="text" id="field-article-author" class="admin-form-control" placeholder="Contoh: Nuzhatul Hilawah" required>
+            </div>
+            <div class="admin-form-group">
+              <label for="field-article-role">Institusi / Peran Penulis</label>
+              <input type="text" id="field-article-role" class="admin-form-control" placeholder="Contoh: Fasilitator Pemuda UIN Bandung">
+            </div>
+          </div>
+
+          <!-- FOTO SAMPUL / COVER IMAGE (BISA UBAH FOTO DARI URL ATAU FILE) -->
+          <div class="admin-form-group" style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 10px; padding: 16px;">
+            <label style="font-size: 0.92rem; font-weight: 800; color: #0F172A; margin-bottom: 8px; display: block;">
+              Foto Sampul Artikel (Ganti / Ubah Foto) *
+            </label>
+            
+            <div style="display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap;">
+              <!-- Realtime Preview Box -->
+              <div style="width: 190px; height: 115px; border-radius: 8px; overflow: hidden; background: #0F172A; border: 1.5px solid #CBD5E1; position: relative; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+                <img id="admin-article-cover-img" src="img/pelatihan_fasilitator_auditorium.jpg" alt="Preview Foto Sampul" style="width: 100%; height: 100%; object-fit: cover;">
+                <span style="position: absolute; bottom: 5px; left: 5px; background: rgba(15,23,42,0.85); color: #FFFFFF; font-size: 0.65rem; font-weight: 700; padding: 2px 6px; border-radius: 4px;">
+                  Pratinjau Foto
+                </span>
+              </div>
+
+              <div style="flex: 1; min-width: 250px;">
+                <div style="margin-bottom: 10px;">
+                  <label for="field-article-cover-url" style="font-size: 0.78rem; font-weight: 700; color: #475569;">URL Link Foto / Gambar</label>
+                  <input type="text" id="field-article-cover-url" class="admin-form-control" placeholder="https://... atau img/pelatihan_fasilitator_auditorium.jpg">
+                  <div class="form-hint">Mendukung link gambar internet publik atau path lokal proyek.</div>
+                </div>
+
+                <div>
+                  <label for="field-article-cover-file" style="font-size: 0.78rem; font-weight: 700; color: #475569;">Atau Unggah Berkas Foto dari HP / Laptop</label>
+                  <input type="file" id="field-article-cover-file" class="admin-form-control" accept="image/*" style="padding: 6px 10px; font-size: 0.8rem;">
+                </div>
+
+                <!-- Quick Preset Pickers -->
+                <div style="margin-top: 10px;">
+                  <span style="font-size: 0.72rem; color: #64748B; font-weight: 600; display: block; margin-bottom: 4px;">Pilihan Foto Cepat Galeri ARUTALA:</span>
+                  <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                    <button type="button" class="btn-action-edit" style="font-size: 0.72rem; padding: 3px 8px;" onclick="setArticleCoverPreset('img/pelatihan_fasilitator_auditorium.jpg')">Auditorium</button>
+                    <button type="button" class="btn-action-edit" style="font-size: 0.72rem; padding: 3px 8px;" onclick="setArticleCoverPreset('img/harmoni_pemuda_aljabbar.png')">Al-Jabbar</button>
+                    <button type="button" class="btn-action-edit" style="font-size: 0.72rem; padding: 3px 8px;" onclick="setArticleCoverPreset('img/seminar_cakrawala_muda.png')">Seminar</button>
+                    <button type="button" class="btn-action-edit" style="font-size: 0.72rem; padding: 3px 8px;" onclick="setArticleCoverPreset('img/circle_mentoring_sebaya.jpg')">Mentoring</button>
+                    <button type="button" class="btn-action-edit" style="font-size: 0.72rem; padding: 3px 8px;" onclick="setArticleCoverPreset('img/santriwati_galeri_rasulullah.png')">Galeri Budaya</button>
+                    <button type="button" class="btn-action-edit" style="font-size: 0.72rem; padding: 3px 8px;" onclick="setArticleCoverPreset('img/IMG_7690_rotated.jpg')">Keluarga Muda</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dokumen PDF Terlampir & Kutipan Refleksi -->
+          <div class="admin-form-row">
+            <div class="admin-form-group">
+              <label for="field-article-doc-url">Tautan Unduh Naskah Lengkap / PDF (Opsional)</label>
+              <input type="url" id="field-article-doc-url" class="admin-form-control" placeholder="https://drive.google.com/file/d/... atau URL cloud PDF">
+            </div>
+            <div class="admin-form-group">
+              <label for="field-article-quote">Kutipan Refleksi / Quote Highlight</label>
+              <input type="text" id="field-article-quote" class="admin-form-control" placeholder="Kutipan pemikiran inti dari artikel ini...">
+            </div>
+          </div>
+
+          <!-- Ringkasan / Summary -->
+          <div class="admin-form-group">
+            <label for="field-article-summary">Ringkasan Eksekutif (Summary) *</label>
+            <textarea id="field-article-summary" class="admin-form-control" rows="3" placeholder="Tuliskan intisari pesan artikel dalam 2-3 kalimat ringkas..." required></textarea>
+            <div class="form-hint">Ringkasan ini tampil di kartu naskah pada halaman utama portal bacaan.</div>
+          </div>
+
+          <!-- Poin-Poin Besar Gagasan Utama -->
+          <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 16px; margin-bottom: 18px;">
+            <div style="margin-bottom: 12px;">
+              <h4 style="font-size: 0.95rem; font-weight: 800; color: #1D428A; margin: 0 0 2px;">
+                Poin-Poin Besar Gagasan Utama (Key Takeaways)
+              </h4>
+              <p style="font-size: 0.78rem; color: #64748B; margin: 0;">
+                Format khas ARUTALA: Memudahkan pembaca muda menangkap intisari naskah dengan cepat.
+              </p>
+            </div>
+
+            <!-- Poin 1 -->
+            <div style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 12px; margin-bottom: 10px;">
+              <strong style="font-size: 0.82rem; color: #2F4F87; display: block; margin-bottom: 6px;">Poin 01</strong>
+              <input type="text" id="field-article-pt1-title" class="admin-form-control" placeholder="Judul Poin 1 (Contoh: Distingsi Equality vs Equity)" style="margin-bottom: 6px;">
+              <textarea id="field-article-pt1-desc" class="admin-form-control" rows="2" placeholder="Uraian singkat penjelasan poin 1..."></textarea>
+            </div>
+
+            <!-- Poin 2 -->
+            <div style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 12px; margin-bottom: 10px;">
+              <strong style="font-size: 0.82rem; color: #2F4F87; display: block; margin-bottom: 6px;">Poin 02</strong>
+              <input type="text" id="field-article-pt2-title" class="admin-form-control" placeholder="Judul Poin 2 (Contoh: Menghapus Polarisasi Gender)" style="margin-bottom: 6px;">
+              <textarea id="field-article-pt2-desc" class="admin-form-control" rows="2" placeholder="Uraian singkat penjelasan poin 2..."></textarea>
+            </div>
+
+            <!-- Poin 3 -->
+            <div style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 12px;">
+              <strong style="font-size: 0.82rem; color: #2F4F87; display: block; margin-bottom: 6px;">Poin 03</strong>
+              <input type="text" id="field-article-pt3-title" class="admin-form-control" placeholder="Judul Poin 3 (Contoh: Peran Pemuda sebagai Sekutu)" style="margin-bottom: 6px;">
+              <textarea id="field-article-pt3-desc" class="admin-form-control" rows="2" placeholder="Uraian singkat penjelasan poin 3..."></textarea>
+            </div>
+          </div>
+
+          <!-- Aksi Nyata -->
+          <div class="admin-form-group">
+            <label for="field-article-action">Refleksi &amp; Aksi Nyata Pemuda</label>
+            <input type="text" id="field-article-action" class="admin-form-control" placeholder="Contoh: Terapkan nilai ini dalam langkah nyata di organisasi dan komunitas sekitarmu.">
+          </div>
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-admin-outline" onclick="closeAdminArticleModal()">Batal</button>
+          <button type="submit" class="btn-admin-primary" id="btn-save-article-submit" style="background: #3730A3; border-color: #3730A3;">
+            Simpan Naskah &amp; Foto &rarr;
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
        MODAL: PEMUTAR VIDEO PREVIEW ADMIN
        ========================================================================== -->
   <div class="admin-modal-overlay" id="admin-video-player-modal">
@@ -1268,6 +1468,118 @@
     </div>
   </div>
 
+  <!-- ==========================================================================
+       MODAL: DETAIL & REVIEW PENDAFTAR CIRCLE MENTORING (TEMARA)
+       ========================================================================== -->
+  <div class="admin-modal-overlay" id="admin-facilitator-modal">
+    <div class="admin-modal-window" style="max-width: 680px;">
+      <div class="admin-modal-header">
+        <div>
+          <span style="font-size: 0.72rem; font-weight: 800; color: #B45309; text-transform: uppercase;">
+            PILAR TEMARA - KADERISASI FASILITATOR SEBAYA
+          </span>
+          <h3 id="modal-fac-fullname" style="font-size: 1.25rem; font-weight: 800; color: #0F172A; margin: 2px 0 0;">
+            Detail Calon Fasilitator
+          </h3>
+        </div>
+        <button type="button" class="admin-modal-close" onclick="closeAdminFacilitatorModal()">&times;</button>
+      </div>
+
+      <div class="admin-modal-body">
+        <input type="hidden" id="field-fac-id">
+        
+        <!-- Quick Bio Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px; margin-bottom: 16px;">
+          <div>
+            <span style="font-size: 0.74rem; color: #64748B; font-weight: 600;">Asal Kampus / Komunitas:</span>
+            <div id="modal-fac-institution" style="font-size: 0.88rem; font-weight: 700; color: #0F172A;">-</div>
+          </div>
+          <div>
+            <span style="font-size: 0.74rem; color: #64748B; font-weight: 600;">Rentang Usia:</span>
+            <div id="modal-fac-age" style="font-size: 0.88rem; font-weight: 700; color: #0F172A;">-</div>
+          </div>
+          <div>
+            <span style="font-size: 0.74rem; color: #64748B; font-weight: 600;">Kontak WhatsApp:</span>
+            <div id="modal-fac-contact" style="font-size: 0.88rem; font-weight: 700; color: #1D428A;">-</div>
+          </div>
+          <div>
+            <span style="font-size: 0.74rem; color: #64748B; font-weight: 600;">Fokus Bidang Pilihan:</span>
+            <div id="modal-fac-pillar" style="font-size: 0.88rem; font-weight: 700; color: #92400E;">-</div>
+          </div>
+        </div>
+
+        <!-- Pengalaman Organisasi -->
+        <div class="admin-form-group">
+          <label style="font-size: 0.82rem; font-weight: 700; color: #334155;">Pengalaman Organisasi &amp; Relawan:</label>
+          <div id="modal-fac-experience" style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px; font-size: 0.85rem; color: #334155; line-height: 1.5; min-height: 50px;">
+            -
+          </div>
+        </div>
+
+        <!-- Motivasi & Dampak -->
+        <div class="admin-form-group">
+          <label style="font-size: 0.82rem; font-weight: 700; color: #334155;">Motivasi Menjadi Fasilitator Sebaya:</label>
+          <div id="modal-fac-motivation" style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px; padding: 12px; font-size: 0.85rem; color: #334155; line-height: 1.5; min-height: 60px;">
+            -
+          </div>
+        </div>
+
+        <!-- Status Seleksi Dropdown -->
+        <div class="admin-form-group">
+          <label for="field-fac-status" style="font-size: 0.82rem; font-weight: 700; color: #334155;">Status Seleksi / Kaderisasi:</label>
+          <select id="field-fac-status" class="admin-form-control" style="font-weight: 700;">
+            <option value="pending">Menunggu Review</option>
+            <option value="interviewed">Tahap Wawancara / Screening</option>
+            <option value="accepted">Diterima / Lolos Pembekalan</option>
+            <option value="rejected">Belum Lolos Seleksi</option>
+          </select>
+        </div>
+
+        <!-- Catatan Tim Seleksi -->
+        <div class="admin-form-group" style="margin-bottom: 0;">
+          <label for="field-fac-notes" style="font-size: 0.82rem; font-weight: 700; color: #334155;">Catatan Reviewer / Pewawancara (Internal):</label>
+          <textarea id="field-fac-notes" class="admin-form-control" rows="2" placeholder="Tuliskan catatan hasil wawancara atau kelebihan calon..."></textarea>
+        </div>
+      </div>
+
+      <div class="admin-modal-footer">
+        <a id="modal-fac-wa-link" href="#" target="_blank" class="btn-admin-outline" style="color: #15803D; border-color: #86EFAC; background: #F0FDF4; text-decoration: none;">
+          Chat WhatsApp &rarr;
+        </a>
+        <button type="button" class="btn-admin-outline" onclick="closeAdminFacilitatorModal()">Tutup</button>
+        <button type="button" class="btn-admin-primary" onclick="handleSaveFacilitatorStatus()" style="background: #B45309; border-color: #B45309;">
+          Simpan Status &amp; Catatan
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL: PRATINJAU / TESTER DOKUMEN PDF
+       ========================================================================== -->
+  <div class="admin-modal-overlay" id="admin-pdf-preview-modal" style="display: none; align-items: center; justify-content: center;">
+    <div class="admin-modal-window" style="max-width: 950px; width: 95%; height: 86vh; padding: 0; display: flex; flex-direction: column; overflow: hidden; background: #FFFFFF; border-radius: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: #0F766E; color: #FFFFFF;">
+        <div>
+          <h3 id="admin-pdf-preview-title" style="margin: 0; font-size: 1.05rem; font-weight: 700; color: #FFFFFF;">Uji Penampil PDF</h3>
+          <p id="admin-pdf-preview-sub" style="margin: 3px 0 0 0; font-size: 0.76rem; color: #CCFBF1;">Verifikasi render dokumen (Google Drive Embed / Berkas Lokal) tanpa beban penyimpanan database</p>
+        </div>
+        <button type="button" onclick="closeAdminPdfPreviewModal()" style="color: #FFFFFF; font-size: 1.4rem; background: rgba(255,255,255,0.15); border: none; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center;">&times;</button>
+      </div>
+      <div style="flex: 1; background: #0F172A; position: relative;">
+        <iframe id="admin-pdf-preview-iframe" src="about:blank" style="width: 100%; height: 100%; border: 0;" allow="fullscreen"></iframe>
+      </div>
+      <div style="padding: 12px 20px; background: #F8FAFC; border-top: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <span id="admin-pdf-preview-note" style="font-size: 0.78rem; color: #64748B;">
+          Status Cloud: 0 Bytes kuota database terpakai. Berkas dilayani langsung oleh CDN penyedia.
+        </span>
+        <button type="button" class="btn-admin-primary" onclick="closeAdminPdfPreviewModal()" style="padding: 7px 18px; font-size: 0.85rem; background: #0F766E; border-color: #0F766E;">
+          Tutup Pratinjau
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification -->
   <div class="admin-toast" id="admin-toast">
     <span id="admin-toast-text">Perubahan berhasil disimpan!</span>
@@ -1277,7 +1589,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/data.js"></script>
   <script src="js/supabase.js"></script>
-  <script src="js/admin.js?v=4.6"></script>
+  <script src="js/admin.js?v=5.0"></script>
 
 </body>
 

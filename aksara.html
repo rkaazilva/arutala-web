@@ -1101,38 +1101,38 @@
           </div>
           <div
             style="background: #FFFFFF; padding: 8px; border-radius: 8px; display: inline-block; margin-bottom: 6px;">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&amp;data=ARUTALA-DONASI-BENCANA-2026"
+            <img id="qris-img-element" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&amp;data=ARUTALA-DONASI-BENCANA-2026"
               alt="QRIS Resmi Tanggap Bencana ARUTALA" style="width: 170px; height: 170px; display: block;"
               loading="lazy">
           </div>
-          <div style="font-size: 0.82rem; font-weight: 800; color: #0F172A;">NMID: ID1026002948192</div>
-          <div style="font-size: 0.74rem; color: #64748B;">ARUTALA UIN SGD BANDUNG</div>
-          <div style="font-size: 0.72rem; color: #166534; margin-top: 4px; font-weight: 600;">Scan dengan GoPay, OVO,
+          <div id="qris-nmid-element" style="font-size: 0.82rem; font-weight: 800; color: #0F172A;">NMID: ID1026002948192</div>
+          <div id="qris-merchant-element" style="font-size: 0.74rem; color: #64748B;">ARUTALA UIN SGD BANDUNG</div>
+          <div id="qris-instruction-element" style="font-size: 0.72rem; color: #166534; margin-top: 4px; font-weight: 600;">Scan dengan GoPay, OVO,
             Dana, BCA, Mandiri, BRImo, dll.</div>
         </div>
 
         <!-- Rekening Bank Alternatif dengan Tombol Salin Cepat -->
-        <div style="margin-bottom: 18px;">
+        <div style="margin-bottom: 18px;" id="qris-bank-accounts-container">
           <div style="font-size: 0.8rem; font-weight: 700; color: #475569; margin-bottom: 8px;">Atau Transfer Langsung
             ke Rekening:</div>
 
           <div class="bank-acc-item">
             <div>
-              <strong style="color: #0F172A;">Bank Syariah Indonesia (BSI)</strong><br>
+              <strong id="qris-bank-b1-name" style="color: #0F172A;">Bank Syariah Indonesia (BSI)</strong><br>
               <span id="bsi-acc-num" style="color: #2F4F87; font-weight: 700;">712-889-4401</span>
-              <span style="font-size: 0.74rem; color: #64748B;"> a.n. ARUTALA Peduli</span>
+              <span id="qris-bank-b1-holder" style="font-size: 0.74rem; color: #64748B;"> a.n. ARUTALA Peduli</span>
             </div>
-            <button type="button" class="btn-copy-acc" onclick="copyAccountNumber('7128894401', this)">Salin No.
+            <button type="button" id="qris-bank-b1-btn" class="btn-copy-acc" onclick="copyAccountNumber('7128894401', this)">Salin No.
               Rek</button>
           </div>
 
           <div class="bank-acc-item">
             <div>
-              <strong style="color: #0F172A;">Bank Central Asia (BCA)</strong><br>
+              <strong id="qris-bank-b2-name" style="color: #0F172A;">Bank Central Asia (BCA)</strong><br>
               <span id="bca-acc-num" style="color: #2F4F87; font-weight: 700;">840-529-1102</span>
-              <span style="font-size: 0.74rem; color: #64748B;"> a.n. Bendahara Arutala</span>
+              <span id="qris-bank-b2-holder" style="font-size: 0.74rem; color: #64748B;"> a.n. Bendahara Arutala</span>
             </div>
-            <button type="button" class="btn-copy-acc" onclick="copyAccountNumber('8405291102', this)">Salin No.
+            <button type="button" id="qris-bank-b2-btn" class="btn-copy-acc" onclick="copyAccountNumber('8405291102', this)">Salin No.
               Rek</button>
           </div>
         </div>

@@ -1339,12 +1339,18 @@ document.addEventListener("DOMContentLoaded", () => {
     videosContainer.innerHTML = "";
 
     const customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+    let deletedIds = [];
+    try {
+      deletedIds = JSON.parse(localStorage.getItem("arutala_deleted_videos") || "[]");
+    } catch (e) {
+      deletedIds = [];
+    }
     const currentVideos = AppState.videos || (window.ARUTALA_DATA && window.ARUTALA_DATA.videos) || [];
 
     const allVideos = [
       ...customVideos,
       ...currentVideos.filter(cv => !customVideos.some(uv => uv.youtubeId === cv.youtubeId || uv.id === cv.id))
-    ];
+    ].filter(v => !deletedIds.includes(String(v.id)) && v.youtubeId !== "dQw4w9WgXcQ");
 
     allVideos.forEach(vid => {
       const card = document.createElement("div");
