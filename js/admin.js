@@ -212,7 +212,7 @@ async function switchTrack(track, shouldPushState = true) {
   if (btnCardAddText) btnCardAddText.textContent = "+ Tambah Item";
 
   if (track === "karsa") {
-    if (bannerTitle) bannerTitle.textContent = "Pilar KARSA: Karya, Aktualisasi, dan Ruang Skill";
+    if (bannerTitle) bannerTitle.textContent = "Pilar KARSA: Ruang Pengembangan Diri (Kehendak & Daya Cipta)";
     if (bannerDesc) bannerDesc.textContent = "Struktur: Ringkasan materi per modul + Tombol Unduh PDF Lengkap + Slot Kuis Interaktif Terpadu di akhir.";
     if (visitBtn) {
       visitBtn.href = "karsa.html";
@@ -221,7 +221,7 @@ async function switchTrack(track, shouldPushState = true) {
     if (linkPreview) linkPreview.href = "karsa.html";
     if (trackHeading) trackHeading.textContent = "Daftar Modul & Kuis Aktif (KARSA)";
   } else if (track === "nuansa") {
-    if (bannerTitle) bannerTitle.textContent = "Pilar NUANSA: Nilai Ukhuwah, Agama, dan Sosial";
+    if (bannerTitle) bannerTitle.textContent = "Pilar NUANSA: Ruang Kesadaran Sosial-Keagamaan (Kepekaan & Harmoni Nilai)";
     if (bannerDesc) bannerDesc.textContent = "Struktur Silabus: Ringkasan materi etika keagamaan + Unduh Modul PDF + Kuis Refleksi Etika.";
     if (visitBtn) {
       visitBtn.href = "nuansa.html";
@@ -230,7 +230,7 @@ async function switchTrack(track, shouldPushState = true) {
     if (linkPreview) linkPreview.href = "nuansa.html";
     if (trackHeading) trackHeading.textContent = "Daftar Silabus Modul & Kuis (NUANSA)";
   } else if (track === "temara") {
-    if (bannerTitle) bannerTitle.textContent = "Pilar TEMARA: Teman Bermakna Arutala (Kader Fasilitator)";
+    if (bannerTitle) bannerTitle.textContent = "Pilar TEMARA: Ruang Tutor Sebaya (Lentera & Kawan Bermakna)";
     if (bannerDesc) bannerDesc.textContent = "Struktur: Perangkat Pelaksanaan & SOP Fasilitator Sebaya (Murni Modul & Lembar Aksi, Tanpa Kuis).";
     if (visitBtn) {
       visitBtn.href = "temara.html";

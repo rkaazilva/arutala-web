@@ -212,9 +212,61 @@ html::before, html::after {
 }
 .filter-btn[data-category="pandai"].active  { background: #059669 !important; border-color: #059669 !important; }
 .filter-btn[data-category="cerdas"].active  { background: #2563EB !important; border-color: #2563EB !important; }
-/* --- SECTION HEADERS --- */
-.section-header h2, .section-title { color: #0F172A !important; }
-.section-header h2::after { content: ""; display: block; width: 48px; height: 3px; background: #2F4F87; border-radius: 4px; margin: 12px auto 0; }
+/* --- SECTION HEADERS: CLEAN, SIMPLE, PREMIUM (No Clutter) --- */
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 42px;
+}
+.section-header h2,
+.section-title,
+.uss-feed-title,
+.karsa-section-header h2 {
+  font-family: var(--font-heading) !important;
+  font-size: 2.35rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.22 !important;
+  color: #0F172A !important;
+  margin: 0 0 12px 0 !important;
+}
+.section-header h2::after,
+.section-title::after,
+.uss-feed-title::after,
+.karsa-section-header h2::after {
+  display: none !important;
+  content: none !important;
+}
+.section-header p,
+.uss-feed-subtitle,
+.karsa-section-header p {
+  font-family: var(--font-body) !important;
+  font-size: 1.05rem !important;
+  color: #475569 !important;
+  line-height: 1.6 !important;
+  max-width: 680px !important;
+  margin: 0 auto !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+.section-header p em,
+.uss-feed-subtitle em,
+.karsa-section-header p em {
+  font-style: normal !important;
+}
+.section-header .section-kicker,
+.section-header .sub-badge,
+.section-header .lms-code-chip,
+.section-kicker,
+.uss-feed-kicker,
+.karsa-section-header .section-kicker,
+.lms-code-chip {
+  display: none !important;
+}
+.section-kicker::before {
+  display: none !important;
+  content: none !important;
+}
 /* --- BENTO --- */
 .bento { border-radius: var(--radius-lg) !important; overflow: hidden !important; box-shadow: var(--shadow-sm) !important; border: 1px solid #E2E8F0 !important; transition: transform var(--transition-normal), box-shadow 0.24s ease !important; }
 .bento:hover { transform: translateY(-4px) !important; box-shadow: var(--shadow-card-hover) !important; }
@@ -284,8 +336,6 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
 .article-list-card:hover, .article-grid-card:hover { transform: translateY(-4px) !important; box-shadow: var(--shadow-card-hover) !important; }
 /* --- CTA HIGHLIGHT --- */
 .donation-card, .cta-section, .highlight-band { background: #FFFFFF !important; border-radius: var(--radius-xl) !important; border: 1px solid #E2E8F0 !important; box-shadow: 0 4px 16px rgba(47, 79, 135, 0.06) !important; }
-/* --- SECTION KICKER TEXT --- */
-.section-kicker { color: #2F4F87; -webkit-text-fill-color: #2F4F87; background: none; }
 
 /* ============================================================
    ULTRA-PREMIUM HERO SHOWCASE SLIDER, 4 PILAR & DOCKED STATS
@@ -361,63 +411,33 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
   inset: 0;
   background:
     linear-gradient(180deg,
-      rgba(15, 23, 42, 0.75) 0%,
-      rgba(15, 23, 42, 0.55) 35%,
-      rgba(15, 23, 42, 0.82) 75%,
-      rgba(15, 23, 42, 0.95) 100%
+      rgba(11, 17, 32, 0.60) 0%,
+      rgba(11, 17, 32, 0.35) 35%,
+      rgba(11, 17, 32, 0.68) 75%,
+      rgba(11, 17, 32, 0.90) 100%
     );
 }
 
-/* Slider Left / Right Navigation Buttons */
-.hero-nav-btn {
+/* Dynamic Palette Ribbon Shadows Overlay over Hero Photos (Sesuai Gambar 3) */
+.hero-palette-wave-overlay {
   position: absolute;
-  top: 42%;
-  transform: translateY(-50%);
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 15;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-  pointer-events: auto;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
 }
 
-.hero-nav-btn svg {
-  width: 24px;
-  height: 24px;
-  transition: transform 0.2s ease;
+.hero-palette-wave-overlay svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.hero-nav-prev {
-  left: 28px;
-}
-
-.hero-nav-next {
-  right: 28px;
-}
-
-.hero-nav-btn:hover {
-  background: rgba(255, 255, 255, 0.95);
-  color: #0F172A;
-  transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-}
-
-.hero-nav-prev:hover svg {
-  transform: translateX(-2px);
-}
-
-.hero-nav-next:hover svg {
-  transform: translateX(2px);
+/* Slider Left / Right Navigation Buttons (Dihapus Sesuai Gambar 4) */
+.hero-nav-btn {
+  display: none !important;
 }
 
 /* Slide Indicators (Dots / Progress Bar) */
@@ -592,11 +612,7 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
 }
 
 .pillar-kicker-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #38BDF8;
-  box-shadow: 0 0 10px #38BDF8;
+  display: none !important;
 }
 
 .hero-pillars-sub {
@@ -613,174 +629,204 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
   gap: 18px;
 }
 
-/* Elevated Luxury Porcelain Card with Soft Dynamic Gradient Wash */
+/* ==========================================================================
+   4 PILAR CARDS (INSPIRASI UIVERSE JAVIERBARROSO DENGAN PALET RESMI ARUTALA)
+   Animasi wave radial dari pojok kanan atas yang memenuhi card saat di-hover
+   ========================================================================== */
 .hero-pillar-glass-card {
   position: relative;
   background: #FFFFFF !important;
   border-radius: 18px;
-  padding: 22px 20px 18px;
+  padding: 24px 22px 20px;
   text-align: left;
   text-decoration: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18), 0 2px 6px rgba(15, 23, 42, 0.08);
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.05);
+  cursor: pointer;
   overflow: hidden;
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, border-color 0.4s ease;
 }
 
-/* Smooth Top Gradient Accent Line */
-.hero-pillar-glass-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  transition: height 0.2s ease;
-  z-index: 3;
+.hero-pillar-glass-card:hover {
+  transform: translateY(-6px) scale(1.02);
 }
 
-.hero-pillar-glass-card:hover::before {
-  height: 5px;
-}
-
-/* 4 Distinct Aesthetic Identities per Brand Palette */
+/* Identitas Garis Tepi & Bayangan per Pilar */
 .pillar-card-karsa {
-  background: linear-gradient(180deg, #F4F8FD 0%, #FFFFFF 42%) !important;
   border: 1.5px solid rgba(47, 79, 135, 0.22) !important;
-}
-.pillar-card-karsa::before {
-  background: linear-gradient(90deg, #2F4F87 0%, #3B82F6 100%);
 }
 .pillar-card-karsa:hover {
   border-color: #2F4F87 !important;
-  transform: translateY(-6px);
-  box-shadow: 0 20px 42px rgba(47, 79, 135, 0.24);
+  box-shadow: 0 16px 38px rgba(47, 79, 135, 0.32);
 }
 
 .pillar-card-nuansa {
-  background: linear-gradient(180deg, #F2FAF4 0%, #FFFFFF 42%) !important;
-  border: 1.5px solid rgba(102, 187, 106, 0.30) !important;
-}
-.pillar-card-nuansa::before {
-  background: linear-gradient(90deg, #2E7D32 0%, #66BB6A 100%);
+  border: 1.5px solid rgba(46, 125, 50, 0.25) !important;
 }
 .pillar-card-nuansa:hover {
-  border-color: #43A047 !important;
-  transform: translateY(-6px);
-  box-shadow: 0 20px 42px rgba(46, 125, 50, 0.24);
+  border-color: #2E7D32 !important;
+  box-shadow: 0 16px 38px rgba(46, 125, 50, 0.32);
 }
 
 .pillar-card-temara {
-  background: linear-gradient(180deg, #F3F8FE 0%, #FFFFFF 42%) !important;
-  border: 1.5px solid rgba(137, 187, 238, 0.48) !important;
-}
-.pillar-card-temara::before {
-  background: linear-gradient(90deg, #0284C7 0%, #89BBEE 100%);
+  border: 1.5px solid rgba(2, 132, 199, 0.25) !important;
 }
 .pillar-card-temara:hover {
   border-color: #0284C7 !important;
-  transform: translateY(-6px);
-  box-shadow: 0 20px 42px rgba(2, 132, 199, 0.24);
+  box-shadow: 0 16px 38px rgba(2, 132, 199, 0.32);
 }
 
 .pillar-card-aksara {
-  background: linear-gradient(180deg, #FDF4FA 0%, #FFFFFF 42%) !important;
-  border: 1.5px solid rgba(255, 100, 197, 0.30) !important;
-}
-.pillar-card-aksara::before {
-  background: linear-gradient(90deg, #D81B60 0%, #FF64C5 100%);
+  border: 1.5px solid rgba(216, 27, 96, 0.25) !important;
 }
 .pillar-card-aksara:hover {
-  border-color: #FF64C5 !important;
-  transform: translateY(-6px);
-  box-shadow: 0 20px 42px rgba(216, 27, 96, 0.24);
+  border-color: #D81B60 !important;
+  box-shadow: 0 16px 38px rgba(216, 27, 96, 0.32);
 }
 
-/* Header Inside Card: Icon Badge & Pillar Tag */
+/* Badge Nomor Pojok Kanan Atas (Uiverse Number Bubble) */
+.pillar-card-number {
+  position: absolute;
+  top: -75px;
+  right: -75px;
+  width: 155px;
+  height: 155px;
+  border-radius: 50%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0 0 24px 26px;
+  box-sizing: border-box;
+  transition: all 0.4s ease-in-out;
+}
+
+.pillar-card-number .pillar-number-kicker {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1;
+  margin-bottom: 2px;
+  font-family: var(--font-heading);
+}
+
+.pillar-card-number .pillar-number-val {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1;
+  font-family: var(--font-heading);
+}
+
+/* Gelombang Radial yang Mengembang Memenuhi Kartu saat Hover */
+.pillar-card-number::after {
+  content: "";
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  right: 50%;
+  transform: translateX(50%) translateY(-50%);
+  transition: width 0.55s cubic-bezier(0.16, 1, 0.3, 1), height 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-pillar-glass-card:hover .pillar-card-number::after {
+  width: 900px;
+  height: 900px;
+}
+
+/* Palet Warna Bubble & Gelombang per Pilar */
+.pillar-card-karsa .pillar-card-number,
+.pillar-card-karsa .pillar-card-number::after {
+  background: #2F4F87;
+}
+
+.pillar-card-nuansa .pillar-card-number,
+.pillar-card-nuansa .pillar-card-number::after {
+  background: #2E7D32;
+}
+
+.pillar-card-temara .pillar-card-number,
+.pillar-card-temara .pillar-card-number::after {
+  background: #0284C7;
+}
+
+.pillar-card-aksara .pillar-card-number,
+.pillar-card-aksara .pillar-card-number::after {
+  background: #D81B60;
+}
+
+/* Layer Konten Teks di Atas Gelombang */
+.pillar-glass-top,
+.pillar-glass-body,
+.pillar-glass-footer {
+  position: relative;
+  z-index: 5;
+  transition: all 0.45s ease;
+}
+
+/* Header Kartu: Ikon Pilar */
 .pillar-glass-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 14px;
 }
 
-/* Premium Solid Gradient Squircle Badge with Pure White Crisp SVG Icon */
 .pillar-icon-badge {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.25s ease;
-}
-
-.hero-pillar-glass-card:hover .pillar-icon-badge {
-  transform: scale(1.08);
+  transition: all 0.35s ease;
 }
 
 .pillar-card-karsa .pillar-icon-badge {
   background: linear-gradient(135deg, #2F4F87 0%, #1E3A8A 100%);
   color: #FFFFFF;
-  box-shadow: 0 6px 16px rgba(47, 79, 135, 0.32);
+  box-shadow: 0 4px 14px rgba(47, 79, 135, 0.3);
 }
 .pillar-card-nuansa .pillar-icon-badge {
   background: linear-gradient(135deg, #43A047 0%, #2E7D32 100%);
   color: #FFFFFF;
-  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.32);
+  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.3);
 }
 .pillar-card-temara .pillar-icon-badge {
   background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
   color: #FFFFFF;
-  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.32);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
 }
 .pillar-card-aksara .pillar-icon-badge {
   background: linear-gradient(135deg, #FF64C5 0%, #D81B60 100%);
   color: #FFFFFF;
-  box-shadow: 0 6px 16px rgba(216, 27, 96, 0.32);
+  box-shadow: 0 4px 14px rgba(216, 27, 96, 0.3);
 }
 
 .pillar-icon-badge svg {
-  width: 21px;
-  height: 21px;
+  width: 22px;
+  height: 22px;
   stroke: #FFFFFF !important;
+  transition: transform 0.3s ease;
 }
 
-/* Subtle Editorial Tag (PILAR 01, PILAR 02, etc.) */
-.pillar-number-tag {
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-family: var(--font-heading);
+/* Hover: Ikon Badge Menjadi Frosted Glass Putih Halus */
+.hero-pillar-glass-card:hover .pillar-icon-badge {
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transform: scale(1.08);
 }
 
-.pillar-card-karsa .pillar-number-tag {
-  background: #EEF4FB;
-  color: #2F4F87;
-  border: 1px solid rgba(47, 79, 135, 0.18);
-}
-.pillar-card-nuansa .pillar-number-tag {
-  background: #EAF7EE;
-  color: #2E7D32;
-  border: 1px solid rgba(102, 187, 106, 0.28);
-}
-.pillar-card-temara .pillar-number-tag {
-  background: #EAF4FD;
-  color: #0369A1;
-  border: 1px solid rgba(137, 187, 238, 0.40);
-}
-.pillar-card-aksara .pillar-number-tag {
-  background: #FDEBF6;
-  color: #BE185D;
-  border: 1px solid rgba(255, 100, 197, 0.28);
-}
-
-/* Body Content */
+/* Tipografi Konten Tubuh Kartu */
 .pillar-glass-body {
   margin-bottom: 14px;
 }
@@ -793,36 +839,23 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
   color: #0F172A !important;
   margin: 0 0 3px;
   line-height: 1.2;
+  transition: color 0.45s ease;
 }
 
 .pillar-glass-role {
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  margin-bottom: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.pillar-glass-role::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  margin-bottom: 8px;
+  display: block;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  transition: color 0.45s ease;
 }
 
 .pillar-card-karsa .pillar-glass-role { color: #2F4F87 !important; }
-.pillar-card-karsa .pillar-glass-role::before { background: #2F4F87; }
-
 .pillar-card-nuansa .pillar-glass-role { color: #2E7D32 !important; }
-.pillar-card-nuansa .pillar-glass-role::before { background: #2E7D32; }
-
 .pillar-card-temara .pillar-glass-role { color: #0284C7 !important; }
-.pillar-card-temara .pillar-glass-role::before { background: #0284C7; }
-
 .pillar-card-aksara .pillar-glass-role { color: #D81B60 !important; }
-.pillar-card-aksara .pillar-glass-role::before { background: #D81B60; }
 
 .pillar-glass-desc {
   font-size: 0.82rem;
@@ -830,13 +863,45 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
   line-height: 1.55;
   margin: 0;
   min-height: 60px;
+  transition: color 0.45s ease;
 }
 
-/* Footer: Interactive Solid Action Pill Button */
+/* Efek Hover Tipografi: Berubah Menjadi Putih Bersih di Atas Gelombang */
+.hero-pillar-glass-card:hover .pillar-glass-title {
+  color: #FFFFFF !important;
+}
+
+.hero-pillar-glass-card.pillar-card-karsa:hover .pillar-glass-role {
+  color: #93C5FD !important;
+}
+.hero-pillar-glass-card.pillar-card-nuansa:hover .pillar-glass-role {
+  color: #86EFAC !important;
+}
+.hero-pillar-glass-card.pillar-card-temara:hover .pillar-glass-role {
+  color: #7DD3FC !important;
+}
+.hero-pillar-glass-card.pillar-card-aksara:hover .pillar-glass-role {
+  color: #FBCFE8 !important;
+}
+
+.hero-pillar-glass-card:hover .pillar-glass-desc {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+.hero-pillar-glass-card:hover .pillar-glass-desc em {
+  color: #FFFFFF !important;
+  font-weight: 700;
+}
+
+/* Footer Kartu & Tombol Aksi */
 .pillar-glass-footer {
   margin-top: auto;
   padding-top: 12px;
   border-top: 1px solid rgba(226, 232, 240, 0.75);
+  transition: border-color 0.45s ease;
+}
+
+.hero-pillar-glass-card:hover .pillar-glass-footer {
+  border-top-color: rgba(255, 255, 255, 0.25);
 }
 
 .pillar-action-pill {
@@ -848,67 +913,63 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pillar-action-pill svg {
-  transition: transform 0.24s ease;
+  transition: transform 0.25s ease;
 }
 
 .hero-pillar-glass-card:hover .pillar-action-pill svg {
   transform: translateX(4px);
 }
 
-/* KARSA Action Pill */
+/* Gaya Awal Tombol (Normal / Unhovered) */
 .pillar-card-karsa .pillar-action-pill {
   background: #EEF4FB;
   color: #2F4F87;
   border: 1px solid rgba(47, 79, 135, 0.18);
 }
-.hero-pillar-glass-card.pillar-card-karsa:hover .pillar-action-pill {
-  background: #2F4F87;
-  color: #FFFFFF;
-  border-color: #2F4F87;
-  box-shadow: 0 4px 14px rgba(47, 79, 135, 0.32);
-}
-
-/* NUANSA Action Pill */
 .pillar-card-nuansa .pillar-action-pill {
   background: #EAF7EE;
   color: #2E7D32;
   border: 1px solid rgba(102, 187, 106, 0.26);
 }
-.hero-pillar-glass-card.pillar-card-nuansa:hover .pillar-action-pill {
-  background: #2E7D32;
-  color: #FFFFFF;
-  border-color: #2E7D32;
-  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.32);
-}
-
-/* TEMARA Action Pill */
 .pillar-card-temara .pillar-action-pill {
   background: #EAF4FD;
   color: #0369A1;
   border: 1px solid rgba(137, 187, 238, 0.40);
 }
-.hero-pillar-glass-card.pillar-card-temara:hover .pillar-action-pill {
-  background: #0284C7;
-  color: #FFFFFF;
-  border-color: #0284C7;
-  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.32);
-}
-
-/* AKSARA Action Pill */
 .pillar-card-aksara .pillar-action-pill {
   background: #FDEBF6;
   color: #BE185D;
   border: 1px solid rgba(255, 100, 197, 0.28);
 }
+
+/* Gaya Tombol Saat Hover: Berubah Menjadi Putih Bersih Solid dengan Teks Warna Pilar */
+.hero-pillar-glass-card.pillar-card-karsa:hover .pillar-action-pill {
+  background: #FFFFFF !important;
+  color: #2F4F87 !important;
+  border-color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+}
+.hero-pillar-glass-card.pillar-card-nuansa:hover .pillar-action-pill {
+  background: #FFFFFF !important;
+  color: #2E7D32 !important;
+  border-color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+}
+.hero-pillar-glass-card.pillar-card-temara:hover .pillar-action-pill {
+  background: #FFFFFF !important;
+  color: #0284C7 !important;
+  border-color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+}
 .hero-pillar-glass-card.pillar-card-aksara:hover .pillar-action-pill {
-  background: #D81B60;
-  color: #FFFFFF;
-  border-color: #D81B60;
-  box-shadow: 0 4px 14px rgba(216, 27, 96, 0.32);
+  background: #FFFFFF !important;
+  color: #D81B60 !important;
+  border-color: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
 }
 
 /* 4. DOCKED 4-COLUMN VIBRANT STATISTIC STRIP (FAITHFUL TO REFERENCE IMAGE) */
@@ -1061,12 +1122,6 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
 }
 
 @media (max-width: 768px) {
-  .hero-nav-btn {
-    width: 42px;
-    height: 42px;
-  }
-  .hero-nav-prev { left: 12px; }
-  .hero-nav-next { right: 12px; }
   .hero-content-wrapper {
     padding: 85px 16px 24px;
   }
@@ -1146,9 +1201,18 @@ input:focus, textarea:focus, select:focus { border-color: #2F4F87 !important; bo
     width: 18px !important;
     height: 18px !important;
   }
-  .pillar-number-tag {
-    font-size: 0.62rem !important;
-    padding: 3px 8px !important;
+  .pillar-card-number {
+    width: 125px !important;
+    height: 125px !important;
+    top: -60px !important;
+    right: -60px !important;
+    padding: 0 0 16px 18px !important;
+  }
+  .pillar-card-number .pillar-number-val {
+    font-size: 0.98rem !important;
+  }
+  .pillar-card-number .pillar-number-kicker {
+    font-size: 0.52rem !important;
   }
   .pillar-glass-title {
     font-size: 1.18rem !important;
