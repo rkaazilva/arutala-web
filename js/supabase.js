@@ -141,6 +141,7 @@
         const { data, error } = await client
           .from("articles")
           .select("*")
+          .neq("category", "nuansa-video")
           .order("created_at", { ascending: false });
 
         if (error) {
@@ -148,7 +149,9 @@
           return [];
         }
 
-        return (data || []).map((row) => ({
+        return (data || [])
+          .filter((row) => (row.category || "").toLowerCase() !== "nuansa-video")
+          .map((row) => ({
           id: row.id,
           title: row.title,
           category: (row.category || "pandai").toLowerCase(),
@@ -180,6 +183,7 @@
           .from("articles")
           .select("*")
           .eq("id", id)
+          .neq("category", "nuansa-video")
           .maybeSingle();
 
         if (error || !data) return null;
@@ -1119,6 +1123,260 @@
         localStorage.setItem(cacheKey, JSON.stringify(defaults));
       } catch (e) {}
       return defaults;
+    },
+
+    // ------------------------------------------------------------------------
+    // 8. NUANSA VIDEOS (Pojok Video YouTube Edukasi Cloud Sync)
+    // ------------------------------------------------------------------------
+    extractYoutubeId(url) {
+      if (!url) return "";
+      const regExp = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?|shorts)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const match = String(url).match(regExp);
+      if (match && match[1]) return match[1];
+      if (/^[a-zA-Z0-9_-]{11}$/.test(url)) return url;
+      return "";
+    },
+
+    getDefaultNuansaVideos() {
+      return [
+        {
+          id: 4,
+          youtubeId: "VN7talTjE14",
+          title: "Video Profil PANCAWALA: Media Literasi Pemuda & Moderasi Beragama",
+          channel: "Pancawala",
+          duration: "06:12",
+          thumbnail: "https://img.youtube.com/vi/VN7talTjE14/hqdefault.jpg",
+          takeaways: "Menjelaskan urgensi platform dinamis pemuda dalam mempromosikan moderasi beragama, kearifan budaya, dan kesetaraan gender bagi Gen Z.",
+          category: "Moderasi & Gender",
+          videoUrl: "https://www.youtube.com/embed/VN7talTjE14",
+          isFromCloud: false
+        },
+        {
+          id: 5,
+          youtubeId: "gkjvWcuXw9Y",
+          title: "Girls4Change: Membangun Masa Depan Berdaya bagi Remaja Perempuan",
+          channel: "RISE Foundation & Let's Read",
+          duration: "04:45",
+          thumbnail: "https://img.youtube.com/vi/gkjvWcuXw9Y/hqdefault.jpg",
+          takeaways: "Penerapan metodologi peer facilitation, self-love, dan ruang aman untuk mendorong kepemimpinan remaja perempuan di komunitas.",
+          category: "Pemberdayaan Sebaya",
+          videoUrl: "https://www.youtube.com/embed/gkjvWcuXw9Y",
+          isFromCloud: false
+        },
+        {
+          id: 6,
+          youtubeId: "zzWGNlDuTkA",
+          title: "Pemuda Bergerak: Menghapus Bias Gender dan Diskriminasi di Kampus",
+          channel: "ARUTALA Youth Media",
+          duration: "05:18",
+          thumbnail: "https://img.youtube.com/vi/zzWGNlDuTkA/hqdefault.jpg",
+          takeaways: "Simulasi studi kasus cara pemuda merespons perilaku diskriminatif dan membangun aturan organisasi kemahasiswaan yang inklusif.",
+          category: "Inklusivitas Kampus",
+          videoUrl: "https://www.youtube.com/embed/zzWGNlDuTkA",
+          isFromCloud: false
+        },
+        {
+          id: 7,
+          youtubeId: "oO7Y8Qu_6v8",
+          title: "Harmoni Keberagaman: Menghidupkan Kearifan Silih Asah, Asih, Asuh",
+          channel: "UIN SGD Youth Movement",
+          duration: "05:40",
+          thumbnail: "https://img.youtube.com/vi/zzWGNlDuTkA/hqdefault.jpg",
+          takeaways: "Menghubungkan nilai Islam dan kearifan lokal Sunda sebagai etika memperlakukan sesama, menghormati martabat kemanusiaan, dan memperkuat kohesi sosial.",
+          category: "Toleransi & Nilai",
+          videoUrl: "https://www.youtube.com/embed/zzWGNlDuTkA",
+          isFromCloud: false
+        }
+      ];
+    },
+
+    async fetchNuansaVideos() {
+      // 1. Ambil dari Supabase Cloud (articles table dengan category: 'nuansa-video')
+      if (client) {
+        try {
+          const { data, error } = await client
+            .from("articles")
+            .select("*")
+            .eq("category", "nuansa-video")
+            .order("id", { ascending: true });
+
+          if (!error && Array.isArray(data) && data.length > 0) {
+            const mapped = data.map((row) => {
+              const ytId = row.quote || (row.doc_url ? this.extractYoutubeId(row.doc_url) : "VN7talTjE14");
+              return {
+                id: row.id,
+                youtubeId: ytId,
+                title: row.title,
+                channel: row.author || "Kanal Edukasi",
+                duration: row.role || "Video Edukasi",
+                thumbnail: row.image || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : "img/pelatihan_fasilitator_auditorium.jpg"),
+                takeaways: row.summary || row.content || "",
+                category: row.date || "Moderasi & Gender",
+                videoUrl: row.doc_url || `https://www.youtube.com/embed/${ytId}`,
+                isFromCloud: true
+              };
+            });
+
+            // Sinkronkan ke local cache
+            try {
+              localStorage.setItem("arutala_custom_videos", JSON.stringify(mapped));
+            } catch (e) {}
+
+            return mapped;
+          }
+        } catch (err) {
+          console.warn("Notice fetch Nuansa videos Supabase (fallback to local):", err);
+        }
+      }
+
+      // 2. Fallback: Ambil dari cache localStorage
+      try {
+        const cached = localStorage.getItem("arutala_custom_videos");
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            return parsed;
+          }
+        }
+      } catch (e) {}
+
+      // 3. Fallback: Default data
+      const defaults = this.getDefaultNuansaVideos();
+      try {
+        localStorage.setItem("arutala_custom_videos", JSON.stringify(defaults));
+      } catch (e) {}
+      return defaults;
+    },
+
+    async saveNuansaVideo(videoObj) {
+      if (!videoObj) return null;
+      const ytId = videoObj.youtubeId || this.extractYoutubeId(videoObj.videoUrl || "");
+      const thumb = videoObj.thumbnail || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : "img/pelatihan_fasilitator_auditorium.jpg");
+      const embedUrl = videoObj.videoUrl || (ytId ? `https://www.youtube.com/embed/${ytId}` : "");
+
+      const dbRow = {
+        title: videoObj.title || "Video Edukasi",
+        category: "nuansa-video",
+        author: videoObj.channel || "Kanal Edukasi",
+        role: videoObj.duration || "Video Edukasi",
+        date: videoObj.category || "Moderasi & Gender",
+        read_time: "Video Edukasi",
+        image: thumb,
+        doc_url: embedUrl,
+        quote: ytId,
+        summary: videoObj.takeaways || "",
+        content: videoObj.takeaways || ""
+      };
+
+      let savedVideo = null;
+
+      // 1. Simpan ke Supabase jika ada client
+      if (client) {
+        try {
+          const isNumericId = videoObj.id && Number.isInteger(Number(videoObj.id)) && Number(videoObj.id) > 0;
+          if (isNumericId) {
+            // Update baris video yang sudah ada di Supabase
+            const { data, error } = await client
+              .from("articles")
+              .update(dbRow)
+              .eq("id", Number(videoObj.id))
+              .select();
+
+            if (!error && data && data[0]) {
+              savedVideo = {
+                id: data[0].id,
+                youtubeId: data[0].quote || ytId,
+                title: data[0].title,
+                channel: data[0].author,
+                duration: data[0].role,
+                thumbnail: data[0].image,
+                takeaways: data[0].summary,
+                category: data[0].date,
+                videoUrl: data[0].doc_url,
+                isFromCloud: true
+              };
+            }
+          } else {
+            // Insert baris video baru ke Supabase
+            const { data, error } = await client
+              .from("articles")
+              .insert([dbRow])
+              .select();
+
+            if (!error && data && data[0]) {
+              savedVideo = {
+                id: data[0].id,
+                youtubeId: data[0].quote || ytId,
+                title: data[0].title,
+                channel: data[0].author,
+                duration: data[0].role,
+                thumbnail: data[0].image,
+                takeaways: data[0].summary,
+                category: data[0].date,
+                videoUrl: data[0].doc_url,
+                isFromCloud: true
+              };
+            }
+          }
+        } catch (err) {
+          console.warn("Gagal simpan video ke Supabase:", err);
+        }
+      }
+
+      if (!savedVideo) {
+        savedVideo = {
+          id: videoObj.id || ("vid-" + Date.now()),
+          youtubeId: ytId,
+          title: videoObj.title,
+          channel: videoObj.channel,
+          duration: videoObj.duration || "Video Edukasi",
+          thumbnail: thumb,
+          takeaways: videoObj.takeaways,
+          category: videoObj.category || "Moderasi & Gender",
+          videoUrl: embedUrl
+        };
+      }
+
+      // 2. Perbarui cache localStorage agar instan & sinkron
+      try {
+        let currentVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+        const idx = currentVideos.findIndex(v => String(v.id) === String(savedVideo.id) || (videoObj.id && String(v.id) === String(videoObj.id)));
+        if (idx >= 0) {
+          currentVideos[idx] = savedVideo;
+        } else {
+          currentVideos.unshift(savedVideo);
+        }
+        localStorage.setItem("arutala_custom_videos", JSON.stringify(currentVideos));
+      } catch (e) {}
+
+      return savedVideo;
+    },
+
+    async deleteNuansaVideo(id) {
+      if (!id) return false;
+
+      // 1. Hapus dari Supabase jika ada client
+      if (client) {
+        try {
+          const isNumericId = Number.isInteger(Number(id)) && Number(id) > 0;
+          if (isNumericId) {
+            await client.from("articles").delete().eq("id", Number(id));
+          } else {
+            await client.from("articles").delete().eq("category", "nuansa-video").eq("id", id);
+          }
+        } catch (err) {
+          console.warn("Notice delete Nuansa video Supabase:", err);
+        }
+      }
+
+      // 2. Hapus dari cache localStorage
+      try {
+        let currentVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+        currentVideos = currentVideos.filter(v => String(v.id) !== String(id));
+        localStorage.setItem("arutala_custom_videos", JSON.stringify(currentVideos));
+      } catch (e) {}
+
+      return true;
     }
   };
 

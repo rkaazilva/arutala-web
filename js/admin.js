@@ -86,6 +86,9 @@ async function initAdminDashboard() {
 }
 
 function getNuansaVideosList() {
+  if (Array.isArray(window.ARUTALA_CACHED_VIDEOS) && window.ARUTALA_CACHED_VIDEOS.length > 0) {
+    return window.ARUTALA_CACHED_VIDEOS;
+  }
   let customVideos = [];
   try {
     customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
@@ -93,58 +96,19 @@ function getNuansaVideosList() {
     customVideos = [];
   }
 
-  let deletedIds = [];
-  try {
-    deletedIds = JSON.parse(localStorage.getItem("arutala_deleted_videos") || "[]");
-  } catch (e) {
-    deletedIds = [];
+  if (customVideos.length > 0) {
+    return customVideos;
+  }
+
+  if (window.ArutalaDB && typeof window.ArutalaDB.getDefaultNuansaVideos === "function") {
+    return window.ArutalaDB.getDefaultNuansaVideos();
   }
 
   const defaultVideos = (window.ARUTALA_DATA && Array.isArray(window.ARUTALA_DATA.videos))
     ? window.ARUTALA_DATA.videos
-    : [
-        {
-          id: "vid-1",
-          youtubeId: "VN7talTjE14",
-          title: "Video Kampanye: Moderat Sejak Dini — Menjalin Harmoni & Kesetaraan",
-          channel: "Kementerian Agama RI",
-          duration: "04:15",
-          thumbnail: "https://img.youtube.com/vi/VN7talTjE14/hqdefault.jpg",
-          takeaways: "Menjelaskan urgensi internalisasi nilai moderasi beragama, toleransi aktif, dan kesetaraan hakiki bagi generasi muda bangsa.",
-          category: "Moderasi & Gender",
-          videoUrl: "https://www.youtube.com/embed/VN7talTjE14"
-        },
-        {
-          id: "vid-2",
-          youtubeId: "gkjvWcuXw9Y",
-          title: "HeForShe: Membangun Gerakan Solidaritas Pemuda untuk Keadilan Gender",
-          channel: "UN Women Global",
-          duration: "11:45",
-          thumbnail: "https://img.youtube.com/vi/gkjvWcuXw9Y/hqdefault.jpg",
-          takeaways: "Pidato reflektif bersejarah mengenai pentingnya keterlibatan laki-laki sebagai sekutu (allies) dalam kesetaraan gender.",
-          category: "Moderasi & Gender",
-          videoUrl: "https://www.youtube.com/embed/gkjvWcuXw9Y"
-        },
-        {
-          id: "vid-3",
-          youtubeId: "zzWGNlDuTkA",
-          title: "Karya Pemuda: Voice of Change — Ruang Aman Bebas Diskriminasi di Kampus",
-          channel: "ARUTALA Youth Media",
-          duration: "05:18",
-          thumbnail: "https://img.youtube.com/vi/zzWGNlDuTkA/hqdefault.jpg",
-          takeaways: "Simulasi studi kasus cara pemuda merespons perilaku diskriminatif dan membangun aturan organisasi kemahasiswaan yang inklusif.",
-          category: "Inklusivitas Kampus",
-          videoUrl: "https://www.youtube.com/embed/zzWGNlDuTkA"
-        }
-      ];
+    : [];
 
-  // Gabungkan custom dan default yang belum dihapus
-  const merged = [
-    ...customVideos,
-    ...defaultVideos.filter(dv => !customVideos.some(cv => cv.youtubeId === dv.youtubeId || cv.id === dv.id))
-  ];
-
-  return merged.filter(v => !deletedIds.includes(v.id) && v.youtubeId !== "dQw4w9WgXcQ");
+  return defaultVideos;
 }
 
 async function loadAllTrackCounts() {
@@ -895,12 +859,34 @@ function handleHeaderAddAction() {
   }
 }
 
-function renderNuansaVideosInAdmin() {
+async function renderNuansaVideosInAdmin() {
   const container = document.getElementById("admin-modules-list");
   const countBadge = document.getElementById("track-items-count-badge");
   if (!container) return;
 
-  const videoList = getNuansaVideosList();
+  // Indikator memuat data cloud
+  if (!window.ARUTALA_CACHED_VIDEOS || window.ARUTALA_CACHED_VIDEOS.length === 0) {
+    container.innerHTML = `
+      <div style="padding: 40px 20px; text-align: center; color: #64748B;">
+        <div style="font-size: 1.5rem; margin-bottom: 8px;">⏳</div>
+        <p style="font-size: 0.9rem; font-weight: 600;">Menghubungkan & memuat video dari Cloud Database...</p>
+      </div>
+    `;
+  }
+
+  let videoList = [];
+  if (window.ArutalaDB && typeof window.ArutalaDB.fetchNuansaVideos === "function") {
+    try {
+      videoList = await window.ArutalaDB.fetchNuansaVideos();
+      window.ARUTALA_CACHED_VIDEOS = videoList;
+    } catch (e) {
+      videoList = getNuansaVideosList();
+    }
+  } else {
+    videoList = getNuansaVideosList();
+  }
+  window.ARUTALA_CACHED_VIDEOS = videoList;
+
   if (countBadge) countBadge.textContent = `${videoList.length} Video Tayang`;
 
   const videoBadge = document.getElementById("badge-count-nuansa-video");
@@ -948,6 +934,7 @@ function renderNuansaVideosInAdmin() {
                 Kanal: <strong style="color: #334155;">${escapeHtml(vid.channel || 'Inisiator Pemuda')}</strong>
               </span>
               <span style="font-size: 0.72rem; color: #94A3B8;">| ID: <code>${escapeHtml(vid.youtubeId)}</code></span>
+              ${vid.isFromCloud ? '<span style="font-size: 0.68rem; font-weight: 700; background: #ECFDF5; color: #059669; padding: 1px 6px; border-radius: 3px;">Cloud Sync</span>' : ''}
             </div>
 
             <h4 style="font-size: 1rem; font-weight: 700; color: #0F172A; margin: 0 0 6px; line-height: 1.35;">
@@ -991,7 +978,9 @@ function openCreateNuansaVideoModal(id = null) {
   if (previewBox) previewBox.style.display = "none";
 
   if (id) {
-    const list = getNuansaVideosList();
+    const list = (Array.isArray(window.ARUTALA_CACHED_VIDEOS) && window.ARUTALA_CACHED_VIDEOS.length > 0)
+      ? window.ARUTALA_CACHED_VIDEOS
+      : getNuansaVideosList();
     const item = list.find(v => String(v.id) === String(id));
     if (item) {
       if (titleEl) titleEl.textContent = "Edit Video Edukasi NUANSA";
@@ -1010,7 +999,7 @@ function openCreateNuansaVideoModal(id = null) {
     }
   } else {
     if (titleEl) titleEl.textContent = "Upload Video YouTube ke Pojok NUANSA";
-    if (subEl) subEl.textContent = "Konten video ini akan langsung tampil di etalase Pojok Video NUANSA (bagian bawah nuansa.html).";
+    if (subEl) subEl.textContent = "Konten video ini akan langsung tersimpan di Cloud Database Supabase & tampil di semua browser!";
     document.getElementById("field-nuansa-video-id").value = "";
   }
 
@@ -1026,7 +1015,7 @@ function closeNuansaVideoModal() {
   if (previewBox) previewBox.style.display = "none";
 }
 
-function handleSaveNuansaVideo(e) {
+async function handleSaveNuansaVideo(e) {
   e.preventDefault();
   const idField = document.getElementById("field-nuansa-video-id").value;
   const urlVal = document.getElementById("field-nuansa-video-url").value.trim();
@@ -1052,15 +1041,14 @@ function handleSaveNuansaVideo(e) {
     return;
   }
 
-  let customVideos = [];
-  try {
-    customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
-  } catch (err) {
-    customVideos = [];
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Menyimpan ke Cloud...";
   }
 
   const videoObj = {
-    id: idField || ("vid-" + Date.now()),
+    id: idField || null,
     youtubeId: ytId,
     title: titleVal,
     channel: channelVal,
@@ -1071,54 +1059,64 @@ function handleSaveNuansaVideo(e) {
     videoUrl: `https://www.youtube.com/embed/${ytId}`
   };
 
-  if (idField) {
-    // Mode edit
-    const idx = customVideos.findIndex(v => String(v.id) === String(idField));
-    if (idx !== -1) {
-      customVideos[idx] = videoObj;
-    } else {
-      customVideos.unshift(videoObj);
+  // Simpan ke Supabase Cloud
+  if (window.ArutalaDB && typeof window.ArutalaDB.saveNuansaVideo === "function") {
+    try {
+      await window.ArutalaDB.saveNuansaVideo(videoObj);
+    } catch (err) {
+      console.warn("Gagal simpan video ke Supabase Cloud:", err);
     }
   } else {
-    // Mode baru
-    customVideos.unshift(videoObj);
+    // Fallback lokal jika database offline
+    let customVideos = [];
+    try {
+      customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+    } catch (err) {
+      customVideos = [];
+    }
+    if (idField) {
+      const idx = customVideos.findIndex(v => String(v.id) === String(idField));
+      if (idx !== -1) customVideos[idx] = videoObj;
+      else customVideos.unshift(videoObj);
+    } else {
+      videoObj.id = "vid-" + Date.now();
+      customVideos.unshift(videoObj);
+    }
+    localStorage.setItem("arutala_custom_videos", JSON.stringify(customVideos));
   }
 
-  localStorage.setItem("arutala_custom_videos", JSON.stringify(customVideos));
-
-  // Sync window memory jika ada
-  if (window.ARUTALA_DATA && Array.isArray(window.ARUTALA_DATA.videos)) {
-    window.ARUTALA_DATA.videos.unshift(videoObj);
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Simpan Video";
   }
 
   closeNuansaVideoModal();
-  showToast("Video edukasi berhasil disimpan & ditayangkan di Pojok NUANSA!", "success");
-  renderNuansaVideosInAdmin();
+  showToast("Video edukasi berhasil disimpan ke Cloud Database & disinkronkan!", "success");
+  await renderNuansaVideosInAdmin();
 }
 
-function handleDeleteNuansaVideo(id, encodedTitle) {
+async function handleDeleteNuansaVideo(id, encodedTitle) {
   const title = decodeURIComponent(encodedTitle || "Video");
   if (!confirm(`Apakah Anda yakin ingin menghapus video "${title}" dari Pojok NUANSA?`)) {
     return;
   }
 
-  try {
-    let customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
-    customVideos = customVideos.filter(v => String(v.id) !== String(id));
-    localStorage.setItem("arutala_custom_videos", JSON.stringify(customVideos));
-  } catch (e) {}
-
-  // Catat ID yang dihapus agar default video juga tersembunyi jika dihapus
-  try {
-    const deleted = JSON.parse(localStorage.getItem("arutala_deleted_videos") || "[]");
-    if (!deleted.includes(id)) {
-      deleted.push(id);
-      localStorage.setItem("arutala_deleted_videos", JSON.stringify(deleted));
+  if (window.ArutalaDB && typeof window.ArutalaDB.deleteNuansaVideo === "function") {
+    try {
+      await window.ArutalaDB.deleteNuansaVideo(id);
+    } catch (err) {
+      console.warn("Gagal hapus video dari Supabase:", err);
     }
-  } catch (e) {}
+  } else {
+    try {
+      let customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+      customVideos = customVideos.filter(v => String(v.id) !== String(id));
+      localStorage.setItem("arutala_custom_videos", JSON.stringify(customVideos));
+    } catch (e) {}
+  }
 
-  showToast("Video berhasil dihapus dari Pojok NUANSA.", "normal");
-  renderNuansaVideosInAdmin();
+  showToast("Video berhasil dihapus dari Database Cloud & Pojok NUANSA.", "normal");
+  await renderNuansaVideosInAdmin();
 }
 
 function openAdminVideoPlayer(url, encodedTitle) {

@@ -1334,24 +1334,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalVideoTitle = document.getElementById("modal-video-title");
   const modalVideoDesc = document.getElementById("modal-video-desc");
 
-  function renderVideos() {
+  async function renderVideos() {
     if (!videosContainer) return;
-    videosContainer.innerHTML = "";
 
-    const customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
-    let deletedIds = [];
-    try {
-      deletedIds = JSON.parse(localStorage.getItem("arutala_deleted_videos") || "[]");
-    } catch (e) {
-      deletedIds = [];
+    let allVideos = [];
+    if (window.ArutalaDB && typeof window.ArutalaDB.fetchNuansaVideos === "function") {
+      try {
+        allVideos = await window.ArutalaDB.fetchNuansaVideos();
+      } catch (e) {}
     }
-    const currentVideos = AppState.videos || (window.ARUTALA_DATA && window.ARUTALA_DATA.videos) || [];
 
-    const allVideos = [
-      ...customVideos,
-      ...currentVideos.filter(cv => !customVideos.some(uv => uv.youtubeId === cv.youtubeId || uv.id === cv.id))
-    ].filter(v => !deletedIds.includes(String(v.id)) && v.youtubeId !== "dQw4w9WgXcQ");
+    if (!allVideos || allVideos.length === 0) {
+      const customVideos = JSON.parse(localStorage.getItem("arutala_custom_videos") || "[]");
+      let deletedIds = [];
+      try {
+        deletedIds = JSON.parse(localStorage.getItem("arutala_deleted_videos") || "[]");
+      } catch (e) {
+        deletedIds = [];
+      }
+      const currentVideos = AppState.videos || (window.ARUTALA_DATA && window.ARUTALA_DATA.videos) || [];
 
+      allVideos = [
+        ...customVideos,
+        ...currentVideos.filter(cv => !customVideos.some(uv => uv.youtubeId === cv.youtubeId || uv.id === cv.id))
+      ].filter(v => !deletedIds.includes(String(v.id)) && v.youtubeId !== "dQw4w9WgXcQ");
+    }
+
+    videosContainer.innerHTML = "";
     allVideos.forEach(vid => {
       const card = document.createElement("div");
       card.className = "video-card reveal";
