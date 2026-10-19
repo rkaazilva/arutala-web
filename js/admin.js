@@ -112,6 +112,23 @@ function getNuansaVideosList() {
 }
 
 async function loadAllTrackCounts() {
+  // Sync Video NUANSA dari Cloud jika belum
+  if (!window.ARUTALA_CACHED_VIDEOS && window.ArutalaDB && typeof window.ArutalaDB.fetchNuansaVideos === "function") {
+    try {
+      window.ARUTALA_CACHED_VIDEOS = await window.ArutalaDB.fetchNuansaVideos();
+    } catch (e) {}
+  }
+
+  // Sync Artikel dari Cloud jika belum
+  if (!window.ARUTALA_CLOUD_ARTICLES && window.ArutalaDB && typeof window.ArutalaDB.fetchArticles === "function") {
+    try {
+      window.ARUTALA_CLOUD_ARTICLES = await window.ArutalaDB.fetchArticles();
+    } catch (e) {}
+  }
+  if (typeof refreshAdminArticlesCache === "function") {
+    refreshAdminArticlesCache();
+  }
+
   // Count untuk Video NUANSA
   const videoList = getNuansaVideosList();
   const videoBadge = document.getElementById("badge-count-nuansa-video");
@@ -180,7 +197,7 @@ async function switchTrack(track, shouldPushState = true) {
     if (btnCardAddText) btnCardAddText.textContent = "+ Tambah Artikel";
     if (btnReset) btnReset.style.display = "none";
 
-    renderArticlesInAdmin();
+    await renderArticlesInAdmin();
     return;
   }
 
@@ -1175,7 +1192,7 @@ function setupAdminVideoUrlListener() {
 // 9. KHUSUS ADMIN: MANAJEMEN ARTIKEL, NASKAH LITERASI & FOTO SAMPUL
 // ----------------------------------------------------------------------------
 
-function getAdminArticlesList() {
+function refreshAdminArticlesCache() {
   let customArticles = [];
   try {
     customArticles = JSON.parse(localStorage.getItem("arutala_custom_articles") || "[]");
@@ -1190,17 +1207,38 @@ function getAdminArticlesList() {
     deletedIds = [];
   }
 
+  const cloudArticles = Array.isArray(window.ARUTALA_CLOUD_ARTICLES)
+    ? window.ARUTALA_CLOUD_ARTICLES
+    : [];
+
   const defaultArticles = (window.ARUTALA_DATA && Array.isArray(window.ARUTALA_DATA.articles))
     ? window.ARUTALA_DATA.articles
     : [];
 
-  // Gabungkan customArticles terlebih dahulu sehingga perubahan pada default article (misal art-1) langsung meng-override data default
+  // Urutan prioritas: customArticles (diedit admin lokal), cloudArticles (database Supabase), defaultArticles (statis)
   const merged = [
     ...customArticles,
-    ...defaultArticles.filter(da => !customArticles.some(ca => String(ca.id) === String(da.id) || (ca.title && da.title && ca.title.trim().toLowerCase() === da.title.trim().toLowerCase())))
+    ...cloudArticles,
+    ...defaultArticles
   ];
 
-  return merged.filter(art => !deletedIds.includes(String(art.id)));
+  const uniqueMap = new Map();
+  merged.forEach(item => {
+    const key = String(item.id || item.title).trim().toLowerCase();
+    if (!uniqueMap.has(key)) {
+      uniqueMap.set(key, item);
+    }
+  });
+
+  window.ARUTALA_CACHED_ARTICLES = Array.from(uniqueMap.values()).filter(art => !deletedIds.includes(String(art.id)));
+  return window.ARUTALA_CACHED_ARTICLES;
+}
+
+function getAdminArticlesList() {
+  if (Array.isArray(window.ARUTALA_CACHED_ARTICLES) && window.ARUTALA_CACHED_ARTICLES.length > 0) {
+    return window.ARUTALA_CACHED_ARTICLES;
+  }
+  return refreshAdminArticlesCache();
 }
 
 function getArticleCategoryBadgeStyle(category) {
@@ -1241,10 +1279,20 @@ function getArticleCategoryText(category) {
   }
 }
 
-function renderArticlesInAdmin() {
+async function renderArticlesInAdmin() {
   const container = document.getElementById("admin-modules-list");
   const countBadge = document.getElementById("track-items-count-badge");
   if (!container) return;
+
+  // Pastikan data artikel dari Cloud Supabase termuat
+  if (!window.ARUTALA_CLOUD_ARTICLES && window.ArutalaDB && typeof window.ArutalaDB.fetchArticles === "function") {
+    try {
+      window.ARUTALA_CLOUD_ARTICLES = await window.ArutalaDB.fetchArticles();
+    } catch (e) {
+      console.warn("Notice fetch cloud articles admin:", e);
+    }
+  }
+  refreshAdminArticlesCache();
 
   const allArticles = getAdminArticlesList();
   const articlesBadge = document.getElementById("badge-count-articles");
@@ -1336,6 +1384,7 @@ function renderArticlesInAdmin() {
               </span>
               ${art.authorRole ? `<span style="font-size: 0.72rem; color: #94A3B8;">(${escapeHtml(art.authorRole)})</span>` : ''}
               <span style="font-size: 0.72rem; color: #94A3B8;">| ${escapeHtml(art.readTime || '5 menit baca')}</span>
+              ${art.isFromCloud ? '<span style="font-size: 0.68rem; font-weight: 700; background: #ECFDF5; color: #059669; padding: 1px 6px; border-radius: 3px; border: 1px solid #A7F3D0;">Cloud Database</span>' : ''}
             </div>
 
             <h4 style="font-size: 1rem; font-weight: 700; color: #0F172A; margin: 0 0 6px; line-height: 1.35;">
@@ -1395,7 +1444,11 @@ function openAdminArticleModal(id = null) {
       document.getElementById("field-article-summary").value = item.summary || "";
 
       // Key points
-      const points = item.keyPoints || [];
+      const points = (item.keyPoints && item.keyPoints.length > 0) ? item.keyPoints : [
+        { title: "Gagasan Pokok Utama", desc: item.summary || "" },
+        { title: "Analisis Kritis & Konteks", desc: "Penguatan pemahaman etika dan kepemimpinan inklusif." },
+        { title: "Langkah Advokasi & Transformasi", desc: "Implementasi aksi nyata di komunitas dan masyarakat." }
+      ];
       document.getElementById("field-article-pt1-title").value = (points[0] && points[0].title) || "";
       document.getElementById("field-article-pt1-desc").value = (points[0] && points[0].desc) || "";
       document.getElementById("field-article-pt2-title").value = (points[1] && points[1].title) || "";
@@ -1403,7 +1456,7 @@ function openAdminArticleModal(id = null) {
       document.getElementById("field-article-pt3-title").value = (points[2] && points[2].title) || "";
       document.getElementById("field-article-pt3-desc").value = (points[2] && points[2].desc) || "";
 
-      document.getElementById("field-article-action").value = item.actionNote || "";
+      document.getElementById("field-article-action").value = item.actionNote || "Jadikan gagasan ini sebagai inspirasi langkah nyata di sekitarmu.";
 
       if (coverImg) {
         coverImg.src = item.coverImage || "img/pelatihan_fasilitator_auditorium.jpg";
@@ -1565,20 +1618,9 @@ async function handleSaveArticle(e) {
   // Sync Cloud Supabase jika tersedia
   if (window.ArutalaDB) {
     try {
+      const isNumericId = idField && Number.isInteger(Number(idField)) && Number(idField) > 0;
       if (idField && typeof window.ArutalaDB.updateArticle === "function") {
-        await window.ArutalaDB.updateArticle(articleId, {
-          title: articleObj.title,
-          category: articleObj.category,
-          author: articleObj.author,
-          role: articleObj.authorRole,
-          read_time: articleObj.readTime,
-          image: articleObj.coverImage,
-          doc_url: articleObj.docUrl,
-          quote: articleObj.quoteHighlight,
-          summary: articleObj.summary
-        });
-      } else if (!idField && typeof window.ArutalaDB.insertArticle === "function") {
-        await window.ArutalaDB.insertArticle({
+        await window.ArutalaDB.updateArticle(isNumericId ? Number(idField) : idField, {
           title: articleObj.title,
           category: articleObj.category,
           author: articleObj.author,
@@ -1590,19 +1632,43 @@ async function handleSaveArticle(e) {
           summary: articleObj.summary,
           content: `<p>${summary}</p>`
         });
+      } else if (!idField && typeof window.ArutalaDB.insertArticle === "function") {
+        const res = await window.ArutalaDB.insertArticle({
+          title: articleObj.title,
+          category: articleObj.category,
+          author: articleObj.author,
+          role: articleObj.authorRole,
+          read_time: articleObj.readTime,
+          image: articleObj.coverImage,
+          doc_url: articleObj.docUrl,
+          quote: articleObj.quoteHighlight,
+          summary: articleObj.summary,
+          content: `<p>${summary}</p>`
+        });
+        if (res && res.id) {
+          articleObj.id = res.id;
+        }
       }
     } catch (errDb) {
       console.warn("Notice save article Supabase:", errDb);
     }
   }
 
+  // Refresh cache artikel cloud agar sinkron seketika
+  if (window.ArutalaDB && typeof window.ArutalaDB.fetchArticles === "function") {
+    try {
+      window.ARUTALA_CLOUD_ARTICLES = await window.ArutalaDB.fetchArticles();
+    } catch (e) {}
+  }
+  refreshAdminArticlesCache();
+
   closeAdminArticleModal();
-  showToast("Artikel dan foto sampul berhasil disimpan!", "success");
-  renderArticlesInAdmin();
-  loadAllTrackCounts();
+  showToast("Artikel dan foto sampul berhasil disimpan ke Cloud Database!", "success");
+  await renderArticlesInAdmin();
+  await loadAllTrackCounts();
 }
 
-function handleDeleteArticle(id, encodedTitle) {
+async function handleDeleteArticle(id, encodedTitle) {
   const title = decodeURIComponent(encodedTitle || "Artikel");
   if (!confirm(`Apakah Anda yakin ingin menghapus artikel "${title}"?\nNaskah ini akan dihapus dari portal bacaan publik.`)) {
     return;
@@ -1624,16 +1690,25 @@ function handleDeleteArticle(id, encodedTitle) {
     }
   } catch (e) {}
 
-  // 3. Hapus dari Supabase jika ada
+  // 3. Hapus dari Supabase jika ada (terutama jika id berupa angka seperti id: 2)
   if (window.ArutalaDB && typeof window.ArutalaDB.deleteArticle === "function") {
     try {
-      window.ArutalaDB.deleteArticle(id);
-    } catch (e) {}
+      const isNum = Number.isInteger(Number(id)) && Number(id) > 0;
+      await window.ArutalaDB.deleteArticle(isNum ? Number(id) : id);
+    } catch (e) {
+      console.warn("Delete article cloud warning:", e);
+    }
   }
 
-  showToast("Artikel berhasil dihapus dari pustaka.", "normal");
-  renderArticlesInAdmin();
-  loadAllTrackCounts();
+  // 4. Update memory cache
+  if (Array.isArray(window.ARUTALA_CLOUD_ARTICLES)) {
+    window.ARUTALA_CLOUD_ARTICLES = window.ARUTALA_CLOUD_ARTICLES.filter(a => String(a.id) !== String(id));
+  }
+  refreshAdminArticlesCache();
+
+  showToast("Artikel berhasil dihapus dari Cloud Database & Pustaka.", "normal");
+  await renderArticlesInAdmin();
+  await loadAllTrackCounts();
 }
 
 function filterAdminArticlesCategory(category) {
