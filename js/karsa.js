@@ -103,7 +103,45 @@ async function initKarsaPortfolio() {
     }
   }
 
-  // 3. Ambil video custom yang diunggah pengguna dari localStorage
+  // 3. Ambil video dari Cloud Database Supabase (termasuk yang disinkronkan di Admin & Nuansa)
+  let cloudVideos = [];
+  if (window.ArutalaDB && typeof window.ArutalaDB.fetchNuansaVideos === "function") {
+    try {
+      const fetchedVids = await window.ArutalaDB.fetchNuansaVideos();
+      if (Array.isArray(fetchedVids) && fetchedVids.length > 0) {
+        cloudVideos = fetchedVids.map(v => {
+          const catStr = (v.category || "bersuara").toLowerCase();
+          let karsaCat = "bersuara";
+          if (catStr.includes("pandai") || catStr.includes("moderasi")) karsaCat = "pandai";
+          else if (catStr.includes("cerdas") || catStr.includes("budaya") || catStr.includes("inklusif")) karsaCat = "cerdas";
+          else if (catStr.includes("berdaya") || catStr.includes("sosial") || catStr.includes("toleransi")) karsaCat = "berdaya";
+
+          return {
+            id: v.id,
+            type: "video",
+            title: v.title,
+            category: karsaCat,
+            categoryLabel: v.category || getKarsaCategoryLabel(karsaCat),
+            author: v.channel || "Kreator Pemuda ARUTALA",
+            authorRole: v.duration || "Video Edukasi",
+            date: "Oktober 2026",
+            readTime: v.duration || "Video Kreatif",
+            thumbnail: v.thumbnail || `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`,
+            coverImage: v.thumbnail || `https://img.youtube.com/vi/${v.youtubeId}/hqdefault.jpg`,
+            videoUrl: v.videoUrl || `https://www.youtube.com/embed/${v.youtubeId}`,
+            youtubeId: v.youtubeId,
+            summary: v.takeaways || "",
+            content: `<p>${v.takeaways || ""}</p>`,
+            isFromCloud: true
+          };
+        });
+      }
+    } catch (err) {
+      console.warn("Gagal memuat video dari Supabase untuk KARSA:", err);
+    }
+  }
+
+  // 4. Ambil video custom lokal yang diunggah pengguna dari localStorage
   let customVideos = [];
   try {
     const savedVids = localStorage.getItem("arutala_karsa_custom_videos");
@@ -114,16 +152,27 @@ async function initKarsaPortfolio() {
     customVideos = [];
   }
 
-  // 4. Gabungkan seluruh karya (Video + Artikel)
+  // 5. Gabungkan artikel
   const combinedArticles = [
     ...cloudArticles,
     ...localArticles.filter(loc => !cloudArticles.some(c => String(c.id) === String(loc.id) || c.title === loc.title))
   ];
 
-  const allVideos = [
+  // Gabungkan video: Cloud Supabase (prioritas 1), Custom Lokal (prioritas 2), Default KARSA (fallback)
+  const mergedVideos = [
+    ...cloudVideos,
     ...customVideos,
-    ...DEFAULT_KARSA_VIDEOS.filter(dv => !customVideos.some(cv => String(cv.id) === String(dv.id)))
+    ...DEFAULT_KARSA_VIDEOS
   ];
+
+  const uniqueVideoMap = new Map();
+  mergedVideos.forEach(v => {
+    const key = String(v.youtubeId || v.id || v.title).trim();
+    if (!uniqueVideoMap.has(key)) {
+      uniqueVideoMap.set(key, v);
+    }
+  });
+  const allVideos = Array.from(uniqueVideoMap.values());
 
   // Susun urutan karya terpadu (video & artikel)
   KARSA_STATE.articles = [
@@ -575,7 +624,7 @@ function setupKarsaModals() {
   // 3. FORM VIDEO KREATIF SUBMIT
   const formVideo = document.getElementById("form-submit-video");
   if (formVideo) {
-    formVideo.addEventListener("submit", (e) => {
+    formVideo.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const title = document.getElementById("video-title-input").value.trim();
@@ -599,7 +648,7 @@ function setupKarsaModals() {
 
       const originalBtnText = submitBtn.innerHTML;
       submitBtn.disabled = true;
-      submitBtn.innerHTML = "Menyimpan Video...";
+      submitBtn.innerHTML = "Menyimpan ke Cloud Database...";
 
       const newVideo = {
         id: "karsa-vid-" + Date.now(),
@@ -616,10 +665,33 @@ function setupKarsaModals() {
         videoUrl: `https://www.youtube.com/embed/${ytId}`,
         youtubeId: ytId,
         summary: desc,
-        content: `<p>${desc.replace(/\n/g, "<br>")}</p>`
+        content: `<p>${desc.replace(/\n/g, "<br>")}</p>`,
+        isFromCloud: true
       };
 
-      // Simpan ke localStorage agar video tetap ada saat reload
+      // 1. Simpan ke Supabase Cloud agar tersinkron di semua halaman (KARSA, NUANSA, Landing Page, dan Admin)
+      if (window.ArutalaDB && typeof window.ArutalaDB.saveNuansaVideo === "function") {
+        try {
+          const savedCloud = await window.ArutalaDB.saveNuansaVideo({
+            id: null,
+            youtubeId: ytId,
+            title: title,
+            channel: author,
+            duration: "Video Kreatif",
+            thumbnail: `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`,
+            takeaways: desc,
+            category: getKarsaCategoryLabel(cat),
+            videoUrl: `https://www.youtube.com/embed/${ytId}`
+          });
+          if (savedCloud && savedCloud.id) {
+            newVideo.id = savedCloud.id;
+          }
+        } catch (errDb) {
+          console.warn("Notice save video cloud KARSA:", errDb);
+        }
+      }
+
+      // 2. Simpan ke localStorage agar video tetap ada saat reload / offline
       try {
         const saved = JSON.parse(localStorage.getItem("arutala_karsa_custom_videos") || "[]");
         saved.unshift(newVideo);
@@ -628,15 +700,14 @@ function setupKarsaModals() {
         console.warn("Gagal simpan video ke localStorage:", err);
       }
 
-      // Tambahkan ke state & render
-      KARSA_STATE.articles.unshift(newVideo);
-      renderKarsaPortfolio();
+      // 3. Muat ulang dan render portfolio
+      await initKarsaPortfolio();
 
       formVideo.reset();
       if (ytPreviewBox) ytPreviewBox.style.display = "none";
       closeSubmitArticleModal();
 
-      alert("Selamat! Video kreatif kamu berhasil dipublikasikan di Etalase KARSA!\nPengunjung kini dapat menonton videomu langsung di website.");
+      alert("Selamat! Video kreatif kamu berhasil dipublikasikan di Etalase KARSA & Cloud Database!\nPengunjung kini dapat menonton videomu langsung di semua halaman.");
 
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalBtnText;
