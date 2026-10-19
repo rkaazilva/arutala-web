@@ -19,7 +19,8 @@
   <!-- Google Fonts: Plus Jakarta Sans (Clean Modern Editorial) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css?v=5.3">
@@ -44,7 +45,8 @@
     <div class="uss-header-top">
       <div class="uss-header-top-container">
         <!-- Kiri: Hamburger Menu Icon -->
-        <button type="button" class="uss-icon-btn" id="btn-uss-menu-toggle" aria-label="Buka Menu Navigasi" title="Menu Navigasi">
+        <button type="button" class="uss-icon-btn" id="btn-uss-menu-toggle" aria-label="Buka Menu Navigasi"
+          title="Menu Navigasi">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="22" height="22">
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -60,7 +62,8 @@
         </a>
 
         <!-- Kanan: Search Icon -->
-        <button type="button" class="uss-icon-btn" id="btn-uss-search-toggle" aria-label="Cari Artikel" title="Pencarian">
+        <button type="button" class="uss-icon-btn" id="btn-uss-search-toggle" aria-label="Cari Artikel"
+          title="Pencarian">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -71,12 +74,15 @@
       <!-- Quick Search Bar (Toggled by Search Icon) -->
       <div class="uss-search-bar-wrap" id="uss-header-search-bar" style="display: none;">
         <div class="uss-search-bar-inner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18" class="search-input-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18"
+            class="search-input-icon">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-          <input type="text" id="uss-top-search-input" placeholder="Cari artikel, topik moderasi, gender, atau isu pemuda..." autocomplete="off">
-          <button type="button" class="uss-search-close-btn" id="btn-uss-search-close" aria-label="Tutup Pencarian">&times;</button>
+          <input type="text" id="uss-top-search-input"
+            placeholder="Cari artikel, topik moderasi, gender, atau isu pemuda..." autocomplete="off">
+          <button type="button" class="uss-search-close-btn" id="btn-uss-search-close"
+            aria-label="Tutup Pencarian">&times;</button>
         </div>
       </div>
     </div>
@@ -89,9 +95,11 @@
 
           <!-- DROPDOWN ARTIKEL (Navigasi Pindah Halaman ke Portal Artikel) -->
           <li class="uss-nav-dropdown" id="dropdown-artikel-wrapper">
-            <a href="artikel.html" class="uss-nav-item uss-dropdown-btn" id="btn-nav-dropdown-artikel" aria-haspopup="true" aria-expanded="false" style="text-decoration: none;">
+            <a href="artikel.html" class="uss-nav-item uss-dropdown-btn" id="btn-nav-dropdown-artikel"
+              aria-haspopup="true" aria-expanded="false" style="text-decoration: none;">
               <span>ARTIKEL &amp; JURNAL</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12" class="dropdown-arrow-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"
+                class="dropdown-arrow-icon">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
             </a>
@@ -133,7 +141,8 @@
   <aside class="uss-side-drawer" id="uss-side-drawer" aria-label="Menu Samping">
     <div class="uss-drawer-header">
       <div class="uss-drawer-brand">
-        <span style="font-family: var(--font-heading); font-weight: 900; font-size: 1.3rem; color: #0F172A;">ARUTALA</span>
+        <span
+          style="font-family: var(--font-heading); font-weight: 900; font-size: 1.3rem; color: #0F172A;">ARUTALA</span>
       </div>
       <button type="button" class="uss-drawer-close" id="btn-uss-drawer-close" aria-label="Tutup Menu">&times;</button>
     </div>
@@ -144,10 +153,12 @@
           <span class="drawer-group-label">ARTIKEL &amp; JURNAL</span>
           <div class="drawer-sublinks">
             <a href="artikel.html" onclick="closeUssDrawer();" class="drawer-sublink">Semua Tulisan</a>
-            <a href="artikel.html?category=pandai" onclick="closeUssDrawer();" class="drawer-sublink">MODERASI BERAGAMA</a>
+            <a href="artikel.html?category=pandai" onclick="closeUssDrawer();" class="drawer-sublink">MODERASI
+              BERAGAMA</a>
             <a href="artikel.html?category=bersuara" onclick="closeUssDrawer();" class="drawer-sublink">KESETARAAN</a>
             <a href="artikel.html?category=cerdas" onclick="closeUssDrawer();" class="drawer-sublink">BUDAYA</a>
-            <a href="artikel.html?category=berdaya" onclick="closeUssDrawer();" class="drawer-sublink">SOSIAL MASYARAKAT</a>
+            <a href="artikel.html?category=berdaya" onclick="closeUssDrawer();" class="drawer-sublink">SOSIAL
+              MASYARAKAT</a>
           </div>
         </li>
         <li><a href="karsa.html" class="drawer-link" onclick="closeUssDrawer()">KARSA</a></li>
@@ -156,10 +167,14 @@
         <li><a href="aksara.html" class="drawer-link" onclick="closeUssDrawer()">AKSARA</a></li>
       </ul>
       <div class="uss-drawer-ctas">
-        <button type="button" class="btn btn-primary" style="width: 100%; margin-bottom: 10px; background: #2F4F87; color: #FFFFFF;" onclick="openCircleRegistrationModal('mentee', event); closeUssDrawer();">
+        <button type="button" class="btn btn-primary"
+          style="width: 100%; margin-bottom: 10px; background: #2F4F87; color: #FFFFFF;"
+          onclick="openCircleRegistrationModal('mentee', event); closeUssDrawer();">
           Gabung Circle
         </button>
-        <button type="button" class="btn btn-outline" style="width: 100%; border: 1.5px solid #0F172A; background: #FFFFFF; color: #0F172A;" onclick="openSubmitArticleModal(event); closeUssDrawer();">
+        <button type="button" class="btn btn-outline"
+          style="width: 100%; border: 1.5px solid #0F172A; background: #FFFFFF; color: #0F172A;"
+          onclick="openSubmitArticleModal(event); closeUssDrawer();">
           + Upload Tulisan
         </button>
       </div>
@@ -168,16 +183,29 @@
       <div class="uss-drawer-social">
         <span class="uss-drawer-social-label">Kanal Resmi ARUTALA:</span>
         <div class="uss-drawer-social-links">
-          <a href="https://www.instagram.com/arutalaproject.id" target="_blank" rel="noopener noreferrer" class="uss-drawer-social-btn" title="Instagram Resmi @arutalaproject.id">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          <a href="https://www.instagram.com/arutalaproject.id" target="_blank" rel="noopener noreferrer"
+            class="uss-drawer-social-btn" title="Instagram Resmi @arutalaproject.id">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
             <span>Instagram</span>
           </a>
-          <a href="https://www.tiktok.com/@arutalaproject.id" target="_blank" rel="noopener noreferrer" class="uss-drawer-social-btn" title="TikTok Resmi @arutalaproject.id">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298 0 .592.046.87.136V9.42a6.32 6.32 0 0 0-.87-.06A6.33 6.33 0 0 0 3 15.69a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.62v-3.5a4.85 4.85 0 0 1-1-.51z"/></svg>
+          <a href="https://www.tiktok.com/@arutalaproject.id" target="_blank" rel="noopener noreferrer"
+            class="uss-drawer-social-btn" title="TikTok Resmi @arutalaproject.id">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+              <path
+                d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298 0 .592.046.87.136V9.42a6.32 6.32 0 0 0-.87-.06A6.33 6.33 0 0 0 3 15.69a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.62v-3.5a4.85 4.85 0 0 1-1-.51z" />
+            </svg>
             <span>TikTok</span>
           </a>
-          <a href="https://youtube.com/@arutalaprojectt?si=-nFBByN6sUsvvXWY" target="_blank" rel="noopener noreferrer" class="uss-drawer-social-btn" title="YouTube Resmi Arutala Project">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <a href="https://youtube.com/@arutalaprojectt?si=-nFBByN6sUsvvXWY" target="_blank" rel="noopener noreferrer"
+            class="uss-drawer-social-btn" title="YouTube Resmi Arutala Project">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+            </svg>
             <span>YouTube</span>
           </a>
         </div>
@@ -251,19 +279,26 @@
             </defs>
 
             <!-- Gelombang Navy Kanan Atas (Swoosh Besar Miring Kanan) -->
-            <path d="M 520,0 C 760,120 1060,280 1440,380 L 1440,0 Z" fill="url(#heroWaveNavyGrad)" filter="url(#heroRibbonShadow)" />
+            <path d="M 520,0 C 760,120 1060,280 1440,380 L 1440,0 Z" fill="url(#heroWaveNavyGrad)"
+              filter="url(#heroRibbonShadow)" />
 
             <!-- Pita Melengkung Dinamis Sky Blue (Menjalar Miring Melintasi Tengah) -->
-            <path d="M 180,0 C 360,160 620,340 940,320 C 1140,300 1320,440 1440,510 L 1440,430 C 1320,360 1140,240 940,260 C 620,280 360,90 180,0 Z" fill="url(#heroWaveSkyGrad)" filter="url(#heroRibbonShadow)" />
+            <path
+              d="M 180,0 C 360,160 620,340 940,320 C 1140,300 1320,440 1440,510 L 1440,430 C 1320,360 1140,240 940,260 C 620,280 360,90 180,0 Z"
+              fill="url(#heroWaveSkyGrad)" filter="url(#heroRibbonShadow)" />
 
             <!-- Aksen Tajam Pita Pink (Swoosh Tajam Khas Brand ARUTALA) -->
-            <path d="M 880,280 C 1040,340 1240,470 1440,570 L 1440,540 C 1240,440 1040,310 880,280 Z" fill="url(#heroWavePinkGrad)" filter="url(#heroRibbonShadow)" />
+            <path d="M 880,280 C 1040,340 1240,470 1440,570 L 1440,540 C 1240,440 1040,310 880,280 Z"
+              fill="url(#heroWavePinkGrad)" filter="url(#heroRibbonShadow)" />
 
             <!-- Pita Melengkung Fresh Green di Bawah (Khas Palet Moderasi Beragama) -->
-            <path d="M 0,360 C 260,500 560,570 880,520 C 1120,480 1300,540 1440,630 L 1440,570 C 1300,490 1120,420 880,470 C 560,520 260,440 0,300 Z" fill="url(#heroWaveGreenGrad)" filter="url(#heroRibbonShadow)" />
+            <path
+              d="M 0,360 C 260,500 560,570 880,520 C 1120,480 1300,540 1440,630 L 1440,570 C 1300,490 1120,420 880,470 C 560,520 260,440 0,300 Z"
+              fill="url(#heroWaveGreenGrad)" filter="url(#heroRibbonShadow)" />
 
             <!-- Aksen Lengkung Sky Blue di Kiri Bawah -->
-            <path d="M 0,70 C 120,210 280,380 460,450 C 280,400 120,250 0,140 Z" fill="url(#heroWaveSkyGrad)" filter="url(#heroRibbonShadow)" />
+            <path d="M 0,70 C 120,210 280,380 460,450 C 280,400 120,250 0,140 Z" fill="url(#heroWaveSkyGrad)"
+              filter="url(#heroRibbonShadow)" />
           </svg>
         </div>
 
@@ -283,22 +318,28 @@
 
           <!-- Headline Utama -->
           <h1 class="hero-main-title">
-            Membangun Ekosistem Pemuda yang <br>
-            Agamis, Setara, dan Berkeadilan Sosial
+            Akses Ruang Tumbuh yang Agamis, Setara, dan Adil
           </h1>
 
           <!-- Lead Paragraph Narasi ARUTALA -->
           <p class="hero-main-lead">
-            <strong>ARUTALA</strong> (Akses Ruang Tumbuh yang Agamis, Setara, dan Adil) merupakan model inovasi pengembangan kapasitas pemuda berbasis nilai keagamaan dan kesetaraan gender. Ekosistem ini mengintegrasikan 4 pilar pemberdayaan untuk menghubungkan kesadaran moral keagamaan dengan aksi nyata di tengah masyarakat.
+            <strong>Arutala</strong> merupakan model inovasi pengembangan kapasitas pemuda berbasis nilai keagamaan dan
+            kesetaraan gender.
+            Ekosistem ini mengintegrasikan 4 pilar pemberdayaan untuk menghubungkan kesadaran moral keagamaan dengan
+            aksi nyata di tengah masyarakat.
           </p>
 
           <!-- Tombol CTA Interaktif -->
           <div class="hero-main-actions">
-            <a href="#pilar-arutala" class="btn-hero-vibrant-glow" onclick="document.getElementById('pilar-arutala').scrollIntoView({behavior: 'smooth'}); return false;">
+            <a href="#pilar-arutala" class="btn-hero-vibrant-glow"
+              onclick="document.getElementById('pilar-arutala').scrollIntoView({behavior: 'smooth'}); return false;">
               <span>Jelajahi 4 Pilar Utama &darr;</span>
             </a>
             <a href="artikel.html" class="btn-hero-glass">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
               <span>Artikel &amp; Jurnal Pemuda &rarr;</span>
             </a>
           </div>
@@ -309,7 +350,7 @@
               <span class="hero-pillars-kicker">
                 4 PILAR PEMBERDAYAAN ARUTALA
               </span>
-              <p class="hero-pillars-sub">Pilih pilar untuk menjelajahi modul skill, kajian nilai, mentoring, atau aksi nyata &darr;</p>
+              <p class="hero-pillars-sub">Pilih pilar &darr;</p>
             </div>
 
             <div class="hero-pillars-cards-grid">
@@ -321,7 +362,8 @@
                 </div>
                 <div class="pillar-glass-top">
                   <div class="pillar-icon-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <circle cx="12" cy="12" r="10"></circle>
                       <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                     </svg>
@@ -330,12 +372,16 @@
                 <div class="pillar-glass-body">
                   <h3 class="pillar-glass-title">KARSA</h3>
                   <div class="pillar-glass-role">Ruang Pengembangan Diri</div>
-                  <p class="pillar-glass-desc">Arti <em>Karsa</em>: kehendak, niat &amp; daya cipta. Ruang belajar mandiri kecakapan hidup (*life skills*), asesmen interaktif, dan publikasi karya pemuda.</p>
+                  <p class="pillar-glass-desc">Arti <em>Karsa</em>: kehendak, niat &amp; daya cipta. Ruang belajar
+                    mandiri kecakapan hidup (*life skills*), asesmen interaktif, dan publikasi karya pemuda.</p>
                 </div>
                 <div class="pillar-glass-footer">
                   <div class="pillar-action-pill">
                     <span>Masuk ke Modul</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14" height="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14"
+                      height="14">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
                   </div>
                 </div>
               </a>
@@ -348,7 +394,8 @@
                 </div>
                 <div class="pillar-glass-top">
                   <div class="pillar-icon-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     </svg>
                   </div>
@@ -356,12 +403,16 @@
                 <div class="pillar-glass-body">
                   <h3 class="pillar-glass-title">NUANSA</h3>
                   <div class="pillar-glass-role">Ruang Kesadaran Sosial-Keagamaan</div>
-                  <p class="pillar-glass-desc">Arti <em>Nuansa</em>: kepekaan rasa &amp; harmoni nilai. Mengkaji 4 etika Islam berkeadilan (Al-'Adl, Ukhuwah, Rahmah, Maslahah) untuk merawat ruang aman.</p>
+                  <p class="pillar-glass-desc">Arti <em>Nuansa</em>: kepekaan rasa &amp; harmoni nilai. Mengkaji 4 etika
+                    Islam berkeadilan (Al-'Adl, Ukhuwah, Rahmah, Maslahah) untuk merawat ruang aman.</p>
                 </div>
                 <div class="pillar-glass-footer">
                   <div class="pillar-action-pill">
                     <span>Masuk ke Kajian</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14" height="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14"
+                      height="14">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
                   </div>
                 </div>
               </a>
@@ -374,7 +425,8 @@
                 </div>
                 <div class="pillar-glass-top">
                   <div class="pillar-icon-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                       <circle cx="9" cy="7" r="4"></circle>
                       <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -385,12 +437,16 @@
                 <div class="pillar-glass-body">
                   <h3 class="pillar-glass-title">TEMARA</h3>
                   <div class="pillar-glass-role">Ruang Tutor Sebaya</div>
-                  <p class="pillar-glass-desc">Arti <em>Temara</em>: lentera &amp; kawan bermakna. Pendampingan mentoring lingkaran sebaya (*ARUTALA Circle*) 5-8 orang dan panduan fasilitator.</p>
+                  <p class="pillar-glass-desc">Arti <em>Temara</em>: lentera &amp; kawan bermakna. Pendampingan
+                    mentoring lingkaran sebaya (*ARUTALA Circle*) 5-8 orang dan panduan fasilitator.</p>
                 </div>
                 <div class="pillar-glass-footer">
                   <div class="pillar-action-pill">
                     <span>Gabung Circle</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14" height="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14"
+                      height="14">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
                   </div>
                 </div>
               </a>
@@ -403,7 +459,8 @@
                 </div>
                 <div class="pillar-glass-top">
                   <div class="pillar-icon-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                      stroke-linejoin="round">
                       <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
                       <line x1="4" y1="22" x2="4" y2="15"></line>
                     </svg>
@@ -412,12 +469,16 @@
                 <div class="pillar-glass-body">
                   <h3 class="pillar-glass-title">AKSARA</h3>
                   <div class="pillar-glass-role">Ruang Aksi Nyata Lintas Keberagaman</div>
-                  <p class="pillar-glass-desc">Arti <em>Aksara</em>: jejak nyata &amp; wujud tindakan. Inisiasi proposal proyek sosial pemuda, donasi tanggap darurat bencana QRIS, dan kolaborasi aksi.</p>
+                  <p class="pillar-glass-desc">Arti <em>Aksara</em>: jejak nyata &amp; wujud tindakan. Inisiasi proposal
+                    proyek sosial pemuda, donasi tanggap darurat bencana QRIS, dan kolaborasi aksi.</p>
                 </div>
                 <div class="pillar-glass-footer">
                   <div class="pillar-action-pill">
                     <span>Inisiasi Aksi</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14" height="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="14"
+                      height="14">
+                      <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
                   </div>
                 </div>
               </a>
@@ -433,7 +494,12 @@
         <div class="hero-stat-block stat-block-navy">
           <div class="stat-block-inner">
             <div class="stat-icon-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <line x1="19" y1="8" x2="19" y2="14"></line>
+                <line x1="22" y1="11" x2="16" y2="11"></line>
+              </svg>
             </div>
             <div class="stat-info">
               <div class="stat-number-row">
@@ -449,7 +515,13 @@
         <div class="hero-stat-block stat-block-green">
           <div class="stat-block-inner">
             <div class="stat-icon-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
             </div>
             <div class="stat-info">
               <div class="stat-number-row">
@@ -465,7 +537,10 @@
         <div class="hero-stat-block stat-block-sky">
           <div class="stat-block-inner">
             <div class="stat-icon-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
             </div>
             <div class="stat-info">
               <div class="stat-number-row">
@@ -481,7 +556,10 @@
         <div class="hero-stat-block stat-block-pink">
           <div class="stat-block-inner">
             <div class="stat-icon-wrap">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
             </div>
             <div class="stat-info">
               <div class="stat-number-row">
@@ -506,17 +584,20 @@
         </div>
 
         <div class="cycle-carousel" id="cycle-carousel">
-          <button type="button" class="cycle-carousel-arrow prev" id="cycle-carousel-prev" aria-label="Siklus sebelumnya">
+          <button type="button" class="cycle-carousel-arrow prev" id="cycle-carousel-prev"
+            aria-label="Siklus sebelumnya">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="20" height="20">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
           </button>
 
-          <div class="cycle-carousel-track" id="cycle-carousel-track" tabindex="0" aria-label="Geser siklus transformasi pemuda">
+          <div class="cycle-carousel-track" id="cycle-carousel-track" tabindex="0"
+            aria-label="Geser siklus transformasi pemuda">
             <!-- Tahap 1: Belajar -->
             <article class="cycle-slide cycle-slide-navy" data-cycle-index="0">
               <div class="cycle-slide-front">
-                <img src="img/circle_mentoring_sebaya.jpg" alt="Sesi belajar dan mentoring sebaya ARUTALA" class="cycle-slide-front-img">
+                <img src="img/circle_mentoring_sebaya.jpg" alt="Sesi belajar dan mentoring sebaya ARUTALA"
+                  class="cycle-slide-front-img">
                 <div class="cycle-slide-front-overlay"></div>
                 <span class="cycle-slide-step">01</span>
                 <div class="cycle-slide-front-caption">
@@ -524,7 +605,10 @@
                   <h3 class="cycle-slide-overlay-title">Belajar (Learn):<br>Mengenali Potensi &amp; Rahmah</h3>
                   <div class="cycle-slide-hover-hint">
                     <span>Lihat Rincian</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13"
+                      height="13">
+                      <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -532,7 +616,8 @@
                 <div class="cycle-slide-content-top">
                   <span class="cycle-slide-content-badge">TAHAP 01</span>
                   <div class="cycle-slide-content-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20"
+                      height="20">
                       <circle cx="12" cy="12" r="10"></circle>
                       <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
                     </svg>
@@ -541,11 +626,14 @@
                 <div>
                   <h3 class="cycle-slide-content-title">Belajar (Learn)</h3>
                   <div class="cycle-slide-content-subtitle">Mengenali Potensi &amp; Rahmah</div>
-                  <p class="cycle-slide-content-desc">Mengenali potensi diri, nilai rahmah keagamaan, dan kesadaran hak asasi yang memuliakan manusia.</p>
+                  <p class="cycle-slide-content-desc">Mengenali potensi diri, nilai rahmah keagamaan, dan kesadaran hak
+                    asasi yang memuliakan manusia.</p>
                 </div>
                 <a href="karsa.html" class="cycle-slide-content-btn">
                   <span>Pelajari Selengkapnya</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
                 </a>
               </div>
             </article>
@@ -553,7 +641,8 @@
             <!-- Tahap 2: Bertumbuh -->
             <article class="cycle-slide cycle-slide-green" data-cycle-index="1">
               <div class="cycle-slide-front">
-                <img src="img/santriwati_galeri_rasulullah.png" alt="Pemuda bertumbuh dalam ruang aman dan setara" class="cycle-slide-front-img">
+                <img src="img/santriwati_galeri_rasulullah.png" alt="Pemuda bertumbuh dalam ruang aman dan setara"
+                  class="cycle-slide-front-img">
                 <div class="cycle-slide-front-overlay"></div>
                 <span class="cycle-slide-step">02</span>
                 <div class="cycle-slide-front-caption">
@@ -561,7 +650,10 @@
                   <h3 class="cycle-slide-overlay-title">Bertumbuh (Grow):<br>Mendobrak Stereotip Gender</h3>
                   <div class="cycle-slide-hover-hint">
                     <span>Lihat Rincian</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13"
+                      height="13">
+                      <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -569,7 +661,8 @@
                 <div class="cycle-slide-content-top">
                   <span class="cycle-slide-content-badge">TAHAP 02</span>
                   <div class="cycle-slide-content-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20"
+                      height="20">
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     </svg>
                   </div>
@@ -577,11 +670,14 @@
                 <div>
                   <h3 class="cycle-slide-content-title">Bertumbuh (Grow)</h3>
                   <div class="cycle-slide-content-subtitle">Mendobrak Stereotip Gender</div>
-                  <p class="cycle-slide-content-desc">Mendobrak stereotip gender yang membatasi, batasan diri sehat, dan komunikasi tanpa kekerasan.</p>
+                  <p class="cycle-slide-content-desc">Mendobrak stereotip gender yang membatasi, batasan diri sehat, dan
+                    komunikasi tanpa kekerasan.</p>
                 </div>
                 <a href="nuansa.html" class="cycle-slide-content-btn">
                   <span>Pelajari Selengkapnya</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
                 </a>
               </div>
             </article>
@@ -589,7 +685,8 @@
             <!-- Tahap 3: Bergerak -->
             <article class="cycle-slide cycle-slide-sky" data-cycle-index="2">
               <div class="cycle-slide-front">
-                <img src="img/pelatihan_fasilitator_auditorium.jpg" alt="Dialog kelompok kecil bersama tutor sebaya" class="cycle-slide-front-img">
+                <img src="img/pelatihan_fasilitator_auditorium.jpg" alt="Dialog kelompok kecil bersama tutor sebaya"
+                  class="cycle-slide-front-img">
                 <div class="cycle-slide-front-overlay"></div>
                 <span class="cycle-slide-step">03</span>
                 <div class="cycle-slide-front-caption">
@@ -597,7 +694,10 @@
                   <h3 class="cycle-slide-overlay-title">Bergerak (Act):<br>Dialog Sebaya yang Setara</h3>
                   <div class="cycle-slide-hover-hint">
                     <span>Lihat Rincian</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13"
+                      height="13">
+                      <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -605,7 +705,8 @@
                 <div class="cycle-slide-content-top">
                   <span class="cycle-slide-content-badge">TAHAP 03</span>
                   <div class="cycle-slide-content-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20"
+                      height="20">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                       <circle cx="9" cy="7" r="4"></circle>
                       <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -616,11 +717,14 @@
                 <div>
                   <h3 class="cycle-slide-content-title">Bergerak (Act)</h3>
                   <div class="cycle-slide-content-subtitle">Dialog Sebaya yang Setara</div>
-                  <p class="cycle-slide-content-desc">Fasilitasi dialog kelompok kecil bersama tutor sebaya dalam lingkaran aman yang setara.</p>
+                  <p class="cycle-slide-content-desc">Fasilitasi dialog kelompok kecil bersama tutor sebaya dalam
+                    lingkaran aman yang setara.</p>
                 </div>
                 <a href="temara.html" class="cycle-slide-content-btn">
                   <span>Pelajari Selengkapnya</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
                 </a>
               </div>
             </article>
@@ -628,7 +732,8 @@
             <!-- Tahap 4: Berdampak -->
             <article class="cycle-slide cycle-slide-pink" data-cycle-index="3">
               <div class="cycle-slide-front">
-                <img src="img/harmoni_pemuda_aljabbar.png" alt="Aksi sosial pemuda ARUTALA di masyarakat" class="cycle-slide-front-img">
+                <img src="img/harmoni_pemuda_aljabbar.png" alt="Aksi sosial pemuda ARUTALA di masyarakat"
+                  class="cycle-slide-front-img">
                 <div class="cycle-slide-front-overlay"></div>
                 <span class="cycle-slide-step">04</span>
                 <div class="cycle-slide-front-caption">
@@ -636,7 +741,10 @@
                   <h3 class="cycle-slide-overlay-title">Berdampak (Impact):<br>ARUTALA Action Nyata</h3>
                   <div class="cycle-slide-hover-hint">
                     <span>Lihat Rincian</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13"
+                      height="13">
+                      <polyline points="18 15 12 9 6 15"></polyline>
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -644,7 +752,8 @@
                 <div class="cycle-slide-content-top">
                   <span class="cycle-slide-content-badge">TAHAP 04</span>
                   <div class="cycle-slide-content-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20"
+                      height="20">
                       <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
                       <line x1="4" y1="22" x2="4" y2="15"></line>
                     </svg>
@@ -653,17 +762,21 @@
                 <div>
                   <h3 class="cycle-slide-content-title">Berdampak (Impact)</h3>
                   <div class="cycle-slide-content-subtitle">ARUTALA Action Nyata</div>
-                  <p class="cycle-slide-content-desc">Melahirkan ARUTALA Action nyata untuk lingkungan kampus, ormawa, dan masyarakat luas.</p>
+                  <p class="cycle-slide-content-desc">Melahirkan ARUTALA Action nyata untuk lingkungan kampus, ormawa,
+                    dan masyarakat luas.</p>
                 </div>
                 <a href="aksara.html" class="cycle-slide-content-btn">
                   <span>Pelajari Selengkapnya</span>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
                 </a>
               </div>
             </article>
           </div>
 
-          <button type="button" class="cycle-carousel-arrow next" id="cycle-carousel-next" aria-label="Siklus berikutnya">
+          <button type="button" class="cycle-carousel-arrow next" id="cycle-carousel-next"
+            aria-label="Siklus berikutnya">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="20" height="20">
               <polyline points="9 18 15 12 9 6"></polyline>
             </svg>
@@ -712,13 +825,17 @@
         <path d="M 680,0 C 900,48 1180,92 1440,105 L 1440,0 Z" fill="url(#waveNavyGrad)" />
 
         <!-- Pita Melengkung Dinamis Sky Blue (Menjalar Anggun di Tengah) -->
-        <path d="M 260,0 C 440,36 680,82 980,68 C 1140,60 1320,95 1440,126 L 1440,112 C 1320,82 1140,48 980,56 C 680,70 440,24 260,0 Z" fill="url(#waveSkyGrad)" />
+        <path
+          d="M 260,0 C 440,36 680,82 980,68 C 1140,60 1320,95 1440,126 L 1440,112 C 1320,82 1140,48 980,56 C 680,70 440,24 260,0 Z"
+          fill="url(#waveSkyGrad)" />
 
         <!-- Aksen Tajam Pita Pink (Swoosh Khas Referensi Gambar 1) -->
         <path d="M 1000,56 C 1120,74 1280,104 1440,138 C 1320,114 1160,86 1000,56 Z" fill="url(#wavePinkGrad)" />
 
         <!-- Pita Melengkung Fresh Green di Gelombang Bawah (Khas Referensi Gambar 2) -->
-        <path d="M 0,85 C 240,125 520,138 820,122 C 1060,110 1260,125 1440,140 L 1440,134 C 1260,118 1060,104 820,116 C 520,132 240,118 0,78 Z" fill="url(#waveGreenGrad)" />
+        <path
+          d="M 0,85 C 240,125 520,138 820,122 C 1060,110 1260,125 1440,140 L 1440,134 C 1260,118 1060,104 820,116 C 520,132 240,118 0,78 Z"
+          fill="url(#waveGreenGrad)" />
 
         <!-- Aksen Lengkung Sky Blue di Kiri Bawah -->
         <path d="M 0,10 C 120,60 260,108 460,128 C 260,118 120,76 0,35 Z" fill="url(#waveSkyGrad)" />
@@ -826,12 +943,15 @@
             <div class="author-avatar" id="modal-article-avatar" style="width: 44px; height: 44px; font-size: 1.1rem;">A
             </div>
             <div>
-              <h5 id="modal-article-author" style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Nama Penulis
+              <h5 id="modal-article-author" style="font-size: 0.95rem; font-weight: 700; margin-bottom: 2px;">Nama
+                Penulis
               </h5>
-              <span id="modal-article-role" style="font-size: 0.82rem; color: var(--text-muted);">Peran / Instansi</span>
+              <span id="modal-article-role" style="font-size: 0.82rem; color: var(--text-muted);">Peran /
+                Instansi</span>
             </div>
           </div>
-          <a id="modal-article-full-link" href="artikel.html" target="_blank" rel="noopener noreferrer" style="border: 1px solid #CBD5E1; color: #2F4F87; background: #F8FAFC; font-weight: 700; border-radius: 6px; padding: 7px 14px; text-decoration: none; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px;">
+          <a id="modal-article-full-link" href="artikel.html" target="_blank" rel="noopener noreferrer"
+            style="border: 1px solid #CBD5E1; color: #2F4F87; background: #F8FAFC; font-weight: 700; border-radius: 6px; padding: 7px 14px; text-decoration: none; font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px;">
             <span>Buka Halaman Lengkap</span> &rarr;
           </a>
         </div>
@@ -1176,7 +1296,9 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-            <h3 style="margin-bottom: 0; font-family: var(--font-heading); font-weight: 900; font-size: 1.6rem; color: #0F172A; letter-spacing: -0.02em;">ARUTALA</h3>
+            <h3
+              style="margin-bottom: 0; font-family: var(--font-heading); font-weight: 900; font-size: 1.6rem; color: #0F172A; letter-spacing: -0.02em;">
+              ARUTALA</h3>
           </div>
           <p>
             Akses Ruang Tumbuh yang Agamis, Setara, dan Adil. Model Inovasi Ekosistem Pengembangan Kapasitas Pemuda yang
@@ -1188,23 +1310,29 @@
           <div class="footer-brand-social">
             <span class="footer-brand-social-label">Media Sosial Resmi:</span>
             <div class="footer-brand-social-links">
-              <a href="https://www.instagram.com/arutalaproject.id" target="_blank" rel="noopener noreferrer" class="brand-social-pill pill-ig" title="Instagram: @arutalaproject.id">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+              <a href="https://www.instagram.com/arutalaproject.id" target="_blank" rel="noopener noreferrer"
+                class="brand-social-pill pill-ig" title="Instagram: @arutalaproject.id">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" width="14" height="14">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
                 <span>Instagram</span>
               </a>
-              <a href="https://www.tiktok.com/@arutalaproject.id" target="_blank" rel="noopener noreferrer" class="brand-social-pill pill-tiktok" title="TikTok: @arutalaproject.id">
+              <a href="https://www.tiktok.com/@arutalaproject.id" target="_blank" rel="noopener noreferrer"
+                class="brand-social-pill pill-tiktok" title="TikTok: @arutalaproject.id">
                 <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
-                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298 0 .592.046.87.136V9.42a6.32 6.32 0 0 0-.87-.06A6.33 6.33 0 0 0 3 15.69a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.62v-3.5a4.85 4.85 0 0 1-1-.51z"/>
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298 0 .592.046.87.136V9.42a6.32 6.32 0 0 0-.87-.06A6.33 6.33 0 0 0 3 15.69a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V9.08a8.16 8.16 0 0 0 4.91 1.62v-3.5a4.85 4.85 0 0 1-1-.51z" />
                 </svg>
                 <span>TikTok</span>
               </a>
-              <a href="https://youtube.com/@arutalaprojectt?si=-nFBByN6sUsvvXWY" target="_blank" rel="noopener noreferrer" class="brand-social-pill pill-yt" title="YouTube: @arutalaprojectt">
+              <a href="https://youtube.com/@arutalaprojectt?si=-nFBByN6sUsvvXWY" target="_blank"
+                rel="noopener noreferrer" class="brand-social-pill pill-yt" title="YouTube: @arutalaprojectt">
                 <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                 </svg>
                 <span>YouTube</span>
               </a>
@@ -1232,7 +1360,8 @@
             <li><a href="aksara.html#proyek-sosial">Dokumentasi Aksi</a></li>
             <li><a href="aksara.html#proyek-sosial">Proyek Sosial Pemuda</a></li>
             <li><a href="aksara.html#donasi-sosial">Donasi Tanggap Bencana</a></li>
-            <li><a href="#direktori-bantuan" id="btn-open-referral" onclick="openReferralModal(event)">Direktori Bantuan</a></li>
+            <li><a href="#direktori-bantuan" id="btn-open-referral" onclick="openReferralModal(event)">Direktori
+                Bantuan</a></li>
             <li><a href="admin.html" style="color: #64748B;">Studio Admin LMS</a></li>
           </ul>
         </div>
@@ -1313,7 +1442,9 @@
     <a href="aksara.html" class="bottom-dock-item" data-target="aksara" id="dock-btn-aksara">
       <div class="dock-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+          </path>
         </svg>
       </div>
       <span>AKSARA</span>
