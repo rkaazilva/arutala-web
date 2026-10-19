@@ -10521,6 +10521,10 @@ body[data-track="temara"] .lms-module-item-btn.active .mod-code {
   max-height: 100vh;
 }
 
+.lms-pdf-mobile-fallback {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .lms-pdf-header-card {
     padding: 18px 16px;
@@ -10532,8 +10536,87 @@ body[data-track="temara"] .lms-module-item-btn.active .mod-code {
     width: 100%;
     justify-content: flex-start;
   }
+  .lms-standalone-pdf-frame {
+    display: none !important;
+  }
   .lms-pdf-viewer-frame-box {
-    height: 560px;
+    height: auto !important;
+    min-height: unset !important;
+    background: transparent !important;
+  }
+  .lms-pdf-mobile-fallback {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 36px 20px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  }
+  .lms-pdf-mobile-icon {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    background: #EEF3FA;
+    color: #2F4F87;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(47, 79, 135, 0.12);
+  }
+  .lms-pdf-mobile-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0F172A;
+    margin-bottom: 8px;
+    font-family: var(--font-heading);
+  }
+  .lms-pdf-mobile-desc {
+    font-size: 0.88rem;
+    color: #64748B;
+    line-height: 1.55;
+    max-width: 440px;
+    margin-bottom: 22px;
+  }
+  .lms-pdf-mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+  }
+  .lms-pdf-mobile-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 20px;
+    border-radius: 8px;
+    background: #2F4F87;
+    color: #FFFFFF !important;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(47, 79, 135, 0.25);
+    transition: all 0.2s ease;
+  }
+  .lms-pdf-mobile-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: #F8FAFC;
+    border: 1px solid #CBD5E1;
+    color: #0F172A !important;
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration: none;
   }
 }
 
